@@ -1,0 +1,37 @@
+import json
+L=[
+('b1a','jay',"What happens if I just... stop paying my credit card?"),
+('b1b','devil',"Nothing. Trust me, bro."),
+('b2a','jay',"Do they empty my bank account? Send me to jail? Take my house?"),
+('b2b','devil',"All three. Probably."),
+('b3a','angel',"Not even close. Three things will actually happen. Let's follow Jay's three thousand dollars."),
+('b4a','angel',"Day one. A late fee, around thirty-five dollars."),
+('b4b','devil',"See? Nothing happened."),
+('b5a','angel',"Day thirty. The late payment hits his credit report, and his score can drop by dozens of points."),
+('b5b','jay',"Dozens?!"),
+('b6a','angel',"Day sixty. His interest rate can jump close to thirty percent. The debt grows while he sleeps."),
+('b6b','devil',"Sleep well, buddy."),
+('b7a','angel',"Months three and four. Calls, emails, letters. His card gets frozen."),
+('b7b','jay',"Just don't pick up."),
+('b7c','devil',"Ghosting is a lifestyle."),
+('b8a','angel',"Around six months, the bank charges the debt off. That is not forgiveness. He still owes every dollar."),
+('b8b','devil',"Debt's gone!"),
+('b8c','angel',"It's not gone."),
+('b9a','angel',"Next comes a collector, and a lawsuit. If he ignores the court papers, the judge can rule against him automatically."),
+('b10a','angel',"That judgment can mean wage garnishment, up to twenty-five percent of his paycheck, or a frozen bank account in many states."),
+('b11a','jay',"So... am I going to jail?"),
+('b11b','angel',"No. You can't be jailed just for owing credit card debt. But never ignore a court order."),
+('b12a','angel',"Even if nobody sues him, the late payments and the charge-off stay on his credit report for seven years."),
+('b12b','jay',"Seven years?!"),
+('b12c','devil',"That's like, two presidents."),
+('b13a','angel',"One last twist. Say he settles the debt for twelve hundred dollars. The eighteen hundred that was forgiven can count as taxable income."),
+('b13b','jay',"I get taxed on money I never even had?"),
+('b13c','devil',"Welcome to adulthood."),
+('b14a','angel',"So, the timeline. Day one, a late fee. Day thirty, score damage. Day sixty, penalty interest. Six months, a charge-off. Then collectors, a possible lawsuit, and a seven-year mark."),
+('b15a','angel',"Call your bank on day one. Ask for a hardship plan. Most people wait too long."),
+('b15b','devil',"Boring."),
+('b15c','angel',"Cheap advice has a price."),
+]
+V={'jay':('am_puck',1.12),'devil':('am_fenrir',1.0),'angel':('af_heart',1.0)}
+json.dump([{'text':t,'voice':V[s][0],'speed':V[s][1],'out':f'vo/{i}_raw.wav'} for i,s,t in L],open('jobs.json','w'))
+json.dump([{'id':i,'spk':s,'text':t} for i,s,t in L],open('lines.json','w'))

@@ -1,17 +1,15 @@
 const W0=[960,540,1];
-const CAMS={b1:[W0,[1450,640,1.4],[960,330,1.2],[900,700,1.3]],b2:[W0,[420,480,1.3],[990,480,1.3],[1560,480,1.3],W0],b3:[W0,[1500,500,1.35],[700,560,1.25]],
- b4:[W0,[650,560,1.5],[1300,330,1.4],[1450,650,1.5]],b5:[W0,[1250,600,1.3],[330,540,1.35],[1700,700,1.5]],b6:[W0,[1100,420,1.3],[600,600,1.4]],
- b7:[W0,[960,520,1.3],[500,700,1.4],[1550,700,1.4]],b8:[W0,[960,520,1.3],[1550,480,1.3]],b9:[W0,[500,500,1.3],[1500,700,1.4]],b10:[W0,[510,440,1.3],[1300,520,1.4]],
- b11:[W0,[960,620,1.4],W0],b12:[W0,[960,420,1.25],[960,480,1.2]],b13:[W0,[500,500,1.25],[1400,500,1.25]],b14:[W0,[960,520,1.12],W0],b15:[W0,[1300,520,1.35],[500,640,1.4],W0]};
+const CAMS=new Proxy({},{get:()=>[W0]});
 let B=null,BI=0;
 const LT=id=>TL.lines.find(l=>l.id==id).t0-B.t0;
 const dsc=()=>BI<=8?1+.08*BI:1.64-.2*(BI-8);
 function title(s,py,sz=84,col=INK,px=1000){T(s,px,py,sz,col,'center')}
-function S_b1(tl,t){const L=['WHAT HAPPENS IF YOU','JUST STOP PAYING','YOUR CREDIT CARD?'];let n=Math.floor(t*22),k=0;
- L.forEach((s,i)=>{T(s.slice(0,Math.max(0,Math.min(s.length,n-k))),960,230+i*140,i==2?130:118,i==2?AMB:INK,'center');k+=s.length+4});
- cc(520,800,-.12+Math.sin(t)*.02,seg(tl,3.8,.7));
- devil(1200,780,1.2,t,talk('devil',t),'');
- jay(1520,740,1,{t,talk:talk('jay',t),mood:tl<3?'smile':'worry'})}
+function S_b1(tl,t){const L=['WHAT IF YOU NEVER PAY','YOUR CREDIT CARD?'];let n=Math.floor(t*30),k=0;
+ L.forEach((q,i)=>{T(q.slice(0,Math.max(0,Math.min(q.length,n-k))),960,200+i*125,i==1?112:100,i==1?AMB:INK,'center');k+=q.length+2});
+ const p=pop(tl,.1);x.save();x.translate(960,660);x.scale(1.7*p,1.7*p);cc(0,0,-.05+Math.sin(t*1.2)*.02,0,0);x.restore();
+ stamp('OVERDUE',960,670,90,RED,-.2,seg(tl,1.8,.3));
+ const away=tl>1.6;jay(400,710,1.15,{t,talk:talk('jay',t),mood:away?'side':'smile',flip:away,handL:away?[55,200]:null,handR:away?[-55,205]:null,tilt:away?-.06:0});
+ devil(440,430,1.1,t,talk('devil',t),'')}
 function S_b2(tl,t){title('SO WHAT COULD HAPPEN?',190);
  [['EMPTY MY BANK?',bank],['I GO TO JAIL?',jailI],['TAKE MY HOUSE?',houseI]].forEach((a,i)=>{const px=170+i*570,p=pop(tl,.5+i*1.25),sh=tl>4.4?Math.sin(t*40)*5:0;
   if(p>0){card(px+sh,260,500,400,RED,p);x.save();x.globalAlpha=cl(p);a[1](px+250+sh,430);T('?',px+250+sh,330,100,RED,'center');T(a[0],px+250+sh,610,44,DK,'center');x.restore()}});
@@ -91,7 +89,7 @@ function hudVals(t){const i=BI;let tdy='$0.00',bk='$2,400.00',bc=INK,db='$3,000'
  if(i>=3)tdy='−$35.00';if(i>=3)db='$3,035';if(i>=5){const p=cl((t-TL.beats[5].t0)/5);db=money(3035+125*p)}if(i>=6)db='$3,160';if(i>=7)db='≈$3,400';if(i>=8)db='$3,400+';
  if(i==9&&t-B.t0>5.2||i>=10&&i<=11){bk='FROZEN';bc='#bfeaff'}if(i>=12){bk='FROZEN';bc='#bfeaff'}if(i==14&&t-B.t0>4){bk='SAVED?';bc=GRN;tdy='$0.00';db='PLAN'}return [tdy,bk,db,bc]}
 function renderT(t){window.endF=0;BI=0;for(let i=0;i<TL.beats.length;i++)if(t>=TL.beats[i].t0)BI=i;B=TL.beats[BI];const id=B.id,tl=t-(BI==0?0:B.t0);
- bg(t,TINT[BI]);const cams=CAMS[id],len=BI==0?2.4:3.0,k=Math.floor(tl/len),cam=cams[k%cams.length],fr=(tl%len)/len,s=cam[2]*(1+.035*fr);
+ bg(t,TINT[BI]);const cam=W0,s=1+.03*cl((t-B.t0)/(B.t1-B.t0));
  const fx=cl(cam[0],960/s,1920-960/s),fy=cl(cam[1],540/s,1080-540/s);x.save();x.translate(960,540);x.scale(s,s);x.translate(-fx,-fy);SC[BI](tl,t);x.restore();vig();const ef=window.endF;if(ef>0){x.fillStyle=`rgba(5,8,18,${.94*ef})`;x.fillRect(0,0,1920,1080);x.globalAlpha=ef;T('Cheap advice has a price.',960,520,100,INK,'center');x.fillStyle=RED;x.fillRect(660,552,600,6);T('General information · not legal advice',960,660,34,'#9aa6c8','center',700);T('CHEAP.',960,800,60,INK,'center');x.globalAlpha=1}
- const h=hudVals(t);hud(h[0],h[1],h[2],h[3]);brand();caption(t);
+ const h=hudVals(t);if(BI>=3)hud(h[0],h[1],h[2],h[3]);brand();caption(t);
  const e=TL.END;if(t<.4){x.fillStyle=`rgba(0,0,0,${1-t/.4})`;x.fillRect(0,0,1920,1080)}if(t>e-.7){x.fillStyle=`rgba(0,0,0,${(t-(e-.7))/.7})`;x.fillRect(0,0,1920,1080)}}

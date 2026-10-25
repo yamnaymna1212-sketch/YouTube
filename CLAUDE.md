@@ -19,5 +19,9 @@
 3. **Don't stay too long on one shot**: cut more often (about 2–4 s per shot) so the viewer never gets bored.
 4. **The character moves a lot**: gestures, body motion, head turns, breathing, walking.
 5. **Many facial expressions**: change them often and match them to the moment.
-6. **Many varied camera angles**: wide, medium, close-up, over-the-shoulder, low and high angles, push-ins and pans.
+6. **Camera: avoid zoom** except when truly needed; never crop text, captions or important elements. Use a wide frame with only a very gentle push-in.
 7. **Main voice**: young and fast (see Voice above).
+
+## Hook rules (Oct 2026)
+- The hook must be clean: ONE big central element (e.g. the card), one clear character action, and a short headline. Viewer understands the story in 1 second, before any voice.
+- No clutter: few words, few elements. HUD stays hidden during the hook.

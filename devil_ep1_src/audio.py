@@ -46,9 +46,9 @@ def buzz(t0): add(bp(noise(.4),90,240)*env(int(.4*SR),.01,.3)*.45,t0,.3,.5)
 def frost(t0): add(bp(noise(.8),3500,9000)*env(int(.8*SR),.01,.35)*.16,t0,0,.5)
 # b1 typing + card X
 for i in range(60):
-    tt=.05+i/22
-    if tt<3.0 and i%5!=4: add(mix(bp(noise(.04),1500,7000)*env(int(.04*SR),.001,.008)*.35,tone(180,.04,.001,.01)*.2),tt,((i%5)-2)*.08,.5)
-swish(B['b1']+3.8,.6,-.4)
+    tt=.05+i/30
+    if tt<1.5 and i%5!=4: add(mix(bp(noise(.04),1500,7000)*env(int(.04*SR),.001,.008)*.35,tone(180,.04,.001,.01)*.2),tt,((i%5)-2)*.08,.5)
+pop(.1); thud(B['b1']+1.8,.9)
 # b2
 for i,o in enumerate([.5,1.75,3.0]): pop(B['b2']+o,(i-1)*.4)
 add(bp(noise(1.4),50,160)*env(int(1.4*SR),.1,.8)*.5,B['b2']+4.4,0,.4)

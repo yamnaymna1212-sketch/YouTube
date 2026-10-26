@@ -1,0 +1,272 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Stair Stories - Ep01 animatic</title>
+<style>
+html,body{margin:0;background:#000}
+#c{width:1080px;height:1920px;position:relative;overflow:hidden}
+svg{position:absolute;left:0;top:0}
+#grain{position:absolute;left:0;top:0;width:1080px;height:1920px;mix-blend-mode:overlay;opacity:.32;pointer-events:none}
+</style></head><body>
+<div id="c"><svg id="s" viewBox="0 0 1080 1920" width="1080" height="1920"></svg><img id="grain" src="grain.png"></div>
+<script>
+const SCENE_LEN = 5;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const eo=x=>1-Math.pow(1-clamp(x,0,1),3);
+const eb=x=>{x=clamp(x,0,1);const c=1.70158;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const hs=a=>{const x=Math.sin(a*12.9898+78.233)*43758.5453;return x-Math.floor(x)};
+const fmt=v=>'$'+Math.round(v).toLocaleString('en-US');
+
+/* ---------- paper cut-out primitives ---------- */
+const jit=(pts,seed,amt)=>pts.map((p,i)=>[p[0]+(hs(seed+i*3.1)-.5)*2*amt,p[1]+(hs(seed+i*7.7+1)-.5)*2*amt]);
+const path=pts=>'M'+pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L')+'Z';
+function cut(pts,fill,o={}){
+  const seed=o.seed||(pts[0][0]*.13+pts[0][1]*.07+pts.length);
+  const d=path(jit(pts,seed,o.j===undefined?2.2:o.j));
+  const sh=o.sh===undefined?1:o.sh;
+  return (sh?`<path d="${d}" transform="translate(${5*sh},${8*sh})" fill="#000" opacity=".38"/>`:'')+
+    `<path d="${d}" fill="${fill}" stroke="${o.edge||'rgba(255,255,255,.22)'}" stroke-width="${o.sw||2.5}" stroke-linejoin="round"/>`;
+}
+const rect=(x,y,w,h,f,o)=>cut([[x,y],[x+w,y],[x+w,y+h],[x,y+h]],f,o);
+function blob(cx,cy,r,f,o={}){const n=o.n||18,ry=o.ry||1,p=[];for(let i=0;i<n;i++){const a=i/n*6.2832;p.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r*ry])}return cut(p,f,o)}
+const txt=(s,x,y,size,fill,o={})=>`<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" text-anchor="${o.a||'middle'}" font-family="${o.f||'DejaVu Sans'}" font-weight="900" ${o.x||''}>${s}</text>`;
+function neon(s,x,y,size,col,o={}){
+  const op=o.op===undefined?1:o.op;
+  return `<g opacity="${op}">`+txt(s,x,y,size,col,{...o,x:'filter="url(#glow)" opacity=".95"'})+
+    txt(s,x,y,size,'#fff',{...o,x:`stroke="${col}" stroke-width="${Math.max(2,size*.035)}"`})+`</g>`;
+}
+function cone(x1,y1,x2,y2,x3,y3,x4,y4,op=1){return `<path d="M${x1},${y1}L${x2},${y2}L${x3},${y3}L${x4},${y4}Z" fill="url(#cone)" opacity="${op}"/>`}
+
+/* ---------- characters: paper body + Polaroid head ---------- */
+function arm(sx,sy,hx,hy,fill,skin){
+  const dx=hx-sx,dy=hy-sy,l=Math.hypot(dx,dy)||1,nx=-dy/l*13,ny=dx/l*13;
+  return cut([[sx+nx,sy+ny],[hx+nx*.8,hy+ny*.8],[hx-nx*.8,hy-ny*.8],[sx-nx,sy-ny]],fill,{j:1.2})+blob(hx,hy,16,skin,{n:10,j:1,sh:.6});
+}
+function head(o){
+  const e=o.expr||'neutral',skin=o.skin,hair=o.hair,t=o.t||0;
+  let g=`<g transform="translate(0,-415) rotate(${o.tilt||0})">`;
+  g+=rect(-64,-80,128,172,'#f6f1e6',{j:1.2});
+  g+=rect(-52,-68,104,106,skin,{sh:0,j:.8});
+  g+=cut(o.long?[[-56,-72],[56,-72],[58,30],[40,30],[36,-40],[-36,-40],[-40,30],[-58,30]]:[[-54,-70],[54,-70],[54,-38],[34,-46],[-18,-40],[-54,-30]],hair,{sh:0,j:1});
+  g+=blob(-20,-14,5.5,'#1b1b1b',{n:8,sh:0,j:.3,edge:'none'})+blob(20,-14,5.5,'#1b1b1b',{n:8,sh:0,j:.3,edge:'none'});
+  const br=(x1,y1,x2,y2)=>`<path d="M${x1},${y1}L${x2},${y2}" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/>`;
+  if(e==='worry'){g+=br(-34,-28,-10,-38)+br(10,-38,34,-28)+`<path d="M-17,24 Q0,10 17,24" stroke="#1b1b1b" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+    const sy=(t*70)%40; g+=`<path d="M44,${-30+sy} q-8,14 0,18 q8,-4 0,-18z" fill="#6fd3ff" opacity="${1-sy/45}"/>`}
+  else if(e==='smile'){g+=br(-34,-32,-10,-34)+br(10,-34,34,-32)+`<path d="M-20,10 Q0,36 20,10" stroke="#1b1b1b" stroke-width="5" fill="#fff" stroke-linecap="round"/>`}
+  else {g+=br(-32,-31,-10,-31)+br(10,-31,32,-31)+`<path d="M-14,20 L14,20" stroke="#1b1b1b" stroke-width="5" stroke-linecap="round"/>`}
+  return g+'</g>';
+}
+function person(x,y,s,o={}){
+  const t=o.t||0,j=o.jacket||'#d9622b',pn=o.pants||'#27406e',sk=o.skin||'#e0ac84',hr=o.hair||'#2b1b12',pose=o.pose||'stand';
+  const sway=Math.sin(t*2.2)*1.6,bob=o.walk?Math.abs(Math.sin(t*7))*-10:0;
+  let L=[-78,-205],R=[78,-205];
+  if(pose==='hands_head'){L=[-52,-440];R=[52,-440]}
+  else if(pose==='wave'){L=[-84,-215];R=[96,-400+Math.sin(t*8)*18]}
+  else if(pose==='look'){L=[-78,-205];R=[70,-300]}
+  let g=`<g transform="translate(${x},${y+bob}) scale(${o.flip?-s:s},${s}) rotate(${sway*.4})">`;
+  const step=o.walk?Math.sin(t*7)*22:0;
+  if(!o.sit){g+=rect(-42+step,-192,36,192,pn)+rect(6-step,-192,36,192,pn)+rect(-54+step,-14,56,18,'#16161d')+rect(0-step,-14,56,18,'#16161d')}
+  g+=cut([[-60,-342],[60,-342],[68,-180],[-68,-180]],j);
+  g+=arm(-56,-326,L[0],L[1],j,sk)+arm(56,-326,R[0],R[1],j,sk);
+  g+=rect(-14,-376,28,40,sk,{sh:.3,j:1});
+  g+=head({skin:sk,hair:hr,expr:o.expr,tilt:o.tilt===undefined?Math.sin(t*1.7)*2:o.tilt,t,long:o.long});
+  return g+'</g>';
+}
+
+/* ---------- shared set pieces ---------- */
+function stars(t){let s='';for(let i=0;i<70;i++){const x=hs(i)*1080,y=hs(i+90)*760,a=.35+.5*Math.abs(Math.sin(t*1.4+i));s+=`<circle cx="${x}" cy="${y}" r="${1+hs(i+5)*2.2}" fill="#fff" opacity="${a}"/>`}return s}
+function skyline(off,base,col,seed,hmin,hmax,wmin,t,lit){
+  let s='',x=-200+off;let i=0;
+  while(x<1300){const w=wmin+hs(seed+i)*60,h=hmin+hs(seed+i+40)*(hmax-hmin);
+    s+=rect(x,base-h,w,h+400,col,{sh:0,j:1.5,seed:seed+i});
+    if(lit){for(let wy=base-h+24;wy<base-20;wy+=46)for(let wx=x+12;wx<x+w-18;wx+=30){const on=hs(seed+i*13+wx+wy)>.55&&(hs(Math.floor(t*2)+wx+wy)>.04);if(on)s+=`<rect x="${wx}" y="${wy}" width="14" height="22" fill="#ffd27a" opacity=".85"/>`}}
+    x+=w+8;i++}
+  return s;
+}
+function lampPost(x,top,base,flick){
+  const a=flick;
+  return rect(x-10,top,20,base-top,'#14121f')+rect(x-150,top-6,160,16,'#14121f')+blob(x-150,top+6,24,'#ffe3a8',{n:10,sh:.4})+
+    `<circle cx="${x-150}" cy="${top+6}" r="58" fill="#ffc26b" opacity="${.25*a}" filter="url(#glow)"/>`+
+    cone(x-150,top+20,x-300,base-20,x+0,base-20,x-150,top+20,a);
+}
+
+/* ---------- Problem Meter + captions ---------- */
+function meter(label,val,max,t,o={}){
+  const r=clamp(val/max,0,1);
+  const col=o.col||(r<.35?'#2cff8f':r<.7?'#ffc233':'#ff3b4a');
+  const sh=o.shake?Math.sin(t*70)*3.5:0;
+  let g=`<g transform="translate(${sh},0)">`;
+  g+=`<rect x="70" y="80" width="940" height="290" rx="36" fill="none" stroke="${col}" stroke-width="20" opacity=".35" filter="url(#glow)"/>`;
+  g+=`<rect x="70" y="80" width="940" height="290" rx="36" fill="#080812" fill-opacity=".94" stroke="${col}" stroke-width="7"/>`;
+  g+=txt(label,112,146,38,'#9aa0c8',{a:'start',f:'DejaVu Sans Mono'});
+  g+=txt('PROBLEM METER',968,146,26,'#5d6290',{a:'end',f:'DejaVu Sans Mono'});
+  g+=`<text x="968" y="272" font-size="150" fill="${col}" text-anchor="end" font-family="DejaVu Sans Mono" font-weight="900" filter="url(#glow)" opacity=".9">${fmt(val)}</text>`;
+  g+=`<text x="968" y="272" font-size="150" fill="#fff" text-anchor="end" font-family="DejaVu Sans Mono" font-weight="900" stroke="${col}" stroke-width="3">${fmt(val)}</text>`;
+  g+=`<rect x="112" y="312" width="856" height="30" rx="15" fill="#23233a"/>`;
+  g+=`<rect x="112" y="312" width="${Math.max(30,856*r)}" height="30" rx="15" fill="${col}"/>`;
+  for(let i=1;i<10;i++)g+=`<rect x="${112+856*i/10-1.5}" y="312" width="3" height="30" fill="#080812" opacity=".6"/>`;
+  return g+'</g>';
+}
+function caption(lines,t,hl){
+  let out=`<rect x="0" y="1450" width="1080" height="470" fill="url(#capbar)"/>`,wi=0;
+  const size=Math.min(100,...lines.map(l=>Math.floor(980/(l.length*.7))));
+  lines.forEach((ln,li)=>{
+    const words=ln.split(' ');
+    let ts='';
+    words.forEach((w,k)=>{const st=.5+wi*.2;wi++;const a=clamp((t-st)/.14,0,1);
+      const col=hl[w.replace(/[.:?!]+$/,'')]||'#fff';
+      ts+=`<tspan fill="${col}" fill-opacity="${a}" stroke-opacity="${a}">${w}${k<words.length-1?' ':''}</tspan>`});
+    out+=`<text x="540" y="${1650+li*118}" font-size="${size}" text-anchor="middle" font-family="DejaVu Sans" font-weight="900" stroke="#000" stroke-width="16" paint-order="stroke" stroke-linejoin="round">${ts}</text>`;
+  });
+  return out;
+}
+const cam=(art,t,o={})=>{const z0=o.z0||1,z1=o.z1||1.07,fx=o.fx||540,fy=o.fy||900,k=clamp(t/SCENE_LEN,0,1),z=z0+(z1-z0)*k,dx=(o.dx||0)*k;
+  return `<g transform="translate(${fx},${fy}) scale(${z}) translate(${-fx+dx},${-fy})">${art}</g>`};
+
+/* ---------- scenes ---------- */
+const MARCUS={jacket:'#d9622b',pants:'#27406e',skin:'#e0ac84',hair:'#2b1b12'};
+
+function scene1(t){ // THE CAR DIED
+  const fl=hs(Math.floor(t*14))>.93?.55:1;
+  let a=`<rect width="1080" height="1920" fill="url(#skyA)"/>`+stars(t);
+  a+=skyline(-t*6,1130,'#1a1440',1,160,420,70,t,false);
+  a+=skyline(-t*12,1230,'#241a52',50,110,300,90,t,true);
+  a+=rect(-40,1230,1160,120,'#3a3350',{sh:0,j:1});
+  a+=rect(-40,1350,1160,300,'#17141f',{sh:0,j:1});
+  for(let i=0;i<7;i++)a+=rect(20+i*170,1480,90,12,'#e8c86a',{sh:0,j:1});
+  a+=lampPost(960,650,1330,fl);
+  // credit-union flyer on pole (plant for scene 4)
+  a+=rect(150,830,20,500,'#14121f')+rect(100,890,118,150,'#f4efe0',{j:1.5})+rect(100,890,118,34,'#2cff8f',{j:1})+
+     txt('CREDIT',159,1000,22,'#222')+txt('UNION',159,1026,22,'#222');
+  // car
+  const cx=400,cy=1340;
+  const steam=[0,1,2,3,4].map(i=>{const p=((t*.45+i*.2)%1);return `<circle cx="${cx+150+Math.sin(p*7+i)*26}" cy="${cy-150-p*300}" r="${20+p*58}" fill="#dfe6f2" opacity="${(1-p)*.55}"/>`}).join('');
+  a+=`<g transform="translate(${cx},${cy})">`+
+    cut([[-270,0],[270,0],[282,-70],[240,-100],[140,-110],[80,-196],[-110,-196],[-185,-112],[-262,-96],[-282,-58]],'#1fa3a8')+
+    cut([[-92,-182],[70,-182],[120,-112],[-150,-112]],'#9fd9e8',{sh:0})+
+    cut([[150,-112],[262,-112],[262,-124],[150,-124]],'#177a80',{sh:0})+
+    `<g transform="rotate(${-52+Math.sin(t*3)*1.5} 150 -118)">`+rect(150,-132,150,18,'#1a8a90')+`</g>`+
+    blob(-150,0,58,'#15131c',{n:16})+blob(-150,0,24,'#8c8aa8',{n:10,sh:0})+blob(165,0,58,'#15131c',{n:16})+blob(165,0,24,'#8c8aa8',{n:10,sh:0})+
+    `</g>`+steam;
+  a+=person(800,1345,1.35,{...MARCUS,t,pose:'hands_head',expr:'worry'});
+  // repair quote drops in
+  const k=eb((t-1.1)/.7);
+  a+=`<g transform="translate(300,${-260+k*880}) rotate(-6)">`+rect(-170,-90,340,190,'#f6f1e6')+rect(-170,-90,340,40,'#e8403a',{sh:0})+
+     txt('REPAIR QUOTE',0,-60,26,'#fff')+txt('TRANSMISSION',0,-14,28,'#222')+txt('$1,400',0,72,84,'#c4221c')+`</g>`;
+  return {art:cam(a,t,{z1:1.08,fx:700,fy:1000,dx:-30}),meter:['REPAIR BILL',1400*eo((t-.3)/1.3),1000,{shake:t>1.6&&t<3.2}],
+    cap:['THE CAR DIED.','THE BILL: $1,400'],hl:{'$1,400':'#ff3b4a',DIED:'#ffc233'}};
+}
+
+function scene2(t){ // PAYDAY LOAN
+  const fl=hs(Math.floor(t*10))>.9?.35:1;
+  let a=`<rect width="1080" height="1920" fill="url(#skyA)"/>`+stars(t);
+  a+=skyline(-t*5,1100,'#1a1440',7,180,420,80,t,false);
+  a+=rect(-40,1300,1160,120,'#3a3350',{sh:0,j:1})+rect(-40,1420,1160,300,'#17141f',{sh:0,j:1});
+  // storefront
+  a+=rect(130,600,820,720,'#3b2a5e')+rect(130,600,820,40,'#2b1f47',{sh:0});
+  a+=rect(210,660,660,150,'#0c0a16');
+  a+=neon('CASH NOW',540,775,118,'#ff3fa4',{op:fl});
+  for(let i=0;i<10;i++)a+=cut([[150+i*80,830],[230+i*80,830],[236+i*80,900],[144+i*80,900]],i%2?'#f2e6c9':'#d6342f',{sh:.4,j:1});
+  a+=rect(170,930,420,290,'#0f0d1f')+`<rect x="180" y="940" width="400" height="270" fill="#ffd27a" opacity=".14"/>`;
+  a+=neon('PAYDAY LOANS',380,1010,46,'#ffc233',{op:fl})+neon('$500 IN 10 MIN',380,1080,50,'#2cff8f');
+  a+=rect(660,930,230,390,'#17142a')+`<rect x="672" y="942" width="206" height="366" fill="#ffd27a" opacity=".3"/>`+
+     cone(676,1318,640,1500,900,1500,874,1318,.5);
+  // Marcus walks in then stops
+  const wx=-120+Math.min(t/2.4,1)*895,walking=t<2.4;
+  a+=person(wx,1410,1.35,{...MARCUS,t,pose:walking?'stand':'look',walk:walking,expr:t<2.6?'worry':'neutral'});
+  // contract + stamp
+  const k=eb((t-2.5)/.6),sk=eb((t-3.6)/.45);
+  a+=`<g transform="translate(${-300+k*640},1245) rotate(4) scale(.85)">`+rect(-170,-110,340,230,'#f6f1e6')+rect(-170,-110,340,40,'#222',{sh:0})+
+     txt('LOAN AGREEMENT',0,-80,24,'#fff')+txt('$500',0,-10,84,'#222')+txt('FEE: $75 / 2 WEEKS',0,62,28,'#c4221c')+
+     (t>3.6?`<g transform="translate(70,30) rotate(-14) scale(${sk})">`+rect(-120,-40,240,80,'#f6f1e6',{sh:0,edge:'#18b66a',sw:7,j:1})+txt('APPROVED',0,16,48,'#18b66a')+`</g>`:'')+`</g>`;
+  return {art:cam(a,t,{z1:1.07,fx:540,fy:1000,dx:-20}),meter:['BORROWED',500*eo((t-.4)/1.2),1000,{}],
+    cap:['$500 IN 10 MINUTES.','THE FEE: $75 / 2 WEEKS'],hl:{'$500':'#2cff8f','$75':'#ffc233'}};
+}
+
+function scene3(t){ // THE STAIRCASE OF FEES
+  let a=`<rect width="1080" height="1920" fill="url(#skyA)"/>`+stars(t);
+  for(let i=0;i<7;i++)a+=`<rect x="${60+i*150}" y="420" width="2" height="1100" fill="#fff" opacity=".05"/>`;
+  a+=rect(-40,1380,1160,300,'#17141f',{sh:0,j:1});
+  const cols=['#f7d154','#f5b83d','#f29a33','#ee7a33','#e75a38','#d9383c'];
+  let fees=0;
+  for(let i=0;i<6;i++){
+    const x=215+i*122,top=1380-i*125;
+    a+=rect(x,top,150,1500-top,cols[i],{seed:20+i});
+    a+=txt('WK '+(2*(i+1)),x+12,top+52,30,'#2a1a10',{a:'start'});
+    const st=.5+i*.6,k=eb((t-st)/.5);
+    if(t>st){fees=75*(i+1);
+      a+=`<g transform="translate(${x+75},${top-95-(1-k)*500}) rotate(${(i%2?4:-4)})">`+rect(-62,-34,124,74,'#f6f1e6',{j:1.5})+txt('$75',0,26,50,'#c4221c')+`</g>`}
+  }
+  // roll-over arrow loop
+  const sp=t*160;
+  a+=`<path d="M240,1330 C 200,1150 330,1020 480,1030" stroke="#ffc233" stroke-width="10" fill="none" stroke-dasharray="26 18" stroke-dashoffset="${-sp}" stroke-linecap="round"/>`+txt('ROLLOVER',230,1010,34,'#ffc233',{a:'start',f:'DejaVu Sans Mono'});
+  a+=person(110,1395,1.0,{...MARCUS,t,pose:'look',expr:'worry'});
+  const shown=Math.round(75*clamp(Math.floor((t-.5)/.6+1),0,6));
+  return {art:cam(a,t,{z1:1.06,fx:600,fy:1000,dx:-20}),meter:['FEES PAID',fees,1000,{shake:t>.5}],
+    cap:['ROLLED OVER 6 TIMES.','$450 IN FEES'],hl:{'$450':'#ff3b4a',ROLLED:'#ffc233'}};
+}
+
+function scene4(t){ // LOW POINT + THE FLYER
+  let a=`<rect width="1080" height="1920" fill="#1a1430"/>`;
+  for(let i=0;i<14;i++)a+=`<rect x="${i*80}" y="0" width="38" height="1920" fill="#fff" opacity=".025"/>`;
+  a+=rect(-20,1480,1120,300,'#2a1d1a',{sh:0,j:1});
+  // corkboard with flyer
+  a+=rect(640,500,360,420,'#a9743f',{seed:90})+rect(650,510,340,400,'#bf8a4e',{sh:0,j:1});
+  a+=`<g transform="translate(700,560) rotate(-5)">`+rect(0,0,110,130,'#f6f1e6',{j:1})+rect(0,0,110,28,'#e8403a',{sh:0})+txt('PAST DUE',55,20,16,'#fff')+`</g>`;
+  a+=`<g transform="translate(850,640) rotate(6)">`+rect(0,0,110,120,'#f6f1e6',{j:1})+rect(0,0,110,28,'#e8403a',{sh:0})+txt('FINAL',55,20,16,'#fff')+`</g>`;
+  const pul=t>1.8?(.5+.5*Math.sin(t*6)):0;
+  a+=`<g transform="translate(690,730) rotate(-2)">`+`<rect x="-14" y="-14" width="248" height="162" rx="10" fill="#2cff8f" opacity="${.5*pul}" filter="url(#glow)"/>`+
+     rect(0,0,220,134,'#f4efe0',{j:1.2})+rect(0,0,220,40,'#18b66a',{sh:0})+txt('CREDIT UNION',110,28,24,'#06301c')+txt('PAYDAY ALTERNATIVE',110,70,18,'#222')+txt('LOAN  -  ASK US',110,98,18,'#222')+`</g>`;
+  // hanging lamp + light
+  a+=rect(374,300,8,330,'#0e0c18',{sh:0})+blob(378,640,46,'#ffe3a8',{n:12,sh:.4,ry:.7})+
+     `<circle cx="378" cy="650" r="90" fill="#ffc26b" opacity=".28" filter="url(#glow)"/>`+cone(378,660,60,1250,700,1250,378,660,.85);
+  // table + Marcus + bills
+  a+=rect(70,1000,300,520,'#2a1f3a',{sh:0,j:1})/*chair back*/;
+  a+=person(300,1260,1.32,{...MARCUS,t,pose:'hands_head',expr:'worry',sit:true,tilt:6});
+  a+=rect(40,1210,760,70,'#7b4d26')+rect(90,1280,40,260,'#5c3a1c')+rect(710,1280,40,260,'#5c3a1c');
+  const bills=[[140,1180,-8],[300,1170,5],[470,1186,-4],[610,1176,9],[230,1160,2]];
+  bills.forEach((b,i)=>{a+=`<g transform="translate(${b[0]},${b[1]}) rotate(${b[2]})">`+rect(0,0,120,48,'#f6f1e6',{j:1,sh:.6})+rect(0,0,120,12,i%2?'#e8403a':'#f2b230',{sh:0,j:.5})+`</g>`});
+  const f=clamp((t-2.0)/3,0,1);
+  return {art:cam(a,t,{z0:1,z1:1.28,fx:430+f*320,fy:900-f*150}),meter:['OWED + FEES',450+500*eo((t-.3)/1.3),1000,{shake:t>.4&&t<1.9}],
+    cap:['STILL OWES $500.','AND ONE FLYER...'],hl:{'$500':'#ff3b4a',FLYER:'#2cff8f'}};
+}
+
+function scene5(t){ // RELIEF
+  let a=`<rect width="1080" height="1920" fill="url(#skyB)"/>`;
+  a+=`<circle cx="540" cy="900" r="520" fill="#2cff8f" opacity=".10" filter="url(#glow)"/>`;
+  a+=rect(100,430,880,150,'#06241f')+neon('CREDIT UNION',540,542,104,'#2cff8f');
+  a+=blob(150,760,64,'#f6f1e6',{n:20})+`<path d="M150,760 L150,718 M150,760 L176,770" stroke="#222" stroke-width="6"/>`;
+  a+=rect(-20,1060,1120,640,'#0f2f2a',{sh:0,j:1});
+  a+=person(850,1110,1.05,{jacket:'#1f6f9a',pants:'#1b2a44',skin:'#8d5a3b',hair:'#1a1210',t,pose:'wave',expr:'smile',long:true});
+  a+=rect(60,1100,960,90,'#a86d32')+rect(60,1190,960,420,'#8a5a2b');
+  for(let i=0;i<5;i++)a+=rect(90+i*190,1220,160,330,'#7a4f25',{sh:0,j:1,seed:70+i});
+  a+=person(250,1500,1.4,{...MARCUS,t,pose:'wave',expr:t>1.2?'smile':'neutral'});
+  const k=eb((t-.6)/.6);
+  a+=`<g transform="translate(710,${1230-k*220}) rotate(-3) scale(.82)">`+rect(-190,-110,380,210,'#f6f1e6')+rect(-190,-110,380,44,'#18b66a',{sh:0})+
+     txt('PAYDAY ALTERNATIVE LOAN',0,-78,23,'#06301c')+txt('APR CAP 28%',0,0,62,'#0b5d36')+txt('NO ROLLOVER TRAP',0,58,28,'#222')+`</g>`;
+  const ck=eb((t-2.4)/.5);
+  if(t>2.4)a+=`<g transform="translate(710,830) scale(${ck})">`+blob(0,0,62,'#2cff8f',{n:20})+`<path d="M-28,2 L-8,24 L30,-22" stroke="#06301c" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+  if(t>2.6)for(let i=0;i<30;i++){const p=((t-2.6)*.5+hs(i)*.6),y=300+p*1300;if(p<1.4)a+=`<g transform="translate(${hs(i+3)*1080},${y}) rotate(${t*140*(hs(i+8)-.5)+hs(i)*360})">`+rect(-8,-5,16,10,['#ffc233','#ff3fa4','#2cff8f','#6fd3ff'][i%4],{sh:0,j:.3})+`</g>`}
+  const v=950*(1-eo((t-1.2)/1.8));
+  return {art:cam(a,t,{z1:1.06,fx:540,fy:1000}),meter:['OWED TO PAYDAY LENDER',v,1000,{col:t>3?'#2cff8f':undefined}],
+    cap:['SAME $500.','A FRACTION OF THE COST.'],hl:{FRACTION:'#2cff8f','$500.':'#ffc233'}};
+}
+
+const SCENES=[scene1,scene2,scene3,scene4,scene5];
+const DEFS=`<defs>
+<linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070b24"/><stop offset=".55" stop-color="#2b1250"/><stop offset="1" stop-color="#8a2f4d"/></linearGradient>
+<linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06222a"/><stop offset=".6" stop-color="#0f4a4a"/><stop offset="1" stop-color="#2f8a6a"/></linearGradient>
+<linearGradient id="cone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc26b" stop-opacity=".62"/><stop offset="1" stop-color="#ffc26b" stop-opacity="0"/></linearGradient>
+<linearGradient id="capbar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></linearGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></radialGradient>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>`;
+
+function render(T){
+  const i=clamp(Math.floor(T/SCENE_LEN),0,SCENES.length-1),t=T-i*SCENE_LEN;
+  const sc=SCENES[i](t);
+  const fade=clamp(t/.3,0,1)*clamp((SCENE_LEN-t)/.15,0,1);
+  document.getElementById('s').innerHTML=DEFS+`<g opacity="${fade}">`+sc.art+`<rect width="1080" height="1920" fill="url(#vig)"/>`+
+    meter(sc.meter[0],sc.meter[1],sc.meter[2],t,{...sc.meter[3],t})+caption(sc.cap,t,sc.hl)+`</g>`;
+}
+window.render=render;window.SCENE_LEN=SCENE_LEN;window.N=SCENES.length;
+render(0);
+</script></body></html>

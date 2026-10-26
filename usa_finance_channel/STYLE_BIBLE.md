@@ -1,66 +1,67 @@
-# Style Bible - "Neon Cutout Americana"
+# Style Bible - "Neon Cutout Americana" (v2, minimal)
 
-A paper-cutout diorama world lit by American night-time light (sodium streetlamps, motel/pawn-shop neon, gas-station white).
-One signature device that makes the channel recognisable in 1 second: the **Problem Meter**.
+Paper-cutout diorama world lit by American night-time light (sodium streetlamps, neon, gas-station white).
+**Rule zero: every element must do a job. If it does not move the story forward, delete it.**
 
-## 1. The three signatures (what nobody else combines)
+## 1. The two signatures
 
-1. **Paper cutout world** - every object is a hand-cut paper layer with a hard offset shadow and a faint white edge. Depth comes from layers and parallax, not 3D.
-2. **Polaroid heads** - characters have paper bodies, but their heads are tilted Polaroid cards with a flat face illustration. Expressions (worry, relief) live on the card; a sweat drop or confetti sells the emotion.
-3. **The Problem Meter** - a neon, gas-pump-style panel at the top of *every* frame. It shows the one number that matters. It rises with each problem, drops a little with each partial fix, then jumps higher. Viewers *see* the staircase without being told.
+1. **Paper cutout world** - every object is a cut-paper layer with a hard offset shadow and a faint white edge. Depth from layers and slow parallax, not 3D.
+2. **Amount + arrow, no box** - one big number at the top of every frame with an arrow beside it. No panel, no label, no bar.
+   - Arrow **up / red** = the problem grows (bill, fees, debt).
+   - Arrow **up / green** = money gained (loan received).
+   - Arrow **down / green** = the problem shrinks (debt paid off).
+   - The number counts up or down as it happens; the arrow bobs only while it moves.
 
-## 2. Palette
+## 2. Characters
 
-| Role | Hex | Use |
-|------|-----|-----|
-| Night navy | `#070B24` | sky top, panels |
-| Dusk plum | `#2B1250` | sky mid, buildings |
-| Sodium rose | `#8A2F4D` | horizon glow |
-| Paper cream | `#F6F1E6` | documents, Polaroid frames |
-| Danger red | `#FF3B4A` | rising meter, bad numbers |
-| Warning amber | `#FFC233` | mid meter, key words |
-| Relief green | `#2CFF8F` | solutions, good numbers, credit-union scenes |
-| Neon pink | `#FF3FA4` | predatory-lender signage (always pink = trap) |
-| Teal safe-room | `#06222A -> #2F8A6A` | the *solution* scene gets a colder, calmer palette |
+- Paper body (jacket, trousers, arms) with a **real American head**: face, ears, hair, eyes, brows, nose, mouth - no card, no frame.
+- Only two animated expressions: **worry** (brows up in the middle, frown) and **smile** (teeth). Everything else is neutral.
+- One fixed outfit per recurring character so viewers recognise them across episodes.
+  - Marcus: orange jacket, navy trousers, brown hair.
+  - Teller (credit union): blue jacket, long dark hair.
+- Poses used: hands on head (stress), look (thinking), wave (relief). Nothing else.
 
-**Colour grammar:** pink neon = trap, amber = caution, red = pain, green = way out. Never use green before the solution scene.
+## 3. Captions (strict)
 
-## 3. Typography
+- **White by default.** Only the *number or key word* turns colour: **red = loss**, **green = gain**. No other colours.
+- Max 2 short lines (<= 22 characters each), one idea, black outline, centred at the bottom.
+- Words appear one by one (0.2 s apart). Never repeat what the amount already says unless it adds the *why*.
 
-- **Captions:** DejaVu Sans Black (or Montserrat Black / Archivo Black), UPPERCASE, white with a thick black outline, max 2 lines, one keyword per line in a colour.
-- **Meter digits:** monospace black (7-segment feel), neon glow in the meter colour.
-- **Documents:** small bold sans on cream paper, one red number each.
+## 4. What is allowed on screen
 
-## 4. Motion rules
+| Allowed | Not allowed |
+|---------|-------------|
+| Amount + arrow | Panels, bars, ticks, labels like "PROBLEM METER" |
+| Caption (white / red / green) | Extra text on props (quotes, stamps, forms, signs with sentences) |
+| One neon sign per location (CASH NOW / CREDIT UNION) to name the place | Stars, clocks, confetti, dashed arrows, decorative props |
+| The planted flyer (no text) | Repeated numbers in three places at once |
 
-- New caption word every 0.2 s (kinetic reveal); one idea per caption.
-- Scene length 8-12 s in the final cut (5 s in the animatic); something changes every 1.5-2 s.
-- Camera: constant slow push-in (1.00 -> 1.08) + 20-30 px parallax drift. Push **toward** the planted detail on the reveal.
-- Objects enter with an overshoot (ease-out-back). Documents drop from above, stamps pop, numbers count up.
-- Meter shakes while the number rises; it never shakes during a solution.
-- Cuts: 0.15 s dip-to-dark, no wipes, no cross-dissolves.
-- Vignette + paper-grain overlay on everything (unifies AI/vector assets).
+## 5. Palette
 
-## 4b. Characters
+| Role | Hex |
+|------|-----|
+| Night navy / plum / rose sky | `#0A0F2C` -> `#2B1250` -> `#7A2A4A` |
+| Safe-room teal sky (solution scene only) | `#06222A` -> `#0F4A4A` -> `#2F8A6A` |
+| Loss red | `#FF4655` |
+| Gain green | `#2CFF8F` |
+| Paper cream | `#F6F1E6` |
+| Trap neon (predatory lender sign) | `#FF3FA4` |
 
-- Marcus: orange jacket, navy pants, brown hair. Recurring cast gets one fixed colour each so viewers recognise them across episodes.
-- Neutral expression is the default; *only* the worry/relief expressions are animated (brows, mouth, sweat drop).
-- Faces are drawn flat on the Polaroid; for real-person stories use a stylised portrait, never a real photo.
+## 6. Motion rules
 
-## 5. Sound
+- Constant slow push-in (1.00 -> 1.07) with 20-30 px drift. On the reveal, push **toward** the planted detail.
+- Objects enter with a small overshoot; numbers count; steam, steps and cash are the only secondary motion.
+- Cuts: 0.15 s dip to dark. No wipes, no cross-dissolves.
+- Vignette + paper grain over everything.
 
-- Constant low room tone per scene (fridge, neon buzz, street).
-- Meter sound: soft "tick" going up; **jukebox chime** for every solution (the channel's audio logo); low detuned note for every new problem.
-- Music: sparse, slow bass pulse that tightens as the Meter climbs, drops out at the reveal.
+## 7. Sound
 
-## 6. Production pipeline
+- Room tone per scene; soft tick while the number climbs; jukebox chime on each solution; low detuned note on each new problem; silence on the reveal.
 
-1. Write the beat sheet (`SCRIPT_EP01.md` template).
-2. Build/animate scenes in `animatic.html` (SVG, deterministic `render(t)`).
-3. `node render.js stills` -> 5 key frames in `keyframes/`.
-4. `node render.js frames <dir>` -> frames -> `ffmpeg` -> MP4.
-5. Add VO + sound in an editor; replace the animatic art with final illustrated layers when budget allows (keep the same layout, Meter and caption system).
+## 8. Pipeline
 
-## 7. Why this should be distinctive
+`animatic.html` (SVG, deterministic `render(t)`) -> `node render.js stills` -> `keyframes/` -> `node render.js frames <dir>` -> ffmpeg -> MP4. Replace the placeholder art with final illustration later, keeping the same amount/arrow and caption system.
 
-Common finance-explainer looks are talking-head + stock footage, whiteboard, flat vector, or 3D clay characters. This style combines paper cutouts + Polaroid heads + a persistent neon Meter. I cannot guarantee nobody has done it; before launch, search TikTok/Shorts for "paper cutout finance", "neon meter explainer" and check the closest matches.
+## 9. Distinctiveness
+
+Typical finance explainers use talking heads, whiteboards, flat vector or 3D clay. Paper-cutout + minimal amount/arrow is uncommon, but I cannot guarantee nobody has done it - search "paper cutout finance" on TikTok/Shorts before launch.

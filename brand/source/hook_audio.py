@@ -1,16 +1,13 @@
 # Sound design for the Episode 1 hook, mixed under the narrator.
 # Original sounds only (no copyrighted ringtones). Usage:
-#   python3 hook_audio.py <vo.mp3> <vo_offset_s> <out.wav>
+#   python3 hook_audio.py <vo.mp3> <vo_offset_s> <out.wav> <ring_end> <whoosh> <hit>
 import subprocess, sys, wave
 import numpy as np
 
 SR = 48000
-DUR = 5.4
-RING_END = 3.9      # call accepted
-WHOOSH = 1.70       # phone zooms in
-HIT = 3.23 + 0.15   # caller name lands ("ex")
-
+DUR = 5.0
 vo_path, vo_off, out = sys.argv[1], float(sys.argv[2]), sys.argv[3]
+RING_END, WHOOSH, HIT = map(float, sys.argv[4:7])  # call accepted / phone zooms in / caller name lands
 t = np.arange(int(SR * DUR)) / SR
 mix = np.zeros_like(t)
 rng = np.random.default_rng(7)
@@ -68,13 +65,21 @@ raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', vo_path, '-f', 's16le', '-a
 vo = np.frombuffer(raw, dtype=np.int16).astype(np.float64) / 32768
 voice = np.zeros_like(t)
 o = int(vo_off * SR)
+if o < 0: vo, o = vo[-o:], 0
 n = min(len(vo), len(t) - o)
 voice[o:o + n] = vo[:n]
 # duck the ring and buzz under the voice
 vo_env = np.convolve(np.abs(voice), np.ones(2400) / 2400, mode='same')
-duck = 1 - 0.55 * np.clip(vo_env / (vo_env.max() + 1e-9) * 3, 0, 1)
+duck = 1 - 0.6 * np.clip(vo_env / (vo_env.max() + 1e-9) * 3, 0, 1)
 
-mix = voice * 1.25 + (ring * 0.32 + vib * 0.55) * duck + whoosh * 0.35 + hit * 0.9 + click + beat * 0.7 + drone
+# The narrator always leads: effects sit ~12 dB under the voice and duck further while he speaks
+voice /= np.max(np.abs(voice)) + 1e-9
+sfx = ring * 0.32 + vib * 0.55 + whoosh * 0.35 + hit * 0.9 + click + beat * 0.7 + drone
+speaking = vo_env > vo_env.max() * 0.15
+v_rms = np.sqrt(np.mean(voice[speaking] ** 2))
+sfx *= v_rms * 0.25 / (np.sqrt(np.mean(sfx ** 2)) + 1e-9)
+sfx *= min(1, 0.45 / (np.max(np.abs(sfx)) + 1e-9))
+mix = voice + sfx * duck
 mix *= np.clip((DUR - t) / 0.25, 0, 1)  # short fade-out at the end
 mix = mix / np.max(np.abs(mix)) * 0.92
 with wave.open(out, 'wb') as w:

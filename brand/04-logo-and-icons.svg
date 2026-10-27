@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"><defs>
+<filter id="grain" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+  <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0"/>
+</filter>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+  <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+<filter id="glowBig" x="-50%" y="-50%" width="200%" height="200%">
+  <feGaussianBlur stdDeviation="22" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+<filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+<filter id="blur20" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="20"/></filter>
+<filter id="blur60" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+<filter id="white"><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0"/></filter>
+<filter id="rough" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="28"/>
+</filter>
+<linearGradient id="rimLight" x1="0" x2="1" y1="0" y2="0">
+  <stop offset="0" stop-color="#2F8FE0" stop-opacity="0.55"/>
+  <stop offset="0.45" stop-color="#2F8FE0" stop-opacity="0"/>
+  <stop offset="0.6" stop-color="#E8202A" stop-opacity="0"/>
+  <stop offset="1" stop-color="#E8202A" stop-opacity="0.7"/>
+</linearGradient>
+<radialGradient id="echoBody" cx="0.5" cy="0.35" r="0.7">
+  <stop offset="0" stop-color="#b8f6ff"/><stop offset="0.45" stop-color="#5CE1F0"/><stop offset="1" stop-color="#1f6fd6"/>
+</radialGradient></defs>
+  <rect width="1920" height="1080" fill="#0b1328"/>
+  <circle cx="400" cy="520" r="420" fill="#E8202A" opacity="0.12" filter="url(#blur60)"/>
+  <g transform="translate(400,500)">
+   <circle r="300" fill="#0F1A33"/><circle r="300" fill="none" stroke="#E8202A" stroke-width="9" filter="url(#glow)"/>
+   <circle r="245.99999999999997" fill="#E0508F" opacity="0.18" filter="url(#blur20)"/>
+   <g transform="translate(0,108) scale(0.3333333333333333)">
+  <ellipse cx="0" cy="330" rx="330" ry="70" fill="#5CE1F0" opacity="0.35" filter="url(#blur20)"/>
+  <g fill="#5CE1F0" opacity="0.55" filter="url(#blur20)">
+  <path d="M-200 300 C-180 250 -90 250 0 270 C90 250 180 250 200 300 C200 350 100 360 0 345 C-100 360 -200 350 -200 300 Z"/>
+  <path d="M-70 40 C-110 60 -125 120 -120 200 L-110 290 L110 290 L120 200 C125 120 110 60 70 40 Z"/>
+  <path d="M0 -130 C-70 -130 -92 -60 -86 -10 C-80 40 -50 60 0 60 C50 60 80 40 86 -10 C92 -60 70 -130 0 -130 Z"/></g>
+  <g fill="url(#echoBody)" stroke="#d9fbff" stroke-width="3" opacity="0.92">
+  <path d="M-200 300 C-180 250 -90 250 0 270 C90 250 180 250 200 300 C200 350 100 360 0 345 C-100 360 -200 350 -200 300 Z"/>
+  <path d="M-70 40 C-110 60 -125 120 -120 200 L-110 290 L110 290 L120 200 C125 120 110 60 70 40 Z"/>
+  <path d="M0 -130 C-70 -130 -92 -60 -86 -10 C-80 40 -50 60 0 60 C50 60 80 40 86 -10 C92 -60 70 -130 0 -130 Z"/></g>
+  <path d="M-100 120 C-90 220 -40 270 0 275 C40 270 90 220 100 120" stroke="#9ff2ff" stroke-width="5" fill="none" opacity="0.7"/>
+  <path d="M-60 -60 C-40 -100 40 -100 60 -60" stroke="#e6fdff" stroke-width="4" fill="none" opacity="0.6"/>
+  <ellipse cx="0" cy="-15" rx="52" ry="56" fill="#1d63c4" opacity="0.55"/>
+  <g filter="url(#glow)"><ellipse cx="-20" cy="-15" rx="10" ry="14" fill="#fffbe6"/><ellipse cx="20" cy="-15" rx="10" ry="14" fill="#fffbe6"/></g></g>
+   <g filter="url(#glow)"><rect x="-118.2" y="-198" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-118.2" y="-118.8" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-118.2" y="-158.4" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-129" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="0.05"/><rect x="-90.3" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-129" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-90.3" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="0.05"/><circle cx="-53.58" cy="-171" r="6.4799999999999995" fill="#E8202A"/><circle cx="-53.58" cy="-135" r="6.4799999999999995" fill="#E8202A"/><rect x="-25.5" y="-198" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-25.5" y="-118.8" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-25.5" y="-158.4" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="0.05"/><rect x="-36.3" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="2.400000000000011" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="-36.3" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="2.400000000000011" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="39.120000000000005" y="-198" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="39.120000000000005" y="-118.8" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="39.120000000000005" y="-158.4" width="27.90000000000001" height="10.799999999999999" rx="5.3999999999999995" fill="#E8202A" opacity="0.05"/><rect x="28.320000000000007" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="67.02000000000002" y="-187.2" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="28.320000000000007" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/><rect x="67.02000000000002" y="-147.6" width="10.799999999999999" height="28.8" rx="5.3999999999999995" fill="#E8202A" opacity="1"/></g>
+   <text x="0" y="-36" text-anchor="middle" font-family="Inter" font-weight="900" font-size="45" letter-spacing="6" fill="#fff"><tspan fill="#E8202A">AM</tspan> STORIES</text>
+  </g>
+  <text x="400" y="910" text-anchor="middle" font-family="Inter" font-weight="800" font-size="24" letter-spacing="5" fill="#cfd6ea">CHANNEL AVATAR</text>
+  <text x="750" y="110" font-family="Caladea, Liberation Serif, serif" font-size="56" fill="#fff">Story icons</text>
+  <text x="750" y="152" font-family="Inter" font-size="22" fill="#9aa6c2">Neon line, glow, one color per topic. Use on thumbnails, playlists and end cards.</text>
+  <g transform="translate(880,300)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#F2B544" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#F2B544" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><rect x="-60" y="-36" width="120" height="72" rx="10"/><circle r="18"/><path d="M-44 -20 v40 M44 -20 v40"/></g>
+  </g><text x="880" y="450" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">MONEY</text><g transform="translate(1140,300)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#2F8FE0" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#2F8FE0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><path d="M-66 -10 L0 -42 L66 -10 L0 22 Z"/><path d="M-38 4 v30 q38 24 76 0 v-30"/><path d="M66 -10 v40"/></g>
+  </g><text x="1140" y="450" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">COLLEGE</text><g transform="translate(1400,300)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#E8202A" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#E8202A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><rect x="-50" y="-50" width="64" height="104" rx="8"/><rect x="-38" y="-38" width="40" height="28" rx="4"/><path d="M14 -24 h18 l14 16 v44 q0 12 -10 12 q-10 0 -10 -12 v-26 h-12"/></g>
+  </g><text x="1400" y="450" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">GAS</text><g transform="translate(1660,300)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#5CE1F0" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#5CE1F0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><path d="M18 -52 A54 54 0 1 0 50 34 A44 44 0 0 1 18 -52 Z"/><path d="M28 -38 h22 l-22 24 h22"/></g>
+  </g><text x="1660" y="450" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">SLEEP</text><g transform="translate(880,640)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#E0508F" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#E0508F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><path d="M-60 0 L0 -50 L60 0"/><path d="M-44 -12 v60 h88 v-60"/><rect x="-14" y="14" width="28" height="34"/></g>
+  </g><text x="880" y="790" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">RENT</text><g transform="translate(1140,640)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#E8202A" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#E8202A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><rect x="-34" y="-58" width="68" height="116" rx="12"/><path d="M0 -26 v28"/><circle cy="20" r="3"/><path d="M-12 -46 h24"/></g>
+  </g><text x="1140" y="790" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">BANK ALERT</text><g transform="translate(1400,640)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#2F8FE0" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#2F8FE0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><path d="M-64 18 v-18 l14 -32 h100 l14 32 v18 z"/><path d="M-50 0 h100"/><circle cx="-36" cy="26" r="12"/><circle cx="36" cy="26" r="12"/></g>
+  </g><text x="1400" y="790" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">CAR</text><g transform="translate(1660,640)">
+   <rect x="-110" y="-110" width="220" height="220" rx="36" fill="#111c38" stroke="#F2B544" stroke-opacity="0.35" stroke-width="2"/>
+   <g transform="scale(1)" fill="none" stroke="#F2B544" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"><path d="M-56 -6 h112 q0 54 -56 54 q-56 0 -56 -54 z"/><path d="M-20 -50 q10 14 0 28 M8 -50 q10 14 0 28"/></g>
+  </g><text x="1660" y="790" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" letter-spacing="3" fill="#dfe5f3">FOOD</text>
+<rect width="1920" height="1080" filter="url(#grain)" opacity="0.07" style="mix-blend-mode:overlay"/>
+<radialGradient id="vig" cx="0.5" cy="0.5" r="0.75"><stop offset="0.6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.7"/></radialGradient>
+<rect width="1920" height="1080" fill="url(#vig)"/>
+<g filter="url(#rough)"><rect x="-20" y="-20" width="1960" height="1120" fill="none" stroke="#05080f" stroke-width="54"/></g></svg>

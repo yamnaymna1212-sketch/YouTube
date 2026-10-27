@@ -34,20 +34,30 @@ Everyone shares one skeleton: torso 112, arms 58+56, legs 72+72, head radius 45.
 - Walls and objects light up only within the glow radius; the radius shrinks when the glow dims
 - Run: lean 10° forward, arms opposite legs, knees fold on the back swing, body bobs. Walk: same at half the size
 
-## World v2: calm neon line city (see `brand/v2-glow/06-world-overview.png`)
-One street, five places, always in this order: **Home → Gas station → 24/7 Market → Diner → Bank.** A college clock tower stands in the distant skyline.
+## World v3: "Blueprint Neon" (see `brand/v2-glow/06-world-overview.png`)
+The channel's signature: **the city is drawn like a blueprint**. Deep navy paper with a faint square grid, chalk-blue structure lines, and one neon color per place. No black backgrounds.
 
-| Place | Accent | Key details |
-|-------|--------|-------------|
-| Home (apt 214) | Warm amber | Kai's lit window, porch light, door number |
-| Gas station | Soft pink + red price | Canopy, 2 pumps, LED price sign `3.89` |
+Why blueprint: nobody in the story-Shorts space uses it, the blue-and-grid look is recognizable at first glance in a feed, and it fits the theme of the stories (plans, budgets, the math of a life).
+
+One street, five places, always in this order: **Home → Gas station → 24/7 Market → Burgers → Bank.** A college clock tower stands in the distant skyline.
+
+| Place | Neon color | Key details |
+|-------|------------|-------------|
+| Home (apt 214) | Warm amber | US flag on the porch, Kai's lit window, door number |
+| Gas station | Pink + red price | Canopy, 2 pumps, LED price sign `3.89` |
 | 24/7 Market | Teal | Glass front, shelves, OPEN sign, cart |
-| Diner | Pink script + amber cup | Booths in the window, steaming coffee sign |
-| Bank | Lavender | Columns, ATM |
+| Burgers | Red + amber | Neon burger pole sign "OPEN 24H", fries, `$8.99 COMBO` |
+| Bank | Money green | Big neon `$`, ATM, US flag on a pole |
+
+**Interiors:** Apartment 214 is shown cut open like a dollhouse (bedroom, kitchen, living room stacked), with a blueprint title block (`13-home-cutaway.png`).
+
+**American details** (`14-americana-props.png`): US flag, $100 and $20 bills, cash stack, coins, paycheck, burger meal, coffee, house keys.
+- **No real brand logos** (McDonald's, Walmart, Chase...). They are trademarks: videos can get claimed, demonetized or taken down. Use generic places that are instantly recognizable instead (golden-yellow burger sign, red "BURGERS").
+- Money stays a line drawing (neon outline, simple portrait), never a photo-real copy of a bill.
 
 **Rules for a calm, clear frame**
 - Three line weights only: far skyline 2px (barely visible), buildings 2.5-3px, accents 3px with a soft glow
-- Buildings have dark fills, so nothing behind them shows through
+- Buildings have solid navy fills, so the grid and skyline don't show through them
 - **One accent color per place**, at low glow. Kai's blue is always the brightest thing on screen
 - Max one sign per building, max two lit windows per frame
 - Scenes are framed on one place at a time (world scale 1.15 in 9:16), with the ground at y=1450

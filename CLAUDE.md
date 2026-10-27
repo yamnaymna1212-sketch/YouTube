@@ -9,10 +9,11 @@ Read this before any work on this repo. The owner talks in Arabic: reply in Arab
 
 ## Style
 4. **Avoid saturated styles.** The neon-noir, lo-fi room and 3D-diorama looks are everywhere. `style/neon-noir-style-bible.md` and `brand/0*.png` are archived (v1) and no longer used.
-5. **Current style: "Glow"** (`style/glow-style-bible.md`): glowing stick characters with faces in a dark world drawn in thin lines. The light comes only from the characters.
+5. **Current style: "Glow" characters in a "Blueprint Neon" world** (`style/glow-style-bible.md`): glowing stick characters with faces, in a navy blueprint city with a square grid and one neon color per place. Never a plain black background.
 6. **Main character: Kai**, a blue glowing stickman with flowing water-like hair, like Watergirl from Fireboy & Watergirl. The other characters use the same skeleton with different colors, head shapes and hair.
 7. **The glow is the story:** it shows energy, money and sleep. Bills drain it, sleep and wins refill it.
 
 ## Content
 8. Real everyday US problems: money, rent, college debt, gas prices, sleep, jobs. Target people living them, ages 18-30.
-9. Hook in the first 2 seconds, cliffhanger at the end of each part, and one practical tip that's actually true.
+9. Use real American details (flag, dollars, burgers, gas prices) but **never real brand logos**.
+10. Hook in the first 2 seconds, cliffhanger at the end of each part, and one practical tip that's actually true.

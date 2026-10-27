@@ -1,3 +1,5 @@
+> **Archived (v1).** Replaced by `glow-style-bible.md`. Kept for reference only.
+
 # Style Bible: "Neon Noir Diorama"
 
 The channel's locked visual style. Every image, character, and scene follows this file, so the videos look like one world.

@@ -1,3 +1,5 @@
+> **Archived (v1).** The current kit is in `v2-glow/` (Glow style).
+
 # 2 AM Stories: Brand Kit
 
 Concept art for the channel, in the Neon Noir Diorama style (`../style/neon-noir-style-bible.md`).

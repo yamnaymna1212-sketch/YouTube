@@ -1,6 +1,7 @@
 # Part 1: The $35 Notification
 
-**Format:** Vertical 9:16, 2:30 runtime, animated flat-illustration story (same style family as the reference video)
+**Format:** Vertical 9:16, 2:30 runtime, story structure from the reference video
+**Visual style:** Neon Noir Diorama, see [`style/neon-noir-style-bible.md`](../style/neon-noir-style-bible.md) for the world, characters, and AI prompts
 **Audience:** US, ages 18-30. College students, first-job workers, night-shift workers, anyone living on a tight budget
 **Language:** English narration and burned-in captions (CAPS for emphasis)
 **Series label:** "Part 1" in the bottom center, on every scene
@@ -11,8 +12,8 @@
 
 - Hook in the first 2 seconds: a number, a sound, or a sentence that makes the viewer ask "what happened?"
 - Captions in bold ALL CAPS, short lines, 2-6 words each
-- Rule cards in cream boxes with a red top bar, used 2-3 times, never more than once per 30 seconds
-- Phone screens and timers are the main props; use red for money pain, warm colors for hope
+- Rule cards as thin white serif text floating in fog, used 2-3 times, never more than once per 30 seconds
+- Phone screens, red digital clocks, and timers are the main props; use red for money pain, amber for hope
 - Narration is first person, past tense, plain words, no jargon
 - Every part ends on a cliffhanger, then a short "what you can do" card in the final 10 seconds
 

@@ -277,7 +277,9 @@ function videoFrame(t) {
     ui({ caption, energy: lerp(0.85, 0.12, drain), balance, color }));
 }
 
-(async () => {
+module.exports = { character, CAST, STAND, walkPose, runPose, mix, lerp, defs, ui };
+
+if (require.main === module) (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const shot = async (name, s) => {

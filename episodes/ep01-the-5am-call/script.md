@@ -58,7 +58,11 @@
 - **Brooke:** real crying, broken breath, voice cracks on "start over". During the wait, a tiny hopeful smile through tears.
 - **Glow as emotion:** Kai dim when asleep → warm pink flicker while tempted → bright and sharp on "No." → shaky during the flashback.
 
-## Posting
+## Posting (TikTok)
+- **Caption:** My ex called me at 5 AM crying 😭 (Part 1)
+- **Hashtags:** #brokekai #storytime #moneytok #animation #ex #relationships
+
+## Posting (YouTube)
 - **Title:** My ex called me at 5 AM crying (Part 1)
 - **Hashtags:** #storytime #ex #relationships #moneytok #animation
 - **Pinned comment (practical tip, true on iPhone and Android):** "Tip: turn on Focus / Do Not Disturb at night and only allow calls from people you choose. 5 AM calls won't wake you up. Part 2 tomorrow."

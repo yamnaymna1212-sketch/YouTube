@@ -25,3 +25,4 @@ Read this before any work on this repo. The owner talks in Arabic: reply in Arab
 10. Use real American details (flag, dollars, burgers, gas prices) but **never real brand logos**.
 11. **Hook (first 3 seconds): a clear contradiction plus a clear problem, so the viewer asks the question in their own head.** Never put "how" or "why" in the hook, and never ask the question out loud. Show two things that clash, e.g. "I ate a $14 salad. I paid $51.50." The viewer thinks "wait, what?" and stays.
 12. Cliffhanger at the end of each part, then a short follow/share line with a joke about the story. Don't add a practical tip unless the episode has room and it's actually true.
+13. **After every finished video, always give the owner its title and the recommended TikTok caption + hashtags** (4 fixed + 1-2 rotating by topic, from `brand/tiktok/hashtags.md`). Do this in the same message that delivers the video, and save them in the episode's `script.md`.

@@ -30,7 +30,11 @@
 ## Audio
 Narrator Andrew, Brooke Ava (shaky + muffled through the door filter). All effects are original (bangs, paper slide, bass hits, heartbeat, drone) and sit about 12 dB under the voices.
 
-## Posting
+## Posting (TikTok)
+- **Caption:** At 5 AM, the door bangs 🚪 (Part 2)
+- **Hashtags:** #brokekai #storytime #moneytok #animation #ex #toxicex
+
+## Posting (YouTube)
 - **Title:** I blocked her. She's at my door. (Part 2)
 - **Hashtags:** #storytime #ex #moneytok #animation #relationships
 - **Pinned comment:** "Would you open the door? 🚪 Part 3 tomorrow."

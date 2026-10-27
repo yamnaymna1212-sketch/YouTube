@@ -171,7 +171,9 @@ F.push({ t: '0:24', shot: 'MEDIUM, slow push toward the door. New text: "I\'m ou
   <g transform="translate(560,760) rotate(4) scale(1.15)">${textScreen()}</g>
   ${caption('THEN SHE TEXTED...')}${partLabel(`<text x="540" y="1700" text-anchor="middle" font-family="Inter" font-weight="800" font-size="26" letter-spacing="4" fill="${PINK}">FOLLOW FOR PART 2</text>`)}`) });
 
-(async () => {
+module.exports = { line, neon, soft, blur, bedroom, carInterior, phoneBody, callIcon, partLabel, KAI, PINK };
+
+if (require.main === module) (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const files = [];

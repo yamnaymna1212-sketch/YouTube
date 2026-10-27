@@ -9,6 +9,13 @@
 2. **Caller ID "Brooke (ex) 🚩".** Saving an ex with a red-flag emoji is a real Gen Z habit, and US viewers read it instantly.
 3. **New ending: "I'm outside."** After the flashback he decides to block her, and the text arrives first, with pink light under his door. This is the cliffhanger for Part 2.
 
+## Hook (0:00-0:05), rendered: `hook.mp4`
+- **Narrator** (clear, fast, no pauses, `audio/hook-vo-andrew.mp3`): "At 5:03 AM, my phone lights up. It's my ex, and she's crying." Alternative voice: `audio/hook-vo-christopher-alt.mp3`
+- **Sound:** urgent digital ring + phone vibrating on the nightstand from frame 1, whoosh on the zoom, bass hit when "ex" lands, click when he answers, heartbeat after
+- **Zoom on the main element only:** the phone lifts off the nightstand and fills the screen; the room stays in place, dims and blurs
+- **Captions:** word by word in sync with the voice; key words in color (5:03 AM red, EX pink, CRYING blue)
+- All sounds are original (no copyrighted ringtones)
+
 ## Shot list
 
 | # | Time | Camera | Picture | Sound | Caption |

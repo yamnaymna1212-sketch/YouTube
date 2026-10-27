@@ -3,17 +3,17 @@
 **Rules followed:** 9:16 · 30-40 s max · hook = clear contradiction + clear problem, no "how/why" · money story, no lesson · follow/share line with a joke
 **Cast:** Kai (blue), Brooke (pink, his ex). Continues Part 1 ("I'm outside.").
 
-## Hook (0:00-0:03)
-- **Title card (white box):** "I BLOCKED HER. / SHE'S AT MY DOOR."
-- **Narrator:** "I blocked her number. She's knocking on my door."
-- Picture: Kai's phone shows "Brooke (ex) 🚩 · Blocked ✓", the check pops in; on the word "knocking" the first BANG hits and the picture cuts to the door.
-- The contradiction (blocked vs. at my door) is the question: the viewer asks it in their own head.
+## Hook (0:00-0:03), updated
+- **Title card (white box):** "AT 5 AM, / THE DOOR BANGS..."
+- **Narrator:** "At 5 AM, the door bangs." The first BANG lands exactly on the word "bangs".
+- Picture: straight to the door from frame 0 (the phone scene was removed). Kai stands frozen in the hallway, pink light under the door; on "bangs" the door shakes, dust flies, "BANG" pops and the camera shakes.
+- Preview: `hook-preview.png`, `hook-storyboard.png`
 
 ## Beats
 
 | Time | Scene | Voice | Sound |
 |------|-------|-------|-------|
-| 0:03-0:07 | Door shakes: BANG x2 more (dust, camera shake, "BANG" pop, pink light under the door, her shadow in the gap) | | Heavy fist on wood |
+| 0:03-0:07 | Door shakes: BANG x2 more (the first one is in the hook) (dust, camera shake, "BANG" pop, pink light under the door, her shadow in the gap) | | Heavy fist on wood |
 | 0:07-0:11 | Same door, Kai steps back | **Brooke** (muffled, through the door): "Kai! Please! I know you're in there!" | Voice shaky |
 | 0:11-0:16 | Peephole view: Brooke with a suitcase, mascara running | Narrator: "Through the peephole, I saw a suitcase." | Heartbeat starts |
 | 0:16-0:19 | Same | **Brooke:** "They locked me out. I have nowhere to go. I'll pay you back, I promise." | |

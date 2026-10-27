@@ -24,8 +24,8 @@ const clip = (name, lead = 0.08, tail = 0.12, offset = null) => {
   cursor = end;
   return { name, at, end, words: ws.map(w => ({ ...w, s: w.s + at })) };
 };
-const HOOK = clip('hook', 0, 0.55, -0.05);
-const B1 = HOOK.words.find(w => w.w === 'knocking').s;           // first bang lands on the word
+const HOOK = clip('hook', 0, 0.9, -0.05);
+const B1 = HOOK.words.find(w => w.w === 'bangs').s;              // first bang lands on the word "bangs"
 const HOOK_END = HOOK.end;
 const B2 = HOOK_END + 0.1, B3 = B2 + 0.42;
 cursor = B3 + 1.2;
@@ -80,8 +80,8 @@ function title(t) {
   if (t >= TITLE_END + 0.15) return '';
   const s = t < TITLE_END ? 1 + 0.08 * Math.exp(-t * 14) : 1 - (t - TITLE_END) / 0.15;
   return `<g transform="translate(540 360) scale(${s}) translate(-540 -360)"><rect x="150" y="262" width="780" height="196" rx="22" fill="#fff"/>
-    <text x="540" y="345" text-anchor="middle" font-family="Inter" font-weight="900" font-size="66" fill="#0a1426">I BLOCKED HER.</text>
-    <text x="540" y="425" text-anchor="middle" font-family="Inter" font-weight="900" font-size="66" fill="#d6226b">SHE'S AT MY DOOR.</text></g>`;
+    <text x="540" y="345" text-anchor="middle" font-family="Inter" font-weight="900" font-size="66" fill="#0a1426">AT 5 AM,</text>
+    <text x="540" y="425" text-anchor="middle" font-family="Inter" font-weight="900" font-size="66" fill="#0a1426">THE DOOR BANGS...</text></g>`;
 }
 
 // ---------- scene pieces ----------
@@ -132,7 +132,7 @@ function doorScene(t, k = 0) {
   const back = ease((t - B1) / 0.4) * 24;
   const flick = 1 - 0.5 * Math.min(1, g);
   return `<g transform="translate(${cs[0]} ${cs[1]})">${push(1 + 0.05 * k, hallway(t) + door(t, g * 0.8)
-    + character('kai', 330 - back, 1480, 1.35, { t, face: 'shocked', glow: flick, pose: { lean: -5 * ease((t - B1) / 0.3), bob: 0, legL: [8, -4], legR: [-8, -4], armL: [-30, 20], armR: [-20, 30] } }), 760, 1200)}</g>`;
+    + character('kai', 330 - back, 1480, 1.35, { t, face: t < B1 ? 'tired' : 'shocked', glow: flick, pose: { lean: -5 * ease((t - B1) / 0.3), bob: 0, legL: [8, -4], legR: [-8, -4], armL: [-30, 20], armR: [-20, 30] } }), 760, 1200)}</g>`;
 }
 
 // ---------- peephole ----------
@@ -212,10 +212,7 @@ function endCard(t) {
 const S = [HOOK_END, BR1.end, BR2.end, CNT.end, BAL.end, PAP.end, DUR];
 const SCENES = [
   { to: S[0], draw: (t, u, d) => {
-    const body = t < B1
-      ? blur(bedroom(), 0.3) + soft(540, 1050, 380, '#ff5a5a', 0.14) + `<g transform="translate(540 1060) scale(${2.6 + 0.5 * u / B1}) rotate(${Math.sin(t * 2) * 0.6})">${blockedScreen(t)}</g>`
-      : doorScene(t, 0);
-    return svgDoc(1080, 1920, `${body}${title(t)}${label2}`);
+    return svgDoc(1080, 1920, `${doorScene(t, u / d)}${title(t)}${label2}`);
   } },
   { to: S[1], draw: (t, u, d) => svgDoc(1080, 1920, `${doorScene(t, u / d)}${captions(t, [BR1], { quote: ['brooke-1'] })}${label2}`) },
   { to: S[2], draw: (t, u, d) => svgDoc(1080, 1920, `${peep(t, u / d)}${captions(t, [PEEP, BR2], { quote: ['brooke-2'] })}${label2}`) },

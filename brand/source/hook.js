@@ -21,8 +21,8 @@ const easeOutBack = u => { const c = 1.6; u = clamp(u); return 1 + (c + 1) * Mat
 const easeInOut = u => { u = clamp(u); return u * u * (3 - 2 * u); };
 
 // Caption groups; each word pops in when it's spoken. Key words get a color.
-const GROUPS = [['At', '5:03 AM'], ['my', 'phone', 'rang'], ["It's", 'my', 'ex'], ['and', "she's", 'crying']];
-const COLORS = { '5:03 AM': '#ff5a5a', ex: PINK, crying: '#8fd3ff' };
+const GROUPS = [['At', '5 AM'], ['my', 'phone', 'rang'], ["It's", 'my', 'ex'], ['and', "she's", 'crying']];
+const COLORS = { '5 AM': '#ff5a5a', ex: PINK, crying: '#8fd3ff' };
 function captions(t) {
   let wi = 0, out = '';
   if (t < TITLE_END) return '';
@@ -62,7 +62,7 @@ function callScreen(t) {
   let bars = '';
   if (connected) for (let i = 0; i < 17; i++) { const h = 6 + Math.abs(Math.sin(t * 9 + i * 1.7) * Math.cos(t * 4 + i)) * 26; bars += `<rect x="${-56 + i * 7}" y="${70 - h / 2}" width="4" height="${h}" rx="2" fill="${PINK}"/>`; }
   return phoneBody(PINK, `
-    <text x="0" y="-122" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11" fill="#c9d4ea">5:03</text>
+    <text x="0" y="-122" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11" fill="#c9d4ea">5:00</text>
     <circle cx="0" cy="-72" r="30" fill="${PINK}" opacity="0.9"/><text x="0" y="-62" text-anchor="middle" font-family="Inter" font-weight="800" font-size="28" fill="#fff">B</text>
     <g transform="translate(0 -18) scale(${pop}) translate(0 18)"><text x="0" y="-12" text-anchor="middle" font-family="Inter, Noto Color Emoji" font-weight="800" font-size="19" fill="#fff">Brooke (ex) 🚩</text></g>
     <text x="0" y="8" text-anchor="middle" font-family="Inter" font-size="11" fill="#c9d4ea">${connected ? '00:0' + Math.floor(t - RING_END + 1) : 'incoming call'}</text>
@@ -82,7 +82,7 @@ function frameAt(t) {
   const blanket = `<path d="M400 1300 q60 -46 130 -30 q90 18 160 -6 q50 -14 90 6 v40 h-380 Z" fill="#0b1d38" opacity="0.92"/>${line('M400 1300 q60 -46 130 -30 q90 18 160 -6 q50 -14 90 6', P.warm, 3)}`;
   const clockPulse = 0.6 + 0.4 * Math.abs(Math.sin(t * 4.5));
   const room = `${bedroom()}<path d="M190 1285 m-70 0 a70 22 0 1 0 140 0 a70 22 0 1 0 -140 0" fill="#0b1d38" stroke="${P.warm}" stroke-width="3" opacity="0.9"/>
-    ${kai}${blanket}<g transform="translate(850,1300) scale(0.28)" opacity="${clockPulse}">${PROPS['ALARM CLOCK']('5:03')}</g>`;
+    ${kai}${blanket}<g transform="translate(850,1300) scale(0.28)" opacity="${clockPulse}">${PROPS['ALARM CLOCK']('5:00')}</g>`;
   // ring pulses around the phone while it rings
   let rings = '';
   if (ringing) for (let k = 0; k < 2; k++) { const ph = ((t + k * 0.35) % 0.7) / 0.7; rings += `<circle cx="0" cy="0" r="${180 + ph * 140}" fill="none" stroke="${PINK}" stroke-width="${3 / sc * 2.2}" opacity="${(1 - ph) * 0.5}"/>`; }
@@ -96,7 +96,9 @@ function frameAt(t) {
     ${title(t)}${captions(t)}${partLabel()}`);
 }
 
-(async () => {
+module.exports = { frameAt, words, VO_OFF, RING_END, ZOOM_A, NAME_T };
+
+if (require.main === module) (async () => {
   const tmp = fs.mkdtempSync(os.tmpdir() + '/hook-');
   const browser = await chromium.launch();
   const page = await browser.newPage();

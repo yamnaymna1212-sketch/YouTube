@@ -26,7 +26,7 @@ const phoneBody = (glowColor, screen) => `
   ${screen}<rect x="-40" y="146" width="80" height="4" rx="2" fill="#fff" opacity="0.7"/>`;
 const callIcon = (x, y, color, rot = 0) => `<circle cx="${x}" cy="${y}" r="19" fill="${color}"/><path d="M${x - 8} ${y - 4} q8 -8 16 0 l-3 5 q-5 -3 -10 0 z" fill="#fff" transform="rotate(${rot} ${x} ${y})"/>`;
 const incomingCall = (status = 'incoming call', crack = false) => phoneBody(PINK, `
-  <text x="0" y="-122" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11" fill="#c9d4ea">5:03</text>
+  <text x="0" y="-122" text-anchor="middle" font-family="Inter" font-weight="600" font-size="11" fill="#c9d4ea">5:00</text>
   <circle cx="0" cy="-70" r="30" fill="${PINK}" opacity="0.9"/><text x="0" y="-60" text-anchor="middle" font-family="Inter" font-weight="800" font-size="28" fill="#fff">B</text>
   <text x="0" y="-12" text-anchor="middle" font-family="Inter, Noto Color Emoji" font-weight="800" font-size="19" fill="#fff">Brooke (ex) 🚩</text>
   <text x="0" y="8" text-anchor="middle" font-family="Inter" font-size="11" fill="#c9d4ea">${status}</text>
@@ -71,16 +71,16 @@ function carInterior(op = 1) {
 const F = [];
 
 // 1. Wide: dark bedroom, Kai asleep, phone lights the ceiling
-F.push({ t: '0:00', shot: 'WIDE, static. Phone buzzes on the nightstand. Clock 5:03.', svg: () => frame(`
+F.push({ t: '0:00', shot: 'WIDE, static. Phone buzzes on the nightstand. Clock 5:00.', svg: () => frame(`
   ${bedroom()}
   <polygon points="895,1325 925,1325 1060,560 760,560" fill="#dfe9ff" opacity="0.07"/>${soft(905, 640, 160, '#dfe9ff', 0.12)}
   <rect x="872" y="1318" width="66" height="10" rx="4" fill="#eaf2ff" filter="url(#glow)"/>
-  <g transform="translate(850,1300) scale(0.28)">${PROPS['ALARM CLOCK']('5:03')}</g>
+  <g transform="translate(850,1300) scale(0.28)">${PROPS['ALARM CLOCK']('5:00')}</g>
   <path d="M190 1285 m-70 0 a70 22 0 1 0 140 0 a70 22 0 1 0 -140 0" fill="#0b1d38" stroke="${P.warm}" stroke-width="3" opacity="0.9"/>
   <g transform="rotate(-90 760 1282)">${character('kai', 760, 1282, 1.2, { t: 1, face: 'asleep', glow: 0.55, droop: 0.4 })}</g>
   <path d="M400 1300 q60 -46 130 -30 q90 18 160 -6 q50 -14 90 6 v40 h-380 Z" fill="#0b1d38" opacity="0.92"/>${line('M400 1300 q60 -46 130 -30 q90 18 160 -6 q50 -14 90 6', P.warm, 3)}
   ${line('M915 1270 q8 -10 0 -20 M935 1275 q14 -18 0 -36', '#eaf2ff', 2.5, 0.8)}
-  ${caption('5:03 AM.')}${partLabel()}`) });
+  ${caption('5 AM.')}${partLabel()}`) });
 
 // 2. ECU phone: incoming call from the ex
 F.push({ t: '0:02', shot: 'EXTREME CLOSE-UP, slow push-in. Caller ID: Brooke (ex) 🚩. Glowing fingers hold the phone.', svg: () => frame(`

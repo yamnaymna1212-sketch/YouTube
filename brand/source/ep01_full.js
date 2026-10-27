@@ -26,21 +26,22 @@ const clip = (name, lead = 0.08, tail = 0.12) => {
   cursor = end;
   return { name, at, end, words: ws.map(w => ({ ...w, s: w.s + at })) };
 };
-const BROOKE = clip('brooke-1', 0.3);
+const BROOKE = clip('brooke-1', 0.15);
 const N1 = clip('vo-n1');
-const N2 = clip('vo-n2', 0.08, 0.6);
+const N2 = clip('vo-n2', 0.08, 0.35);
 const NO = clip('kai-no', 0.15, 0.75);
 const N3 = clip('vo-n3');
-const N4 = clip('vo-n4', 0.35);
+const N4 = clip('vo-n4', 0.2);
 const N5 = clip('vo-n5', 0.12);
 const THROW = NO.words[0].s + 0.2, IMPACT = THROW + 0.3;
 const CALL_AGAIN = N3.words.find((w, i) => i > 2 && w.w === 'And').s;
 const BLOCK_T = N5.words.find(w => w.w === 'block').s;
-const TEXT_T = N5.end + 0.05, KNOCK1 = TEXT_T + 1.0, KNOCK2 = KNOCK1 + 0.3;
-cursor = KNOCK2 + 0.5;
-const N6 = clip('vo-n6'); // "Should I open the door?" asks the viewer
-const END_CARD = N6.end;
-const DUR = Math.min(30, END_CARD + 2.2);
+const TEXT_T = N5.end + 0.05, KNOCK1 = TEXT_T + 0.8, KNOCK2 = KNOCK1 + 0.3;
+cursor = KNOCK2 + 0.25;
+const CTA = clip('vo-cta', 0.05, 0.1); // follow + share, with a joke about the story
+const CTA2 = CTA.words.find((w, i) => i > 3 && w.w === 'And').s;
+const END_CARD = CTA.at;
+const DUR = Math.min(31, CTA.end + 0.6);
 
 // ---------- captions: word by word, groups of up to ~15 characters ----------
 const COLORS = { yes: PINK, no: '#ff5a5a', waiting: PINK, again: PINK, six: P.green, thousand: P.green, dollars: P.green, anything: '#ff5a5a', block: '#ff5a5a', texted: PINK };
@@ -110,6 +111,24 @@ const messages = (pop) => phoneBody(PINK, `
   <path d="${rr(-62, -32, 108, 34, 15)}" fill="#2a3a5c"/><text x="-50" y="-10" font-family="Inter" font-size="12" fill="#fff">I'm sorry. Please.</text>
   <g transform="translate(-62 27) scale(${pop}) translate(62 -27)"><path d="${rr(-62, 10, 92, 34, 15)}" fill="#2a3a5c"/><text x="-50" y="32" font-family="Inter" font-weight="800" font-size="14" fill="#fff">I'm outside.</text></g>
   <text x="-60" y="58" font-family="Inter" font-size="8" fill="#8aa0c8" opacity="${pop ? 1 : 0}">Delivered · 5:02 AM</text>`);
+
+// End card: follow (find out what Kai does) + share (the joke), synced to the CTA voice
+function endCard(t) {
+  const a = ease((t - END_CARD) / 0.3), b = easeOutBack((t - CTA2) / 0.35), f = CTA.words[0].s;
+  const tap = t > f + 0.3 && t < f + 0.8 ? (t - f - 0.3) / 0.5 : 0;
+  const txt = (y, size, color, s) => `<text x="540" y="${y}" text-anchor="middle" font-family="Inter, Noto Color Emoji" font-weight="900" font-size="${size}" fill="${color}" stroke="#000" stroke-width="9" style="paint-order:stroke">${s}</text>`;
+  return `<rect width="1080" height="1920" fill="#050c1c" opacity="${0.68 * a}"/>
+    <g opacity="${a}" transform="translate(0 ${(1 - a) * 40})">
+      <path d="${rr(370, 640, 340, 96, 48)}" fill="${PINK}"/><path d="${rr(370, 640, 340, 96, 48)}" fill="none" stroke="${PINK}" stroke-width="16" opacity="0.4" filter="url(#neon)"/>
+      <text x="540" y="704" text-anchor="middle" font-family="Inter" font-weight="900" font-size="46" fill="#fff">+ FOLLOW</text>
+      ${tap ? `<circle cx="600" cy="690" r="${20 + tap * 50}" fill="#fff" opacity="${0.5 * (1 - tap)}"/>` : ''}
+      ${txt(830, 58, '#fff', 'TO SEE IF KAI')}${txt(900, 58, '#fff', 'OPENS THE DOOR 🚪')}
+    </g>
+    ${t >= CTA2 ? `<g transform="translate(540 1180) scale(${b}) translate(-540 -1180)">
+      <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M540 1040 v-70 M510 1000 l30 -30 l30 30 M490 1010 h-20 v70 h140 v-70 h-20"/></g>
+      ${txt(1150, 50, '#fff', 'SEND THIS TO THE FRIEND')}${txt(1212, 50, '#fff', 'WHO STILL ANSWERS')}${txt(1274, 50, PINK, 'THEIR EX AT 5 AM 🚩')}
+    </g>` : ''}`;
+}
 
 // ---------- scenes ----------
 const SCENES = [
@@ -202,8 +221,8 @@ const SCENES = [
       <rect x="704" y="1472" width="252" height="10" fill="${PINK}" opacity="${light}" filter="url(#glow)"/><ellipse cx="830" cy="1490" rx="260" ry="26" fill="${PINK}" opacity="${0.35 * light}" filter="url(#b10)"/>
       ${character('kai', 330, 1480, 1.35, { t, face: t < TEXT_T ? 'determined' : 'shocked', pose: { lean: -2, bob: 0, legL: [6, -4], legR: [-6, -4], armL: [-8, 10], armR: [60, 80] } })}
       <g transform="translate(560,760) rotate(4) scale(1.15)">${t < TEXT_T ? contactScreen(tap) : messages(pop)}</g>`, 700, 1200)}
-      ${t < TEXT_T ? captions(t, N5) : t >= N6.words[0].s ? captions(t, N6, { color: '#fff' }) : `<text x="540" y="470" text-anchor="middle" font-family="Inter" font-weight="900" font-size="${72 * (0.9 + 0.1 * pop)}" fill="${PINK}" stroke="#000" stroke-width="11" style="paint-order:stroke">"I'M OUTSIDE."</text>`}
-      ${partLabel(end ? `<text x="540" y="1700" text-anchor="middle" font-family="Inter" font-weight="900" font-size="30" letter-spacing="4" fill="${PINK}" opacity="${ease((t - END_CARD) / 0.3)}">FOLLOW FOR PART 2</text>` : '')}
+      ${t < TEXT_T ? captions(t, N5) : `<text x="540" y="470" text-anchor="middle" font-family="Inter" font-weight="900" font-size="${72 * (0.9 + 0.1 * pop)}" fill="${PINK}" stroke="#000" stroke-width="11" style="paint-order:stroke">"I'M OUTSIDE."</text>`}
+      ${end ? endCard(t) : ''}${partLabel()}
       <rect width="1080" height="1920" fill="#000" opacity="${fade}"/>`);
   } },
 ];
@@ -234,7 +253,7 @@ function timeline() {
     voices: [
       { file: `${AUD}/hook-vo-andrew.mp3`, at: hook.VO_OFF },
       v(BROOKE, { filter: 'vibrato=f=5.5:d=0.18,tremolo=f=5:d=0.2', gain: 0.95 }),
-      v(N1), v(N2), v(NO), v(N3), v(N4), v(N5), v(N6),
+      v(N1), v(N2), v(NO), v(N3), v(N4), v(N5), v(CTA),
     ],
     sfx: fx,
   };
@@ -246,7 +265,7 @@ if (TEST > 0) (async () => {
   const out = process.argv[TEST + 1];
   const b = await chromium.launch(), pg = await b.newPage();
   await pg.setViewportSize({ width: 1080, height: 1920 });
-  const times = SCENES.map((s, i) => (i ? SCENES[i - 1].to : 0) * 0.3 + s.to * 0.7);
+  const times = process.env.TIMES ? process.env.TIMES.split(',').map(Number) : SCENES.map((s, i) => (i ? SCENES[i - 1].to : 0) * 0.3 + s.to * 0.7);
   console.log('scenes end at', SCENES.map(s => s.to.toFixed(2)).join(' '), 'throw', THROW.toFixed(2), 'text', TEXT_T.toFixed(2), 'dur', DUR.toFixed(2));
   for (let i = 0; i < times.length; i++) { await pg.setContent(`<html><body style="margin:0">${frameAt(times[i])}</body></html>`); await pg.screenshot({ path: `${out}/t${i}.png` }); }
   await b.close();

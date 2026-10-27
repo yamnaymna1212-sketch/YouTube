@@ -18,7 +18,7 @@
 - **Captions:** word by word in sync with the voice; key words in color (5:00 AM red, EX pink, CRYING blue)
 - All sounds are original (no copyrighted ringtones)
 
-## Final cut (rendered): `ep01-the-5am-call.mp4`, ~29 s
+## Final cut (rendered): `ep01-the-5am-call.mp4`, ~30.6 s
 
 | Time | Scene | Voice | Caption |
 |------|-------|-------|---------|
@@ -30,11 +30,12 @@
 | 0:13-0:15 | Low angle: he freezes, hands on his face; the cracked phone rings again | "I threw my phone across the room. And she called again." | word by word |
 | 0:15-0:21 | Pink flashback: panels slam in on "Two years", "Six thousand dollars", "And I never got anything back"; balance counts down $4,212 → $39 | "Two years. Six thousand dollars on dinners and rent help. And I never got anything back." | SIX THOUSAND DOLLARS in green |
 | 0:21-0:24 | He opens her contact, taps "Block this Caller" | "So I picked up the phone to block her, and then she texted." | BLOCK in red |
-| 0:24-0:29 | Text pops: "I'm outside." Pink light under the door. Two knocks, the door shakes | "Should I open the door?" | "I'M OUTSIDE." / SHOULD I OPEN THE DOOR / FOLLOW FOR PART 2 |
+| 0:23-0:24 | Text pops: "I'm outside." Pink light under the door. Two knocks, the door shakes | (text tone, knocks) | "I'M OUTSIDE." |
+| 0:24-0:30 | **End card:** "+ FOLLOW" button gets tapped, then a share icon | "Follow to find out if Kai opens that door. And send this to the friend who still answers their ex at 5 AM." | TO SEE IF KAI OPENS THE DOOR 🚪 / SEND THIS TO THE FRIEND WHO STILL ANSWERS THEIR EX AT 5 AM 🚩 |
 
 **Audio:** voices on top; effects (ring, vibration, rain, heartbeat, whoosh, crash, text tone, knocks, drone, flashback pad) sit about 12 dB lower and duck while someone speaks. All effects are original. Voice files: `audio/*.mp3`, mix timeline: `audio/timeline.json`.
 
-**Why end on a question:** "Should I open the door?" invites comments (yes/no), which pushes the Short in the algorithm and sets up Part 2.
+**Why this CTA:** "Follow to find out" turns the cliffhanger into follows; the joke about "the friend who still answers their ex" makes people tag and share, which pushes the Short.
 
 ## Original storyboard shot list
 

@@ -67,7 +67,20 @@ def pad(s, e, gain=0.14):  # dreamy flashback pad
     g = np.clip((t - s) / 0.4, 0, 1) * np.clip((e - t) / 0.4, 0, 1)
     return lp(d, 4) * g * gain
 
-FX = dict(ring=ring, vib=vib, whoosh=whoosh, hit=hit, click=click, beat=beat, rain=rain, crash=crash, text_tone=text_tone, knock=knock, drone=drone, pad=pad)
+def bang(s):  # heavy fist on a wooden door
+    x = at(s); xp = np.maximum(x, 0)
+    thud = np.sin(2 * np.pi * 65 * xp) * env(xp, 0.002, 0.2) * 1.5
+    wood = lp(rng.standard_normal(len(t)), 3) * env(xp, 0.001, 0.07) * 1.1
+    frame = np.sin(2 * np.pi * 180 * xp) * env(xp, 0.003, 0.12) * 0.5
+    rattle = sum(np.where(x >= d, lp(rng.standard_normal(len(t)), 5) * env(np.maximum(x - d, 0), 0.002, 0.05), 0) * a for d, a in [(0.05, 0.35), (0.11, 0.2)])
+    return np.where(x >= 0, thud + wood + frame, 0) + rattle
+def slide(s, d=0.6):  # paper sliding across a floor
+    x = at(s); idx = (x >= 0) & (x < d)
+    out = np.zeros_like(t); n = lp(rng.standard_normal(idx.sum()), 14) * 3
+    out[idx] = n * np.sin(np.pi * x[idx] / d) ** 1.5
+    return out * 0.7
+
+FX = dict(bang=bang, slide=slide, ring=ring, vib=vib, whoosh=whoosh, hit=hit, click=click, beat=beat, rain=rain, crash=crash, text_tone=text_tone, knock=knock, drone=drone, pad=pad)
 sfx = np.zeros_like(t)
 for e in spec['sfx']:
     sfx += FX[e['fx']](*e.get('args', []))

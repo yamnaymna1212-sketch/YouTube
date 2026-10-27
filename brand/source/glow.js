@@ -17,6 +17,7 @@ const CAST = {
   rosa: { name: 'Rosa',     role: 'Coworker. Always in a hurry, always on fire',        color: '#ff4f7b', light: '#ffe6ee', head: 'round',  hair: 'flame', size: 0.95 },
   mint: { name: 'Mint',     role: 'Roommate. Broke but calm',                           color: '#3fe0a0', light: '#e6fff4', head: 'wide',   hair: 'beanie', size: 0.9 },
   gold: { name: 'Mr. Gold', role: 'Landlord. Steady glow, never dims',                  color: '#ffb52e', light: '#fff4dc', head: 'square', hair: 'none', size: 1.12, tie: true },
+  brooke: { name: 'Brooke', role: "Kai's ex. Calls when she needs something", color: '#ff6fae', light: '#ffe6f2', head: 'round', hair: 'long', size: 0.95 },
   gray: { name: 'The Grays', role: 'Burned-out people. Lost their glow',                color: '#5d6b82', light: '#8e9ab0', head: 'round',  hair: 'none', size: 1, dim: true },
 };
 
@@ -58,14 +59,17 @@ function ribbon(hx, hy, t, kind, speed, droop) {
   for (let i = 0; i <= N; i++) {
     const u = i / N;
     let x, y;
-    if (kind === 'flame') {
+    if (kind === 'long') {
+      x = hx - u * (26 + 60 * speed) + Math.sin(t * 3 - u * 4) * 9 * u;
+      y = hy + u * (200 - 90 * speed);
+    } else if (kind === 'flame') {
       x = hx - u * (20 + 50 * speed) + Math.sin(t * 13 - u * 7) * 9 * u;
       y = hy - u * (95 - 30 * speed) + Math.cos(t * 11 - u * 5) * 5 * u;
     } else {
       x = hx - u * (75 + 95 * speed);
       y = hy - u * (70 - 30 * speed) * (1 - droop) + u * u * 60 * droop + Math.sin(t * 6 - u * 6) * 14 * u;
     }
-    pts.push([x, y, (kind === 'flame' ? 22 : 40) * Math.pow(1 - u, 0.8) + 2]);
+    pts.push([x, y, kind === 'long' ? 32 * Math.pow(1 - u, 0.6) + 5 : (kind === 'flame' ? 22 : 40) * Math.pow(1 - u, 0.8) + 2]);
   }
   const L = [], R = [];
   for (let i = 0; i < pts.length; i++) {
@@ -103,6 +107,8 @@ function character(key, x, y, s, o = {}) {
     : `<circle cx="${hc[0]}" cy="${hc[1]}" r="${r}" ${extra}/>`;
   let hair = '';
   if (ch.hair === 'water' || ch.hair === 'flame') hair = ribbon(hc[0] - hr * 0.3, hc[1] - hr * 0.75, t, ch.hair, o.speed || 0, o.droop || 0);
+  if (ch.hair === 'long') hair = ribbon(hc[0] - hr * 0.55, hc[1] - hr * 0.55, t, 'long', o.speed || 0, 0);
+  const fringe = ch.hair === 'long' ? `<path d="M${hc[0] - hr * 1.0} ${hc[1] - hr * 0.1} Q${hc[0] - hr * 0.9} ${hc[1] - hr * 1.25} ${hc[0] + hr * 0.2} ${hc[1] - hr * 1.02} Q${hc[0] + hr * 1.0} ${hc[1] - hr * 0.85} ${hc[0] + hr * 0.98} ${hc[1] - hr * 0.3} Q${hc[0] + hr * 0.4} ${hc[1] - hr * 0.75} ${hc[0] - hr * 0.3} ${hc[1] - hr * 0.55} Q${hc[0] - hr * 0.75} ${hc[1] - hr * 0.4} ${hc[0] - hr * 1.0} ${hc[1] - hr * 0.1} Z" fill="${mix(color, light, 0.2)}" stroke="${light}" stroke-width="2.5" stroke-opacity="0.8"/>` : '';
   if (ch.hair === 'beanie') hair = `M${hc[0] - hr * 1.02} ${hc[1] - hr * 0.35} Q${hc[0]} ${hc[1] - hr * 1.55} ${hc[0] + hr * 1.02} ${hc[1] - hr * 0.35} Z`;
   const tie = ch.tie ? `<path d="M${neck[0]} ${neck[1] + 4} l-9 14 l9 40 l9 -40 z" fill="${light}" opacity="0.85"/>` : '';
 
@@ -113,15 +119,27 @@ function character(key, x, y, s, o = {}) {
     eyes = [-1, 1].map(k => `<ellipse cx="${fx + k * ex}" cy="${fy}" rx="7" ry="5" fill="#0a0d16"/>`).join('');
     mouth = `<path d="M${fx - 8} ${fy + 20} h16" stroke="#0a0d16" stroke-width="4" stroke-linecap="round"/>`;
   } else {
-    const ry = f === 'tired' ? 6 : f === 'shocked' ? 16 : 13, py = f === 'tired' ? 2 : 0;
-    eyes = [-1, 1].map(k => `<ellipse cx="${fx + k * ex}" cy="${fy}" rx="10.5" ry="${ry}" fill="#fff"/>
-      <circle cx="${fx + k * ex + 3}" cy="${fy + py}" r="${f === 'shocked' ? 4.5 : 6}" fill="#0b1426"/>
-      <circle cx="${fx + k * ex + 5}" cy="${fy - 4}" r="2" fill="#fff"/>`).join('');
+    const ry = f === 'tired' ? 6 : f === 'shocked' ? 16 : f === 'crying' ? 11 : 13, py = f === 'tired' ? 2 : 0;
+    const [lx, ly] = f === 'thinking' ? [-5, -5] : ['crying', 'sad', 'hopeful'].includes(f) ? [1, 3] : [0, 0];
+    eyes = f === 'asleep' ? [-1, 1].map(k => `<path d="M${fx + k * ex - 10} ${fy} q10 8 20 0" stroke="#0b1426" stroke-width="4" fill="none" stroke-linecap="round"/>`).join('')
+      : [-1, 1].map(k => `<ellipse cx="${fx + k * ex}" cy="${fy}" rx="10.5" ry="${ry}" fill="#fff"/>
+      <circle cx="${fx + k * ex + 3 + lx}" cy="${fy + py + ly}" r="${f === 'shocked' ? 4.5 : 6}" fill="#0b1426"/>
+      <circle cx="${fx + k * ex + 5 + lx}" cy="${fy - 4 + ly}" r="2" fill="#fff"/>`).join('');
+    if (['crying', 'sad', 'hopeful'].includes(f)) eyes += [-1, 1].map(k => `<path d="M${fx + k * ex + k * 11} ${fy - 15} L${fx + k * ex - k * 10} ${fy - 22}" stroke="#0b1426" stroke-width="4" stroke-linecap="round"/>`).join('');
+    if (f === 'crying' || f === 'hopeful') eyes += [-1, 1].map(k => `<path d="M${fx + k * ex + 2} ${fy + 10} q-5 12 0 ${f === 'crying' ? 26 : 14} q5 -10 0 ${f === 'crying' ? -26 : -14}" fill="#d9f4ff" opacity="0.95"/>`).join('');
+    if (f === 'thinking') eyes += `<path d="M${fx + ex - 11} ${fy - 22} q11 -8 22 0" stroke="#0b1426" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+    if (f === 'firm') eyes += [-1, 1].map(k => `<path d="M${fx + k * ex + k * 11} ${fy - 21} L${fx + k * ex - k * 10} ${fy - 13}" stroke="#0b1426" stroke-width="4.5" stroke-linecap="round"/>`).join('');
     if (f === 'tired') eyes += [-1, 1].map(k => `<path d="M${fx + k * ex - 12} ${fy - 3} h24" stroke="${mix(color, '#000', 0.35)}" stroke-width="4" stroke-linecap="round"/>`).join('');
     if (f === 'determined') eyes += [-1, 1].map(k => `<path d="M${fx + k * ex - 11} ${fy - 17 - k * 3} L${fx + k * ex + 11} ${fy - 17 + k * 3}" stroke="#0b1426" stroke-width="4" stroke-linecap="round"/>`).join('');
     mouth = f === 'happy' ? `<path d="M${fx - 11} ${fy + 18} q11 12 22 0" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`
       : f === 'tired' ? `<path d="M${fx - 9} ${fy + 22} q9 -5 18 0" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`
       : f === 'shocked' ? `<ellipse cx="${fx}" cy="${fy + 23}" rx="7" ry="9" fill="#0b1426"/>`
+      : f === 'crying' ? `<path d="M${fx - 12} ${fy + 26} q6 -9 12 -3 q6 -6 12 3" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`
+      : f === 'sad' ? `<path d="M${fx - 10} ${fy + 25} q10 -9 20 0" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`
+      : f === 'thinking' ? `<path d="M${fx - 3} ${fy + 22} h12" stroke="#0b1426" stroke-width="4.5" stroke-linecap="round"/>`
+      : f === 'firm' ? `<ellipse cx="${fx + 1}" cy="${fy + 23}" rx="10" ry="7" fill="#0b1426"/>`
+      : f === 'hopeful' ? `<path d="M${fx - 8} ${fy + 21} q8 6 16 0" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`
+      : f === 'asleep' ? `<path d="M${fx - 5} ${fy + 22} q5 3 10 0" stroke="#0b1426" stroke-width="4" fill="none" stroke-linecap="round"/>`
       : `<path d="M${fx - 10} ${fy + 20} q10 6 20 0" stroke="#0b1426" stroke-width="4.5" fill="none" stroke-linecap="round"/>`;
   }
 
@@ -144,7 +162,7 @@ function character(key, x, y, s, o = {}) {
     <radialGradient id="${id}" cx="0.4" cy="0.35" r="0.75"><stop offset="0" stop-color="${ch.dim ? color : light}"/><stop offset="0.55" stop-color="${mix(color, light, 0.25)}"/><stop offset="1" stop-color="${color}"/></radialGradient>
     ${headShape(hr, `fill="url(#${id})" stroke="${light}" stroke-width="3" stroke-opacity="${0.6 * glow + 0.2}"`)}
     ${ch.hair === 'beanie' ? `<path d="${hair}" fill="${mix(color, '#0b1426', 0.35)}" stroke="${light}" stroke-width="3"/><path d="M${hc[0] - hr * 1.02} ${hc[1] - hr * 0.35} H${hc[0] + hr * 1.02}" stroke="${light}" stroke-width="6" stroke-linecap="round"/>` : ''}
-    ${tie}${eyes}${mouth}
+    ${fringe}${tie}${eyes}${mouth}
     ${parts}
   </g>`;
 }

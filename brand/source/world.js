@@ -470,7 +470,9 @@ function frame(t) {
     hud({ caption, energy: lerp(0.85, 0.3, drain), balance: drain > 0 ? '$' + lerp(39.12, 4.12, drain).toFixed(2) : '$39.12' }));
 }
 
-(async () => {
+module.exports = { P, G, svgDoc, PROPS, AMERICANA, led, flag, rr, outline, burgerIcon, smooth };
+
+if (require.main === module) (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const shot = async (file, s) => {

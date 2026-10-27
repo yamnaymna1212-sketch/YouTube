@@ -1,0 +1,209 @@
+{
+ "dur": 28.728371000000003,
+ "voices": [
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/hook-vo-andrew.mp3",
+   "at": -0.06
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/brooke-1.mp3",
+   "at": 4.082125,
+   "filter": "vibrato=f=5.5:d=0.18,tremolo=f=5:d=0.2",
+   "gain": 0.95
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n1.mp3",
+   "at": 7.8347489999999995
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n2.mp3",
+   "at": 9.944457
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/kai-no.mp3",
+   "at": 11.388873
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n3.mp3",
+   "at": 12.593873
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n4.mp3",
+   "at": 15.610164
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n5.mp3",
+   "at": 20.757539
+  },
+  {
+   "file": "/home/user/YouTube/episodes/ep01-the-5am-call/audio/vo-n6.mp3",
+   "at": 25.43483
+  }
+ ],
+ "sfx": [
+  {
+   "fx": "ring",
+   "args": [
+    0,
+    2.8061249999999998
+   ]
+  },
+  {
+   "fx": "vib",
+   "args": [
+    0,
+    2.8061249999999998
+   ]
+  },
+  {
+   "fx": "whoosh",
+   "args": [
+    0.9311249999999999
+   ]
+  },
+  {
+   "fx": "hit",
+   "args": [
+    2.370541
+   ]
+  },
+  {
+   "fx": "click",
+   "args": [
+    2.8061249999999998
+   ]
+  },
+  {
+   "fx": "drone",
+   "args": [
+    0,
+    12.513873
+   ]
+  },
+  {
+   "fx": "drone",
+   "args": [
+    15.260164,
+    28.728371000000003,
+    0.2,
+    49
+   ]
+  },
+  {
+   "fx": "rain",
+   "args": [
+    3.7821249999999997,
+    7.7547489999999994
+   ]
+  },
+  {
+   "fx": "rain",
+   "args": [
+    9.864457,
+    11.238873
+   ]
+  },
+  {
+   "fx": "whoosh",
+   "args": [
+    11.701373,
+    0.3
+   ]
+  },
+  {
+   "fx": "crash",
+   "args": [
+    12.001373000000001
+   ]
+  },
+  {
+   "fx": "vib",
+   "args": [
+    14.341539000000001,
+    15.260164,
+    0.9
+   ]
+  },
+  {
+   "fx": "whoosh",
+   "args": [
+    15.260164,
+    0.4
+   ]
+  },
+  {
+   "fx": "pad",
+   "args": [
+    15.260164,
+    20.637539
+   ]
+  },
+  {
+   "fx": "click",
+   "args": [
+    21.764497000000002
+   ]
+  },
+  {
+   "fx": "text_tone",
+   "args": [
+    23.554830000000003
+   ]
+  },
+  {
+   "fx": "knock",
+   "args": [
+    24.554830000000003
+   ]
+  },
+  {
+   "fx": "knock",
+   "args": [
+    24.854830000000003
+   ]
+  },
+  {
+   "fx": "hit",
+   "args": [
+    25.204830000000005,
+    45
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    7.7547489999999994
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    8.374749
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    8.994748999999999
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    9.614748999999998
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    10.234748999999997
+   ]
+  },
+  {
+   "fx": "beat",
+   "args": [
+    10.854748999999996
+   ]
+  }
+ ]
+}

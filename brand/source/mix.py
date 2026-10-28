@@ -80,7 +80,17 @@ def slide(s, d=0.6):  # paper sliding across a floor
     out[idx] = n * np.sin(np.pi * x[idx] / d) ** 1.5
     return out * 0.7
 
-FX = dict(bang=bang, slide=slide, ring=ring, vib=vib, whoosh=whoosh, hit=hit, click=click, beat=beat, rain=rain, crash=crash, text_tone=text_tone, knock=knock, drone=drone, pad=pad)
+def creak(s, d=0.9):  # old door hinge opening
+    x = at(s); idx = (x >= 0) & (x < d); out = np.zeros_like(t); xi = x[idx]
+    f = 180 + 120 * np.sin(np.pi * xi / d) + 25 * np.sin(2 * np.pi * 9 * xi)
+    tone = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * (0.5 + 0.5 * np.sin(2 * np.pi * 23 * xi) ** 2)
+    out[idx] = lp(tone, 6) * np.sin(np.pi * xi / d) ** 0.7
+    return out * 0.45
+def step(s, gain=1.0):  # soft footstep on a hallway floor
+    x = at(s); xp = np.maximum(x, 0)
+    return np.where(x >= 0, np.sin(2 * np.pi * 80 * xp) * env(xp, 0.004, 0.05) + lp(rng.standard_normal(len(t)), 8) * env(xp, 0.002, 0.03) * 0.6, 0) * 0.8 * gain
+
+FX = dict(creak=creak, step=step, bang=bang, slide=slide, ring=ring, vib=vib, whoosh=whoosh, hit=hit, click=click, beat=beat, rain=rain, crash=crash, text_tone=text_tone, knock=knock, drone=drone, pad=pad)
 sfx = np.zeros_like(t)
 for e in spec['sfx']:
     sfx += FX[e['fx']](*e.get('args', []))

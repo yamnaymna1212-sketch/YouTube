@@ -365,7 +365,8 @@ else (async () => {
   const page = await browser.newPage();
   await page.setViewportSize({ width: 1080, height: 1920 });
   await page.setContent('<html><body style="margin:0;background:#000"><div id="r"></div></body></html>');
-  const N = Math.round(DUR * FPS);
+  const UNTIL = Number(process.env.UNTIL || DUR), N = Math.round(Math.min(DUR, UNTIL) * FPS);   // UNTIL=3.4 renders only the hook
+  const OUTF = UNTIL < DUR ? 'hook.mp4' : 'ep02-rent-day-part1.mp4';
   for (let i = 0; i < N; i++) {
     await page.evaluate(s => { document.getElementById('r').innerHTML = s; }, frameAt(i / FPS));
     await page.screenshot({ path: `${tmp}/f${String(i).padStart(4, '0')}.png` });
@@ -375,8 +376,8 @@ else (async () => {
   fs.writeFileSync(`${AUD}/timeline.json`, JSON.stringify(timeline(), null, 1));
   execFileSync('python3', [__dirname + '/mix.py', `${AUD}/timeline.json`, `${tmp}/mix.wav`]);
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-framerate', String(FPS), '-i', `${tmp}/f%04d.png`, '-i', `${tmp}/mix.wav`,
-    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-b:a', '192k', '-shortest', `${DIR}/ep02-rent-day-part1.mp4`]);
-  fs.copyFileSync(`${tmp}/mix.wav`, `${AUD}/mix.wav`);
+    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-b:a', '192k', '-shortest', `${DIR}/${OUTF}`]);
+  if (UNTIL >= DUR) fs.copyFileSync(`${tmp}/mix.wav`, `${AUD}/mix.wav`);
   fs.rmSync(tmp, { recursive: true });
-  console.log('rendered ep02-rent-day-part1.mp4', DUR.toFixed(2) + 's');
+  console.log('rendered', OUTF, (N / FPS).toFixed(2) + 's');
 })();

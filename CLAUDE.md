@@ -2,6 +2,8 @@
 
 Read this before any work on this repo. The owner talks in Arabic: reply in Arabic. Video content is in English for a US audience.
 
+**Start here, in this order:** `WORKFLOW.md` (how every video is made: tools, scripts, steps) → `STORY_BIBLE.md` (characters, what happened in Parts 1-2, next episode, idea backlog) → `style/glow-style-bible.md` (look) → `POSTED.md` (what is published, titles, links). The code to make episodes is in `brand/source/` (`ep02.js` is the template, `tts.py` voices, `mix.py` sound).
+
 ## Format
 1. **Shorts first.** Every video is vertical 9:16 (1080x1920) for TikTok and YouTube Shorts, split into "Part 1, Part 2...".
 2. **Length: 30, 35 or 40 seconds. Never more than 40.** (Owner's rule.) Cut lines before you let an episode run over. Trade-off the owner accepted: TikTok Creator Rewards only pays on videos over 1 minute, so these short episodes build followers and views toward eligibility but won't earn there; YouTube Shorts has no length condition on its payouts.
@@ -26,3 +28,12 @@ Read this before any work on this repo. The owner talks in Arabic: reply in Arab
 11. **Hook (first 3 seconds): a clear contradiction plus a clear problem, so the viewer asks the question in their own head.** Never put "how" or "why" in the hook, and never ask the question out loud. Show two things that clash, e.g. "I ate a $14 salad. I paid $51.50." The viewer thinks "wait, what?" and stays.
 12. Cliffhanger at the end of each part, then a short follow/share line with a joke about the story. Don't add a practical tip unless the episode has room and it's actually true.
 13. **After every finished video, always give the owner its title and the recommended TikTok caption + hashtags** (4 fixed + 1-2 rotating by topic, from `brand/tiktok/hashtags.md`). Do this in the same message that delivers the video, and save them in the episode's `script.md`.
+
+## Owner's production preferences (learned while making Parts 1-2)
+- **Show the hook image(s) to the owner and wait for approval before rendering the full video.**
+- Hook: white title card on screen for the first 3 seconds, the narrator's voice starts at 0:00, the first sound effect lands on the hook's key word, and only the main object zooms (never the whole picture).
+- Voices and effects: the narrator is clear, fast and never pauses; sound effects always sit well under the voice.
+- Ending: a funny follow + share line tied to the story, with a "+ FOLLOW" button that gets tapped.
+- Publishing: the owner posts two videos a day, at **6 PM and 10 PM Tunisia time (Africa/Tunis)**. YouTube goes through the Metricool connector when it is available; TikTok is uploaded manually by the owner.
+- The repo is **public**: never put emails, account ids or other personal data in it.
+

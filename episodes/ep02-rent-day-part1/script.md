@@ -1,6 +1,6 @@
 # Episode 2, Part 1: Rent Day (~34 s)
 
-**Status:** hook preview sent to the owner, waiting for approval before the full render.
+**Status:** rendered (`ep02-rent-day-part1.mp4`, 34.3 s, mean -18.5 dB, max -0.7 dB). Not posted yet.
 **Rules followed:** 9:16 · 34.3 s · hook = clear contradiction + clear problem, no "how/why" · everyday money moment, no advice, no claims, only small amounts
 **Cast:** Kai (blue), Mr. Gold (amber, landlord, through the door), Mint (green, roommate). New story, unrelated to the ex arc.
 
@@ -35,3 +35,12 @@ Every shot settles in with a short camera move (slide, push in or pull out); tim
 
 ## Audio
 Narrator Andrew (+8%), Kai Andrew (+0%), Mr. Gold Christopher (+8%, through-door filter), Mint Brian (-4%). All effects synthesized in `mix.py`.
+
+## Posting (TikTok)
+- **Caption:** Rent is due tomorrow. Payday is Friday. 😬 (Part 1)
+- **Hashtags:** #brokekai #storytime #moneytok #animation #rent #roommates
+
+## Posting (YouTube)
+- **Title:** Rent is due tomorrow. Payday is Friday. (Part 1)
+- **Hashtags:** #storytime #rent #roommates #animation #moneytok
+- **Pinned comment:** "What do you think Mint is about to say? 👀"

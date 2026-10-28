@@ -29,7 +29,13 @@ Hook: "At 5 AM, the door bangs." Three hard knocks. Through the peephole: Brooke
 - Mint (roommate) is asleep behind Kai; Mr. Gold (landlord) hasn't appeared yet (a 5 AM racket on a door is the kind of thing a landlord notices).
 - Brooke's real situation (locked out because of what? whose lease?) is unrevealed.
 
-## Next episode: Part 3 (draft)
+## Story 2: "Rent Day" (new arc, the ex arc is closed)
+The owner stopped the Brooke storyline after Part 2: no more ex episodes. Part 3 ("In My Name", `episodes/ep01-part3-in-my-name`) was built but will not be posted.
+- **Part 1: "Rent Day"** (34.3 s, rendered, `episodes/ep02-rent-day-part1`): rent is due Thursday, payday is Friday. Kai searches pockets, jacket, couch: $8.37. Mr. Gold knocks: "Just a friendly reminder. Tomorrow." Kai: "Yes sir! Tomorrow!" 11:58 PM, Mint walks in with an envelope marked RENT: "Hey... can we talk about my half of the rent?"
+- **Owner's direction for this arc:** real everyday US problems (rent, gas, paycheck), small amounts only, no claims of gains or losses, no advice, no sensitive money words (debt, loan, fees, invest).
+- **Editing rule (owner):** many short shots (about 1-3 s), new places and camera angles, and every cut must be motivated by the story (a sound, an object, a reaction, time passing), never random. See the shot table in `episodes/ep02-rent-day-part1/script.md`.
+
+## (Closed) Ex arc, Part 3 draft
 - **Hook (contradiction + problem, no how/why):** "I never opened that card. It says I owe $2,300." (voice) with title card "I NEVER OPENED IT. / I OWE $2,300."
 - Beats (about 35 s): Kai holds the paper; Brooke through the door: "Please, I'll explain"; Kai reads the line items (fake charges, one is for a hotel booked with his name); Mint wakes up and steps into the hallway; Mr. Gold's door opens down the hall; cliffhanger: Brooke slides a second paper under the door, this time Mr. Gold is the one holding it (or: the lease with her name crossed out).
 - End card: "Follow for Part 4. Send this to the friend who never says no." (or a new joke about the story)

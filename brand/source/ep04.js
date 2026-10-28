@@ -119,90 +119,166 @@ function hookScene(t) {
     <g transform="translate(${cx + shake} ${cy}) scale(${sc})">${calendar(t, hot, fri)}</g>`;
 }
 
-// Pockets: jeans, jacket, couch pop in on their words.
+// ---------- camera ----------
+// Every shot gets a short settle on entry (slides in from `from`) and a slow move (z0 -> z1 zoom, dx/dy pan).
+function cam(inner, u, { z0 = 1, z1 = 1.05, dx = 0, dy = 0, cx = 540, cy = 1000, from = [0, 0], age: a = 1 } = {}) {
+  const z = lerp(z0, z1, ease(u)), s = 1 - ease(a / 0.22);
+  const tx = dx * ease(u) + from[0] * s, ty = dy * ease(u) + from[1] * s;
+  return `<g transform="translate(${tx} ${ty}) translate(${cx} ${cy}) scale(${z}) translate(${-cx} ${-cy})">${inner}</g>`;
+}
+const fadeIn = (a, d = 0.25) => a < d ? `<rect width="1080" height="1920" fill="#02060f" opacity="${1 - a / d}"/>` : '';
+const flash = (a, d = 0.12) => a < d ? `<rect width="1080" height="1920" fill="#fff" opacity="${0.35 * (1 - a / d)}"/>` : '';
+// Close-up on a face: head centred at (540, cy).
+const HEAD = 303;
+const face = (k, t, S, o = {}, cy = 1000) => character(k, 540 + (o.dx || 0), cy + HEAD * S * ({ kai: 1, gold: 1.12, mint: 0.9 }[k]), S, { t, ...o });
+const sweat = (t, x, y) => `<path d="M${x} ${y + 60 * ((t * 1.5) % 1)} q-14 24 0 36 q14 -12 0 -36" fill="#bfe8ff" opacity="${1 - ((t * 1.5) % 1)}"/>`;
+const SIT = { lean: 6, bob: 0, legL: [90, -90], legR: [84, -86], armL: [30, 40], armR: [20, 50] };
+
+// ---------- pockets (three places, three angles) ----------
 const icon = {
-  pocket: c => `<g fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-60 -70 h120 l10 150 h-55 l-15 -90 l-15 90 h-55 Z"/><path d="M-50 -50 q20 40 40 0" fill="#e6eeff" stroke="#e6eeff"/><path d="M10 -50 q20 40 40 0" fill="#e6eeff" stroke="#e6eeff"/></g>`,
+  pocket: c => `<g fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-60 -70 h120 l10 150 h-55 l-15 -90 l-15 90 h-55 Z"/></g>`,
   jacket: c => `<g fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-25 -75 l25 25 l25 -25 l45 20 l20 90 l-28 6 l-7 -40 v80 h-110 v-80 l-7 40 l-28 -6 l20 -90 Z M0 -50 v130"/><path d="M-40 20 h22 M18 20 h22"/></g>`,
-  couch: c => `<g fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-80 -20 v-40 h160 v40 M-95 -20 h190 v60 h-190 Z M-80 40 v20 M80 40 v20 M-95 -20 v-15 h15 M95 -20 v-15 h-15"/></g>`,
+  couch: c => `<g fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-95 -20 h190 v60 h-190 Z M-80 40 v20 M80 40 v20 M-95 -20 v-15 h15 M95 -20 v-15 h-15"/></g>`,
 };
-function pocketsScene(t, u) {
-  const items = ['pocket', 'jacket', 'couch'].map((w, i) => {
-    const s = W(PK, w), p = pop(t, s); if (t < s) return '';
-    const x = 300 + i * 260, empty = clamp((t - s - 0.35) / 0.2);
-    const coin = w === 'couch' ? `<g transform="translate(0 ${-110 - 80 * ease((t - s - 0.3) / 0.5)})" opacity="${clamp((t - s - 0.3) / 0.1)}"><circle r="22" fill="#0b1d38" stroke="${P.warm}" stroke-width="4"/><text y="8" text-anchor="middle" font-family="Inter" font-weight="900" font-size="20" fill="${P.warm}">¢</text></g>` : '';
-    return `<g transform="translate(${x} 720) scale(${p})">${soft(0, 0, 140, P.warm, 0.12)}${icon[w](P.warm)}${coin}
-      ${w !== 'couch' ? `<text y="135" text-anchor="middle" font-family="Inter" font-weight="900" font-size="34" fill="${RED}" opacity="${empty}">EMPTY</text>` : `<text y="135" text-anchor="middle" font-family="Inter" font-weight="900" font-size="34" fill="${P.green}" opacity="${empty}">+ COINS</text>`}</g>`;
-  }).join('');
-  const dig = Math.sin(t * 9) * 12;
-  return `${room(t, 0.6)}${items}
-    ${character('kai', 540, 1480, 1.2, { t, face: 'determined', glow: 0.75, pose: { lean: 22, bob: 0, legL: [14, -10], legR: [-10, -6], armL: [60 + dig, 30], armR: [40 - dig, 40] } })}`;
+const empty = (t, s, x, y, txt = 'EMPTY', c = RED) => t < s ? '' : `<g transform="translate(${x} ${y}) scale(${pop(t, s, 0.25)}) rotate(-6)"><text text-anchor="middle" font-family="Inter" font-weight="900" font-size="80" fill="${c}" stroke="#000" stroke-width="10" style="paint-order:stroke">${txt}</text></g>`;
+function pocketShot(t, u, a) { // extreme close-up: the jeans pocket gets pulled inside out
+  const pull = ease((a - 0.1) / 0.5);
+  const lining = `<path d="M-50 -50 q20 ${10 + 60 * pull} 40 0 M10 -50 q20 ${10 + 60 * pull} 40 0" fill="#e6eeff" stroke="#e6eeff" stroke-width="4"/>`;
+  return cam(`${soft(540, 1000, 420, P.warm, 0.1)}<g transform="translate(540 1040) scale(4.2)">${icon.pocket(P.warm)}${lining}</g>
+    ${[0, 1, 2, 3, 4].map(k => `<circle cx="${470 + k * 40}" cy="${1080 + 120 * pull + k * 14}" r="5" fill="#cfe3ff" opacity="${pull * (1 - pull) * 2}"/>`).join('')}
+    ${empty(t, W(PK, 'every', 1) - 0.45, 540, 1480)}`, u, { z0: 1.12, z1: 1.0, age: a, from: [0, 120] });
+}
+function closetShot(t, u, a) { // bedroom closet, side angle
+  const sw = Math.sin(a * 7) * 8 * Math.exp(-a * 1.5);
+  return cam(`${line('M0 1480 H1080', P.line, 3)}${line('M560 520 h460 v960 M560 520 v960 M600 600 h380', P.lav, 3, 0.7)}${soft(780, 800, 260, P.lav, 0.1)}
+    <g transform="translate(780 620) rotate(${sw})">${line('M0 -20 v40 M-70 50 L0 20 L70 50', '#e6eeff', 4)}<g transform="translate(0 150) scale(1.7)">${icon.jacket(P.warm)}</g></g>
+    ${character('kai', 360, 1480, 1.3, { t, face: 'determined', glow: 0.75, pose: { lean: 12, bob: 0, legL: [10, -6], legR: [-10, -6], armL: [95 + sw * 2, 10], armR: [70, 30] } })}
+    ${empty(t, W(PK, 'even') - 0.4, 780, 1180)}`, u, { z0: 1.0, z1: 1.06, dx: -30, age: a, from: [160, 0] });
+}
+function couchShot(t, u, a) { // living room, low angle; a coin flies up out of frame (lands in the next shot)
+  const lift = ease((a - 0.15) / 0.4), coinY = 1180 - 1500 * ease((a - 0.55) / 0.6);
+  return cam(`${line('M0 1560 H1080', P.line, 3)}${soft(540, 1200, 380, P.warm, 0.1)}
+    <g transform="translate(540 1330) scale(4.6)">${icon.couch(P.warm)}</g>
+    <g transform="translate(150 1240) rotate(${-24 * lift} 0 0)">${line('M0 0 h330 v-110 h-330 Z', P.warm, 5)}</g>
+    ${character('kai', 860, 1560, 1.25, { t, dir: -1, face: 'determined', glow: 0.75, pose: { lean: 35, bob: 0, legL: [30, -40], legR: [-6, -10], armL: [110, 10], armR: [80, 20] } })}
+    ${a > 0.55 ? `<g transform="translate(330 ${coinY})"><circle r="34" fill="#0b1d38" stroke="${P.warm}" stroke-width="6" filter="url(#glow)"/><text y="12" text-anchor="middle" font-family="Inter" font-weight="900" font-size="32" fill="${P.warm}">¢</text></g>` : ''}`, u, { z0: 1.0, z1: 1.04, age: a, from: [-160, 0] });
 }
 
-// The count: coins, a five, two ones land on the table.
+// ---------- the count: top-down on the kitchen table ----------
 const bill = (n, c = P.green) => `<path d="${rr(-90, -42, 180, 84, 8)}" fill="#0b1d38" stroke="${c}" stroke-width="4"/><circle r="22" fill="none" stroke="${c}" stroke-width="3"/><text y="11" text-anchor="middle" font-family="Inter" font-weight="900" font-size="30" fill="${c}">${n}</text>
   <text x="-68" y="-18" font-family="Inter" font-weight="900" font-size="18" fill="${c}">${n}</text><text x="68" y="32" text-anchor="end" font-family="Inter" font-weight="900" font-size="18" fill="${c}">${n}</text>`;
-function countScene(t) {
+const coinArt = `${[0, 1, 2, 3].map(i => `<circle cx="${(i % 2) * 70 - 35}" cy="${Math.floor(i / 2) * 70 - 35}" r="30" fill="#0b1d38" stroke="${P.warm}" stroke-width="4"/><text x="${(i % 2) * 70 - 35}" y="${Math.floor(i / 2) * 70 - 25}" text-anchor="middle" font-family="Inter" font-weight="900" font-size="26" fill="${P.warm}">¢</text>`).join('')}`;
+function tableShot(t, u, a) {
   const it = [
-    [W(CN, 'coins'), 250, 960, -8, `${[0, 1, 2, 3].map(i => `<ellipse cx="${(i % 2) * 20}" cy="${30 - i * 16}" rx="56" ry="16" fill="#0b1d38" stroke="${P.warm}" stroke-width="4"/>`).join('')}<ellipse cx="70" cy="40" rx="30" ry="10" fill="#0b1d38" stroke="${P.warm}" stroke-width="3"/>`],
-    [W(CN, 'five'), 520, 930, 6, bill('5')],
-    [W(CN, 'two'), 330, 1110, -4, bill('1')],
-    [W(CN, 'ones'), 590, 1120, 10, bill('1')],
-  ].map(([s, x, y, r, art]) => t < s ? '' : `<g transform="translate(${x} ${y - 60 * (1 - ease((t - s) / 0.25))}) rotate(${r}) scale(${pop(t, s, 0.25) * 1.3})">${art}</g>`).join('');
-  const no = W(CN, 'close'), x = clamp((t - no) / 0.25);
-  return `${line('M90 1250 H760', P.warm, 4, 0.7)}${line('M140 1250 v230 M710 1250 v230', P.warm, 3, 0.5)}${line('M0 1480 H1080', P.line, 3)}${soft(430, 1050, 340, P.warm, 0.1)}${it}
-    ${character('kai', 880, 1480, 1.2, { t, dir: -1, face: t < no ? 'thinking' : 'sad', glow: lerp(0.8, 0.45, x), droop: x * 0.6 })}
-    ${x > 0 ? `<g transform="translate(430 800) scale(${easeOutBack(x)})"><text y="40" text-anchor="middle" font-family="Inter" font-weight="900" font-size="110" fill="${RED}" stroke="#000" stroke-width="12" style="paint-order:stroke">$8.37</text></g>` : ''}`;
+    [PK.end - 0.05, 380, 900, -8, coinArt], [W(CN, 'five'), 700, 860, 8, bill('5')],
+    [W(CN, 'two'), 420, 1150, -6, bill('1')], [W(CN, 'ones'), 720, 1170, 10, bill('1')],
+  ].map(([s, x, y, r, art]) => { if (t < s) return ''; const f = ease((t - s) / 0.22), sc = lerp(2.2, 1.5, f);
+    return `<ellipse cx="${x + 10}" cy="${y + 20}" rx="${100 * f}" ry="${50 * f}" fill="#000" opacity="${0.35 * f}" filter="url(#b10)"/><g transform="translate(${x} ${y}) rotate(${r}) scale(${sc})">${art}</g>`; }).join('');
+  const tot = W(CN, 'ones') + 0.35;
+  const planks = [0, 1, 2, 3, 4, 5].map(k => line(`M130 ${620 + k * 130} H950`, P.warm, 2, 0.25)).join('');
+  return cam(`<rect x="130" y="560" width="820" height="800" rx="20" fill="#0d2140"/>${neon(`M130 580 v760 h820 v-760 Z`, P.warm, 3)}${planks}${soft(540, 1000, 400, P.warm, 0.08)}${it}
+    ${t >= tot ? `<g transform="translate(540 1480) scale(${pop(t, tot, 0.3)})"><text text-anchor="middle" font-family="Inter" font-weight="900" font-size="120" fill="${P.green}" stroke="#000" stroke-width="12" style="paint-order:stroke">$8.37</text></g>` : ''}`,
+    u, { z0: 1.0, z1: 1.08, age: a, from: [0, -140] });
+}
+function sadFace(t, u, a) {
+  return cam(`${soft(540, 1000, 380, KAI, 0.08)}${face('kai', t, 3.6, { face: 'sad', glow: lerp(0.8, 0.4, ease(a / 0.6)), droop: 0.7 })}
+    <g transform="translate(540 1500) scale(${pop(t, W(CN, 'close'), 0.25)})"><text text-anchor="middle" font-family="Inter" font-weight="900" font-size="110" fill="${RED}" stroke="#000" stroke-width="12" style="paint-order:stroke">$8.37</text></g>`, u, { z0: 1.0, z1: 1.1, age: a, from: [0, 0] }) + flash(a);
 }
 
-// ---------- the door: Mr. Gold's amber light underneath ----------
-const DX = 620, DY = 760, DW = 340, DH = 720;
-function door(t) {
-  const sh = KNOCKS.reduce((a, b) => { const g = age(t, b, 0.2); return g < 0 ? a : a + Math.sin(g * 130) * (1 - g / 0.2) * 7; }, 0);
-  const arrive = ease((t - W(ST, 'footsteps')) / 1.0);
+// ---------- the hallway outside (Mr. Gold walks to 214, tracking shot) ----------
+function hallDoor(x, n, hot = 0) {
+  return `<rect x="${x}" y="760" width="300" height="720" fill="#0b1d38"/>${line(`M${x} 1480 V760 H${x + 300} V1480`, P.warm, 3, 0.6 + 0.4 * hot)}
+    <rect x="${x + 110}" y="820" width="80" height="34" rx="4" fill="none" stroke="${P.teal}" stroke-width="2.5"/><text x="${x + 150}" y="846" text-anchor="middle" font-family="Inter" font-weight="800" font-size="22" fill="${P.teal}">${n}</text>
+    <circle cx="${x + 46}" cy="1150" r="12" fill="${P.warm}"/>`;
+}
+function corridor(t, off) {
+  let s = `<rect x="${-off - 200}" y="600" width="3000" height="880" fill="#0a1830"/>${line(`M${-off - 200} 1480 H${2800 - off}`, P.line, 3)}${line(`M${-off - 200} 640 H${2800 - off}`, P.line, 2, 0.4)}
+    <rect x="${-off - 200}" y="1484" width="3000" height="40" fill="${GOLD}" opacity="0.06"/>`;
+  [['211', -150], ['212', 380], ['213', 780], ['214', 1250]].forEach(([n, x]) => { s += hallDoor(x - off, n, n === '214' ? 1 : 0); });
+  [120, 620, 1080, 1620].forEach(x => { s += `<path d="M${x - off - 20} 700 h40 l-10 30 h-20 Z" fill="${GOLD}" opacity="0.8"/>${soft(x - off, 720, 120, GOLD, 0.16 + 0.03 * Math.sin(t * 4 + x))}`; });
+  return s;
+}
+function hallShot(t, u, a, d) {
+  const gx = lerp(250, 1060, u), off = gx - 430;
+  return `${corridor(t, off)}${character('gold', gx - off, 1480, 1.25, { t, face: 'firm', glow: 0.95, pose: walkPose(a * 1.15) })}` + fadeIn(a, 0.15);
+}
+function knockShot(t, u, a) { // close-up on 214 from the hallway side
+  const sh = KNOCKS.reduce((s, b) => { const g = age(t, b, 0.2); return g < 0 ? s : s + Math.sin(g * 130) * (1 - g / 0.2) * 10; }, 0);
+  const hitk = KNOCKS.map(b => clamp(1 - Math.abs(t - b) / 0.12)).reduce((x, y) => Math.max(x, y), 0);
+  return cam(`<g transform="translate(${sh} 0)"><rect x="120" y="300" width="840" height="1500" fill="#0b1d38"/>${neon('M120 1800 V300 H960 V1800', P.warm, 5)}
+    <rect x="390" y="520" width="300" height="130" rx="10" fill="none" stroke="${P.teal}" stroke-width="7"/><text x="540" y="618" text-anchor="middle" font-family="Inter" font-weight="900" font-size="96" fill="${P.teal}">214</text>
+    <circle cx="540" cy="800" r="36" fill="none" stroke="#e6eeff" stroke-width="7"/></g>
+    <g transform="translate(${760 + 80 * (1 - hitk)} ${1080})"><path d="${rr(-80, -60, 160, 120, 40)}" fill="${GOLD}" opacity="0.9" filter="url(#glow)"/>${line('M-40 -60 v50 M0 -60 v50 M40 -60 v50', '#7a4a00', 5)}</g>
+    ${KNOCKS.map(k => { const g = age(t, k, 0.3); return g < 0 ? '' : `<text x="540" y="1420" text-anchor="middle" font-family="Inter" font-weight="900" font-size="140" fill="#fff" stroke="${GOLD}" stroke-width="10" style="paint-order:stroke" opacity="${1 - g / 0.3}" transform="rotate(-6 540 1400)">KNOCK</text>`; }).join('')}`,
+    u, { z0: 1.05, z1: 1.0, age: a, from: [0, 0] }) + flash(a);
+}
+function goldShot(t, u, a) { // medium shot in the hallway, he talks to the door
+  return cam(`${corridor(t, 1250 - 40)}${character('gold', 640, 1480, 1.7, { t, dir: -1, face: 'firm', glow: 1, pose: { lean: -3, bob: 0, legL: [6, -4], legR: [-6, -4], armL: [-20, 20], armR: [60, 80] } })}`,
+    u, { z0: 1.0, z1: 1.12, cx: 640, cy: 900, age: a, from: [-140, 0] });
+}
+function insideShot(t, u, a) { // inside 214, over Kai's shoulder: the door with the landlord's light under it
   const pulse = 0.6 + 0.4 * Math.abs(Math.sin(t * 3));
-  const feet = [0, 1].map(i => `<rect x="${DX + 90 + i * 110 + (1 - arrive) * 500}" y="${DY + DH - 7}" width="46" height="8" rx="3" fill="#050c1c"/>`).join('');
-  return `<g>
-    <ellipse cx="${DX + DW / 2}" cy="${DY + DH + 14}" rx="${DW * 0.9}" ry="34" fill="${GOLD}" opacity="${0.25 * pulse}" filter="url(#b10)"/>
-    <g transform="translate(${sh} 0)">
-      <rect x="${DX}" y="${DY}" width="${DW}" height="${DH}" fill="#0b1d38"/>
-      ${neon(`M${DX} ${DY + DH} V${DY} H${DX + DW} V${DY + DH}`, P.warm, 4)}
-      ${line(`M${DX + 30} ${DY + 220} h${DW - 60} v200 h${-(DW - 60)} Z M${DX + 30} ${DY + 450} h${DW - 60} v240 h${-(DW - 60)} Z`, P.warm, 2.5, 0.55)}
-      <rect x="${DX + DW / 2 - 40}" y="${DY + 60}" width="80" height="36" rx="4" fill="none" stroke="${P.teal}" stroke-width="2.5"/><text x="${DX + DW / 2}" y="${DY + 87}" text-anchor="middle" font-family="Inter" font-weight="800" font-size="24" fill="${P.teal}">214</text>
-      <circle cx="${DX + DW / 2}" cy="${DY + 150}" r="13" fill="none" stroke="#e6eeff" stroke-width="3"/><circle cx="${DX + DW / 2}" cy="${DY + 150}" r="4" fill="#e6eeff"/>
-      <circle cx="${DX + 52}" cy="${DY + 400}" r="14" fill="${P.warm}"/>
-      <rect x="${DX + 6}" y="${DY + DH - 8}" width="${DW - 12}" height="10" fill="${GOLD}" opacity="${0.4 + 0.5 * pulse}" filter="url(#glow)"/>${feet}
-    </g>
-    ${KNOCKS.map(k => { const g = age(t, k, 0.3); return g < 0 ? '' : `<text x="${DX + DW / 2}" y="${DY - 30}" text-anchor="middle" font-family="Inter" font-weight="900" font-size="90" fill="#fff" stroke="${GOLD}" stroke-width="8" style="paint-order:stroke" opacity="${1 - g / 0.3}">KNOCK</text>`; }).join('')}</g>`;
+  return cam(`${line('M0 1480 H1080', P.line, 3)}
+    <rect x="470" y="700" width="380" height="780" fill="#0b1d38"/>${neon('M470 1480 V700 H850 V1480', P.warm, 4)}
+    <rect x="${615}" y="${770}" width="90" height="38" rx="4" fill="none" stroke="${P.teal}" stroke-width="2.5"/><text x="660" y="797" text-anchor="middle" font-family="Inter" font-weight="800" font-size="24" fill="${P.teal}">214</text>
+    <rect x="476" y="1470" width="368" height="10" fill="${GOLD}" opacity="${0.5 + 0.5 * pulse}" filter="url(#glow)"/>
+    <ellipse cx="660" cy="1494" rx="320" ry="30" fill="${GOLD}" opacity="${0.25 * pulse}" filter="url(#b10)"/>
+    ${[0, 1].map(i => `<rect x="${560 + i * 110}" y="1473" width="46" height="8" rx="3" fill="#050c1c"/>`).join('')}
+    <g opacity="0.95">${character('kai', 170, 2050, 2.5, { t, face: 'shocked', glow: 0.7, pose: { lean: -3, bob: 0, legL: [8, -4], legR: [-8, -4], armL: [10, 12], armR: [-10, 12] } })}</g>`,
+    u, { z0: 1.0, z1: 1.08, cx: 660, cy: 1100, age: a, from: [120, 0] });
 }
-function doorScene(t, u) {
-  const smile = t >= KA.words[0].s;
-  const sweat = smile ? `<path d="M${385} ${1050 + 30 * ((t * 1.5) % 1)} q-8 14 0 20 q8 -6 0 -20" fill="#bfe8ff" opacity="${1 - ((t * 1.5) % 1)}"/>` : '';
-  return push(1 + 0.04 * u, `${room(t, 0.5)}${door(t)}
-    ${character('kai', 320, 1480, 1.35, { t, face: smile ? 'happy' : (t > KNOCKS[0] ? 'shocked' : 'tired'), glow: 0.7, pose: smile ? { lean: 0, bob: 0, legL: [8, -4], legR: [-8, -4], armL: [8, 10], armR: [150, 20] } : { lean: -4, bob: 0, legL: [8, -4], legR: [-8, -4], armL: [20, 30], armR: [-10, 20] } })}${sweat}`, 760, 1200);
+function smileShot(t, u, a) {
+  return cam(`${soft(540, 1000, 380, KAI, 0.1)}${face('kai', t, 3.6, { face: 'happy', glow: 0.8, pose: { lean: 0, bob: 0, legL: [8, -4], legR: [-8, -4], armL: [8, 10], armR: [160, 10] } })}${sweat(t, 380, 820)}`,
+    u, { z0: 1.0, z1: 1.06, age: a, from: [0, 0] }) + flash(a);
 }
 
-// ---------- one night ----------
-function nightScene(t, u) {
-  const tick = Math.floor((t - NT.at) * 1.2) % 2 === 0;
-  return push(1 + 0.05 * u, `${line('M0 1480 H1080', P.line, 3)}
-    ${line('M600 560 h300 v360 h-300 Z M750 560 v360 M600 740 h300', P.lav, 3, 0.6)}<circle cx="680" cy="640" r="24" fill="#e3e9ff" opacity="0.6"/>${soft(680, 640, 110, '#cfd9ff', 0.12)}
-    ${line('M120 1300 h520 v90 h-520 M140 1390 v90 M620 1390 v90 M120 1300 v-140', P.lav, 3, 0.7)}
-    ${line('M760 1480 V1330 h200 V1480', P.lav, 3, 0.7)}
-    <g transform="translate(860 1270)"><path d="${rr(-90, -45, 180, 90, 16)}" fill="#0b1d38" stroke="${RED}" stroke-width="3"/><g fill="${RED}" filter="url(#glow)">${led(tick ? '11:58' : '11:58', -72, -26, 52, RED)}</g></g>
-    ${character('kai', 400, 1478, 1.25, { t, face: 'tired', glow: 0.45, droop: 0.8, pose: { lean: 6, bob: 0, legL: [90, -90], legR: [84, -86], armL: [30, 40], armR: [20, 50] } })}`, 540, 1200);
+// ---------- night ----------
+function buildingShot(t, u, a) { // the street at night: one lit window, 214
+  let stars = '';
+  for (let k = 0; k < 40; k++) stars += `<circle cx="${(k * 137) % 1080}" cy="${80 + (k * 89) % 620}" r="${1.5 + (k % 3)}" fill="#e6eeff" opacity="${0.3 + 0.3 * Math.sin(t * 3 + k)}"/>`;
+  let wins = '';
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) {
+    const x = 270 + c * 150, y = 820 + r * 190, lit = r === 1 && c === 2;
+    wins += `<rect x="${x}" y="${y}" width="90" height="120" fill="${lit ? P.warm : '#0d2140'}" opacity="${lit ? 0.85 : 1}" ${lit ? 'filter="url(#glow)"' : ''}/>${line(`M${x} ${y} h90 v120 h-90 Z`, P.line, 2, 0.6)}`;
+  }
+  return cam(`${stars}<circle cx="840" cy="300" r="60" fill="#e6eeff" opacity="0.85"/>${soft(840, 300, 160, '#cfd9ff', 0.2)}
+    <rect x="220" y="760" width="640" height="720" fill="#0b1d38"/>${line('M220 1480 V760 H860 V1480', P.line, 3)}${wins}
+    ${soft(615, 1070, 170, P.warm, 0.25)}<text x="615" y="1225" text-anchor="middle" font-family="Inter" font-weight="800" font-size="24" fill="${P.teal}">214</text>
+    ${line('M0 1480 H1080', P.line, 3)}${line('M140 1480 v-260', '#e6eeff', 4)}<rect x="142" y="1220" width="70" height="44" fill="none" stroke="${RED}" stroke-width="3"/><rect x="142" y="1220" width="28" height="22" fill="${P.flagBlue}"/>`,
+    u, { z0: 1.0, z1: 1.35, cx: 615, cy: 1070, age: a }) + fadeIn(a, 0.35);
+}
+function clockShot(t, u, a) {
+  const tm = a > 0.6 ? '11:59' : '11:58';
+  return cam(`${soft(540, 1000, 360, RED, 0.12)}<g transform="translate(540 1000) scale(3.2)"><path d="${rr(-130, -70, 260, 140, 26)}" fill="#0b1d38" stroke="${RED}" stroke-width="3"/>
+    <g fill="${RED}" filter="url(#glow)">${led(tm, -108, -34, 68, RED)}</g></g>`, u, { z0: 1.0, z1: 1.08, age: a }) + flash(a);
 }
 
 // ---------- Mint ----------
-function mintScene(t, u) {
-  const s0 = MN.at - 0.95, w = ease((t - s0) / 1.0), x = lerp(-120, 250, w), walking = t - s0 < 1.0;
-  const half = W(MN, 'half'), stress = t > half ? 0.5 + 0.5 * Math.abs(Math.sin(t * 18)) : 1;
-  const env = `<g transform="translate(${x + 95} 1210) rotate(-8)"><rect x="-44" y="-30" width="88" height="60" rx="4" fill="#e6ecf6"/><path d="M-44 -30 L0 6 L44 -30" fill="none" stroke="#9aa6bf" stroke-width="3"/><text y="22" text-anchor="middle" font-family="Inter" font-weight="900" font-size="13" fill="#1a7a45">RENT</text></g>`;
-  return push(1 + 0.04 * u, `${room(t, 0.5)}
-    ${line('M40 680 h200 v800 M40 680 v800', P.line, 3, 0.6)}${soft(140, 1000, 180, MINT, 0.1)}
-    ${character('mint', x, 1480, 1.3, { t, face: 'sad', glow: 0.85, pose: walking ? walkPose((t - s0) * 1.6) : { lean: -3, bob: Math.sin(t * 2) * 2, legL: [6, -4], legR: [-6, -4], armL: [8, 10], armR: [55, 60] } })}
-    ${walking ? '' : env}
-    ${character('kai', 640, 1480, 1.35, { t, dir: -1, face: t > half ? 'shocked' : 'tired', glow: stress, color: t > half ? (Math.sin(t * 18) > 0 ? RED : KAI) : undefined, pose: { lean: 0, bob: 0, legL: [8, -4], legR: [-8, -4], armL: [8, 10], armR: [-8, 10] } })}`, 540, 1200);
+function bedShot(t, u, a) { // bedroom: Kai on the bed, Mint's door opens (green light spills in)
+  const op = ease((a - 0.15) / 0.6);
+  return cam(`${line('M0 1480 H1080', P.line, 3)}
+    <rect x="700" y="640" width="300" height="840" fill="#0b1d38"/>${line('M700 1480 V640 H1000 V1480', P.line, 3, 0.7)}
+    <path d="M700 1480 V640 H${700 + 300 * op} V1480 Z" fill="${MINT}" opacity="${0.35 * op}"/>${soft(850, 1060, 260, MINT, 0.3 * op)}
+    <path d="M700 1480 L${700 + 300 * op} 1480 L${560 + 420 * op} 1620 L560 1620 Z" fill="${MINT}" opacity="${0.12 * op}"/>
+    ${line('M60 1300 h520 v90 h-520 M80 1390 v90 M560 1390 v90 M60 1300 v-140', P.lav, 3, 0.7)}
+    ${character('kai', 330, 1478, 1.25, { t, dir: 1, face: op > 0.5 ? 'shocked' : 'tired', glow: 0.45, droop: 0.8, pose: SIT })}`, u, { z0: 1.0, z1: 1.05, cx: 700, age: a }) + fadeIn(a, 0.12);
 }
+function mintShot(t, u, a) { // low angle, Mint in his doorway
+  return cam(`<rect x="200" y="300" width="680" height="1500" fill="${MINT}" opacity="0.18"/>${line('M200 1800 V300 H880 V1800', P.line, 4)}${soft(540, 900, 420, MINT, 0.22)}
+    ${character('mint', 540, 1780, 2.3, { t, face: 'sad', glow: 0.9, pose: { lean: -2, bob: Math.sin(t * 2) * 2, legL: [6, -4], legR: [-6, -4], armL: [8, 10], armR: [55, 60] } })}`,
+    u, { z0: 1.0, z1: 1.08, cy: 900, age: a, from: [0, 100] }) + flash(a);
+}
+function envShot(t, u, a) { // close-up on the envelope in Mint's hand
+  const tr = Math.sin(t * 40) * 3;
+  return cam(`${soft(540, 1000, 400, MINT, 0.18)}<g transform="translate(${540 + tr} 1000) rotate(-6) scale(5.2)"><rect x="-44" y="-30" width="88" height="60" rx="4" fill="#e6ecf6"/><path d="M-44 -30 L0 6 L44 -30" fill="none" stroke="#9aa6bf" stroke-width="2"/>
+    <text y="22" text-anchor="middle" font-family="Inter" font-weight="900" font-size="13" fill="#1a7a45">RENT</text></g>
+    <path d="M${720 + tr} 1180 q90 -30 180 40" stroke="${MINT}" stroke-width="40" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#glow)"/>`, u, { z0: 1.0, z1: 1.1, age: a });
+}
+function redFace(t, u, a) {
+  const f = Math.sin(t * 18) > 0;
+  return cam(`${soft(540, 1000, 400, RED, 0.14)}${face('kai', t, 3.6, { face: 'shocked', glow: 0.6 + 0.4 * Math.abs(Math.sin(t * 18)), color: f ? RED : KAI })}`, u, { z0: 1.0, z1: 1.12, age: a }) + flash(a);
+}
+
 
 // ---------- end card ----------
 function endCard(t) {
@@ -222,17 +298,30 @@ function endCard(t) {
     </g>` : ''}`;
 }
 
-// ---------- scenes ----------
-const S = [HOOK.end, PK.end, CN.end, KA.end, NT.end, MN.end, DUR];
-const SCENES = [
-  { to: S[0], draw: (t) => svgDoc(1080, 1920, `${hookScene(t)}${title(t)}${label}`) },
-  { to: S[1], draw: (t, u, d) => svgDoc(1080, 1920, `${pocketsScene(t, u / d)}${captions(t, [PK])}${label}`) },
-  { to: S[2], draw: (t) => svgDoc(1080, 1920, `${countScene(t)}${captions(t, [CN])}${label}`) },
-  { to: S[3], draw: (t, u, d) => svgDoc(1080, 1920, `${doorScene(t, u / d)}${captions(t, [ST, GD, KA], { quote: ['gold', 'kai'] })}${label}`) },
-  { to: S[4], draw: (t, u, d) => svgDoc(1080, 1920, `${nightScene(t, u / d)}${captions(t, [NT])}${label}`) },
-  { to: S[5], draw: (t, u, d) => svgDoc(1080, 1920, `${mintScene(t, u / d)}${captions(t, [MN], { quote: ['mint'] })}${label}`) },
-  { to: S[6], draw: (t) => svgDoc(1080, 1920, `${blur(mintScene(t, 1), 0.5)}${endCard(t)}${label}`) },
+// ---------- shots: short, each cut motivated by the story ----------
+const NT_MID = NT.at + (NT.end - NT.at) * 0.5;
+const SHOTS = [
+  [HOOK.end, (t) => `${hookScene(t)}${title(t)}`],
+  [W(PK, 'every', 1) - 0.05, (t, u, a) => pocketShot(t, u, a) + captions(t, [PK])],
+  [W(PK, 'even') - 0.05, (t, u, a) => closetShot(t, u, a) + captions(t, [PK])],
+  [PK.end, (t, u, a) => couchShot(t, u, a) + captions(t, [PK])],                       // coin flies up...
+  [W(CN, 'not') - 0.05, (t, u, a) => tableShot(t, u, a) + captions(t, [CN])],          // ...and lands on the table
+  [CN.end, (t, u, a) => sadFace(t, u, a) + captions(t, [CN])],
+  [KNOCKS[0] - 0.08, (t, u, a) => hallShot(t, u, a) + captions(t, [ST])],             // footsteps -> the hallway
+  [GD.words[0].s - 0.05, (t, u, a) => knockShot(t, u, a)],
+  [W(GD, 'tomorrow') - 0.05, (t, u, a) => goldShot(t, u, a) + captions(t, [GD], { quote: ['gold'] })],
+  [KA.at, (t, u, a) => insideShot(t, u, a) + captions(t, [GD], { quote: ['gold'] })], // "Tomorrow." heard from inside
+  [KA.end, (t, u, a) => smileShot(t, u, a) + captions(t, [KA], { quote: ['kai'] })],
+  [NT_MID, (t, u, a) => buildingShot(t, u, a) + captions(t, [NT])],                   // time passes: the street at night
+  [NT.end, (t, u, a) => clockShot(t, u, a) + captions(t, [NT])],
+  [W(MN, 'can') - 0.05, (t, u, a) => bedShot(t, u, a) + captions(t, [MN], { quote: ['mint'] })],
+  [W(MN, 'half') - 0.05, (t, u, a) => mintShot(t, u, a) + captions(t, [MN], { quote: ['mint'] })],
+  [W(MN, 'rent') + 0.05, (t, u, a) => envShot(t, u, a) + captions(t, [MN], { quote: ['mint'] })],
+  [MN.end, (t, u, a) => redFace(t, u, a) + captions(t, [MN], { quote: ['mint'] })],
+  [DUR, (t) => `${blur(redFace(t, 1, 1), 0.5)}${endCard(t)}`],
 ];
+const S = SHOTS.map(s => s[0]);
+const SCENES = SHOTS.map(([to, f], i) => ({ to, draw: (t, u, d) => svgDoc(1080, 1920, f(t, u / d, u, d) + label) }));
 function frameAt(t) {
   let from = 0;
   for (const s of SCENES) { if (t < s.to) return s.draw(t, t - from, s.to - from); from = s.to; }
@@ -242,22 +331,22 @@ function frameAt(t) {
 // ---------- audio ----------
 function timeline() {
   const v = (c, extra = {}) => ({ file: `${AUD}/${c.name}.mp3`, at: c.at, ...extra });
-  const thru = 'highpass=f=140,lowpass=f=2400';
   const fx = [
-    { fx: 'drone', args: [0, S[5], 0.18, 52] },
+    { fx: 'drone', args: [0, MN.end, 0.18, 52] },
     { fx: 'hit', args: [TOMORROW, 52] }, { fx: 'whoosh', args: [TOMORROW - 0.12, 0.3] }, { fx: 'click', args: [FRIDAY] },
-    ...[S[0], S[1], S[2], S[3], S[4]].map(s => ({ fx: 'whoosh', args: [s - 0.12, 0.35] })),
-    ...['pocket', 'jacket', 'couch'].map(w => ({ fx: 'click', args: [W(PK, w)] })),
-    ...['coins', 'five', 'two', 'ones'].map(w => ({ fx: 'click', args: [W(CN, w)] })), { fx: 'hit', args: [W(CN, 'close'), 48] },
-    ...[0, 0.45, 0.9, 1.35].map(d => ({ fx: 'step', args: [W(ST, 'footsteps') + d, 0.7] })),
+    ...S.slice(0, -2).map(s => ({ fx: 'whoosh', args: [s - 0.1, 0.25] })),
+    ...['every', 'even'].map(w => ({ fx: 'click', args: [W(PK, w) - 0.45] })), { fx: 'click', args: [PK.end - 0.25] },
+    ...['five', 'two', 'ones'].map(w => ({ fx: 'click', args: [W(CN, w)] })), { fx: 'click', args: [PK.end] }, { fx: 'hit', args: [W(CN, 'close'), 48] },
+    ...[0, 0.42, 0.84, 1.26, 1.68].map(d => ({ fx: 'step', args: [ST.at + 0.1 + d, 0.8] })),
     ...KNOCKS.map(k => ({ fx: 'knock', args: [k] })),
-    ...[0, 0.55, 1.1].map(d => ({ fx: 'step', args: [MN.at - 0.95 + d] })), { fx: 'creak', args: [MN.at - 1.0, 0.7] },
+    { fx: 'creak', args: [MN.at - 0.9, 0.7] },
     { fx: 'hit', args: [W(MN, 'half'), 46] },
     { fx: 'click', args: [CTA.words[0].s + 0.5] },
   ];
-  for (let b = W(MN, 'half'); b < S[5] - 0.2; b += 0.55) fx.push({ fx: 'beat', args: [b] });
-  return { dur: DUR, voices: [v(HOOK), v(PK), v(CN), v(ST), v(GD, { filter: thru, gain: 0.95 }), v(KA), v(NT), v(MN), v(CTA)], sfx: fx };
+  for (let b = W(MN, 'half'); b < MN.end - 0.2; b += 0.55) fx.push({ fx: 'beat', args: [b] });
+  return { dur: DUR, voices: [v(HOOK), v(PK), v(CN), v(ST), v(GD), v(KA), v(NT), v(MN), v(CTA)], sfx: fx };
 }
+
 
 const TEST = process.argv.indexOf('--test');
 if (TEST > 0) (async () => {

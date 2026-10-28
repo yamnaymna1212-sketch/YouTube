@@ -9,15 +9,29 @@
 - **Narrator (starts at 0:00):** "Rent is due tomorrow. My paycheck comes Friday."
 - Picture: Kai in apartment 214 looking at a week calendar on the wall. On "tomorrow" a bass hit lands and only the calendar zooms; THU 29 "RENT DUE" circles red. On "Friday", FRI 30 "PAYDAY" circles green.
 
-## Beats
-| Time | Scene | Voice | Sound |
-|------|-------|-------|-------|
-| 3.1-6.9 | Kai digs; jeans, jacket (EMPTY) and couch (+ COINS) pop in | "So I checked every pocket. Every jacket. Even the couch." | Click per item |
-| 6.9-11.1 | Table: coins, a $5, two $1 land; $8.37 pops in red | "Coins, a five, and two ones. Not even close." | Clicks, hit on "close" |
-| 11.1-21.1 | Front door 214, amber light underneath, shadow feet arrive, KNOCK KNOCK | "Then I heard footsteps in the hallway." **Mr. Gold** (through the door): "Kai. Just a friendly reminder. Tomorrow." **Kai** (forced smile, sweat): "Yes sir! Tomorrow!" | Footsteps, knocks |
-| 21.1-23.9 | Kai sits on the bed in the dark, clock 11:58 | "I had one night to figure it out." | |
-| 23.9-29.2 | Mint walks in holding an envelope marked RENT; Kai's glow flickers red | **Mint:** "Hey... can we talk about my half of the rent?" | Door creak, steps, hit on "half", heartbeat |
-| 29.2-34.3 | End card: "+ FOLLOW" tapped, "TO HEAR WHAT MINT SAYS NEXT 😬", share: "SEND THIS TO THE ROOMMATE WHO ALWAYS PAYS 'TOMORROW' 📅" | "Follow for Part 2. And send this to the roommate who always pays tomorrow." | Tap click |
+## Shots (18 short shots, each cut has a reason)
+| Time | Place / camera | Voice | Why the cut |
+|------|----------------|-------|-------------|
+| 0.0-3.1 | Apartment, wide; calendar zooms | Hook | |
+| 3.1-4.7 | Extreme close-up: jeans pocket pulled inside out, EMPTY | "So I checked every pocket." | the search starts |
+| 4.7-5.8 | Bedroom closet, side angle, jacket swings, EMPTY | "Every jacket." | next place he looks |
+| 5.8-6.9 | Living room, low angle: cushion lifts, a coin flies up out of frame | "Even the couch." | next place he looks |
+| 6.9-9.5 | Top-down on the kitchen table: the coin lands, then a $5 and two $1; $8.37 | "Coins, a five, and two ones." | match cut: the coin lands |
+| 9.5-11.1 | Close-up on Kai's sad face, $8.37 in red | "Not even close." | reaction |
+| 11.1-13.7 | Hallway outside, tracking shot: Mr. Gold walks past 211, 212, 213 to 214 | "Then I heard footsteps in the hallway." | the sound takes us outside |
+| 13.7-14.5 | Close-up on door 214: his fist, KNOCK KNOCK | | he arrives |
+| 14.5-17.8 | Hallway, medium shot of Mr. Gold talking to the door | **Mr. Gold:** "Kai. Just a friendly reminder." | |
+| 17.8-19.0 | Inside 214, over Kai's shoulder: amber light and two shadows under the door | **Mr. Gold:** "Tomorrow." | we hear it from Kai's side |
+| 19.0-21.1 | Close-up: Kai's forced smile, sweat drop | **Kai:** "Yes sir! Tomorrow!" | his answer |
+| 21.1-22.6 | Street at night: the building, one lit window (214), moon, slow push in | "I had one night..." | time passes |
+| 22.6-23.9 | Close-up: alarm clock 11:58 -> 11:59 | "...to figure it out." | |
+| 23.9-25.9 | Bedroom: Kai on the bed in the dark, Mint's door opens, green light spills | **Mint:** "Hey..." | the creak |
+| 25.9-26.9 | Low angle: Mint in his doorway | "...can we talk about my" | who it is |
+| 26.9-27.5 | Close-up: the envelope marked RENT, trembling | "half of the" | what he holds |
+| 27.5-29.2 | Close-up: Kai's face flickers red | "rent?" | reaction |
+| 29.2-34.3 | End card over Kai: + FOLLOW, share line | "Follow for Part 2. And send this to the roommate who always pays tomorrow." | |
+
+Every shot settles in with a short camera move (slide, push in or pull out); time jumps (night) fade from black, close-ups land with a light flash.
 
 ## Audio
 Narrator Andrew (+8%), Kai Andrew (+0%), Mr. Gold Christopher (+8%, through-door filter), Mint Brian (-4%). All effects synthesized in `mix.py`.

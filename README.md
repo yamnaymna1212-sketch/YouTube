@@ -18,4 +18,4 @@ Animated Shorts (9:16, 30-40 s) about the money moments Americans live through. 
 - `brand/tiktok/`: profile name, bio, avatars, hashtags
 - `style/references/`: the reference images the style came from
 - `DOPAMINE | An Animated Short Film.mp4`, `ssstik.io_*.MP4`: the original reference videos
-- `brand/0*.png`, `style/neon-noir-style-bible.md`: archived first style (not used)
+- `brand/0*.png`, `style/neon-noir-style-bible.md`, `scripts/`: archived first style and the first (Dana) draft, not used

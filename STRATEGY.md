@@ -74,6 +74,12 @@
 
 > قبل النشر: راجع كل رقم ومصدر. اكتب بالوصف: *"Educational content, not financial advice."*
 
+## 5.5) الصيغ (Formats) — المال + علم النفس + الكتب
+
+6 صيغ بنفس الستايل: **Money Laws · Psychology Says · The Page · One Line · Book vs. Book · The Book in 12 Minutes**.
+التفاصيل، صيغ الـ Hook، بنك الاقتباسات والدراسات، و3 سكربتات كاملة في **`SCRIPTS.md`**.
+الصورة: `design/formats.png`.
+
 ## 6) Thumbnail
 
 خلفية سوداء، رقم ذهبي ضخم، 2–3 كلمات، ورمز واحد (قفص / وعاء / تسريب). نفس القالب لكل الحلقات.

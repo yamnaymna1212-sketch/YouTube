@@ -121,3 +121,17 @@
 | Fri | The Page |
 | Sat | Book vs. Book |
 | Sun | Long form (مرة كل أسبوعين) |
+
+---
+
+## 10) سلسلة: The Psychology of Money — Chapter by Chapter
+
+### Chapter 1 · No One's Crazy — الهوك (واحد فقط)
+
+> **"Nobody is crazy with money. They're just repeating what they lived."**
+
+- **Voice-over (0–3s):** Nobody is crazy with money. They're just repeating what they lived.
+- **On screen:** NOBODY IS CRAZY WITH MONEY. / *They're repeating what they lived.*
+- **Visual:** Vessel بدون وجه، وخلفه ظل رمادي باهت (الماضي) يتحرك معه بنفس الحركة.
+- **بعد الهوك:** اقتباس الفصل — "Your personal experiences with money make up maybe 0.00000001% of what's happened in the world but maybe 80% of how you think the world works." (راجعه من الكتاب نفسه قبل النشر).
+- **The Move:** اكتب أول ذكرى لك عن الفلوس، وشوف كيف تأثر قراراتك اليوم.

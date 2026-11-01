@@ -1,0 +1,295 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Corm;font-style:italic;font-weight:500;src:url(../fonts/corm-1.ttf)}
+@font-face{font-family:Corm;font-weight:500;src:url(../fonts/corm-3.ttf)}
+@font-face{font-family:Corm;font-weight:600;src:url(../fonts/corm-4.ttf)}
+@font-face{font-family:Inter;font-weight:300;src:url(../fonts/inter-1.ttf)}
+@font-face{font-family:Inter;font-weight:400;src:url(../fonts/inter-2.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(../fonts/inter-3.ttf)}
+@font-face{font-family:Inter;font-weight:800;src:url(../fonts/inter-4.ttf)}
+html,body{margin:0;background:#0A0A0B;overflow:hidden}svg{display:block;font-family:Inter,sans-serif}
+</style><script src="timing-002.js"></script></head><body>
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 1080 1920"></svg>
+<script>
+const W=1080,H=1920,GY=1300,XE=300,XR=900,FS=1.25;
+const GOLD='#C9A45C',GOLD2='#E8C987',IV='#EDE8DF',ASH='#5A5A5A',GREY='#8C8A86',WINE='#9A4040';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),lerp=(a,b,t)=>a+(b-a)*t;
+const eo=x=>1-Math.pow(1-clamp(x),3),eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const eob=x=>{x=clamp(x);const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const win=(t,a,b)=>clamp((t-a)/(b-a));
+const mix=(c1,c2,t)=>{const a=[1,3,5].map(i=>parseInt(c1.substr(i,2),16)),b=[1,3,5].map(i=>parseInt(c2.substr(i,2),16));return '#'+a.map((v,i)=>Math.round(lerp(v,b[i],clamp(t))).toString(16).padStart(2,'0')).join('');};
+/* ---------- word timing ---------- */
+const L={};VO.forEach(o=>{const ws=o.text.split(' '),wt=ws.map(w=>w.length+1+(/[.,]$/.test(w)?2:0)),tot=wt.reduce((a,b)=>a+b,0);let acc=0;
+  o.words=ws.map((w,i)=>{const a=o.t+.03+(o.d-.06)*acc/tot;acc+=wt[i];return {w,t0:a,t1:o.t+.03+(o.d-.06)*acc/tot};});L[o.k]=o;});
+const Wd=(k,frag,n=0)=>{const ws=L[k].words.filter(x=>x.w.toLowerCase().replace(/[^a-z0-9']/g,'').startsWith(frag));return (ws[n]||ws[0]).t0;};
+const S=k=>L[k].t,E=k=>L[k].t+L[k].d;
+/* ---------- svg scaffold ---------- */
+const svg=document.getElementById('svg'),NS='http://www.w3.org/2000/svg';
+svg.innerHTML=`<defs>
+<linearGradient id="gfill" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8E6F33"/><stop offset=".55" stop-color="#C9A45C"/><stop offset="1" stop-color="#F1D89C"/></linearGradient>
+<radialGradient id="halo"><stop offset="0" stop-color="#E8C987" stop-opacity=".55"/><stop offset="1" stop-color="#E8C987" stop-opacity="0"/></radialGradient>
+<radialGradient id="whalo"><stop offset="0" stop-color="#EDE8DF" stop-opacity=".12"/><stop offset="1" stop-color="#EDE8DF" stop-opacity="0"/></radialGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient>
+<radialGradient id="bgl" cx=".5" cy=".5" r=".75"><stop offset="0" stop-color="#1a191d"/><stop offset="1" stop-color="#0A0A0B"/></radialGradient>
+<linearGradient id="gline" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9A45C" stop-opacity="0"/><stop offset=".5" stop-color="#E8C987"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE8DF" stop-opacity=".06"/><stop offset="1" stop-color="#EDE8DF" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="${W}" height="${H}" fill="url(#bgl)"/>
+<g id="dust"></g>
+<g id="back"></g>
+<g id="world"><g id="floorL"></g><g id="bld"></g><g id="thr"></g><g id="figs"></g><g id="ico"></g><g id="fx"></g></g>
+<g id="scr"></g><g id="cap"></g><g id="hud"></g>
+<rect width="${W}" height="${H}" fill="url(#vig)"/><rect id="flash" width="${W}" height="${H}" fill="#fff" opacity="0"/><rect id="dim" width="${W}" height="${H}" fill="#0A0A0B" opacity="0"/><g id="end"></g>`;
+const $=id=>document.getElementById(id);
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e;}
+function grp(parent,inner,attrs){const g=el('g',attrs||{},parent);g.innerHTML=inner;return g;}
+const set=(e,a)=>{for(const k in a)e.setAttribute(k,a[k]);};
+/* ---------- floor + dust ---------- */
+el('line',{x1:-1500,y1:GY,x2:3500,y2:GY,stroke:IV,'stroke-opacity':.35,'stroke-width':2},$('floorL'));
+el('rect',{x:-1500,y:GY,width:5000,height:400,fill:'url(#floor)'},$('floorL'));
+const hills=el('path',{d:'M-1500 1180 C -900 1080 -400 1240 200 1150 S 1200 1060 1700 1170 S 2800 1100 3500 1160',fill:'none',stroke:IV,'stroke-opacity':.07,'stroke-width':2},$('back'));
+const dust=[];for(let i=0;i<46;i++){const r=Math.random;dust.push({x:r()*W,y:r()*H,s:.6+r()*1.8,v:6+r()*18,ph:r()*6,e:el('circle',{r:1+r()*1.8,fill:i%7?IV:GOLD2,opacity:0},$('dust'))});}
+/* ---------- characters ---------- */
+const BASE='M-34 0 H34 L29 -12 Q0 -17 -29 -12 Z',BODY='M-24 -12 C-18 -60 -14 -105 -13 -138 H13 C14 -105 18 -60 24 -12 Z',COL='M-20 -138 H20 L17 -150 H-17 Z';
+function makeFig(id,kind){
+  const acc=kind==='exec'?`<path d="M0 -136 L-8 -124 L0 -76 L8 -124 Z" fill="${IV}" stroke="none" id="${id}_tie"/><path d="M-26 -196 Q-6 -222 28 -200" fill="none" stroke-width="6"/>`
+    :`<circle cx="0" cy="-226" r="17" fill="#0A0A0B"/><path d="M-30 -196 Q0 -214 30 -196" fill="none" stroke-width="5"/>`;
+  const g=grp($('figs'),`<circle id="${id}_h" cx="0" cy="-150" r="210" fill="url(#halo)" opacity="0"/>
+   <ellipse cx="0" cy="4" rx="58" ry="10" fill="#000" opacity=".55"/>
+   <g id="${id}_b">
+   <clipPath id="${id}_c"><path d="${BASE}"/><path d="${BODY}"/><path d="${COL}"/></clipPath>
+   <g clip-path="url(#${id}_c)"><rect id="${id}_f" x="-40" y="0" width="80" height="0" fill="url(#gfill)"/><path id="${id}_w" d="" fill="none" stroke="#F6E2AE" stroke-width="3"/></g>
+   <g id="${id}_s" fill="none" stroke="${IV}" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+     <path d="${BASE}"/><path d="${BODY}"/><path d="${COL}"/>
+     <line id="${id}_al" x1="-15" y1="-126" x2="-20" y2="-50"/><line id="${id}_ar" x1="15" y1="-126" x2="20" y2="-50"/>
+     <circle cx="0" cy="-185" r="31" fill="#0A0A0B"/>${acc}
+   </g><circle id="${id}_d" cx="0" cy="-185" r="8" fill="${IV}"/>
+   <g id="${id}_prop"></g></g>`,{id});
+  return {g,id,kind};}
+const FE=makeFig('fe','exec'),FR=makeFig('fr','read');
+// props: Grace = notepad, Trader = briefcase
+const notepad=`<g id="notepad"><rect x="-26" y="-4" width="52" height="64" rx="5" fill="#0A0A0B" stroke="${IV}" stroke-width="4"/><path d="M-14 14 H14 M-14 28 H14 M-14 42 H4" stroke="${IV}" stroke-width="3" opacity=".7"/></g>`;
+const brief=`<g id="brief"><path d="M-30 6 H30 V52 H-30 Z" fill="#0A0A0B" stroke="${IV}" stroke-width="4" stroke-linejoin="round"/><path d="M-11 6 V-4 H11 V6" fill="none" stroke="${IV}" stroke-width="4"/><path d="M-30 24 H30" stroke="${IV}" stroke-width="2" opacity=".5"/></g>`;
+const pRead=grp($('figs'),notepad),pExec=grp($('figs'),brief);
+function armHand(sx,sy,a,len=78){const r=a*Math.PI/180;return [sx+Math.sin(r)*len,sy+Math.cos(r)*len];}
+function setFig(F,o){ // o:{x,y,s,al,ar,level,color,dash,rot,alpha,halo,hop}
+  const sc=o.s||1,breath=1+.012*Math.sin(o.t*3.1+(F.kind==='exec'?1:0));
+  set(F.g,{transform:`translate(${o.x.toFixed(1)},${(GY-(o.hop||0)).toFixed(1)}) rotate(${(o.rot||0).toFixed(1)}) scale(${sc.toFixed(3)},${(sc*breath*(o.sq||1)).toFixed(3)})`,opacity:(o.alpha??1).toFixed(3)});
+  const lv=clamp(o.level||0),top=150,fy=-top*lv;
+  set($(F.id+'_f'),{y:fy.toFixed(1),height:(top*lv+2).toFixed(1)});
+  set($(F.id+'_w'),{d:lv>0?`M-40 ${fy} q10 ${-6*Math.sin(o.t*4)} 20 0 t20 0 t20 0 t20 0`:''});
+  const s=$(F.id+'_s');set(s,{stroke:o.color||IV,'stroke-dasharray':o.dash?'10 9':'none'});
+  set($(F.id+'_d'),{fill:o.dot||o.color||IV});set($(F.id+'_h'),{opacity:(o.halo||0).toFixed(3)});
+  const [lx,ly]=armHand(-15,-126,-(o.al||0)),[rx,ry]=armHand(15,-126,o.ar||0);
+  set($(F.id+'_al'),{x2:lx.toFixed(1),y2:ly.toFixed(1)});set($(F.id+'_ar'),{x2:rx.toFixed(1),y2:ry.toFixed(1)});
+  if(F.kind==='exec'&&$('fe_tie'))$('fe_tie').setAttribute('fill',o.color||IV);
+  return {hx:rx,hy:ry,lx,ly};}
+/* ---------- icon library (world) ---------- */
+const S1=`fill="none" stroke="${IV}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`,G1=`fill="none" stroke="${GOLD2}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`;
+const calIc=(id,txt,sz)=>`<rect x="-60" y="-120" width="120" height="120" rx="10" fill="#0A0A0B" ${S1}/><path d="M-60 -92 H60 M-32 -132 V-110 M32 -132 V-110" ${S1}/><text id="${id}" x="0" y="-26" text-anchor="middle" font-size="${sz}" font-weight="800" fill="${IV}">${txt}</text>`;
+const IC={
+ coin:`<circle r="26" ${G1}/><circle r="18" fill="none" stroke="${GOLD}" stroke-width="2.5"/><path d="M0 -12 V12 M5 -7 H-2 a4 4 0 0 0 0 8 h3 a4 4 0 0 1 0 8 H-6" ${G1} stroke-width="3"/>`,
+ cert:`<rect x="-46" y="-120" width="92" height="120" rx="6" fill="#0A0A0B" ${S1}/><path d="M-30 -96 H30 M-30 -80 H30 M-30 -64 H14" ${S1} stroke-width="3"/><path d="M-30 -24 L-12 -40 L2 -32 L28 -56" ${G1} stroke-width="3.5"/><circle cx="26" cy="-16" r="9" fill="${GOLD}"/>`,
+ hourglass:`<path d="M-36 -110 H36 M-36 0 H36 M-28 -110 C-28 -70 0 -66 0 -55 C0 -44 -28 -40 -28 0 M28 -110 C28 -70 0 -66 0 -55 C0 -44 28 -40 28 0" ${S1}/><path d="M-18 -6 L0 -26 L18 -6 Z" fill="${GOLD2}"/>`,
+ sell:`<rect x="-70" y="-34" width="140" height="68" rx="34" fill="#0A0A0B" ${S1}/><text y="13" text-anchor="middle" font-size="36" font-weight="800" letter-spacing="4" fill="${IV}">SELL</text>`,
+ typew:`<path d="M-70 0 V-46 Q-70 -56 -60 -56 H60 Q70 -56 70 -46 V0 Z" ${S1}/><path d="M-44 -56 V-96 H44 V-56" ${S1}/><path d="M-26 -78 H26 M-26 -66 H12" ${S1} stroke-width="3"/><path d="M-48 -24 H48 M-36 -12 H36" ${S1} stroke-width="3" stroke-dasharray="2 12"/>`,
+ flask:`<path d="M-16 -140 H16 M-10 -140 V-80 L-56 -10 Q-64 2 -50 2 H50 Q64 2 56 -10 L10 -80 V-140" ${S1}/><path d="M-34 -30 H34" ${S1} stroke-width="3"/><circle cx="-8" cy="-14" r="5" fill="${IV}"/><circle cx="12" cy="-20" r="4" fill="${IV}"/>`,
+ up:`<path d="M0 0 V-120 M-44 -76 L0 -122 L44 -76" ${S1} stroke-width="8"/>`,
+ down:`<path d="M0 -120 V0 M-44 -44 L0 2 L44 -44" ${S1} stroke-width="8"/>`,
+ screen:`<rect x="-80" y="-130" width="160" height="110" rx="10" fill="#0A0A0B" ${S1}/><path d="M-56 -46 L-30 -92 L-6 -64 L20 -108 L56 -50" ${S1} stroke-width="4"/><path d="M-30 0 H30 M0 -20 V0" ${S1}/>`,
+ cycle:`<path d="M-50 -60 A56 56 0 0 1 36 -100 M50 -60 A56 56 0 0 1 -36 -20" ${S1} stroke-width="5"/><path d="M36 -100 L40 -128 M36 -100 L10 -92 M-36 -20 L-40 8 M-36 -20 L-10 -28" ${S1} stroke-width="5"/><circle cx="0" cy="-60" r="18" ${G1}/>`,
+ hanger:`<path d="M0 -70 V-86 a11 11 0 1 1 11 11 M0 -70 L-76 -26 Q-84 -18 -72 -18 H72 Q84 -18 76 -26 Z" ${S1}/>`,
+ tag:`<path d="M-56 -52 L-12 -96 H56 V0 H-12 Z" ${S1}/><circle cx="-4" cy="-72" r="5" fill="${IV}"/><text x="14" y="-20" text-anchor="middle" font-size="28" font-weight="800" fill="${IV}">SALE</text>`,
+ college:`<path d="M-100 0 H100 M-92 -14 H92 M-80 -14 V-118 M-40 -14 V-118 M0 -14 V-118 M40 -14 V-118 M80 -14 V-118 M-104 -118 H104 L0 -170 Z" ${S1}/><path d="M-40 -196 L0 -216 L40 -196 L0 -176 Z" fill="none" stroke="${GOLD2}" stroke-width="4"/><path d="M40 -196 V-176" stroke="${GOLD2}" stroke-width="4"/>`,
+ cal35:calIc('cal35','1935',40),yrs43:calIc('yrs43','43 YRS',30),calY:calIc('calY','1935',40),cal100:calIc('cal100','100',54),
+};
+function icon(name,x,y,sz,parent){const g=grp(parent||$('ico'),IC[name],{opacity:0});return {g,x,y,sz};}
+function showIcon(o,t,t0,t1,extra){
+  const pin=eob(win(t,t0,t0+.38)),out=eio(win(t,t1,t1+.3)),a=win(t,t0,t0+.12)*(1-out);
+  const bob=Math.sin(t*2.4+o.x*.01)*5,sc=o.sz*lerp(.2,1,pin)*(1-.3*out),rot=(1-eo(win(t,t0,t0+.5)))*-14+(extra?.rot||0);
+  set(o.g,{opacity:a.toFixed(3),transform:`translate(${(o.x+(extra?.dx||0)).toFixed(1)},${(o.y+bob*(extra?.nob?0:1)+(extra?.dy||0)).toFixed(1)}) rotate(${rot.toFixed(1)}) scale(${sc.toFixed(3)})`});return a;}
+const XR2=XR,CLX=1460;
+const college=icon('college',CLX,GY,1.3,$('bld'));
+const hg=icon('hourglass',XR+200,GY-30,1.0),hgHook=icon('hourglass',XR-230,GY-80,1.1);
+const typew=icon('typew',XR-250,GY,1.15,$('bld')),flask=icon('flask',XR+250,GY,1.1,$('bld')),yrs=icon('yrs43',XR,985,1.0);
+const cal35=icon('cal35',XR-220,985,1.0),certs=[0,1,2].map(i=>icon('cert',XR+190+i*40,GY-i*18,1.0));
+const calY=icon('calY',XR+230,985,1.0),cal100=icon('cal100',XR-230,985,1.0);
+const cycle=icon('cycle',XR-230,GY-60,1.05),sell=icon('sell',XR+200,900,1.0);
+const sellX=el('path',{d:'M-80 -40 L80 40',stroke:GOLD2,'stroke-width':7,'stroke-linecap':'round',opacity:0},$('ico'));
+const hanger=icon('hanger',XR-210,GY-40,1.15),tag=icon('tag',XR+210,GY-60,1.1);
+const upI=icon('up',XE-190,GY-30,1.0),dnI=icon('down',XE+190,GY-30,1.0),scrI=icon('screen',XE,GY-330,1.0);
+const sellT=icon('sell',XE+30,880,1.0),chartI=icon('screen',XE,GY-330,1.0);
+const rain=[];for(let i=0;i<9;i++)rain.push(icon('coin',XR-110+(i%5)*55+(i>4?27:0),0,.9));
+const dcoins=[0,1,2].map(i=>icon('coin',XR-60+i*60,0,.95));
+const gchart=el('polyline',{fill:'none',stroke:GOLD2,'stroke-width':5,'stroke-linejoin':'round',opacity:0},$('bld'));
+const gglow=el('polyline',{fill:'none',stroke:GOLD2,'stroke-width':20,'stroke-opacity':.12,'stroke-linejoin':'round',opacity:0},$('bld'));
+const thr=el('path',{fill:'none',stroke:GOLD2,'stroke-width':4,'stroke-linecap':'round',opacity:0},$('thr'));
+const thrG=el('path',{fill:'none',stroke:GOLD,'stroke-width':16,'stroke-opacity':.15,'stroke-linecap':'round',opacity:0},$('thr'));
+const crash=el('polyline',{fill:'none',stroke:WINE,'stroke-width':9,'stroke-linejoin':'round','stroke-linecap':'round',opacity:0},$('scr'));
+const crashG=el('polyline',{fill:'none',stroke:WINE,'stroke-width':30,'stroke-opacity':.18,'stroke-linejoin':'round',opacity:0},$('scr'));
+const stamp=grp($('scr'),`<g transform="rotate(-8)"><rect x="-250" y="-56" width="500" height="112" rx="8" fill="#0A0A0B" fill-opacity=".6" stroke="${WINE}" stroke-width="7"/><text y="26" text-anchor="middle" font-size="68" font-weight="800" letter-spacing="8" fill="${WINE}">SOLD LOW</text></g>`,{opacity:0});
+const dim2=el('rect',{width:W,height:H,fill:'#0A0A0B',opacity:0},$('scr'));const card=el('image',{href:'card-grace.png',x:-297,y:-333,width:594,height:667,opacity:0},$('scr'));
+const nw=el('text',{x:540,y:1150,'text-anchor':'middle','font-size':150,'font-weight':300,'letter-spacing':-4,fill:GOLD2,opacity:0},$('scr'));
+const nwl=el('text',{x:540,y:1010,'text-anchor':'middle','font-size':24,'font-weight':600,'letter-spacing':8,fill:GREY,opacity:0},$('scr'));nwl.textContent='LEFT TO HER COLLEGE';
+const srcT=el('text',{x:540,y:1250,'text-anchor':'middle','font-size':20,'font-weight':600,'letter-spacing':5,fill:GREY,opacity:0},$('scr'));srcT.textContent='SOURCE: CHICAGO TRIBUNE · MARCH 2010';
+const fx=$('fx');const rings=[0,1,2].map(()=>el('circle',{fill:'none',stroke:GOLD2,'stroke-width':4,opacity:0},fx));
+const parts=[];for(let i=0;i<22;i++)parts.push(el('circle',{r:3,fill:IV,opacity:0},fx));
+/* ---------- screen text ---------- */
+const scr=$('scr');
+function T(txt,y,size,fill,italic,extra){const t=el('text',Object.assign({x:540,y,'text-anchor':'middle','font-size':size,'font-weight':italic?500:800,'letter-spacing':italic?0:-2,fill,opacity:0,'font-family':italic?'Corm':'Inter','font-style':italic?'italic':'normal'},extra||{}),scr);t.innerHTML=txt;return t;}
+function showT(e,t,a,b,dy){const i=eo(win(t,a,a+.28)),o=eio(win(t,b,b+.22));e.setAttribute('opacity',(i*(1-o)).toFixed(3));
+  const s=lerp(.9,1,eob(win(t,a,a+.4)));const y=+e.getAttribute('y');e.setAttribute('transform',`translate(540,${y}) scale(${s.toFixed(3)}) translate(-540,${-y}) translate(0,${((1-i)*(dy??30)-o*20).toFixed(1)})`);}
+const tx={
+ h1:T('DOING NOTHING',330,112,IV),h2:T('MADE HER',450,112,IV),h4:T('millions.',640,230,GOLD2,true),
+ rr:T('GRACE GRONER',360,96,IV,false,{'font-family':'Corm','font-weight':600,'letter-spacing':12}),ry:T('1909 — 2010',440,44,GREY,true),
+ sec:T('SECRETARY.',360,112,IV),abb:T('ABBOTT LABS.',360,100,IV),y43:T('43 YEARS.',360,118,IV),
+ y35:T('1935.',340,150,IV,false,{'letter-spacing':-4}),d180:T('$180.',340,170,GOLD2),sh3:T('3 SHARES.',340,120,IV),
+ tr:T('THE TRADER',340,100,IV,false,{'font-family':'Corm','font-weight':600,'letter-spacing':10}),fic:T('FICTIONAL CHARACTER',420,28,GREY,false,{'font-weight':600,'letter-spacing':8}),
+ bo:T('BOUGHT.',340,120,IV),so:T('SOLD.',340,120,IV),ev:T('EVERY DAY.',340,108,IV),
+ ri:T('REINVESTED.',340,112,GOLD2),ns:T('NEVER SOLD.',340,118,IV),
+ cl:T('SECONDHAND.',340,104,IV),
+ rec:T('RECESSIONS.',340,112,IV),cr:T('CRASHED.',340,120,WINE),
+ pa:T('PANIC.',340,150,WINE),
+ hw:T('she waited.',470,150,GOLD2,true),
+ d100:T('AT 100.',330,130,IV),co:T('TO HER COLLEGE.',330,92,IV),
+};
+const endL=$('end');
+function ET(txt,y,size,fill,italic){const t=el('text',{x:540,y,'text-anchor':'middle','font-size':size,'font-weight':italic?500:800,'letter-spacing':italic?0:-3,fill,opacity:0,'font-family':italic?'Corm':'Inter','font-style':italic?'italic':'normal'},endL);t.textContent=txt;return t;}
+const e1=ET('TIME',760,170,IV),e2=ET('BEATS',905,170,IV),e3=ET('effort.',1150,300,GOLD2,true);
+const eSub=el('text',{x:540,y:1500,'text-anchor':'middle','font-size':24,'font-weight':600,'letter-spacing':7,fill:GREY,opacity:0},endL);eSub.textContent='CASE FILE 002 · GRACE GRONER';
+const eBrand=el('text',{x:540,y:1625,'text-anchor':'middle','font-size':62,'font-family':'Corm','font-weight':500,fill:IV,opacity:0},endL);eBrand.innerHTML='The Gold <tspan font-style="italic" fill="'+GOLD+'">Mind</tspan>';
+const eLine=el('path',{d:'M250 1200 C 420 1188 660 1212 830 1196',stroke:'url(#gline)','stroke-width':5,fill:'none',opacity:0},endL);
+const chip=grp($('hud'),`<rect x="60" y="120" width="250" height="46" rx="23" fill="none" stroke="${GOLD}" stroke-opacity=".55" stroke-width="2"/><text x="185" y="151" text-anchor="middle" font-size="17" font-weight="600" letter-spacing="5" fill="${GOLD}">CASE FILE 002</text>`,{opacity:0});
+/* captions */
+const capSegs=[];['l2','l3','l4','l5','l6','l7','l8','l9','l10','l11','l12'].forEach(k=>{const o=L[k];const words=o.words;const lines=[];let cur=[],len=0;
+  words.forEach(w=>{if(len+w.w.length>28&&cur.length){lines.push(cur);cur=[];len=0;}cur.push(w);len+=w.w.length+1;});if(cur.length)lines.push(cur);
+  const g=el('g',{opacity:0},$('cap'));const lh=60,y0=1600-(lines.length-1)*lh;
+  lines.forEach((ln,li)=>{const t=el('text',{x:540,y:y0+li*lh,'text-anchor':'middle','font-size':44,'font-weight':800,'letter-spacing':.5},g);
+    t.innerHTML=ln.map((w,i)=>`<tspan>${w.w.toUpperCase()}${i<ln.length-1?' ':''}</tspan>`).join('');t.querySelectorAll('tspan').forEach((s,i)=>ln[i].el=s);});
+  capSegs.push({g,words,t0:o.t,t1:o.t+o.d});});
+/* ---------- camera (continuous Hermite spline) ---------- */
+const w_=(k,f,n)=>Wd(k,f,n);
+const CK=[[0,650,1050,1.15],[S('l2')-.3,700,1040,1.2],[S('l2')+.1,900,1030,1.36],[S('l3'),905,1020,1.28],[S('l4'),940,1010,1.2],[S('l5')-.35,880,1020,1.2],[S('l5')-.02,310,1020,1.24],[S('l6'),300,1000,1.12],[S('l7')-.35,320,1000,1.08],[S('l7')+.1,880,1030,1.22],[S('l8'),930,1010,1.2],[S('l9')-.1,920,1000,1.1],[S('l9')+.4,640,980,.84],[S('l10')-.1,600,985,.86],[S('l10')+.25,300,1040,1.22],[S('l11')-.1,295,1040,1.3],[S('l11')+.25,900,1030,1.25],[S('l12'),930,1010,1.2],[w_('l12','college')-.4,1250,990,1.0],[E('l12'),1420,990,.92],[S('l13'),1250,960,.8],[S('l13')+4,1150,950,.7]];
+function camAt(t){let i=0;while(i<CK.length-2&&t>CK[i+1][0])i++;const a=CK[i],b=CK[i+1],p=CK[Math.max(i-1,0)],n=CK[Math.min(i+2,CK.length-1)];
+  const h=b[0]-a[0],u=clamp((t-a[0])/h);const h00=2*u*u*u-3*u*u+1,h10=u*u*u-2*u*u+u,h01=-2*u*u*u+3*u*u,h11=u*u*u-u*u;
+  const r=[];for(let k=1;k<4;k++){const m0=(b[k]-p[k])/Math.max(b[0]-p[0],.01)*h*.5,m1=(n[k]-a[k])/Math.max(n[0]-a[0],.01)*h*.5;r.push(h00*a[k]+h10*m0+h01*b[k]+h11*m1);}return r;}
+const lvlAt=(arr,t)=>{let v=arr[0][1];for(let i=1;i<arr.length;i++){if(t<=arr[i][0]){const[a,va]=arr[i-1],[b,vb]=arr[i];return lerp(va,vb,eio((t-a)/Math.max(b-a,.01)));}v=arr[i][1];}return v;};
+/* ---------- render ---------- */
+window.renderAt=function(t){
+  const w=w_;
+  const kM=w('l1','millions'),kCr=w('l9','crashed'),kPa=w('l10','panic'),kSv=w('l12','seven'),kEf=w('l13','effort');
+  let sh=0;[kM,kCr,kPa,kSv,kEf].forEach(h=>{if(t>=h)sh+=Math.exp(-(t-h)*8);});
+  let [cx,cy,z]=camAt(t);cx+=Math.sin(t*.9)*8+Math.sin(t*37)*14*sh;cy+=Math.cos(t*.7)*6+Math.cos(t*41)*12*sh;z*=1+.006*Math.sin(t*.8);
+  $('world').setAttribute('transform',`translate(540,960) scale(${z.toFixed(4)}) translate(${(-cx).toFixed(2)},${(-cy).toFixed(2)})`);
+  $('back').setAttribute('transform',`translate(540,960) scale(${(z*.9).toFixed(4)}) translate(${(-cx*.8).toFixed(2)},${(-cy).toFixed(2)})`);
+  dust.forEach(d=>{const y=((d.y-t*d.v)%H+H)%H,x=(d.x+Math.sin(t*.5+d.ph)*20-cx*.05*d.s+3000)%W;set(d.e,{cx:x.toFixed(1),cy:y.toFixed(1),opacity:(.12+.1*Math.sin(t+d.ph)).toFixed(3)});});
+  const endT=S('l13'),fade=1-eio(win(t,endT-.2,endT+.5));
+  const tDied=w('l12','died'),tRe=w('l7','reinvested'),tWait=w('l11','waited'),tPanic=w('l10','sold');
+
+  /* ===== TRADER (fictional, dashed) ===== */
+  let e={t,x:XE,s:FS,al:14,ar:14,level:0,color:IV,dash:true,alpha:fade,halo:0};
+  const trAct=win(t,S('l5'),S('l5')+.4)*(1-win(t,S('l7')-.3,S('l7')));
+  if(t<S('l2')){e.level=0;e.al=20+Math.sin(t*12)*25;e.ar=20-Math.sin(t*12)*25;}
+  if(t>=S('l6')&&t<S('l9')){const a=Math.sin(t*9);e.al=30+a*50;e.ar=30-a*50;e.hop=Math.abs(Math.sin(t*6))*18;e.level=.3+.15*Math.sin(t*5);}
+  if(t>=S('l9')&&t<S('l10')){e.level=.3;e.al=60;e.ar=60;}
+  const dl=eio(win(t,kPa,kPa+.7));if(t>=S('l10')){e.al=lerp(60,150,eob(win(t,S('l10'),S('l10')+.4)));e.ar=lerp(60,-150,eob(win(t,S('l10'),S('l10')+.4)));e.level=.3*(1-dl);e.color=mix(IV,ASH,dl);e.rot=-78*eio(win(t,kPa+.3,kPa+.9));e.alpha=fade*(1-.4*win(t,kPa+.9,kPa+1.4));}
+  e.alpha=fade*(t<S('l5')-.4?.55:1)*(e.alpha!==undefined&&t>=S('l10')?1:1);
+  if(t>=S('l10')){e.alpha=fade*(1-.4*win(t,kPa+.9,kPa+1.4));}
+  const he=setFig(FE,e);
+  const bA=win(t,S('l6')-.1,S('l6')+.2)*(t<kPa+.3?1:1-win(t,kPa+.3,kPa+.6))*fade;
+  set(pExec,{opacity:bA.toFixed(3),transform:`translate(${XE},${GY-(e.hop||0)}) rotate(${(e.rot||0).toFixed(1)}) scale(${FS}) translate(${he.hx.toFixed(1)},${he.hy.toFixed(1)}) rotate(${(Math.sin(t*3)*4).toFixed(1)})`});
+
+  /* ===== GRACE ===== */
+  let r={t,x:XR,s:FS,al:8,ar:-8,level:.1,color:IV,alpha:fade,halo:0};
+  r.level=lvlAt([[0,.1],[kM,.1],[kM+.6,.8],[S('l2')-.1,.8],[S('l2')+.5,.1],[w('l4','three')+.5,.14],[tRe,.14],[S('l8'),.5],[S('l9'),.6],[kCr,.6],[kCr+.3,.5],[S('l10')+1,.55],[tWait,.58],[E('l11'),.88],[tDied,.92]],t);
+  r.halo=t<S('l2')?.9*eo(win(t,kM,kM+.5)):(t>tWait?.6*win(t,tWait,E('l11')):.12+.2*win(t,tRe,S('l8')));
+  r.color=(t>kM&&t<S('l2'))||t>tWait?GOLD2:IV;
+  const tWave=S('l2');
+  if(t<S('l2')){r.al=8+Math.sin(t*3)*3;r.ar=-8;}
+  if(t>tWave&&t<S('l3')){r.ar=-20-140*eob(win(t,tWave+.2,tWave+.55))+Math.sin(t*14)*16*win(t,tWave+.5,tWave+.8);}
+  if(t>=S('l3')&&t<S('l4')){const a=Math.sin(t*11);r.al=40+a*18;r.ar=-40+a*18;}
+  if(t>=S('l4')&&t<S('l5')){r.al=lerp(10,70,eob(win(t,w('l4','three')-.2,w('l4','three')+.2)));r.ar=-8;}
+  if(t>=S('l7')&&t<S('l9')){r.al=40;r.ar=-40;}
+  if(t>=S('l8')&&t<S('l9')){r.al=70;r.ar=-8;}
+  if(t>=tWait&&t<tDied){r.al=15;r.ar=-15;}
+  r.alpha=fade*(1-.55*win(t,tDied,tDied+.8));
+  const hr=setFig(FR,r);
+  const npA=(win(t,S('l3'),S('l3')+.3)*(1-win(t,S('l4'),S('l4')+.3)))*fade;
+  set(pRead,{opacity:npA.toFixed(3),transform:`translate(${XR},${GY}) scale(${FS}) translate(${hr.hx.toFixed(1)},${hr.hy.toFixed(1)}) rotate(${(-20+Math.sin(t*11)*6).toFixed(1)}) scale(.62)`});
+
+  /* ===== HOOK ===== */
+  showIcon(hgHook,t,w('l1','nothing')-.05,S('l2')-.1,{nob:1,rot:eio(win(t,w('l1','nothing'),kM))*180});
+  showIcon(chartI,t,.3,S('l2')-.1,{nob:1});
+  rain.forEach((c,i)=>{const t0=kM-.15+i*.07,u=win(t,t0,t0+.55);const y=lerp(560,GY-120,u*u);set(c.g,{opacity:(t>t0&&u<1&&t<S('l2')+.4?1:0).toFixed(3),transform:`translate(${c.x},${y.toFixed(1)}) rotate(${(u*360).toFixed(0)}) scale(${c.sz})`});});
+  rings.forEach((g,i)=>{const t0=kM+.45+i*.14,u=win(t,t0,t0+.9);set(g,{cx:XR,cy:GY-180*FS,r:(40+u*360).toFixed(0),opacity:(u>0&&u<1?(1-u)*.7:0).toFixed(3)});});
+  /* ===== l2 card ===== */
+  const cIn=eob(win(t,w('l2','grace'),w('l2','grace')+.4)),cOut=eio(win(t,S('l3')+.1,S('l3')+.4));
+  set(card,{opacity:(win(t,w('l2','grace'),w('l2','grace')+.15)*(1-cOut)).toFixed(3),transform:`translate(${lerp(1000,820,cIn).toFixed(0)},1010) scale(${(.42*lerp(.7,1,cIn)).toFixed(3)}) rotate(${lerp(8,3,cIn).toFixed(1)})`});
+  /* ===== l3 secretary ===== */
+  showIcon(typew,t,w('l3','secretary')-.05,S('l4')-.1,{nob:1});showIcon(flask,t,w('l3','abbott')-.05,S('l4')-.1,{nob:1});showIcon(yrs,t,w('l3','forty')-.05,S('l4')-.1);
+  /* ===== l4 1935 / $180 / 3 shares ===== */
+  showIcon(cal35,t,w('l4','1935')-.05,w('l4','three'));
+  const tH=w('l4','hundred'),tS=w('l4','three');
+  dcoins.forEach((c,i)=>{const t0=tH+i*.12,u=win(t,t0,t0+.5);set(c.g,{opacity:(u>0&&u<1?1:0).toFixed(3),transform:`translate(${(c.x).toFixed(0)},${lerp(700,GY-130,u*u).toFixed(0)}) rotate(${(u*300).toFixed(0)}) scale(${c.sz})`});});
+  certs.forEach((c,i)=>showIcon(c,t,tS-.05+i*.18,99,{nob:1}));
+  /* ===== l6 trader icons ===== */
+  showIcon(upI,t,w('l6','bought')-.05,S('l7')-.3,{nob:1});showIcon(dnI,t,w('l6','sold')-.05,S('l7')-.3,{nob:1});
+  showIcon(scrI,t,w('l6','checked')-.05,S('l7')-.3);
+  /* ===== l7 reinvest/never sold ===== */
+  showIcon(cycle,t,tRe-.1,w('l7','never'),{rot:t*40,nob:1});
+  const sa=showIcon(sell,t,w('l7','never')-.1,S('l8')-.05);set(sellX,{opacity:(sa*win(t,w('l7','sold'),w('l7','sold')+.2)).toFixed(3),transform:`translate(${XR+200},900) scale(${eob(win(t,w('l7','sold'),w('l7','sold')+.3)).toFixed(3)})`});
+  const gu=win(t,tRe,tDied+.3);const cp=[];const Nn=18;for(let i=0;i<=Nn;i++){const u=i/Nn;const x=XR+260+i*34;let y=GY-170-Math.pow(u,2.6)*620-Math.sin(i*1.3)*7;if(t>kCr&&t<S('l11')&&i>8)y+=Math.sin(i*.9)*22*win(t,kCr,kCr+.4);cp.push(x+','+y.toFixed(0));}
+  const gpts=cp.slice(0,Math.max(2,Math.round((Nn+1)*Math.min(1,gu*1.15)))).join(' ');
+  set(gchart,{points:gpts,opacity:(win(t,tRe,tRe+.3)*fade*(1-win(t,tDied+1.2,tDied+1.6))).toFixed(3)});set(gglow,{points:gpts,opacity:(win(t,tRe,tRe+.3)*fade*(1-win(t,tDied+1.2,tDied+1.6))*.8).toFixed(3)});
+  /* ===== l8 secondhand ===== */
+  showIcon(hanger,t,w('l8','clothes')-.05,S('l9')-.1,{nob:1});showIcon(tag,t,w('l8','rummage')-.05,S('l9')-.1,{nob:1});
+  /* ===== l9 crash (screen) ===== */
+  const tCr=w('l9','markets');const cpu=win(t,tCr-.3,kCr+.5);const pts=[];const Np=30;
+  for(let i=0;i<=Np*cpu;i++){const u=i/Np,x=90+u*900;let y=520+Math.sin(u*9)*22-u*80;if(u>.55)y+=Math.pow((u-.55)/.45,1.6)*560+Math.sin(i*2.7)*18;pts.push(x.toFixed(0)+','+y.toFixed(0));}
+  const crA=win(t,tCr-.3,tCr)*(1-win(t,S('l10')+.3,S('l10')+.7));
+  set(crash,{points:pts.join(' '),opacity:crA.toFixed(3)});set(crashG,{points:pts.join(' '),opacity:crA.toFixed(3)});
+  /* ===== l10 trader sells ===== */
+  showIcon(sellT,t,S('l10')-.05,kPa+.6,{nob:1});
+  const stA=win(t,kPa+.1,kPa+.25)*(1-win(t,E('l10')+.15,E('l10')+.4));set(stamp,{opacity:stA.toFixed(3),transform:`translate(540,820) scale(${lerp(1.7,1,eob(win(t,kPa+.1,kPa+.35))).toFixed(3)})`});
+  /* ===== l11 waited ===== */
+  showIcon(hg,t,tWait-.15,tDied+.1,{rot:eio(win(t,tWait,tWait+.6))*180,nob:1,dy:-55});
+  showIcon(calY,t,tWait-.05,tDied+.1);const yr=Math.round(lerp(1935,2010,win(t,tWait,E('l11')+.25)));const cy_=$('calY');if(cy_)cy_.textContent=yr;
+  /* ===== l12 died -> card + counter -> college ===== */
+  const tCo=w('l12','college');
+  const c2=eob(win(t,tDied,tDied+.45)),c2o=eio(win(t,tCo-.35,tCo));
+  if(t>=tDied&&t<tCo){set(card,{opacity:(win(t,tDied,tDied+.15)*(1-c2o)).toFixed(3),transform:`translate(540,${lerp(700,640,c2).toFixed(0)}) scale(${(.62*lerp(.8,1,c2)).toFixed(3)})`});}
+  dim2.setAttribute('opacity',(.6*win(t,tDied,tDied+.4)*(1-c2o)).toFixed(3));
+  const cu=eio(win(t,kSv-.1,kSv+1.1));nw.textContent='$'+Math.round(7000000*Math.pow(cu,1.5)).toLocaleString('en-US');
+  const nwA=win(t,kSv-.15,kSv)*(1-c2o);set(nw,{opacity:nwA.toFixed(3)});set(nwl,{opacity:nwA.toFixed(3)});set(srcT,{opacity:(nwA*.9).toFixed(3)});
+  showIcon(cal100,t,w('l12','hundred')-.05,kSv-.1,{nob:1});
+  showIcon(college,t,tCo-.15,99,{nob:1});
+  const tu=eo(win(t,tCo-.1,tCo+.5)),ta=tu*fade;const tx1=XR,ty1=GY-200,tx2=CLX,ty2=GY-200,mx=(tx1+tx2)/2,my=GY-420;
+  const td=`M${tx1} ${ty1} Q ${mx} ${my} ${lerp(tx1,tx2,tu).toFixed(0)} ${lerp(ty1,ty2,tu).toFixed(0)}`;set(thr,{d:td,opacity:ta.toFixed(3)});set(thrG,{d:td,opacity:(ta*(.6+.4*Math.sin(t*6))).toFixed(3)});
+  /* ===== screen texts ===== */
+  showT(tx.h1,t,w('l1','doing')-.05,S('l2')-.15);showT(tx.h2,t,w('l1','made')-.05,S('l2')-.15);showT(tx.h4,t,kM-.05,S('l2')-.15,0);
+  showT(tx.rr,t,w('l2','grace')-.05,S('l3')-.2);showT(tx.ry,t,w('l2','grace')+.15,S('l3')-.2);
+  showT(tx.sec,t,w('l3','secretary')-.05,w('l3','abbott')-.12);showT(tx.abb,t,w('l3','abbott')-.05,w('l3','forty')-.12);showT(tx.y43,t,w('l3','forty')-.05,S('l4')-.1);
+  showT(tx.y35,t,w('l4','1935')-.05,tH-.12);showT(tx.d180,t,tH-.05,tS-.12);showT(tx.sh3,t,tS-.05,S('l5')-.1);
+  showT(tx.tr,t,w('l5','trader')-.15,S('l6')-.1);showT(tx.fic,t,w('l5','trader')-.05,S('l6')-.1);
+  showT(tx.bo,t,w('l6','bought')-.05,w('l6','sold')-.12);showT(tx.so,t,w('l6','sold')-.05,w('l6','checked')-.12);showT(tx.ev,t,w('l6','checked')-.05,S('l7')-.3);
+  showT(tx.ri,t,tRe-.05,w('l7','never')-.12);showT(tx.ns,t,w('l7','never')-.05,S('l8')-.1);
+  showT(tx.cl,t,w('l8','clothes')-.05,S('l9')-.1);
+  showT(tx.rec,t,S('l9')-.05,kCr-.12);showT(tx.cr,t,kCr-.05,S('l10')-.1);
+  showT(tx.pa,t,kPa-.05,S('l11')-.15);
+  showT(tx.hw,t,tWait-.05,tDied-.1,0);
+  showT(tx.d100,t,w('l12','hundred')-.05,kSv-.15);showT(tx.co,t,tCo-.05,endT-.25);
+  set(chip,{opacity:(win(t,S('l2')+.2,S('l2')+.5)*(1-win(t,endT-.3,endT))).toFixed(3)});
+  capSegs.forEach(s=>{const on=(t>=s.t0-.05&&t<=s.t1+.12);const o=on?Math.min(win(t,s.t0-.05,s.t0+.08),1-win(t,s.t1,s.t1+.12)):0;s.g.setAttribute('opacity',o.toFixed(3));
+    if(on)s.words.forEach(x=>{x.el.setAttribute('fill',t>=x.t1?IV:(t>=x.t0?GOLD2:'#6d6b67'));});});
+  const fl=Math.max(win(t,kM,kM+.04)*(1-win(t,kM+.04,kM+.25))*.06,win(t,kCr,kCr+.04)*(1-win(t,kCr+.04,kCr+.3))*.08,win(t,kSv,kSv+.04)*(1-win(t,kSv+.04,kSv+.3))*.04);
+  $('flash').setAttribute('opacity',fl.toFixed(3));
+  $('world').setAttribute('opacity',(1-eio(win(t,endT-.2,endT+.4))).toFixed(3));
+  $('dim').setAttribute('opacity',(.8*eio(win(t,endT-.2,endT+.4))).toFixed(3));
+  const sE=(e,a,dy)=>{const i=eo(win(t,a,a+.3));e.setAttribute('opacity',i.toFixed(3));e.setAttribute('transform',`translate(0,${((1-i)*(dy||40)).toFixed(1)})`);};
+  sE(e1,w('l13','time')-.05);sE(e2,w('l13','beats')-.05);sE(e3,kEf-.05,0);
+  const bs=eob(win(t,kEf-.05,kEf+.35));e3.setAttribute('transform',`translate(540,1150) scale(${lerp(.8,1,bs).toFixed(3)}) translate(-540,-1150)`);
+  set(eLine,{opacity:win(t,E('l13'),E('l13')+.3).toFixed(3),'stroke-dasharray':'700','stroke-dashoffset':(700*(1-eio(win(t,E('l13'),E('l13')+.7)))).toFixed(0)});
+  sE(eSub,E('l13')+.5,20);sE(eBrand,E('l13')+.9,20);
+};
+window.ready=document.fonts.ready.then(()=>new Promise(r=>{const im=new Image();im.onload=()=>r(1);im.onerror=()=>r(0);im.src='card-grace.png';}));
+</script></body></html>

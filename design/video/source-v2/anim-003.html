@@ -86,67 +86,202 @@ function setFig(F,o){ // o:{x,y,s,al,ar,level,color,dash,rot,alpha,halo,hop}
   return {hx:rx,hy:ry,lx,ly};}
 
 const S1=`fill="none" stroke="${IV}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`,G1=`fill="none" stroke="${GOLD2}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`;
+const card=(col,up,lab)=>`<rect x="-62" y="-150" width="124" height="150" rx="8" fill="#0A0A0B" fill-opacity=".9" stroke="${col}" stroke-width="4.5"/><path d="${up?'M-36 -40 L-12 -70 L8 -56 L38 -104':'M-36 -100 L-12 -72 L8 -86 L38 -40'}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="${up?'M18 -104 H38 V-84':'M18 -40 H38 V-60'}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round"/><text x="0" y="-116" text-anchor="middle" font-size="26" font-weight="800" fill="${col}">${lab}</text>`;
 const IC={
- win:`<rect x="-62" y="-150" width="124" height="150" rx="8" fill="#0A0A0B" ${G1}/><path d="M-36 -40 L-12 -70 L8 -56 L38 -104" ${G1} stroke-width="6"/><path d="M18 -104 H38 V-84" ${G1} stroke-width="6"/><text x="0" y="-116" text-anchor="middle" font-size="26" font-weight="800" fill="${GOLD2}">+40%</text>`,
- lose:`<rect x="-62" y="-150" width="124" height="150" rx="8" fill="#0A0A0B" stroke="${WINE}" stroke-width="4.5"/><path d="M-36 -100 L-12 -72 L8 -86 L38 -40" fill="none" stroke="${WINE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 -40 H38 V-60" fill="none" stroke="${WINE}" stroke-width="6" stroke-linecap="round"/><text x="0" y="-116" text-anchor="middle" font-size="26" font-weight="800" fill="${WINE}">−20%</text>`,
+ win:card(GOLD2,1,'+40%'),lose:card(WINE,0,'−20%'),
  sell:`<rect x="-70" y="-34" width="140" height="68" rx="34" fill="#0A0A0B" ${S1}/><text y="13" text-anchor="middle" font-size="36" font-weight="800" letter-spacing="4" fill="${IV}">SELL</text>`,
  coin:`<circle r="26" ${G1}/><circle r="18" fill="none" stroke="${GOLD}" stroke-width="2.5"/>`,
+ hourglass:`<path d="M-36 -110 H36 M-36 0 H36 M-28 -110 C-28 -70 0 -66 0 -55 C0 -44 -28 -40 -28 0 M28 -110 C28 -70 0 -66 0 -55 C0 -44 28 -40 28 0" ${S1}/><path d="M-18 -6 L0 -26 L18 -6 Z" fill="${IV}"/>`,
+ rule:`<rect x="-56" y="-150" width="112" height="150" rx="8" fill="#0A0A0B" ${S1}/><text x="0" y="-118" text-anchor="middle" font-size="24" font-weight="800" letter-spacing="3" fill="${IV}">RULE</text><path d="M-34 -88 l8 8 l14 -16 M2 -84 H36 M-34 -54 l8 8 l14 -16 M2 -50 H36 M-34 -20 l8 8 l14 -16 M2 -16 H36" ${S1} stroke-width="3.5"/>`,
+ heart:`<path d="M0 -20 C-60 -60 -70 -120 -30 -130 C-12 -134 0 -118 0 -106 C0 -118 12 -134 30 -130 C70 -120 60 -60 0 -20 Z" ${S1}/><path d="M-62 -140 L62 -10" stroke="${WINE}" stroke-width="8" stroke-linecap="round"/>`,
+ crown:`<path d="M-50 0 L-58 -60 L-26 -30 L0 -74 L26 -30 L58 -60 L50 0 Z" fill="url(#gfill)" stroke="${GOLD2}" stroke-width="4" stroke-linejoin="round"/><circle cx="0" cy="-80" r="7" fill="${GOLD2}"/>`,
 };
 function icon(name,x,y,sz,parent){const g=grp(parent||$('ico'),IC[name],{opacity:0});return {g,x,y,sz};}
 function place(o,a,dx,dy,sc,rot){set(o.g,{opacity:clamp(a).toFixed(3),transform:`translate(${(o.x+dx).toFixed(1)},${(o.y+dy).toFixed(1)}) rotate(${(rot||0).toFixed(1)}) scale(${(o.sz*sc).toFixed(3)})`});}
+function showIcon(o,t,t0,t1,ex){ex=ex||{};const pin=eob(win(t,t0,t0+.38)),out=eio(win(t,t1,t1+.3)),a=win(t,t0,t0+.12)*(1-out);
+  const bob=ex.nob?0:Math.sin(t*2.4+o.x*.01)*5;place(o,a,ex.dx||0,bob+(ex.dy||0),lerp(.2,1,pin)*(1-.3*out)*(ex.sc||1),(1-eo(win(t,t0,t0+.5)))*-14+(ex.rot||0));return a;}
 const PX=540;
+/* hook objects */
 const winC=icon('win',PX-250,GY-20,1.15),loseC=icon('lose',PX+250,GY-20,1.15),sellP=icon('sell',PX-250,GY-330,1.0);
-const drips=[0,1,2,3,4].map(i=>icon('coin',PX,GY,.7));
+const drips=[0,1,2,3,4].map(()=>icon('coin',PX,GY,.7));
+/* story objects: A = loss-hater (left), B = rule-follower (right, the viewer pawn) */
+const aW=icon('win',XE-175,GY,.95),aL=icon('lose',XE+175,GY,.95),bW=icon('win',XR+175,GY,.95),bL=icon('lose',XR-175,GY,.95);
+const aSell=icon('sell',XE-175,GY-260,.9),bSell=icon('sell',XR-175,GY-260,.9),hg=icon('hourglass',XE+175,GY-250,.9);
+const rule=icon('rule',XR,GY-360,1.0),heart=icon('heart',XR+230,GY-300,.9),crown=icon('crown',XR,GY-262*FS,1.0);
+const aCoins=[0,1,2].map(()=>icon('coin',XE,GY,.75)),bCoins=[0,1,2,3,4].map(()=>icon('coin',XR,GY,.75));
 const fx=$('fx');const rings=[0,1,2].map(()=>el('circle',{fill:'none',stroke:WINE,'stroke-width':4,opacity:0},fx));
+const grings=[0,1,2].map(()=>el('circle',{fill:'none',stroke:GOLD2,'stroke-width':4,opacity:0},fx));
+/* screen layer */
 const scr=$('scr');
+const dim2=el('rect',{width:W,height:H,fill:'#0A0A0B',opacity:0},scr);
 function T(txt,y,size,fill,italic,extra){const t=el('text',Object.assign({x:540,y,'text-anchor':'middle','font-size':size,'font-weight':italic?500:800,'letter-spacing':italic?0:-2,fill,opacity:0,'font-family':italic?'Corm':'Inter','font-style':italic?'italic':'normal'},extra||{}),scr);t.innerHTML=txt;return t;}
 function showT(e,t,a,b,dy){const i=eo(win(t,a,a+.28)),o=eio(win(t,b,b+.22));e.setAttribute('opacity',(i*(1-o)).toFixed(3));
   const s=lerp(.9,1,eob(win(t,a,a+.4)));const y=+e.getAttribute('y');e.setAttribute('transform',`translate(540,${y}) scale(${s.toFixed(3)}) translate(-540,${-y}) translate(0,${((1-i)*(dy??30)-o*20).toFixed(1)})`);}
+const small=(txt,y,fill)=>T(txt,y,26,fill||GREY,false,{'font-weight':600,'letter-spacing':8});
 const tx={
  ps:T('PSYCHOLOGY SAYS',240,34,GREY,false,{'font-weight':600,'letter-spacing':12}),
- hl:T('HATE LOSING?',390,138,IV),
- yl:T('YOU LOSE',545,138,IV),
- mo:T('more.',760,280,WINE,true),
+ hl:T('HATE LOSING?',390,138,IV),yl:T('YOU LOSE',545,138,IV),mo:T('more.',760,280,WINE,true),
+ two:T('TWO INVESTORS.',350,108,IV),fic:small('FICTIONAL CHARACTERS',430),
+ st:T('TWO STOCKS.',350,116,IV),up:T('ONE UP.',350,124,GOLD2),dn:T('ONE DOWN.',350,124,WINE),
+ hate:T('HATES LOSING.',350,108,IV),sw:T('SELLS THE WINNER.',350,90,IV),
+ hold:T('HOLDS THE LOSER.',350,96,IV),hope:T('hoping…',490,150,GREY,true),
+ rl:T('FOLLOWS A RULE.',350,98,IV),nf:T('NOT FEELINGS.',350,112,IV),
+ y98:T('1998',520,230,IV,false,{'letter-spacing':-6}),acc:T('10,000',800,170,IV,false,{'font-weight':300,'letter-spacing':-4}),accL:small('BROKERAGE ACCOUNTS',870),src1:small('ODEAN · JOURNAL OF FINANCE · 1998',1400,GOLD),
+ x15:T('1.5×',560,230,IV,false,{'letter-spacing':-6}),x15L:small('MORE LIKELY TO SELL WINNERS',640),
+ x2:T('2×',520,230,WINE,false,{'letter-spacing':-6}),x2L:small('A LOSS HURTS ABOUT TWICE AS MUCH',600),src2:small('TVERSKY & KAHNEMAN · 1992',1400,GOLD),
+ fear:T('FEAR',350,150,WINE),cw:T('COSTS YOU WINNERS.',480,86,IV),
+ mv:small('THE MOVE',225,GOLD),mv1:T('SELL RULE',370,124,IV),mv2:T('before you buy.',510,130,GOLD2,true),
 };
 const echoes=[0,1,2].map(()=>T('more.',760,280,WINE,true));
+/* l8 account grid */
+const grid=grp(scr,'',{});const dots=[];for(let r=0;r<10;r++)for(let c=0;c<20;c++)dots.push(el('circle',{cx:160+c*40,cy:990+r*36,r:9,fill:IV,opacity:0},grid));
+/* l9 bars */
+const bars=grp(scr,`<text x="140" y="830" font-size="30" font-weight="800" letter-spacing="3" fill="${IV}">WINNERS SOLD</text><rect id="bw" x="140" y="850" height="70" rx="6" fill="url(#gfill)" width="0"/><text id="bwT" x="150" y="970" font-size="40" font-weight="300" fill="${GOLD2}">14.8%</text>
+<text x="140" y="1070" font-size="30" font-weight="800" letter-spacing="3" fill="${GREY}">LOSERS SOLD</text><rect id="bl" x="140" y="1090" height="70" rx="6" fill="${ASH}" width="0"/><text id="blT" x="150" y="1210" font-size="40" font-weight="300" fill="${GREY}">9.8%</text>
+<text x="140" y="1290" font-size="22" font-weight="600" letter-spacing="6" fill="${GOLD}">SHARE OF GAINS VS LOSSES REALIZED · ODEAN 1998</text>`,{opacity:0});
+/* l10 scale */
+const scale=grp(scr,`<g transform="translate(540,900)"><path d="M0 0 V360 M-110 360 H110" ${S1} stroke-width="7"/><circle r="12" fill="${IV}"/>
+<g id="beam"><path d="M-300 0 H300" ${S1} stroke-width="7"/>
+<g id="panL"><path d="M-300 0 L-370 170 M-300 0 L-230 170" ${S1} stroke-width="3"/><path d="M-390 170 H-210 Q-300 230 -390 170 Z" fill="#0A0A0B" stroke="${WINE}" stroke-width="5"/><text x="-300" y="150" text-anchor="middle" font-size="40" font-weight="800" fill="${WINE}">LOSS</text></g>
+<g id="panR"><path d="M300 0 L230 170 M300 0 L370 170" ${S1} stroke-width="3"/><path d="M210 170 H390 Q300 230 210 170 Z" fill="#0A0A0B" stroke="${GOLD2}" stroke-width="5"/><text x="300" y="150" text-anchor="middle" font-size="40" font-weight="800" fill="${GOLD2}">GAIN</text></g></g></g>`,{opacity:0});
+/* end */
+const endL=$('end');
+function ET(txt,y,size,fill,italic){const t=el('text',{x:540,y,'text-anchor':'middle','font-size':size,'font-weight':italic?500:800,'letter-spacing':italic?0:-3,fill,opacity:0,'font-family':italic?'Corm':'Inter','font-style':italic?'italic':'normal'},endL);t.textContent=txt;return t;}
+const e1=ET('PAIN IS A',740,150,IV),e2=ET('BAD',890,150,IV),e3=ET('advisor.',1130,270,GOLD2,true);
+const eEcho=[0,1,2].map(()=>ET('advisor.',1130,270,GOLD2,true));
+const eSub=el('text',{x:540,y:1500,'text-anchor':'middle','font-size':24,'font-weight':600,'letter-spacing':7,fill:GREY,opacity:0},endL);eSub.textContent='CASE FILE 003 · LOSS AVERSION';
+const eBrand=el('text',{x:540,y:1625,'text-anchor':'middle','font-size':62,'font-family':'Corm','font-weight':500,fill:IV,opacity:0},endL);eBrand.innerHTML='The Gold <tspan font-style="italic" fill="'+GOLD+'">Mind</tspan>';
+const eLine=el('path',{d:'M250 1200 C 420 1188 660 1212 830 1196',stroke:'url(#gline)','stroke-width':5,fill:'none',opacity:0},endL);
 const chip=grp($('hud'),`<rect x="60" y="120" width="250" height="46" rx="23" fill="none" stroke="${GOLD}" stroke-opacity=".55" stroke-width="2"/><text x="185" y="151" text-anchor="middle" font-size="17" font-weight="600" letter-spacing="5" fill="${GOLD}">CASE FILE 003</text>`,{opacity:0});
+/* captions (story lines) */
+const capSegs=[];['l3','l4','l5','l6','l7','l8','l9','l10','l11','l12'].forEach(k=>{const o=L[k];const words=o.words;const lines=[];let cur=[],len=0;
+  words.forEach(w=>{if(len+w.w.length>28&&cur.length){lines.push(cur);cur=[];len=0;}cur.push(w);len+=w.w.length+1;});if(cur.length)lines.push(cur);
+  const g=el('g',{opacity:0},$('cap'));const lh=60,y0=1640-(lines.length-1)*lh;
+  lines.forEach((ln,li)=>{const t=el('text',{x:540,y:y0+li*lh,'text-anchor':'middle','font-size':44,'font-weight':800,'letter-spacing':.5},g);
+    t.innerHTML=ln.map((w,i)=>`<tspan>${w.w.toUpperCase()}${i<ln.length-1?' ':''}</tspan>`).join('');t.querySelectorAll('tspan').forEach((s,i)=>ln[i].el=s);});
+  capSegs.push({g,words,t0:o.t,t1:o.t+o.d});});
+/* camera */
+const W_=(k,f,n)=>Wd(k,f,n);
+const hookEnd=S('l3');
+const CK=[[0,540,1050,1.05],[hookEnd-.4,540,1080,1.3],[hookEnd,600,1050,1.02],[S('l4'),600,1050,.97],[S('l5')-.3,590,1050,.97],[S('l5')+.05,320,1050,1.25],[S('l6'),300,1050,1.28],[S('l7')-.3,320,1050,1.25],[S('l7')+.05,880,1050,1.25],[S('l8')-.2,900,1040,1.2],
+ [S('l8')+.3,620,1000,.95],[S('l11')-.2,600,1000,.9],[S('l11')+.1,600,1040,.92],[S('l12')-.1,620,1040,.95],[S('l12')+.25,900,1060,1.3],[S('l13'),900,1040,1.2],[S('l13')+4,880,1000,1.0]];
+function camAt(t){let i=0;while(i<CK.length-2&&t>CK[i+1][0])i++;const a=CK[i],b=CK[i+1],p=CK[Math.max(i-1,0)],n=CK[Math.min(i+2,CK.length-1)];
+  const h=b[0]-a[0],u=clamp((t-a[0])/h);const h00=2*u*u*u-3*u*u+1,h10=u*u*u-2*u*u+u,h01=-2*u*u*u+3*u*u,h11=u*u*u-u*u;
+  const r=[];for(let k=1;k<4;k++){const m0=(b[k]-p[k])/Math.max(b[0]-p[0],.01)*h*.5,m1=(n[k]-a[k])/Math.max(n[0]-a[0],.01)*h*.5;r.push(h00*a[k]+h10*m0+h01*b[k]+h11*m1);}return r;}
+const lvlAt=(arr,t)=>{for(let i=1;i<arr.length;i++){if(t<=arr[i][0]){const[a,va]=arr[i-1],[b,vb]=arr[i];return lerp(va,vb,eio((t-a)/Math.max(b-a,.01)));}}return arr[arr.length-1][1];};
 window.renderAt=function(t){
-  const w=(k,f,n)=>Wd(k,f,n);
-  const tHate=w('l1','hate'),tLos=w('l1','losing'),tLose=w('l2','lose'),kM=w('l2','more'),tEnd=E('l2')+.9;
-  let sh=0;[kM].forEach(h=>{if(t>=h)sh+=Math.exp(-(t-h)*7);});
-  // camera: low angle, slow push-in, never stops
-  const u=win(t,0,tEnd);let cx=PX+Math.sin(t*.9)*10,cy=lerp(1050,1080,eio(u)),z=lerp(1.05,1.32,eio(u))+.12*eob(win(t,kM,kM+.3))*(1-win(t,kM+.3,kM+1.2));
-  cx+=Math.sin(t*37)*16*sh;cy+=Math.cos(t*41)*14*sh;
+  const w=W_;
+  const tHate=w('l1','hate'),tLos=w('l1','losing'),kM=w('l2','more'),tEnd=hookEnd-.05;
+  const tSells=w('l5','sells'),tHolds=w('l6','holds'),tHope=w('l6','hoping'),tRule=w('l7','rule'),tFeel=w('l7','feelings'),kFear=w('l11','fear'),kCost=w('l11','costs'),kBuy=w('l12','sell')+.05,kAdv=w('l13','advisor'),kTw=w('l10','twice');
+  const endT=S('l13'),fade=1-eio(win(t,endT-.2,endT+.5));
+  let sh=0;[kM,tSells,kTw,kFear,kAdv].forEach(h=>{if(t>=h)sh+=Math.exp(-(t-h)*7)*(h===tSells?.4:1);});
+  let [cx,cy,z]=camAt(t);
+  if(t<hookEnd){z+=.12*eob(win(t,kM,kM+.3))*(1-win(t,kM+.3,kM+1.2));}
+  cx+=Math.sin(t*.9)*9+Math.sin(t*37)*15*sh;cy+=Math.cos(t*.7)*6+Math.cos(t*41)*13*sh;z*=1+.006*Math.sin(t*.8);
   $('world').setAttribute('transform',`translate(540,960) scale(${z.toFixed(4)}) translate(${(-cx).toFixed(2)},${(-cy).toFixed(2)})`);
+  $('world').setAttribute('opacity',(1-eio(win(t,endT-.2,endT+.4))).toFixed(3));
   $('back').setAttribute('transform',`translate(540,960) scale(${(z*.9).toFixed(4)}) translate(${(-cx*.8).toFixed(2)},${(-cy).toFixed(2)})`);
-  dust.forEach(d=>{const y=((d.y-t*d.v)%H+H)%H,x=(d.x+Math.sin(t*.5+d.ph)*20+3000)%W;set(d.e,{cx:x.toFixed(1),cy:y.toFixed(1),opacity:(.12+.1*Math.sin(t+d.ph)).toFixed(3)});});
-  setFig(FE,{t,x:-999,s:0.01,alpha:0});
-  // pawn
-  const drain=eio(win(t,kM,kM+.8));
-  let r={t,x:PX,s:1.35,al:10,ar:-10,level:.7*(1-drain)+.05,color:IV,alpha:1,halo:.35*(1-drain)};
-  const grab=eob(win(t,tHate,tHate+.35));
-  r.ar=lerp(-10,62,grab)+Math.sin(t*38)*5*win(t,tHate,tHate+.3);           // reaches for the loser, trembling
-  r.al=lerp(10,40,eob(win(t,tLos,tLos+.3)))*(1-win(t,tLos+.5,tLos+.8))+10*win(t,tLos+.5,tLos+.8);  // pushes winner away
-  if(t>kM){r.color=mix(IV,ASH,drain);r.dash=drain>.5;r.sq=1-.07*drain;r.rot=-6*drain;}
-  r.x+=Math.sin(t*30)*3*win(t,tHate,tHate+.2)*(1-win(t,kM,kM+.5));
+  dust.forEach(d=>{const y=((d.y-t*d.v)%H+H)%H,x=(d.x+Math.sin(t*.5+d.ph)*20-cx*.05*d.s+3000)%W;set(d.e,{cx:x.toFixed(1),cy:y.toFixed(1),opacity:(.12+.1*Math.sin(t+d.ph)).toFixed(3)});});
+
+  /* ===== PAWN (hook) -> investor B ===== */
+  let r={t,x:PX,s:1.35,al:10,ar:-10,level:.7,color:IV,alpha:fade,halo:.35};
+  if(t<hookEnd){
+    const drain=eio(win(t,kM,kM+.8)),grab=eob(win(t,tHate,tHate+.35));
+    r.level=.7*(1-drain)+.05;r.halo=.35*(1-drain);
+    r.ar=lerp(-10,62,grab)+Math.sin(t*38)*5*win(t,tHate,tHate+.3);
+    r.al=lerp(10,40,eob(win(t,tLos,tLos+.3)))*(1-win(t,tLos+.5,tLos+.8))+10*win(t,tLos+.5,tLos+.8);
+    if(t>kM){r.color=mix(IV,ASH,drain);r.dash=drain>.5;r.sq=1-.07*drain;r.rot=-6*drain;}
+    r.x+=Math.sin(t*30)*3*win(t,tHate,tHate+.2)*(1-win(t,kM,kM+.5));
+  }else{
+    const mv=eio(win(t,hookEnd,hookEnd+.6));r.x=lerp(PX,XR,mv);r.s=lerp(1.35,FS,mv);
+    r.level=lvlAt([[hookEnd,.15],[S('l4'),.3],[tFeel,.3],[S('l8'),.5],[kFear,.5],[kCost+.6,.8],[kBuy,.85],[kBuy+.5,1]],t);
+    r.halo=lerp(.05,.7,win(t,kFear,kCost+.6));r.color=t>kFear?mix(IV,GOLD2,win(t,kFear,kCost+.6)):IV;
+    r.hop=Math.abs(Math.sin((t-hookEnd)*10))*16*(1-win(t,hookEnd+.4,hookEnd+.6))*win(t,hookEnd,hookEnd+.1);
+    if(t>S('l4')&&t<S('l5')){r.al=30;r.ar=30;}
+    if(t>S('l7')&&t<S('l8')){r.al=lerp(10,60,eob(win(t,w('l7','second'),w('l7','second')+.3)));r.ar=lerp(-10,-150,eob(win(t,tRule,tRule+.35)));}
+    if(t>kBuy){r.ar=-160+Math.sin(t*12)*10;r.al=150-Math.sin(t*12)*10;r.hop=Math.abs(Math.sin((t-kBuy)*7))*20*(1-win(t,kBuy+.8,kBuy+1.1));}
+  }
   setFig(FR,r);
-  // winner card: pops, then sold & flies off at 'losing'
+  /* ===== INVESTOR A (loss-hater) ===== */
+  const aIn=eob(win(t,w('l3','two')-.1,w('l3','two')+.3));
+  let a={t,x:XE,s:FS*lerp(.2,1,aIn),al:10,ar:-10,level:.3,color:IV,alpha:win(t,w('l3','two')-.1,w('l3','two')+.05)*fade,halo:0};
+  if(t>=S('l5')&&t<tSells){const q=Math.sin(t*36);a.al=20+q*6;a.ar=-20-q*6;a.x+=q*2;}
+  if(t>=tSells&&t<S('l6')){a.al=lerp(10,60,eob(win(t,tSells-.1,tSells+.2)));a.halo=.4*win(t,tSells+.3,tSells+.6)*(1-win(t,tSells+1,S('l6')));}
+  if(t>=S('l6')&&t<S('l11')){const g=eob(win(t,tHolds-.1,tHolds+.3));a.ar=lerp(-10,62,g)+Math.sin(t*30)*4*win(t,tHope,tHope+.3);a.al=12;}
+  a.level=lvlAt([[0,.3],[tSells+.3,.3],[tSells+.8,.45],[S('l6'),.45],[S('l7'),.35],[kFear,.35],[kCost+.6,.05]],t);
+  if(t>kFear){const d=eio(win(t,kFear,kCost+.6));a.color=mix(IV,ASH,d);a.dash=d>.5;a.sq=1-.06*d;a.rot=-70*eio(win(t,kCost,kCost+.6));a.ar=lerp(62,140,d);a.al=lerp(12,-80,d);}
+  setFig(FE,a);
+  /* ===== HOOK ===== */
+  const hk=1-win(t,hookEnd-.1,hookEnd+.2);
   const wIn=eob(win(t,.25,.6)),fly=eio(win(t,tLos+.15,tLos+.75));
-  place(winC,win(t,.25,.4)*(1-fly),-fly*420,-fly*520+Math.sin(t*2.4)*5,lerp(.3,1,wIn)*(1-.4*fly),fly*-40);
+  place(winC,win(t,.25,.4)*(1-fly)*hk,-fly*420,-fly*520+Math.sin(t*2.4)*5,lerp(.3,1,wIn)*(1-.4*fly),fly*-40);
   const sA=eob(win(t,tLos-.05,tLos+.25));place(sellP,win(t,tLos-.05,tLos+.08)*(1-win(t,tLos+.6,tLos+.85)),0,0,lerp(.4,1,sA),0);
-  // loser card: pops at 'hate', pawn clutches it
-  const lIn=eob(win(t,tHate-.1,tHate+.25));place(loseC,win(t,tHate-.1,tHate+.05),-lerp(0,70,grab),Math.sin(t*2.4+1)*5+(t>kM?drain*40:0),lerp(.3,1,lIn),Math.sin(t*30)*2*win(t,tHate,tHate+.3)+(t>kM?drain*12:0));
-  // gold drips out on 'more'
-  drips.forEach((c,i)=>{const t0=kM+i*.09,q=win(t,t0,t0+.6);place(c,q>0&&q<1?1-q*q:0,(i-2)*36*q,-180+q*q*260,1,q*200);c.g.querySelectorAll('*').forEach(e=>{if(e.getAttribute('stroke'))e.setAttribute('stroke',mix(GOLD2,ASH,q));});});
+  const grab0=eob(win(t,tHate,tHate+.35)),drain0=eio(win(t,kM,kM+.8)),lIn=eob(win(t,tHate-.1,tHate+.25));
+  place(loseC,win(t,tHate-.1,tHate+.05)*hk,-lerp(0,70,grab0),Math.sin(t*2.4+1)*5+(t>kM?drain0*40:0),lerp(.3,1,lIn),Math.sin(t*30)*2*win(t,tHate,tHate+.3)+(t>kM?drain0*12:0));
+  drips.forEach((c,i)=>{const t0=kM+i*.09,q=win(t,t0,t0+.6);place(c,q>0&&q<1?(1-q*q)*hk:0,(i-2)*36*q,-180+q*q*260,1,q*200);c.g.querySelectorAll('*').forEach(e=>{if(e.getAttribute('stroke'))e.setAttribute('stroke',mix(GOLD2,ASH,q));});});
   rings.forEach((g,i)=>{const t0=kM+.05+i*.14,q=win(t,t0,t0+.9);set(g,{cx:540,cy:730,r:(60+q*420).toFixed(0),opacity:(q>0&&q<1?(1-q)*.6:0).toFixed(3)});});
-  // texts (short written hook)
-  showT(tx.ps,t,.05,tEnd,20);
-  showT(tx.hl,t,.3,tEnd);
-  showT(tx.yl,t,tLose-.12,tEnd);
-  showT(tx.mo,t,kM-.05,tEnd,0);
+  /* ===== l4 cards ===== */
+  const tUp=w('l4','up'),tDn=w('l4','down');
+  // A winner: sold at 'sells' -> flies away
+  const aFly=eio(win(t,tSells+.1,tSells+.7));
+  showIcon(aW,t,tUp-.05,99,{nob:1,dx:-aFly*300,dy:-aFly*500,sc:1-.5*aFly,rot:-aFly*30});if(aFly>=1)aW.g.setAttribute('opacity',0);
+  showIcon(aSell,t,tSells-.1,tSells+.6,{nob:1});
+  // A loser: held, keeps sinking & cracking
+  const sink=win(t,tHolds,S('l8'));
+  showIcon(aL,t,tDn-.05,kCost+.5,{nob:1,dx:-lerp(0,60,eob(win(t,tHolds-.1,tHolds+.3))),dy:sink*40,rot:sink*10});
+  aL.g.querySelector('text').textContent=t>tHope+.3?'−35%':'−20%';
+  showIcon(hg,t,tHope-.1,S('l7'),{nob:1,rot:eio(win(t,tHope,tHope+.6))*180});
+  // B winner: kept, grows; B loser: cut by rule
+  const grow=win(t,tFeel,kCost+.5);
+  showIcon(bW,t,tUp+.05,99,{nob:1,sc:1+.35*eio(grow),dy:-30*eio(grow)});bW.g.querySelector('text').textContent=grow>.5?'+80%':'+40%';
+  const bCut=eio(win(t,tFeel-.1,tFeel+.5));
+  showIcon(bL,t,tDn+.05,99,{nob:1,dy:bCut*260,rot:-bCut*40});if(bCut>=1)bL.g.setAttribute('opacity',0);
+  showIcon(bSell,t,tFeel-.25,tFeel+.5,{nob:1});
+  showIcon(rule,t,tRule-.1,S('l8')-.1);showIcon(heart,t,tFeel-.15,S('l8')-.1,{nob:1});
+  // coins: A small gain at 'sells'; B coins at 'costs'
+  aCoins.forEach((c,i)=>{const t0=tSells+.25+i*.12,q=win(t,t0,t0+.45);place(c,q>0&&q<1?1:0,0,lerp(-420,-150,q*q),1,q*300);});
+  bCoins.forEach((c,i)=>{const t0=kCost+i*.1,q=win(t,t0,t0+.5);place(c,q>0&&q<1?1:0,(i-2)*12,lerp(-520,-150,q*q),1,q*300);});
+  showIcon(crown,t,kBuy-.05,99,{nob:1,dy:-Math.abs(Math.sin((t-kBuy)*7))*20*(1-win(t,kBuy+.8,kBuy+1.1))});
+  grings.forEach((g,i)=>{const t0=kBuy+.1+i*.14,q=win(t,t0,t0+.9);set(g,{cx:XR,cy:GY-180*FS,r:(40+q*380).toFixed(0),opacity:(q>0&&q<1?(1-q)*.7:0).toFixed(3)});});
+  /* ===== data scenes (l8-l10) ===== */
+  const dIn=win(t,S('l8')-.1,S('l8')+.3),dOut=win(t,S('l11')-.25,S('l11')+.05);
+  dim2.setAttribute('opacity',(.95*dIn*(1-dOut)).toFixed(3));
+  const tAcc=w('l8','ten'),gOut=win(t,S('l9')-.15,S('l9')+.1);
+  dots.forEach((d,i)=>{const t0=tAcc-.1+i*.006;set(d,{opacity:(win(t,t0,t0+.08)*(1-gOut)*.85).toFixed(3),r:(9*eob(win(t,t0,t0+.25))).toFixed(1)});});
+  tx.acc.textContent=Math.round(10000*eio(win(t,tAcc-.1,tAcc+1.0))).toLocaleString('en-US');
+  const b9=win(t,S('l9'),S('l9')+.2)*(1-win(t,S('l10')-.15,S('l10')+.1));bars.setAttribute('opacity',b9.toFixed(3));
+  const bw=eio(win(t,w('l9','winners'),w('l9','winners')+.8))*14.8*48,bl=eio(win(t,w('l9','losers')-.1,w('l9','losers')+.6))*9.8*48;
+  $('bw').setAttribute('width',bw.toFixed(0));$('bl').setAttribute('width',bl.toFixed(0));$('bwT').setAttribute('x',(150+bw).toFixed(0));$('blT').setAttribute('x',(150+bl).toFixed(0));
+  const sc10=win(t,S('l10'),S('l10')+.25)*(1-dOut);scale.setAttribute('opacity',sc10.toFixed(3));
+  const tilt=-16*eob(win(t,w('l10','loss'),w('l10','loss')+.5))-10*eob(win(t,kTw,kTw+.4));
+  $('beam').setAttribute('transform',`rotate(${tilt.toFixed(2)})`);
+  ['panL','panR'].forEach((id,i)=>{const x=i?300:-300;$(id).setAttribute('transform',`rotate(${(-tilt).toFixed(2)},${x},0)`);});
+  /* ===== texts ===== */
+  showT(tx.ps,t,.05,tEnd,20);showT(tx.hl,t,.3,tEnd);showT(tx.yl,t,w('l2','lose')-.12,tEnd);showT(tx.mo,t,kM-.05,tEnd,0);
   echoes.forEach((e,i)=>{const t0=kM+.18+i*.22,q=win(t,t0,t0+.7);const s=1+q*(.35+i*.15);e.setAttribute('opacity',(q>0&&q<1?(1-q)*.35:0).toFixed(3));e.setAttribute('transform',`translate(540,730) scale(${s.toFixed(3)}) translate(-540,-730)`);});
-  $('flash').setAttribute('opacity',(win(t,kM,kM+.04)*(1-win(t,kM+.04,kM+.3))*.045).toFixed(3));
-  set(chip,{opacity:win(t,.2,.5).toFixed(3)});
+  showT(tx.two,t,w('l3','two')-.05,S('l4')-.1);showT(tx.fic,t,w('l3','investors')-.05,S('l4')-.1);
+  showT(tx.st,t,S('l4')-.05,tUp-.25);showT(tx.up,t,tUp-.2,tDn-.25);showT(tx.dn,t,tDn-.2,S('l5')-.1);
+  showT(tx.hate,t,w('l5','hates')-.1,tSells-.25);showT(tx.sw,t,tSells-.1,S('l6')-.1);
+  showT(tx.hold,t,tHolds-.1,tHope-.15);showT(tx.hope,t,tHope-.05,S('l7')-.1,0);
+  showT(tx.rl,t,w('l7','follows')-.1,w('l7','not')-.15);showT(tx.nf,t,w('l7','not')-.05,S('l8')-.1);
+  showT(tx.y98,t,S('l8')+.05,S('l9')-.15,0);showT(tx.acc,t,tAcc-.1,S('l9')-.15);showT(tx.accL,t,tAcc,S('l9')-.15);showT(tx.src1,t,w('l8','study')-.05,S('l9')-.15,10);
+  showT(tx.x15,t,w('l9','one')-.1,S('l10')-.15,0);showT(tx.x15L,t,w('l9','one'),S('l10')-.15);
+  showT(tx.x2,t,kTw-.05,S('l11')-.2,0);showT(tx.x2L,t,kTw+.05,S('l11')-.2);showT(tx.src2,t,S('l10')+.1,S('l11')-.2,10);
+  showT(tx.fear,t,kFear-.05,S('l12')-.15,0);showT(tx.cw,t,kCost-.05,S('l12')-.15);
+  showT(tx.mv,t,S('l12')-.05,endT-.25,10);showT(tx.mv1,t,w('l12','sell')-.1,endT-.25);showT(tx.mv2,t,w('l12','before')-.05,endT-.25,0);
+  set(chip,{opacity:(win(t,.2,.5)*(1-win(t,endT-.3,endT))).toFixed(3)});
+  capSegs.forEach(s=>{const on=(t>=s.t0-.05&&t<=s.t1+.12);const o=on?Math.min(win(t,s.t0-.05,s.t0+.08),1-win(t,s.t1,s.t1+.12)):0;s.g.setAttribute('opacity',o.toFixed(3));
+    if(on)s.words.forEach(x=>{x.el.setAttribute('fill',t>=x.t1?IV:(t>=x.t0?GOLD2:'#6d6b67'));});});
+  const fl=Math.max(win(t,kM,kM+.04)*(1-win(t,kM+.04,kM+.3))*.045,win(t,kBuy,kBuy+.04)*(1-win(t,kBuy+.04,kBuy+.3))*.04);
+  $('flash').setAttribute('opacity',fl.toFixed(3));
+  /* ===== END ===== */
+  $('dim').setAttribute('opacity',(.8*eio(win(t,endT-.2,endT+.4))).toFixed(3));
+  const sE=(e,a0,dy)=>{const i=eo(win(t,a0,a0+.3));e.setAttribute('opacity',i.toFixed(3));e.setAttribute('transform',`translate(0,${((1-i)*(dy||40)).toFixed(1)})`);};
+  sE(e1,w('l13','pain')-.05);sE(e2,w('l13','bad')-.05);sE(e3,kAdv-.05,0);
+  const bs=eob(win(t,kAdv-.05,kAdv+.35));e3.setAttribute('transform',`translate(540,1130) scale(${lerp(.8,1,bs).toFixed(3)}) translate(-540,-1130)`);
+  eEcho.forEach((e,i)=>{const t0=kAdv+.25+i*.25,q=win(t,t0,t0+.8);const s=1+q*(.3+i*.12);e.setAttribute('opacity',(q>0&&q<1?(1-q)*.3:0).toFixed(3));e.setAttribute('transform',`translate(540,1100) scale(${s.toFixed(3)}) translate(-540,-1100)`);});
+  set(eLine,{opacity:win(t,E('l13'),E('l13')+.3).toFixed(3),'stroke-dasharray':'700','stroke-dashoffset':(700*(1-eio(win(t,E('l13'),E('l13')+.7)))).toFixed(0)});
+  sE(eSub,E('l13')+.4,20);sE(eBrand,E('l13')+.8,20);
 };
 window.ready=document.fonts.ready;
 </script></body></html>

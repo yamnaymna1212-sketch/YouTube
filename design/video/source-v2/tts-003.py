@@ -1,6 +1,9 @@
-import sys, json, wave, numpy as np
-from piper import PiperVoice, SynthesisConfig
-voice = PiperVoice.load("voices/en_US-ryan-high.onnx")
+# Case File 003 narration — Microsoft Neural "Christopher" (deep, clear US), every pause cut.
+# usage: python3 tts-003.py   -> v003/l*.wav (44.1k mono) + timing-003.js
+import asyncio, ssl, json, subprocess, os, numpy as np, wave
+import edge_tts, edge_tts.communicate as c
+c._SSL_CTX = ssl.create_default_context(cafile=os.environ.get("SSL_CERT_FILE","/root/.ccr/ca-bundle.crt"))
+VOICE, RATE, PITCH = "en-US-ChristopherNeural", "-4%", "-8Hz"
 LINES = [
  ("l1","Psychology says: if you hate losing,"),
  ("l2","you lose more."),
@@ -16,15 +19,36 @@ LINES = [
  ("l12","Decide your sell rule before you buy."),
  ("l13","Pain is a bad advisor."),
 ]
-scale=float(sys.argv[1]); GAP=float(sys.argv[2])
-cfg=SynthesisConfig(length_scale=scale, noise_scale=0.55, noise_w_scale=0.6)
-sr=voice.config.sample_rate; t=0.15; out=[]; allv=[]
-for k,txt in LINES:
-    a=np.concatenate([c.audio_float_array for c in voice.synthesize(txt, syn_config=cfg)])
-    nz=np.where(np.abs(a)>0.015)[0]; a=a[max(nz[0]-int(.02*sr),0):min(nz[-1]+int(.06*sr),len(a))]   # trim silence
-    a16=(np.clip(a,-1,1)*32767).astype(np.int16)
-    with wave.open(f"v003/{k}.wav","wb") as w: w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(a16.tobytes())
-    d=len(a)/sr; out.append({"k":k,"t":round(t,3),"d":round(d,3),"text":txt}); t+=d+GAP
-    if k in ("l2","l4","l7","l10","l12"): t+=0.08   # tiny breath only after key beats
+SR, GAP, MAXSIL, KEEP = 44100, 0.06, 0.07, 0.05
+os.makedirs("v003", exist_ok=True)
+async def synth():
+    for k, txt in LINES:
+        await edge_tts.Communicate(txt, VOICE, rate=RATE, pitch=PITCH).save(f"v003/{k}.mp3")
+asyncio.run(synth())
+def load(p):
+    raw = subprocess.run(["ffmpeg","-v","error","-i",p,"-ac","1","-ar",str(SR),"-f","f32le","-"],capture_output=True,check=True).stdout
+    return np.frombuffer(raw, dtype=np.float32).copy()
+def cut_pauses(a):
+    hop = int(.01*SR); n = len(a)//hop
+    rms = np.array([np.sqrt(np.mean(a[i*hop:(i+1)*hop]**2)) for i in range(n)])
+    thr = max(.006, .06*np.percentile(rms, 95)); loud = rms > thr
+    idx = np.where(loud)[0]; a0, a1 = max(idx[0]-2,0), min(idx[-1]+5,n)   # trim head/tail
+    out, i = [], a0
+    while i < a1:
+        if loud[i]: out.append(a[i*hop:(i+1)*hop]); i += 1; continue
+        j = i
+        while j < a1 and not loud[j]: j += 1
+        run = j - i
+        keep = run if run*hop/SR <= MAXSIL else int(KEEP*SR/hop)          # long inner silence -> 50 ms
+        seg = a[i*hop:(i+keep)*hop]
+        if keep < run: seg = seg*np.linspace(1,0,len(seg))**.5            # soft edge
+        out.append(seg); i = j
+    return np.concatenate(out)
+t, timing = 0.12, []
+for k, txt in LINES:
+    a = cut_pauses(load(f"v003/{k}.mp3")); a = a/np.max(np.abs(a))*.95
+    with wave.open(f"v003/{k}.wav","wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((a*32767).astype(np.int16).tobytes())
+    d = len(a)/SR; timing.append({"k":k,"t":round(t,3),"d":round(d,3),"text":txt}); t += d + GAP
 print(round(t,2))
-open("v003/timing-003.js","w").write("const VO="+json.dumps(out)+";")
+open("timing-003.js","w").write("const VO="+json.dumps(timing)+";")

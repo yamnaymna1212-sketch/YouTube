@@ -1,0 +1,152 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Corm;font-style:italic;font-weight:500;src:url(../fonts/corm-1.ttf)}
+@font-face{font-family:Corm;font-weight:500;src:url(../fonts/corm-3.ttf)}
+@font-face{font-family:Corm;font-weight:600;src:url(../fonts/corm-4.ttf)}
+@font-face{font-family:Inter;font-weight:300;src:url(../fonts/inter-1.ttf)}
+@font-face{font-family:Inter;font-weight:400;src:url(../fonts/inter-2.ttf)}
+@font-face{font-family:Inter;font-weight:600;src:url(../fonts/inter-3.ttf)}
+@font-face{font-family:Inter;font-weight:800;src:url(../fonts/inter-4.ttf)}
+html,body{margin:0;background:#0A0A0B;overflow:hidden}svg{display:block;font-family:Inter,sans-serif}
+</style><script src="timing-003.js"></script></head><body>
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 1080 1920"></svg>
+<script>
+const W=1080,H=1920,GY=1300,XE=300,XR=900,FS=1.25;
+const GOLD='#C9A45C',GOLD2='#E8C987',IV='#EDE8DF',ASH='#5A5A5A',GREY='#8C8A86',WINE='#9A4040';
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),lerp=(a,b,t)=>a+(b-a)*t;
+const eo=x=>1-Math.pow(1-clamp(x),3),eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const eob=x=>{x=clamp(x);const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const win=(t,a,b)=>clamp((t-a)/(b-a));
+const mix=(c1,c2,t)=>{const a=[1,3,5].map(i=>parseInt(c1.substr(i,2),16)),b=[1,3,5].map(i=>parseInt(c2.substr(i,2),16));return '#'+a.map((v,i)=>Math.round(lerp(v,b[i],clamp(t))).toString(16).padStart(2,'0')).join('');};
+/* ---------- word timing ---------- */
+const L={};VO.forEach(o=>{const ws=o.text.split(' '),wt=ws.map(w=>w.length+1+(/[.,]$/.test(w)?2:0)),tot=wt.reduce((a,b)=>a+b,0);let acc=0;
+  o.words=ws.map((w,i)=>{const a=o.t+.03+(o.d-.06)*acc/tot;acc+=wt[i];return {w,t0:a,t1:o.t+.03+(o.d-.06)*acc/tot};});L[o.k]=o;});
+const Wd=(k,frag,n=0)=>{const ws=L[k].words.filter(x=>x.w.toLowerCase().replace(/[^a-z0-9']/g,'').startsWith(frag));return (ws[n]||ws[0]).t0;};
+const S=k=>L[k].t,E=k=>L[k].t+L[k].d;
+/* ---------- svg scaffold ---------- */
+const svg=document.getElementById('svg'),NS='http://www.w3.org/2000/svg';
+svg.innerHTML=`<defs>
+<linearGradient id="gfill" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8E6F33"/><stop offset=".55" stop-color="#C9A45C"/><stop offset="1" stop-color="#F1D89C"/></linearGradient>
+<radialGradient id="halo"><stop offset="0" stop-color="#E8C987" stop-opacity=".55"/><stop offset="1" stop-color="#E8C987" stop-opacity="0"/></radialGradient>
+<radialGradient id="whalo"><stop offset="0" stop-color="#EDE8DF" stop-opacity=".12"/><stop offset="1" stop-color="#EDE8DF" stop-opacity="0"/></radialGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient>
+<radialGradient id="bgl" cx=".5" cy=".5" r=".75"><stop offset="0" stop-color="#1a191d"/><stop offset="1" stop-color="#0A0A0B"/></radialGradient>
+<linearGradient id="gline" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9A45C" stop-opacity="0"/><stop offset=".5" stop-color="#E8C987"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE8DF" stop-opacity=".06"/><stop offset="1" stop-color="#EDE8DF" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="${W}" height="${H}" fill="url(#bgl)"/>
+<g id="dust"></g>
+<g id="back"></g>
+<g id="world"><g id="floorL"></g><g id="bld"></g><g id="thr"></g><g id="figs"></g><g id="ico"></g><g id="fx"></g></g>
+<g id="scr"></g><g id="cap"></g><g id="hud"></g>
+<rect width="${W}" height="${H}" fill="url(#vig)"/><rect id="flash" width="${W}" height="${H}" fill="#fff" opacity="0"/><rect id="dim" width="${W}" height="${H}" fill="#0A0A0B" opacity="0"/><g id="end"></g>`;
+const $=id=>document.getElementById(id);
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e;}
+function grp(parent,inner,attrs){const g=el('g',attrs||{},parent);g.innerHTML=inner;return g;}
+const set=(e,a)=>{for(const k in a)e.setAttribute(k,a[k]);};
+/* ---------- floor + dust ---------- */
+el('line',{x1:-1500,y1:GY,x2:3500,y2:GY,stroke:IV,'stroke-opacity':.35,'stroke-width':2},$('floorL'));
+el('rect',{x:-1500,y:GY,width:5000,height:400,fill:'url(#floor)'},$('floorL'));
+const hills=el('path',{d:'M-1500 1180 C -900 1080 -400 1240 200 1150 S 1200 1060 1700 1170 S 2800 1100 3500 1160',fill:'none',stroke:IV,'stroke-opacity':.07,'stroke-width':2},$('back'));
+const dust=[];for(let i=0;i<46;i++){const r=Math.random;dust.push({x:r()*W,y:r()*H,s:.6+r()*1.8,v:6+r()*18,ph:r()*6,e:el('circle',{r:1+r()*1.8,fill:i%7?IV:GOLD2,opacity:0},$('dust'))});}
+/* ---------- characters ---------- */
+const BASE='M-34 0 H34 L29 -12 Q0 -17 -29 -12 Z',BODY='M-24 -12 C-18 -60 -14 -105 -13 -138 H13 C14 -105 18 -60 24 -12 Z',COL='M-20 -138 H20 L17 -150 H-17 Z';
+function makeFig(id,kind){
+  const acc=kind==='exec'?`<path d="M0 -136 L-8 -124 L0 -76 L8 -124 Z" fill="${IV}" stroke="none" id="${id}_tie"/><path d="M-26 -196 Q-6 -222 28 -200" fill="none" stroke-width="6"/>`
+    :``;
+  const g=grp($('figs'),`<circle id="${id}_h" cx="0" cy="-150" r="210" fill="url(#halo)" opacity="0"/>
+   <ellipse cx="0" cy="4" rx="58" ry="10" fill="#000" opacity=".55"/>
+   <g id="${id}_b">
+   <clipPath id="${id}_c"><path d="${BASE}"/><path d="${BODY}"/><path d="${COL}"/></clipPath>
+   <g clip-path="url(#${id}_c)"><rect id="${id}_f" x="-40" y="0" width="80" height="0" fill="url(#gfill)"/><path id="${id}_w" d="" fill="none" stroke="#F6E2AE" stroke-width="3"/></g>
+   <g id="${id}_s" fill="none" stroke="${IV}" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+     <path d="${BASE}"/><path d="${BODY}"/><path d="${COL}"/>
+     <line id="${id}_al" x1="-15" y1="-126" x2="-20" y2="-50"/><line id="${id}_ar" x1="15" y1="-126" x2="20" y2="-50"/>
+     <circle cx="0" cy="-185" r="31" fill="#0A0A0B"/>${acc}
+   </g><circle id="${id}_d" cx="0" cy="-185" r="8" fill="${IV}"/>
+   <g id="${id}_prop"></g></g>`,{id});
+  return {g,id,kind};}
+const FE=makeFig('fe','exec'),FR=makeFig('fr','read');
+// props: Grace = notepad, Trader = briefcase
+const notepad=`<g id="notepad"><rect x="-26" y="-4" width="52" height="64" rx="5" fill="#0A0A0B" stroke="${IV}" stroke-width="4"/><path d="M-14 14 H14 M-14 28 H14 M-14 42 H4" stroke="${IV}" stroke-width="3" opacity=".7"/></g>`;
+const brief=`<g id="brief"><path d="M-30 6 H30 V52 H-30 Z" fill="#0A0A0B" stroke="${IV}" stroke-width="4" stroke-linejoin="round"/><path d="M-11 6 V-4 H11 V6" fill="none" stroke="${IV}" stroke-width="4"/><path d="M-30 24 H30" stroke="${IV}" stroke-width="2" opacity=".5"/></g>`;
+
+function armHand(sx,sy,a,len=78){const r=a*Math.PI/180;return [sx+Math.sin(r)*len,sy+Math.cos(r)*len];}
+function setFig(F,o){ // o:{x,y,s,al,ar,level,color,dash,rot,alpha,halo,hop}
+  const sc=o.s||1,breath=1+.012*Math.sin(o.t*3.1+(F.kind==='exec'?1:0));
+  set(F.g,{transform:`translate(${o.x.toFixed(1)},${(GY-(o.hop||0)).toFixed(1)}) rotate(${(o.rot||0).toFixed(1)}) scale(${sc.toFixed(3)},${(sc*breath*(o.sq||1)).toFixed(3)})`,opacity:(o.alpha??1).toFixed(3)});
+  const lv=clamp(o.level||0),top=150,fy=-top*lv;
+  set($(F.id+'_f'),{y:fy.toFixed(1),height:(top*lv+2).toFixed(1)});
+  set($(F.id+'_w'),{d:lv>0?`M-40 ${fy} q10 ${-6*Math.sin(o.t*4)} 20 0 t20 0 t20 0 t20 0`:''});
+  const s=$(F.id+'_s');set(s,{stroke:o.color||IV,'stroke-dasharray':o.dash?'10 9':'none'});
+  set($(F.id+'_d'),{fill:o.dot||o.color||IV});set($(F.id+'_h'),{opacity:(o.halo||0).toFixed(3)});
+  const [lx,ly]=armHand(-15,-126,-(o.al||0)),[rx,ry]=armHand(15,-126,o.ar||0);
+  set($(F.id+'_al'),{x2:lx.toFixed(1),y2:ly.toFixed(1)});set($(F.id+'_ar'),{x2:rx.toFixed(1),y2:ry.toFixed(1)});
+  if(F.kind==='exec'&&$('fe_tie'))$('fe_tie').setAttribute('fill',o.color||IV);
+  return {hx:rx,hy:ry,lx,ly};}
+
+const S1=`fill="none" stroke="${IV}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`,G1=`fill="none" stroke="${GOLD2}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"`;
+const IC={
+ win:`<rect x="-62" y="-150" width="124" height="150" rx="8" fill="#0A0A0B" ${G1}/><path d="M-36 -40 L-12 -70 L8 -56 L38 -104" ${G1} stroke-width="6"/><path d="M18 -104 H38 V-84" ${G1} stroke-width="6"/><text x="0" y="-116" text-anchor="middle" font-size="26" font-weight="800" fill="${GOLD2}">+40%</text>`,
+ lose:`<rect x="-62" y="-150" width="124" height="150" rx="8" fill="#0A0A0B" stroke="${WINE}" stroke-width="4.5"/><path d="M-36 -100 L-12 -72 L8 -86 L38 -40" fill="none" stroke="${WINE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 -40 H38 V-60" fill="none" stroke="${WINE}" stroke-width="6" stroke-linecap="round"/><text x="0" y="-116" text-anchor="middle" font-size="26" font-weight="800" fill="${WINE}">−20%</text>`,
+ sell:`<rect x="-70" y="-34" width="140" height="68" rx="34" fill="#0A0A0B" ${S1}/><text y="13" text-anchor="middle" font-size="36" font-weight="800" letter-spacing="4" fill="${IV}">SELL</text>`,
+ coin:`<circle r="26" ${G1}/><circle r="18" fill="none" stroke="${GOLD}" stroke-width="2.5"/>`,
+};
+function icon(name,x,y,sz,parent){const g=grp(parent||$('ico'),IC[name],{opacity:0});return {g,x,y,sz};}
+function place(o,a,dx,dy,sc,rot){set(o.g,{opacity:clamp(a).toFixed(3),transform:`translate(${(o.x+dx).toFixed(1)},${(o.y+dy).toFixed(1)}) rotate(${(rot||0).toFixed(1)}) scale(${(o.sz*sc).toFixed(3)})`});}
+const PX=540;
+const winC=icon('win',PX-250,GY-20,1.15),loseC=icon('lose',PX+250,GY-20,1.15),sellP=icon('sell',PX-250,GY-330,1.0);
+const drips=[0,1,2,3,4].map(i=>icon('coin',PX,GY,.7));
+const fx=$('fx');const rings=[0,1,2].map(()=>el('circle',{fill:'none',stroke:WINE,'stroke-width':4,opacity:0},fx));
+const scr=$('scr');
+function T(txt,y,size,fill,italic,extra){const t=el('text',Object.assign({x:540,y,'text-anchor':'middle','font-size':size,'font-weight':italic?500:800,'letter-spacing':italic?0:-2,fill,opacity:0,'font-family':italic?'Corm':'Inter','font-style':italic?'italic':'normal'},extra||{}),scr);t.innerHTML=txt;return t;}
+function showT(e,t,a,b,dy){const i=eo(win(t,a,a+.28)),o=eio(win(t,b,b+.22));e.setAttribute('opacity',(i*(1-o)).toFixed(3));
+  const s=lerp(.9,1,eob(win(t,a,a+.4)));const y=+e.getAttribute('y');e.setAttribute('transform',`translate(540,${y}) scale(${s.toFixed(3)}) translate(-540,${-y}) translate(0,${((1-i)*(dy??30)-o*20).toFixed(1)})`);}
+const tx={
+ ps:T('PSYCHOLOGY SAYS',240,34,GREY,false,{'font-weight':600,'letter-spacing':12}),
+ hl:T('HATE LOSING?',390,138,IV),
+ yl:T('YOU LOSE',545,138,IV),
+ mo:T('more.',760,280,WINE,true),
+};
+const echoes=[0,1,2].map(()=>T('more.',760,280,WINE,true));
+const chip=grp($('hud'),`<rect x="60" y="120" width="250" height="46" rx="23" fill="none" stroke="${GOLD}" stroke-opacity=".55" stroke-width="2"/><text x="185" y="151" text-anchor="middle" font-size="17" font-weight="600" letter-spacing="5" fill="${GOLD}">CASE FILE 003</text>`,{opacity:0});
+window.renderAt=function(t){
+  const w=(k,f,n)=>Wd(k,f,n);
+  const tHate=w('l1','hate'),tLos=w('l1','losing'),tLose=w('l2','lose'),kM=w('l2','more'),tEnd=E('l2')+.9;
+  let sh=0;[kM].forEach(h=>{if(t>=h)sh+=Math.exp(-(t-h)*7);});
+  // camera: low angle, slow push-in, never stops
+  const u=win(t,0,tEnd);let cx=PX+Math.sin(t*.9)*10,cy=lerp(1050,1080,eio(u)),z=lerp(1.05,1.32,eio(u))+.12*eob(win(t,kM,kM+.3))*(1-win(t,kM+.3,kM+1.2));
+  cx+=Math.sin(t*37)*16*sh;cy+=Math.cos(t*41)*14*sh;
+  $('world').setAttribute('transform',`translate(540,960) scale(${z.toFixed(4)}) translate(${(-cx).toFixed(2)},${(-cy).toFixed(2)})`);
+  $('back').setAttribute('transform',`translate(540,960) scale(${(z*.9).toFixed(4)}) translate(${(-cx*.8).toFixed(2)},${(-cy).toFixed(2)})`);
+  dust.forEach(d=>{const y=((d.y-t*d.v)%H+H)%H,x=(d.x+Math.sin(t*.5+d.ph)*20+3000)%W;set(d.e,{cx:x.toFixed(1),cy:y.toFixed(1),opacity:(.12+.1*Math.sin(t+d.ph)).toFixed(3)});});
+  setFig(FE,{t,x:-999,s:0.01,alpha:0});
+  // pawn
+  const drain=eio(win(t,kM,kM+.8));
+  let r={t,x:PX,s:1.35,al:10,ar:-10,level:.7*(1-drain)+.05,color:IV,alpha:1,halo:.35*(1-drain)};
+  const grab=eob(win(t,tHate,tHate+.35));
+  r.ar=lerp(-10,62,grab)+Math.sin(t*38)*5*win(t,tHate,tHate+.3);           // reaches for the loser, trembling
+  r.al=lerp(10,40,eob(win(t,tLos,tLos+.3)))*(1-win(t,tLos+.5,tLos+.8))+10*win(t,tLos+.5,tLos+.8);  // pushes winner away
+  if(t>kM){r.color=mix(IV,ASH,drain);r.dash=drain>.5;r.sq=1-.07*drain;r.rot=-6*drain;}
+  r.x+=Math.sin(t*30)*3*win(t,tHate,tHate+.2)*(1-win(t,kM,kM+.5));
+  setFig(FR,r);
+  // winner card: pops, then sold & flies off at 'losing'
+  const wIn=eob(win(t,.25,.6)),fly=eio(win(t,tLos+.15,tLos+.75));
+  place(winC,win(t,.25,.4)*(1-fly),-fly*420,-fly*520+Math.sin(t*2.4)*5,lerp(.3,1,wIn)*(1-.4*fly),fly*-40);
+  const sA=eob(win(t,tLos-.05,tLos+.25));place(sellP,win(t,tLos-.05,tLos+.08)*(1-win(t,tLos+.6,tLos+.85)),0,0,lerp(.4,1,sA),0);
+  // loser card: pops at 'hate', pawn clutches it
+  const lIn=eob(win(t,tHate-.1,tHate+.25));place(loseC,win(t,tHate-.1,tHate+.05),-lerp(0,70,grab),Math.sin(t*2.4+1)*5+(t>kM?drain*40:0),lerp(.3,1,lIn),Math.sin(t*30)*2*win(t,tHate,tHate+.3)+(t>kM?drain*12:0));
+  // gold drips out on 'more'
+  drips.forEach((c,i)=>{const t0=kM+i*.09,q=win(t,t0,t0+.6);place(c,q>0&&q<1?1-q*q:0,(i-2)*36*q,-180+q*q*260,1,q*200);c.g.querySelectorAll('*').forEach(e=>{if(e.getAttribute('stroke'))e.setAttribute('stroke',mix(GOLD2,ASH,q));});});
+  rings.forEach((g,i)=>{const t0=kM+.05+i*.14,q=win(t,t0,t0+.9);set(g,{cx:540,cy:730,r:(60+q*420).toFixed(0),opacity:(q>0&&q<1?(1-q)*.6:0).toFixed(3)});});
+  // texts (short written hook)
+  showT(tx.ps,t,.05,tEnd,20);
+  showT(tx.hl,t,.3,tEnd);
+  showT(tx.yl,t,tLose-.12,tEnd);
+  showT(tx.mo,t,kM-.05,tEnd,0);
+  echoes.forEach((e,i)=>{const t0=kM+.18+i*.22,q=win(t,t0,t0+.7);const s=1+q*(.35+i*.15);e.setAttribute('opacity',(q>0&&q<1?(1-q)*.35:0).toFixed(3));e.setAttribute('transform',`translate(540,730) scale(${s.toFixed(3)}) translate(-540,-730)`);});
+  $('flash').setAttribute('opacity',(win(t,kM,kM+.04)*(1-win(t,kM+.04,kM+.3))*.045).toFixed(3));
+  set(chip,{opacity:win(t,.2,.5).toFixed(3)});
+};
+window.ready=document.fonts.ready;
+</script></body></html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title></title><style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;900&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Oswald:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Playfair+Display:ital,wght@1,700&display=block');
+:root{--navy:#0f2a46;--navy2:#0b2038;--coat:#15171c;--coat2:#252a33;--red:#d6453d;--gold:#e8b23a;--ivory:#ede6d6;--yellow:#f2c230}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy)}
+body{position:relative;font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ivory)}
+/* ledger paper: faint rules + red margin line = the channel's fingerprint */
+.bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.05), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(237,230,214,.045) 0 2px, transparent 2px 54px), var(--navy)}
+.bg:after{content:'';position:absolute;top:0;bottom:0;right:150px;width:3px;background:rgba(214,69,61,.35)}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55));pointer-events:none;z-index:50}
+.grain{position:absolute;inset:-50%;z-index:51;opacity:.12;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* case header strip */
+.case{position:absolute;top:44px;right:190px;left:80px;display:flex;justify-content:space-between;align-items:center;z-index:40;
+  font-family:'Oswald';letter-spacing:.18em;font-size:22px;color:rgba(237,230,214,.7)}
+.case b{color:var(--gold);font-weight:700}
+.case .ar{font-family:'Noto Kufi Arabic';letter-spacing:0;font-size:24px}
+/* source footnote — always on screen when a fact is shown */
+.src{position:absolute;bottom:40px;left:80px;z-index:40;font-family:'IBM Plex Mono';font-size:19px;color:rgba(237,230,214,.6);direction:ltr}
+.src:before{content:'◆ SOURCE  ';color:var(--red)}
+.h1{font-family:'Noto Kufi Arabic';font-weight:900;line-height:1.15;color:var(--ivory)}
+.num{font-family:'Oswald';font-weight:700;color:var(--gold);direction:ltr}
+/* real photo cutout: halftone-ish B&W + thick paper edge + lift shadow */
+.cut{position:absolute;filter:grayscale(1) contrast(1.25) brightness(1.05)
+  drop-shadow(0 0 0 var(--ivory)) drop-shadow(5px 0 0 var(--ivory)) drop-shadow(-5px 0 0 var(--ivory)) drop-shadow(0 5px 0 var(--ivory)) drop-shadow(0 -5px 0 var(--ivory))
+  drop-shadow(14px 18px 0 rgba(0,0,0,.35))}
+.dots{position:absolute;inset:0;background:radial-gradient(circle, rgba(15,42,70,.35) 1.2px, transparent 1.6px) 0 0/7px 7px;mix-blend-mode:multiply}
+/* evidence tag for real logos */
+.tag{position:absolute;background:#fbf8f1;border-radius:14px;padding:26px 34px 20px;box-shadow:12px 16px 0 rgba(0,0,0,.3);
+  display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--coat)}
+.tag:before{content:'';position:absolute;top:12px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--navy);box-shadow:inset 0 0 0 4px #cfc6b4}
+.tag img{display:block;margin-top:10px}
+.tag span{font-family:'Oswald';font-size:20px;letter-spacing:.16em;color:#5a5f6b}
+.tag i{font-style:normal;font-family:'Noto Kufi Arabic';font-size:22px;font-weight:700;color:var(--coat)}
+/* real document */
+.doc{position:absolute;background:#fff;box-shadow:18px 22px 0 rgba(0,0,0,.35);overflow:hidden}
+.hl{position:absolute;background:var(--yellow);mix-blend-mode:multiply;opacity:.75;border-radius:4px}
+.label{position:absolute;font-family:'Noto Kufi Arabic';font-weight:700;font-size:30px;background:var(--coat);color:var(--ivory);padding:8px 22px;border-right:6px solid var(--red)}
+.label small{display:block;font-family:'IBM Plex Mono';font-weight:500;font-size:15px;color:rgba(237,230,214,.6);direction:ltr;text-align:right}
+</style></head>
+<body><div class="bg"></div>
+<div class="case"><span class="ar">الملف <b>01</b> · BYBIT</span><span style="direction:ltr">21.02.2025</span></div>
+
+<svg style="position:absolute;inset:0" width="1920" height="1080">
+  <defs><filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <g filter="url(#glow)"><path d="M560 520 C 773.8569958847737 407.34996570644716, 915.4567901234568 560.394804526749, 1186.3576817558298 560.394804526749" stroke="rgba(237,230,214,0.42723401063100136)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1186.3576817558298" y="567.394804526749" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 830.7304526748972 480.7625171467764, 902.7551440329219 719.4354423868313, 1029.852023319616 719.4354423868313" stroke="rgba(237,230,214,0.5234390003429354)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1029.852023319616" y="726.4354423868313" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 819.8261316872428 403.4343278463649, 933.7572016460905 318.2908950617284, 1249.8278463648835 318.2908950617284" stroke="rgba(237,230,214,0.3052921382030178)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1249.8278463648835" y="325.2908950617284" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 781.1440329218107 322.03206447187927, 955.1296296296296 523.627829218107, 1212.9518175582991 523.627829218107" stroke="rgba(237,230,214,0.589460090877915)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1212.9518175582991" y="530.627829218107" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 874.6841563786008 383.2223936899863, 913.5390946502058 502.11291152263374, 1045.8906035665295 502.11291152263374" stroke="rgba(237,230,214,0.4426095250342935)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1045.8906035665295" y="509.11291152263374" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 780.4465020576132 733.6719821673526, 915.6522633744856 420.4128086419753, 1255.3108710562415 420.4128086419753" stroke="rgba(237,230,214,0.3314071073388203)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1255.3108710562415" y="427.4128086419753" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 778.4310699588477 640.0474965706447, 908.1358024691358 445.19418724279836, 1207.8792866941014 445.19418724279836" stroke="rgba(237,230,214,0.37251950445816184)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1207.8792866941014" y="452.19418724279836" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 788.6378600823045 689.0156035665295, 917.656378600823 743.1237139917696, 1030.2625171467764 743.1237139917696" stroke="rgba(237,230,214,0.3326133830589849)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1030.2625171467764" y="750.1237139917696" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 851.0668724279835 587.2429698216736, 890.8806584362139 480.86805555555554, 1229.1272290809327 480.86805555555554" stroke="rgba(237,230,214,0.3283554098079561)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1229.1272290809327" y="487.86805555555554" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 765.7181069958848 481.39626200274347, 934.4753086419753 325.093878600823, 1171.1400891632372 325.093878600823" stroke="rgba(237,230,214,0.4764122513717421)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1171.1400891632372" y="332.093878600823" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 812.5915637860082 518.142146776406, 915.1069958847737 442.46784979423865, 1362.9677640603568 442.46784979423865" stroke="rgba(237,230,214,0.5434505744170096)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1362.9677640603568" y="449.46784979423865" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 791.687242798354 404.14729080932784, 939.4423868312757 499.65663580246917, 1171.2769204389574 499.65663580246917" stroke="rgba(237,230,214,0.29613704561042525)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1171.2769204389574" y="506.65663580246917" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 863.0051440329219 726.0783607681756, 954.1481481481482 663.326903292181, 1102.7342249657065 663.326903292181" stroke="rgba(237,230,214,0.5511383316186557)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1102.7342249657065" y="670.326903292181" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 826.5452674897119 310.6020233196159, 905.8909465020577 600.1453189300412, 1284.0063443072702 600.1453189300412" stroke="rgba(237,230,214,0.37512109910836766)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1284.0063443072702" y="607.1453189300412" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 842.3076131687243 624.3849451303155, 901.3374485596707 476.77854938271605, 1081.7599451303156 476.77854938271605" stroke="rgba(237,230,214,0.5847520147462277)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1081.7599451303156" y="483.77854938271605" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 830.2921810699588 494.09379286694104, 887.1543209876543 459.89326131687244, 1002.6616941015089 459.89326131687244" stroke="rgba(237,230,214,0.5966977451989026)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1002.6616941015089" y="466.89326131687244" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 830.4989711934156 506.3952331961591, 890.0082304526749 716.156121399177, 1173.378257887517 716.156121399177" stroke="rgba(237,230,214,0.5276249571330589)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1173.378257887517" y="723.156121399177" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 762.9279835390946 367.9559327846365, 936.5658436213992 412.2337962962963, 1340.5763031550068 412.2337962962963" stroke="rgba(237,230,214,0.4942003172153635)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1340.5763031550068" y="419.2337962962963" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 787.5792181069959 665.4425582990398, 893.4938271604939 714.7929526748972, 1250.9224965706446 714.7929526748972" stroke="rgba(237,230,214,0.26309049211248287)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1250.9224965706446" y="721.7929526748972" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 824.4526748971193 665.5217764060358, 947.4588477366256 290.5002572016461, 1031.0835048010974 290.5002572016461" stroke="rgba(237,230,214,0.30096214849108366)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1031.0835048010974" y="297.5002572016461" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 793.548353909465 514.8602537722908, 885.1275720164609 306.0223765432099, 1187.7259945130315 306.0223765432099" stroke="rgba(237,230,214,0.3744819530178326)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1187.7259945130315" y="313.0223765432099" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 854.866255144033 360.1246570644719, 893.1666666666666 428.0259773662551, 1087.516632373114 428.0259773662551" stroke="rgba(237,230,214,0.2503165723593964)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1087.516632373114" y="435.0259773662551" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 808.406378600823 347.98165294924553, 918.2427983539095 323.1777263374486, 1237.122085048011 323.1777263374486" stroke="rgba(237,230,214,0.3951326731824417)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1237.122085048011" y="330.1777263374486" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 814.1687242798354 625.0979080932784, 907.022633744856 658.1442901234568, 1003.2090192043896 658.1442901234568" stroke="rgba(237,230,214,0.5755969221536351)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1003.2090192043896" y="665.1442901234568" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 792.1532921810699 458.14008916323735, 886.1728395061729 599.5923353909466, 1272.4441015089164 599.5923353909466" stroke="rgba(237,230,214,0.5583759859396433)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1272.4441015089164" y="606.5923353909466" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 782.3600823045267 433.7748628257888, 882.3600823045267 314.1885288065844, 1031.493998628258 314.1885288065844" stroke="rgba(237,230,214,0.46013653120713305)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1031.493998628258" y="321.1885288065844" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 824.7890946502058 698.6688957475994, 922.2510288065844 468.599537037037, 1167.025377229081 468.599537037037" stroke="rgba(237,230,214,0.3975452246227709)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1167.025377229081" y="475.599537037037" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 839.440329218107 519.4888545953361, 952.5123456790124 729.4920267489713, 1045.7049039780522 729.4920267489713" stroke="rgba(237,230,214,0.4872687328532236)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1045.7049039780522" y="736.4920267489713" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 866.3137860082304 482.90140603566533, 919.8106995884774 763.5326646090534, 1174.199245541838 763.5326646090534" stroke="rgba(237,230,214,0.4959737225651577)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1174.199245541838" y="770.5326646090534" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 825.4094650205761 735.5732167352537, 930.812757201646 737.3881172839506, 1299.1750685871057 737.3881172839506" stroke="rgba(237,230,214,0.54032686042524)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1299.1750685871057" y="744.3881172839506" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 876.727366255144 544.1709533607682, 932.1851851851852 317.7250514403292, 1167.2990397805213 317.7250514403292" stroke="rgba(237,230,214,0.38699481310013717)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1167.2990397805213" y="324.7250514403292" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 820.2674897119341 495.36128257887515, 950.5946502057614 671.210133744856, 1285.2378257887517 671.210133744856" stroke="rgba(237,230,214,0.5026442472565158)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1285.2378257887517" y="678.210133744856" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 816.0298353909465 735.8108710562415, 932.7078189300412 464.5100308641976, 1019.6580932784636 464.5100308641976" stroke="rgba(237,230,214,0.30394182956104254)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1019.6580932784636" y="471.5100308641976" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 784.0144032921811 532.1863854595335, 905.1913580246913 364.2914094650206, 1257.2265089163238 364.2914094650206" stroke="rgba(237,230,214,0.2575542266803841)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1257.2265089163238" y="371.2914094650206" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 764.2211934156379 471.1544924554184, 894.7119341563786 537.2209362139918, 1364.6097393689986 537.2209362139918" stroke="rgba(237,230,214,0.4801481052812071)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1364.6097393689986" y="544.2209362139918" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 796.6502057613169 699.3818587105625, 927.9362139917696 649.9652777777778, 1088.474451303155 649.9652777777778" stroke="rgba(237,230,214,0.38839013203017836)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1088.474451303155" y="656.9652777777778" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 801.3014403292182 483.5351508916324, 951.5308641975308 369.19110082304525, 1315.4873113854596 369.19110082304525" stroke="rgba(237,230,214,0.4489469735939643)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1315.4873113854596" y="376.19110082304525" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 818.1748971193416 410.2810356652949, 912.1625514403293 361.56507201646093, 1032.314986282579 361.56507201646093" stroke="rgba(237,230,214,0.42848529663923185)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1032.314986282579" y="368.56507201646093" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 767.2705761316872 626.2861796982168, 916.4979423868313 293.75385802469134, 1125.6241426611798 293.75385802469134" stroke="rgba(237,230,214,0.4436717678326475)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1125.6241426611798" y="300.75385802469134" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 808.5884773662551 398.2172496570645, 911.2037037037037 332.4241255144033, 1342.0814471879287 332.4241255144033" stroke="rgba(237,230,214,0.2611730538408779)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1342.0814471879287" y="339.4241255144033" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 862.1286008230453 312.7409122085048, 922.9465020576132 644.2425411522634, 1048.3535665294924 644.2425411522634" stroke="rgba(237,230,214,0.34765582133058986)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1048.3535665294924" y="651.2425411522634" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 847.8909465020577 516.5238340192044, 898.3930041152263 395.8757716049383, 1131.1071673525378 395.8757716049383" stroke="rgba(237,230,214,0.4697867369684499)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1131.1071673525378" y="402.8757716049383" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 805.8755144032922 716.2326817558298, 944.2098765432099 753.9904835390946, 1337.0089163237312 753.9904835390946" stroke="rgba(237,230,214,0.39423246742112483)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1337.0089163237312" y="760.9904835390946" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 776.082304526749 618.534122085048, 927.0637860082304 385.25334362139915, 1032.7254801097395 385.25334362139915" stroke="rgba(237,230,214,0.5876596793552812)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1032.7254801097395" y="392.25334362139915" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 798.511316872428 370.09482167352536, 953.6213991769547 456.3310185185185, 1104.923525377229 456.3310185185185" stroke="rgba(237,230,214,0.4667350394375857)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1104.923525377229" y="463.3310185185185" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 793.1625514403293 557.5814471879287, 890.5493827160494 633.8901748971193, 1300.269718792867 633.8901748971193" stroke="rgba(237,230,214,0.498125214334705)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1300.269718792867" y="640.8901748971193" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 800.0360082304527 447.66066529492457, 924.5144032921811 584.5974794238683, 1365.4307270233196 584.5974794238683" stroke="rgba(237,230,214,0.4484968707133059)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1365.4307270233196" y="591.5974794238683" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 859.1316872427983 626.9991426611797, 922.1831275720165 475.1195987654321, 1047.0732167352537 475.1195987654321" stroke="rgba(237,230,214,0.4345166752400549)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1047.0732167352537" y="482.1195987654321" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 770.4495884773662 362.2635459533608, 910.2222222222222 472.1231995884774, 1231.863854595336 472.1231995884774" stroke="rgba(237,230,214,0.5728512945816187)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1231.863854595336" y="479.1231995884774" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 813.9897119341564 680.1205418381344, 915.298353909465 742.2749485596707, 1286.4693072702332 742.2749485596707" stroke="rgba(237,230,214,0.2801673954046639)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1286.4693072702332" y="749.2749485596707" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 789.7520576131687 407.23679698216733, 884.0781893004115 452.241512345679, 1337.556241426612 452.241512345679" stroke="rgba(237,230,214,0.37313164437585733)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1337.556241426612" y="459.241512345679" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 857.7366255144033 570.2789780521261, 923.2283950617284 768.6895576131687, 1131.7913237311386 768.6895576131687" stroke="rgba(237,230,214,0.2684107081618656)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1131.7913237311386" y="775.6895576131687" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 817.9434156378601 435.91375171467763, 899.4156378600823 358.2857510288066, 1175.84122085048 358.2857510288066" stroke="rgba(237,230,214,0.43267125342935525)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1175.84122085048" y="365.2857510288066" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 830.3724279835391 590.8077846364883, 919.3065843621399 387.69675925925924, 1216.3725994513031 387.69675925925924" stroke="rgba(237,230,214,0.28257994684499316)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1216.3725994513031" y="394.69675925925924" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 815.0236625514403 301.627743484225, 929.5679012345679 523.5892489711935, 1000.0521262002743 523.5892489711935" stroke="rgba(237,230,214,0.2848034550754458)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1000.0521262002743" y="530.5892489711935" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 811.8971193415638 595.0402949245542, 956.866255144033 432.6298868312757, 1033.5464677640603 432.6298868312757" stroke="rgba(237,230,214,0.5560084447873799)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1033.5464677640603" y="439.6298868312757" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 860.9927983539095 737.7121056241426, 947.8683127572017 281.48533950617286, 1063.5222908093278 281.48533950617286" stroke="rgba(237,230,214,0.5128615826474623)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1063.5222908093278" y="288.48533950617286" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 762.3106995884774 436.3098422496571, 929.2407407407408 736.8222736625514, 1216.6462620027435 736.8222736625514" stroke="rgba(237,230,214,0.2720295353223594)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1216.6462620027435" y="743.8222736625514" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 795.8508230452675 717.5001714677641, 927.6502057613169 465.3073559670782, 1239.5850480109739 465.3073559670782" stroke="rgba(237,230,214,0.300178969478738)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1239.5850480109739" y="472.3073559670782" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 761.6131687242798 407.9497599451303, 889.7633744855967 633.6072530864197, 1259.0053155006858 633.6072530864197" stroke="rgba(237,230,214,0.3639765517832647)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1259.0053155006858" y="640.6072530864197" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 819.5977366255144 534.3252743484225, 922.2469135802469 408.38863168724276, 1021.573731138546 408.38863168724276" stroke="rgba(237,230,214,0.5800889489026063)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1021.573731138546" y="415.38863168724276" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 769.8045267489712 363.29338134430725, 891.7674897119341 456.318158436214, 1033.9569615912208 456.318158436214" stroke="rgba(237,230,214,0.36518282750342934)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1033.9569615912208" y="463.318158436214" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 772.2335390946502 481.5207475994513, 904.9917695473251 444.0625, 1042.8216735253773 444.0625" stroke="rgba(237,230,214,0.5359248542524004)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1042.8216735253773" y="451.0625" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 866.8847736625514 595.6740397805213, 908.5864197530864 538.2883230452675, 1174.8345336076818 538.2883230452675" stroke="rgba(237,230,214,0.5089816958161866)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1174.8345336076818" y="545.2883230452675" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 853.7582304526749 412.4199245541838, 929.2181069958848 405.6622942386831, 1176.6622085048011 405.6622942386831" stroke="rgba(237,230,214,0.401020018861454)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1176.6622085048011" y="412.6622942386831" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 772.8539094650206 518.4250685871057, 913.5534979423868 712.8510802469136, 1174.971364883402 712.8510802469136" stroke="rgba(237,230,214,0.3287064900548697)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1174.971364883402" y="719.8510802469136" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 784.1718106995885 620.3561385459534, 888.2592592592592 626.5213477366256, 1296.4286694101509 626.5213477366256" stroke="rgba(237,230,214,0.40870777606310016)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1296.4286694101509" y="633.5213477366256" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 807.7119341563786 424.8798010973937, 880.0020576131687 313.3397633744856, 1287.7007887517148 313.3397633744856" stroke="rgba(237,230,214,0.4076905435528121)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1287.7007887517148" y="320.3397633744856" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 763.4742798353909 518.6627229080932, 915.4485596707818 439.9729938271605, 1275.45438957476 439.9729938271605" stroke="rgba(237,230,214,0.4423214591906721)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1275.45438957476" y="446.9729938271605" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text><path d="M560 520 C 811.4588477366256 608.3715706447188, 941.2654320987655 673.0877057613168, 1006.3561385459534 673.0877057613168" stroke="rgba(237,230,214,0.27926718964334707)" stroke-width="2" stroke-dasharray="7 9" fill="none"/>
+            <text x="1006.3561385459534" y="680.0877057613168" font-size="20" fill="rgba(237,230,214,.75)" text-anchor="middle" font-family="IBM Plex Mono">×</text></g>
+  <path d="M350 470 L500 500" stroke="#e8b23a" stroke-width="4" stroke-dasharray="10 8"/>
+</svg>
+<div class="tag" style="left:130px;top:330px;transform:rotate(-4deg)"><img src="../assets/ethereum_logo_2014.svg" style="height:120px"><span>ETHEREUM</span><i>~500 ألف ETH</i></div>
+<div class="tag" style="left:470px;top:440px;transform:rotate(3deg);padding:26px 26px 18px"><img src="../assets/thorchain_icon.png" style="height:90px"><span>THORCHAIN</span><i>~361 ألف ETH</i></div>
+<div class="tag" style="left:1360px;top:780px;transform:rotate(-3deg)"><img src="../assets/bitcoin.svg" style="height:90px"><span>BITCOIN</span><i>6,954 محفظة</i></div>
+<div style="position:absolute;right:190px;top:130px;text-align:right">
+  <div class="h1" style="font-size:58px">عشرة أيام</div>
+  <div style="font-size:28px;opacity:.75;margin-top:6px">كل الإيثيريوم المسروق تقريباً… تحرّك</div>
+</div>
+<svg style="position:absolute;right:170px;top:330px" width="330" height="330"><path d="M165 45 A120 120 0 1 1 45.94623584226265 149.96001197228355" stroke="#e8b23a" stroke-width="34" fill="none"/><path d="M45.94623584226265 149.96001197228355 A120 120 0 0 1 142.51424224971294 47.12552991255738" stroke="#252a33" stroke-width="34" fill="none"/><path d="M142.51424224971294 47.12552991255738 A120 120 0 0 1 164.99999999999997 45" stroke="#d6453d" stroke-width="34" fill="none"/>
+  <text x="165" y="160" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="58" fill="#ede6d6">77%</text>
+  <text x="165" y="200" text-anchor="middle" font-family="Noto Kufi Arabic" font-size="22" fill="#ede6d6" opacity=".7">قابل للتتبع</text></svg>
+<div style="position:absolute;right:190px;top:680px;font-size:24px;line-height:1.9;text-align:right">
+  <div><b style="color:#e8b23a">■</b> 77% قابل للتتبع</div><div><b style="color:#5b6473">■</b> 20% اختفى</div><div><b style="color:#d6453d">■</b> 3% مجمّد</div></div>
+<svg style="position:absolute;left:40px;top:690px;height:360px;z-index:30;overflow:visible;" viewBox="0 0 400 720">
+<g class="auditor">
+  <!-- shadow -->
+  <ellipse cx="200" cy="704" rx="120" ry="14" fill="#000" opacity=".28"/>
+  <g transform="rotate(0 200 700)">
+    <!-- legs -->
+    <g transform="rotate(0 172 560)"><rect x="150" y="548" width="44" height="140" rx="10" fill="#15171c"/><rect x="138" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+    <g transform="rotate(0 228 560)"><rect x="206" y="548" width="44" height="140" rx="10" fill="#1d2028"/><rect x="200" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+
+    <!-- back arm (right side of body, darker) -->
+    
+  <g transform="translate(282 262) rotate(24)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(96)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        
+    <g transform="translate(-6 -10) rotate(-8)">
+      <rect x="-46" y="-6" width="92" height="118" rx="6" fill="#b8861f"/>
+      <rect x="-42" y="-10" width="88" height="118" rx="6" fill="#e8b23a"/>
+      <rect x="-42" y="-10" width="12" height="118" rx="4" fill="#b8861f" opacity=".55"/>
+      <rect x="-20" y="18" width="52" height="5" rx="2.5" fill="#15171c" opacity=".55"/>
+      <rect x="-20" y="30" width="38" height="5" rx="2.5" fill="#15171c" opacity=".35"/>
+      <circle cx="6" cy="70" r="14" fill="none" stroke="#15171c" stroke-width="4" opacity=".5"/>
+    </g>
+      </g>
+    </g>
+  </g>
+
+    <!-- coat: A-line trench, two-tone split = light from the left -->
+    <path d="M128 250 Q200 226 272 250 L312 586 Q200 606 88 586 Z" fill="#15171c"/>
+    <path d="M128 250 Q164 238 200 236 L200 600 Q140 598 88 586 Z" fill="#252a33"/>
+    <path d="M128 250 L88 586" stroke="#ede6d6" stroke-width="3" opacity=".22"/>
+    <path d="M200 520 L212 600" stroke="#15171c" stroke-width="4"/>
+    <!-- lapel / front seam -->
+    <path d="M200 262 L214 600" stroke="#15171c" stroke-width="5" opacity=".7"/>
+    <circle cx="222" cy="330" r="5" fill="#e8b23a"/><circle cx="224" cy="380" r="5" fill="#e8b23a"/>
+    <!-- belt + buckle -->
+    <path d="M100 430 Q200 446 300 430 L302 454 Q200 470 98 454 Z" fill="#1d2028"/>
+    <rect x="188" y="434" width="30" height="26" rx="4" fill="none" stroke="#e8b23a" stroke-width="5"/>
+    <!-- pocket flap -->
+    <path d="M118 500 L170 504 L168 516 L116 512 Z" fill="#15171c" opacity=".6"/>
+
+    <!-- raised collar hides the face: two tall wedges -->
+    <path d="M200 270 L120 258 L132 168 L196 196 Z" fill="#252a33"/>
+    <path d="M200 270 L280 258 L268 168 L204 196 Z" fill="#1d2028"/>
+    <path d="M132 168 L196 196 L200 270" stroke="#15171c" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M120 258 L132 168" stroke="#ede6d6" stroke-width="3" opacity=".25"/>
+
+    <!-- glasses peek between collar and brim -->
+    <g transform="translate(200 182)">
+      <rect x="-56" y="-24" width="112" height="40" fill="#15171c"/>
+      <rect x="-44" y="-5.5" width="34" height="7" rx="3.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="10" y="-5.5" width="34" height="7" rx="3.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="-10" y="-4" width="20" height="4" fill="#e8b23a"/>
+      <rect x="-44" y="-5.5" width="88" height="7" fill="#e8b23a" opacity=".10" filter="blur(6px)"/>
+      <path d="M18 -2.5 l12 0" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="-14" r="0" fill="#fff"><animate attributeName="r" values="0;5;0" dur="2.4s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <!-- fedora with red band -->
+    <path d="M136 156 L148 84 Q200 62 252 84 L264 156 Z" fill="#15171c"/>
+    <path d="M148 84 Q200 62 252 84 L246 100 Q200 82 154 100 Z" fill="#252a33" opacity=".7"/>
+    <path d="M139 136 L261 136 L264 156 L136 156 Z" fill="#d6453d"/>
+    <rect x="92" y="152" width="216" height="18" rx="9" fill="#15171c"/>
+    <rect x="92" y="152" width="108" height="9" rx="4.5" fill="#252a33" opacity=".8"/>
+
+    <!-- front arm -->
+    
+  <g transform="translate(118 262) rotate(-30)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(-100)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        <g transform="rotate(20)"><rect x="-4" y="-6" width="8" height="58" rx="3" fill="#e8b23a"/><path d="M-4 52 L0 64 L4 52Z" fill="#15171c"/></g>
+      </g>
+    </g>
+  </g>
+  </g>
+</g></svg>
+
+<div class="src">Cointelegraph (4 Mar 2025, Ben Zhou figures) · The Hacker News (7 Mar 2025)</div>
+<div class="vignette"></div><div class="grain"></div></body></html>

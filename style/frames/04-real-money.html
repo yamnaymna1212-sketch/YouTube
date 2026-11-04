@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title></title><style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;900&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Oswald:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Playfair+Display:ital,wght@1,700&display=block');
+:root{--navy:#0f2a46;--navy2:#0b2038;--coat:#15171c;--coat2:#252a33;--red:#d6453d;--gold:#e8b23a;--ivory:#ede6d6;--yellow:#f2c230}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy)}
+body{position:relative;font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ivory)}
+/* ledger paper: faint rules + red margin line = the channel's fingerprint */
+.bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.05), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(237,230,214,.045) 0 2px, transparent 2px 54px), var(--navy)}
+.bg:after{content:'';position:absolute;top:0;bottom:0;right:150px;width:3px;background:rgba(214,69,61,.35)}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55));pointer-events:none;z-index:50}
+.grain{position:absolute;inset:-50%;z-index:51;opacity:.12;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* case header strip */
+.case{position:absolute;top:44px;right:190px;left:80px;display:flex;justify-content:space-between;align-items:center;z-index:40;
+  font-family:'Oswald';letter-spacing:.18em;font-size:22px;color:rgba(237,230,214,.7)}
+.case b{color:var(--gold);font-weight:700}
+.case .ar{font-family:'Noto Kufi Arabic';letter-spacing:0;font-size:24px}
+/* source footnote — always on screen when a fact is shown */
+.src{position:absolute;bottom:40px;left:80px;z-index:40;font-family:'IBM Plex Mono';font-size:19px;color:rgba(237,230,214,.6);direction:ltr}
+.src:before{content:'◆ SOURCE  ';color:var(--red)}
+.h1{font-family:'Noto Kufi Arabic';font-weight:900;line-height:1.15;color:var(--ivory)}
+.num{font-family:'Oswald';font-weight:700;color:var(--gold);direction:ltr}
+/* real photo cutout: halftone-ish B&W + thick paper edge + lift shadow */
+.cut{position:absolute;filter:grayscale(1) contrast(1.25) brightness(1.05)
+  drop-shadow(0 0 0 var(--ivory)) drop-shadow(5px 0 0 var(--ivory)) drop-shadow(-5px 0 0 var(--ivory)) drop-shadow(0 5px 0 var(--ivory)) drop-shadow(0 -5px 0 var(--ivory))
+  drop-shadow(14px 18px 0 rgba(0,0,0,.35))}
+.dots{position:absolute;inset:0;background:radial-gradient(circle, rgba(15,42,70,.35) 1.2px, transparent 1.6px) 0 0/7px 7px;mix-blend-mode:multiply}
+/* evidence tag for real logos */
+.tag{position:absolute;background:#fbf8f1;border-radius:14px;padding:26px 34px 20px;box-shadow:12px 16px 0 rgba(0,0,0,.3);
+  display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--coat)}
+.tag:before{content:'';position:absolute;top:12px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--navy);box-shadow:inset 0 0 0 4px #cfc6b4}
+.tag img{display:block;margin-top:10px}
+.tag span{font-family:'Oswald';font-size:20px;letter-spacing:.16em;color:#5a5f6b}
+.tag i{font-style:normal;font-family:'Noto Kufi Arabic';font-size:22px;font-weight:700;color:var(--coat)}
+/* real document */
+.doc{position:absolute;background:#fff;box-shadow:18px 22px 0 rgba(0,0,0,.35);overflow:hidden}
+.hl{position:absolute;background:var(--yellow);mix-blend-mode:multiply;opacity:.75;border-radius:4px}
+.label{position:absolute;font-family:'Noto Kufi Arabic';font-weight:700;font-size:30px;background:var(--coat);color:var(--ivory);padding:8px 22px;border-right:6px solid var(--red)}
+.label small{display:block;font-family:'IBM Plex Mono';font-weight:500;font-size:15px;color:rgba(237,230,214,.6);direction:ltr;text-align:right}
+</style></head>
+<body><div class="bg"></div>
+<div class="case"><span class="ar">الملف <b>01</b> · BYBIT</span><span style="direction:ltr">21.02.2025</span></div>
+
+<img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:218.9917695473251px;top:526.4592764060357px;width:314.6687242798354px;transform:rotate(-8.128557956104252deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:356.4495884773662px;top:535.8526234567901px;width:316.98285322359396px;transform:rotate(-4.879415294924556deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:238.10493827160494px;top:595.5340363511659px;width:316.0048010973937px;transform:rotate(15.365612139917694deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:232.1059670781893px;top:634.886231138546px;width:295.9320987654321px;transform:rotate(-33.81322873799726deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:457.7119341563786px;top:660.3289609053497px;width:309.11042524005484px;transform:rotate(-23.650505829903977deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:178.62654320987656px;top:553.0967935528121px;width:307.1447187928669px;transform:rotate(8.693287037037038deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:416.3312757201646px;top:560.3502229080933px;width:265.343621399177px;transform:rotate(15.68728566529493deg);opacity:0.9;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px">
+<img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:561.0337791495199px;top:700px;width:420px;transform:rotate(0.9172325102880658deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:565.0621570644719px;top:691px;width:420px;transform:rotate(0.09442729766803826deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:562.783950617284px;top:682px;width:420px;transform:rotate(0.25516117969821694deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:560.2485425240055px;top:673px;width:420px;transform:rotate(-0.4771090534979423deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:563.1349451303155px;top:664px;width:420px;transform:rotate(-1.9048525377229082deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:564.5295781893004px;top:655px;width:420px;transform:rotate(-1.312019890260631deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:569.3707133058984px;top:646px;width:420px;transform:rotate(1.6470679012345677deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:565.559585048011px;top:637px;width:420px;transform:rotate(-1.2745027434842249deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:561.7381687242798px;top:628px;width:420px;transform:rotate(1.5282064471879289deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1001.7336248285322px;top:730px;width:420px;transform:rotate(0.62309670781893deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1005.6694101508916px;top:721px;width:420px;transform:rotate(-0.681189986282579deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1007.7430555555555px;top:712px;width:420px;transform:rotate(-1.890826474622771deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1000.67061042524px;top:703px;width:420px;transform:rotate(1.7843106995884774deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1006.7977537722908px;top:694px;width:420px;transform:rotate(1.2084190672153636deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1005.8775720164609px;top:685px;width:420px;transform:rotate(1.7642146776406036deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1009.5150034293553px;top:676px;width:420px;transform:rotate(-1.5359567901234568deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1002.2779492455419px;top:667px;width:420px;transform:rotate(1.7276577503429356deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1009.4750514403293px;top:658px;width:420px;transform:rotate(1.8266632373113856deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1001.6001371742112px;top:649px;width:420px;transform:rotate(-0.0043724279835390956deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1005.443329903978px;top:640px;width:420px;transform:rotate(-1.7901406035665295deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px"><img src="../assets/usd100_front_2013.jpg" style="position:absolute;left:1001.8688271604939px;top:631px;width:420px;transform:rotate(-0.37014746227709194deg);opacity:1;box-shadow:10px 14px 0 rgba(0,0,0,.3);border-radius:3px">
+<div class="tag" style="left:150px;top:200px;transform:rotate(-5deg);padding:34px 40px 22px"><img src="../assets/bybit_logo.svg" style="height:56px"><span>BYBIT</span><i>المحفظة الباردة · ETH</i></div>
+<div style="position:absolute;right:190px;top:150px;text-align:right;z-index:20">
+  <div style="font-family:'Noto Kufi Arabic';font-size:30px;opacity:.8">ما خرج من الخزنة في دقائق</div>
+  <div class="num" style="font-size:150px;line-height:1.05;text-shadow:8px 10px 0 rgba(0,0,0,.35)">$1,460,000,000</div>
+</div>
+<div style="position:absolute;right:190px;top:400px;z-index:20;display:flex;gap:16px;direction:ltr">
+  <div style="background:#ede6d6;color:#15171c;padding:12px 18px;border-radius:8px;box-shadow:8px 10px 0 rgba(0,0,0,.3);display:flex;align-items:center;gap:10px"><img src="../assets/ethereum_logo_2014.svg" style="height:34px"><b style="font-family:Oswald;font-size:30px">401,347</b><span style="font-family:Oswald;font-size:20px;color:#6b7080">ETH</span></div><div style="background:#ede6d6;color:#15171c;padding:12px 18px;border-radius:8px;box-shadow:8px 10px 0 rgba(0,0,0,.3);display:flex;align-items:center;gap:10px"><img src="../assets/ethereum_logo_2014.svg" style="height:34px"><b style="font-family:Oswald;font-size:30px">90,376</b><span style="font-family:Oswald;font-size:20px;color:#6b7080">stETH</span></div><div style="background:#ede6d6;color:#15171c;padding:12px 18px;border-radius:8px;box-shadow:8px 10px 0 rgba(0,0,0,.3);display:flex;align-items:center;gap:10px"><img src="../assets/ethereum_logo_2014.svg" style="height:34px"><b style="font-family:Oswald;font-size:30px">15,000</b><span style="font-family:Oswald;font-size:20px;color:#6b7080">cmETH</span></div><div style="background:#ede6d6;color:#15171c;padding:12px 18px;border-radius:8px;box-shadow:8px 10px 0 rgba(0,0,0,.3);display:flex;align-items:center;gap:10px"><img src="../assets/ethereum_logo_2014.svg" style="height:34px"><b style="font-family:Oswald;font-size:30px">8,000</b><span style="font-family:Oswald;font-size:20px;color:#6b7080">mETH</span></div>
+</div>
+<svg style="position:absolute;left:1500px;top:560px;height:440px;z-index:30;overflow:visible;transform:scaleX(-1)" viewBox="0 0 400 720">
+<g class="auditor">
+  <!-- shadow -->
+  <ellipse cx="200" cy="704" rx="120" ry="14" fill="#000" opacity=".28"/>
+  <g transform="rotate(0 200 700)">
+    <!-- legs -->
+    <g transform="rotate(0 172 560)"><rect x="150" y="548" width="44" height="140" rx="10" fill="#15171c"/><rect x="138" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+    <g transform="rotate(0 228 560)"><rect x="206" y="548" width="44" height="140" rx="10" fill="#1d2028"/><rect x="200" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+
+    <!-- back arm (right side of body, darker) -->
+    
+  <g transform="translate(282 262) rotate(-6)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(-4)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        
+      </g>
+    </g>
+  </g>
+
+    <!-- coat: A-line trench, two-tone split = light from the left -->
+    <path d="M128 250 Q200 226 272 250 L312 586 Q200 606 88 586 Z" fill="#15171c"/>
+    <path d="M128 250 Q164 238 200 236 L200 600 Q140 598 88 586 Z" fill="#252a33"/>
+    <path d="M128 250 L88 586" stroke="#ede6d6" stroke-width="3" opacity=".22"/>
+    <path d="M200 520 L212 600" stroke="#15171c" stroke-width="4"/>
+    <!-- lapel / front seam -->
+    <path d="M200 262 L214 600" stroke="#15171c" stroke-width="5" opacity=".7"/>
+    <circle cx="222" cy="330" r="5" fill="#e8b23a"/><circle cx="224" cy="380" r="5" fill="#e8b23a"/>
+    <!-- belt + buckle -->
+    <path d="M100 430 Q200 446 300 430 L302 454 Q200 470 98 454 Z" fill="#1d2028"/>
+    <rect x="188" y="434" width="30" height="26" rx="4" fill="none" stroke="#e8b23a" stroke-width="5"/>
+    <!-- pocket flap -->
+    <path d="M118 500 L170 504 L168 516 L116 512 Z" fill="#15171c" opacity=".6"/>
+
+    <!-- raised collar hides the face: two tall wedges -->
+    <path d="M200 270 L120 258 L132 168 L196 196 Z" fill="#252a33"/>
+    <path d="M200 270 L280 258 L268 168 L204 196 Z" fill="#1d2028"/>
+    <path d="M132 168 L196 196 L200 270" stroke="#15171c" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M120 258 L132 168" stroke="#ede6d6" stroke-width="3" opacity=".25"/>
+
+    <!-- glasses peek between collar and brim -->
+    <g transform="translate(200 182)">
+      <rect x="-56" y="-24" width="112" height="40" fill="#15171c"/>
+      <rect x="-44" y="-9.5" width="34" height="15" rx="7.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="10" y="-9.5" width="34" height="15" rx="7.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="-10" y="-4" width="20" height="4" fill="#e8b23a"/>
+      <rect x="-44" y="-9.5" width="88" height="15" fill="#e8b23a" opacity=".10" filter="blur(6px)"/>
+      <path d="M18 -6.5 l12 0" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="-14" r="0" fill="#fff"><animate attributeName="r" values="0;5;0" dur="2.4s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <!-- fedora with red band -->
+    <path d="M136 156 L148 84 Q200 62 252 84 L264 156 Z" fill="#15171c"/>
+    <path d="M148 84 Q200 62 252 84 L246 100 Q200 82 154 100 Z" fill="#252a33" opacity=".7"/>
+    <path d="M139 136 L261 136 L264 156 L136 156 Z" fill="#d6453d"/>
+    <rect x="92" y="152" width="216" height="18" rx="9" fill="#15171c"/>
+    <rect x="92" y="152" width="108" height="9" rx="4.5" fill="#252a33" opacity=".8"/>
+
+    <!-- front arm -->
+    
+  <g transform="translate(118 262) rotate(-20)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(-95)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        
+    <g transform="translate(-6 -10) rotate(-8)">
+      <rect x="-46" y="-6" width="92" height="118" rx="6" fill="#b8861f"/>
+      <rect x="-42" y="-10" width="88" height="118" rx="6" fill="#e8b23a"/>
+      <rect x="-42" y="-10" width="12" height="118" rx="4" fill="#b8861f" opacity=".55"/>
+      <rect x="-20" y="18" width="52" height="5" rx="2.5" fill="#15171c" opacity=".55"/>
+      <rect x="-20" y="30" width="38" height="5" rx="2.5" fill="#15171c" opacity=".35"/>
+      <circle cx="6" cy="70" r="14" fill="none" stroke="#15171c" stroke-width="4" opacity=".5"/>
+    </g>
+      </g>
+    </g>
+  </g>
+  </g>
+</g></svg>
+
+<div class="src">Nansen via IBTimes (asset breakdown) · $100 note image: uscurrency.gov (U.S. Federal Reserve)</div>
+<div class="vignette"></div><div class="grain"></div></body></html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title></title><style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;900&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Oswald:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Playfair+Display:ital,wght@1,700&display=block');
+:root{--navy:#0f2a46;--navy2:#0b2038;--coat:#15171c;--coat2:#252a33;--red:#d6453d;--gold:#e8b23a;--ivory:#ede6d6;--yellow:#f2c230}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--navy)}
+body{position:relative;font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ivory)}
+/* ledger paper: faint rules + red margin line = the channel's fingerprint */
+.bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.05), transparent 60%),
+  repeating-linear-gradient(0deg, rgba(237,230,214,.045) 0 2px, transparent 2px 54px), var(--navy)}
+.bg:after{content:'';position:absolute;top:0;bottom:0;right:150px;width:3px;background:rgba(214,69,61,.35)}
+.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55));pointer-events:none;z-index:50}
+.grain{position:absolute;inset:-50%;z-index:51;opacity:.12;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* case header strip */
+.case{position:absolute;top:44px;right:190px;left:80px;display:flex;justify-content:space-between;align-items:center;z-index:40;
+  font-family:'Oswald';letter-spacing:.18em;font-size:22px;color:rgba(237,230,214,.7)}
+.case b{color:var(--gold);font-weight:700}
+.case .ar{font-family:'Noto Kufi Arabic';letter-spacing:0;font-size:24px}
+/* source footnote — always on screen when a fact is shown */
+.src{position:absolute;bottom:40px;left:80px;z-index:40;font-family:'IBM Plex Mono';font-size:19px;color:rgba(237,230,214,.6);direction:ltr}
+.src:before{content:'◆ SOURCE  ';color:var(--red)}
+.h1{font-family:'Noto Kufi Arabic';font-weight:900;line-height:1.15;color:var(--ivory)}
+.num{font-family:'Oswald';font-weight:700;color:var(--gold);direction:ltr}
+/* real photo cutout: halftone-ish B&W + thick paper edge + lift shadow */
+.cut{position:absolute;filter:grayscale(1) contrast(1.25) brightness(1.05)
+  drop-shadow(0 0 0 var(--ivory)) drop-shadow(5px 0 0 var(--ivory)) drop-shadow(-5px 0 0 var(--ivory)) drop-shadow(0 5px 0 var(--ivory)) drop-shadow(0 -5px 0 var(--ivory))
+  drop-shadow(14px 18px 0 rgba(0,0,0,.35))}
+.dots{position:absolute;inset:0;background:radial-gradient(circle, rgba(15,42,70,.35) 1.2px, transparent 1.6px) 0 0/7px 7px;mix-blend-mode:multiply}
+/* evidence tag for real logos */
+.tag{position:absolute;background:#fbf8f1;border-radius:14px;padding:26px 34px 20px;box-shadow:12px 16px 0 rgba(0,0,0,.3);
+  display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--coat)}
+.tag:before{content:'';position:absolute;top:12px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--navy);box-shadow:inset 0 0 0 4px #cfc6b4}
+.tag img{display:block;margin-top:10px}
+.tag span{font-family:'Oswald';font-size:20px;letter-spacing:.16em;color:#5a5f6b}
+.tag i{font-style:normal;font-family:'Noto Kufi Arabic';font-size:22px;font-weight:700;color:var(--coat)}
+/* real document */
+.doc{position:absolute;background:#fff;box-shadow:18px 22px 0 rgba(0,0,0,.35);overflow:hidden}
+.hl{position:absolute;background:var(--yellow);mix-blend-mode:multiply;opacity:.75;border-radius:4px}
+.label{position:absolute;font-family:'Noto Kufi Arabic';font-weight:700;font-size:30px;background:var(--coat);color:var(--ivory);padding:8px 22px;border-right:6px solid var(--red)}
+.label small{display:block;font-family:'IBM Plex Mono';font-weight:500;font-size:15px;color:rgba(237,230,214,.6);direction:ltr;text-align:right}
+</style></head>
+<body><div class="bg"></div>
+<div class="case"><span class="ar">الملف <b>01</b> · BYBIT</span><span style="direction:ltr">21.02.2025</span></div>
+
+
+<div style="position:absolute;top:150px;right:110px;width:760px;height:540px;background:#0b1626;border:3px solid #3fa36b;border-radius:18px;box-shadow:16px 20px 0 rgba(0,0,0,.35);overflow:hidden">
+  <div style="height:58px;background:#111d30;display:flex;align-items:center;gap:10px;padding:0 22px;direction:ltr">
+    <i style="width:14px;height:14px;border-radius:50%;background:#d6453d"></i><i style="width:14px;height:14px;border-radius:50%;background:#e8b23a"></i><i style="width:14px;height:14px;border-radius:50%;background:#3fa36b"></i>
+    <span style="margin-left:18px;font-family:'IBM Plex Mono';font-size:18px;color:rgba(237,230,214,.6)">app.safe.global</span>
+  </div>
+  <div style="padding:40px 48px;direction:ltr;font-family:'IBM Plex Mono';font-size:24px;line-height:1.9;color:#cfd6e2">
+  <b style="font-family:Oswald;font-size:30px;color:#fff">Safe{Wallet}</b><br>
+  Operation: <b style="color:#7fd6a0">Transfer</b><br>
+  To: <b style="color:#7fd6a0">Bybit Warm Wallet ✓</b><br>
+  Value: <b style="color:#7fd6a0">routine</b><br>
+  Signatures: <b>3 / 3</b></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:84px;background:#3fa36b;display:flex;align-items:center;justify-content:center;font-family:'Noto Kufi Arabic';font-weight:900;font-size:38px;color:#0f2a46">الشاشة</div>
+</div>
+
+<div style="position:absolute;top:150px;left:110px;width:760px;height:540px;background:#0b1626;border:3px solid #d6453d;border-radius:18px;box-shadow:16px 20px 0 rgba(0,0,0,.35);overflow:hidden">
+  <div style="height:58px;background:#111d30;display:flex;align-items:center;gap:10px;padding:0 22px;direction:ltr">
+    <i style="width:14px;height:14px;border-radius:50%;background:#d6453d"></i><i style="width:14px;height:14px;border-radius:50%;background:#e8b23a"></i><i style="width:14px;height:14px;border-radius:50%;background:#3fa36b"></i>
+    <span style="margin-left:18px;font-family:'IBM Plex Mono';font-size:18px;color:rgba(237,230,214,.6)">etherscan.io/tx/… (on-chain)</span>
+  </div>
+  <div style="padding:40px 48px;direction:ltr;font-family:'IBM Plex Mono';font-size:24px;line-height:1.9;color:#cfd6e2">
+  <span style="color:#ff8a80">// what was actually signed</span><br>
+  Operation: <b style="color:#ff6b5e">delegatecall</b><br>
+  To: <b style="color:#ff6b5e">0x9622…7242</b> (attacker)<br>
+  Effect: <b style="color:#ff6b5e">replace wallet logic</b><br>
+  From: 0x1Db9…FCF4 (ETH cold wallet)</div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:84px;background:#d6453d;display:flex;align-items:center;justify-content:center;font-family:'Noto Kufi Arabic';font-weight:900;font-size:38px;color:#0f2a46">الدفتر</div>
+</div>
+<div style="position:absolute;top:370px;left:50%;margin-left:-46px;width:92px;height:92px;border-radius:50%;background:#e8b23a;color:#0f2a46;display:flex;align-items:center;justify-content:center;font-family:Oswald;font-weight:700;font-size:40px;z-index:20;box-shadow:0 0 0 10px #0f2a46">≠</div>
+<div class="h1" style="position:absolute;bottom:105px;left:0;right:0;text-align:center;font-size:54px">الشاشة تقول شيئاً. <span style="color:#e8b23a">الدفتر يقول شيئاً آخر.</span></div>
+<svg style="position:absolute;left:872px;top:500px;height:330px;z-index:30;overflow:visible;" viewBox="0 0 400 720">
+<g class="auditor">
+  <!-- shadow -->
+  <ellipse cx="200" cy="704" rx="120" ry="14" fill="#000" opacity=".28"/>
+  <g transform="rotate(-3 200 700)">
+    <!-- legs -->
+    <g transform="rotate(0 172 560)"><rect x="150" y="548" width="44" height="140" rx="10" fill="#15171c"/><rect x="138" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+    <g transform="rotate(0 228 560)"><rect x="206" y="548" width="44" height="140" rx="10" fill="#1d2028"/><rect x="200" y="676" width="64" height="24" rx="12" fill="#0b0c0f"/></g>
+
+    <!-- back arm (right side of body, darker) -->
+    
+  <g transform="translate(282 262) rotate(-6)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(-4)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#1d2028" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        
+      </g>
+    </g>
+  </g>
+
+    <!-- coat: A-line trench, two-tone split = light from the left -->
+    <path d="M128 250 Q200 226 272 250 L312 586 Q200 606 88 586 Z" fill="#15171c"/>
+    <path d="M128 250 Q164 238 200 236 L200 600 Q140 598 88 586 Z" fill="#252a33"/>
+    <path d="M128 250 L88 586" stroke="#ede6d6" stroke-width="3" opacity=".22"/>
+    <path d="M200 520 L212 600" stroke="#15171c" stroke-width="4"/>
+    <!-- lapel / front seam -->
+    <path d="M200 262 L214 600" stroke="#15171c" stroke-width="5" opacity=".7"/>
+    <circle cx="222" cy="330" r="5" fill="#e8b23a"/><circle cx="224" cy="380" r="5" fill="#e8b23a"/>
+    <!-- belt + buckle -->
+    <path d="M100 430 Q200 446 300 430 L302 454 Q200 470 98 454 Z" fill="#1d2028"/>
+    <rect x="188" y="434" width="30" height="26" rx="4" fill="none" stroke="#e8b23a" stroke-width="5"/>
+    <!-- pocket flap -->
+    <path d="M118 500 L170 504 L168 516 L116 512 Z" fill="#15171c" opacity=".6"/>
+
+    <!-- raised collar hides the face: two tall wedges -->
+    <path d="M200 270 L120 258 L132 168 L196 196 Z" fill="#252a33"/>
+    <path d="M200 270 L280 258 L268 168 L204 196 Z" fill="#1d2028"/>
+    <path d="M132 168 L196 196 L200 270" stroke="#15171c" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M120 258 L132 168" stroke="#ede6d6" stroke-width="3" opacity=".25"/>
+
+    <!-- glasses peek between collar and brim -->
+    <g transform="translate(200 182)">
+      <rect x="-56" y="-24" width="112" height="40" fill="#15171c"/>
+      <rect x="-44" y="-5.5" width="34" height="7" rx="3.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="10" y="-5.5" width="34" height="7" rx="3.5" fill="#0f2a46" stroke="#e8b23a" stroke-width="4"/>
+      <rect x="-10" y="-4" width="20" height="4" fill="#e8b23a"/>
+      <rect x="-44" y="-5.5" width="88" height="7" fill="#e8b23a" opacity=".10" filter="blur(6px)"/>
+      <path d="M18 -2.5 l12 0" stroke="#fff" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="-14" r="0" fill="#fff"><animate attributeName="r" values="0;5;0" dur="2.4s" repeatCount="indefinite"/></circle>
+    </g>
+
+    <!-- fedora with red band -->
+    <path d="M136 156 L148 84 Q200 62 252 84 L264 156 Z" fill="#15171c"/>
+    <path d="M148 84 Q200 62 252 84 L246 100 Q200 82 154 100 Z" fill="#252a33" opacity=".7"/>
+    <path d="M139 136 L261 136 L264 156 L136 156 Z" fill="#d6453d"/>
+    <rect x="92" y="152" width="216" height="18" rx="9" fill="#15171c"/>
+    <rect x="92" y="152" width="108" height="9" rx="4.5" fill="#252a33" opacity=".8"/>
+
+    <!-- front arm -->
+    
+  <g transform="translate(118 262) rotate(-10)">
+    <rect x="-18" y="-6" width="36" height="96" rx="18" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+    <g transform="translate(0 84) rotate(-150)">
+      <rect x="-16" y="-4" width="32" height="86" rx="16" fill="#2f3440" stroke="#0b0c0f" stroke-width="4"/>
+      <rect x="-16" y="66" width="32" height="10" rx="3" fill="#15171c" opacity=".9"/>
+      <g transform="translate(0 90)">
+        <circle r="16" fill="#ede6d6" stroke="#0b0c0f" stroke-width="3"/>
+        
+    <g transform="rotate(-30)">
+      <rect x="-5" y="0" width="10" height="44" rx="5" fill="#15171c"/>
+      <circle cy="72" r="34" fill="rgba(237,230,214,.16)" stroke="#e8b23a" stroke-width="9"/>
+      <path d="M-18 58 A22 22 0 0 1 2 46" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".8"/>
+    </g>
+      </g>
+    </g>
+  </g>
+  </g>
+</g></svg>
+<div style="position:absolute;top:160px;left:0;right:0;text-align:center;z-index:25"><span style="font-family:'Noto Kufi Arabic';font-size:18px;background:#d6453d;color:#fff;padding:4px 14px;border-radius:4px">إعادة تمثيل توضيحية</span></div>
+
+<div class="src">NCC Group technical analysis · Ben Zhou statement, 21 Feb 2025 · Etherscan</div>
+<div class="vignette"></div><div class="grain"></div></body></html>

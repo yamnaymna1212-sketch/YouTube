@@ -69,7 +69,7 @@ export const S3Host: React.FC = () => {
         <Host seed="intro" look={-0.15} smile={0.3} style={{ width: 860 }} />
       </div>
       <AbsoluteFill style={{ background: 'linear-gradient(0deg, rgba(12,13,16,.85), transparent 35%)' }} />
-      <LowerThird at={18} title="The Auditor" sub="Real financial crimes. Read line by line." />
+      <LowerThird at={18} title="The Auditor" sub="Where your money actually goes. Read line by line." />
     </AbsoluteFill>
   );
 };

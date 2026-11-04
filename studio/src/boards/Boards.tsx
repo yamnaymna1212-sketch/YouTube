@@ -23,8 +23,8 @@ export const BoardCharacter: React.FC = () => {
   const ex: [string, string, Partial<HostPose>][] = [
     ['Neutral', 'default · listening', {}],
     ['Speaking', 'mouth driven by voice', { talk: 0.75 }],
-    ['Skeptical', 'one beat before a reveal', { brow: 0.9, smile: 0, look: 0.5 }],
-    ['Knowing smile', 'end of a chapter', { smile: 0.9, tilt: -4 }],
+    ['Skeptical', 'one beat before the bill', { brow: 0.9, smile: 0, look: 0.5 }],
+    ['Half-smile', 'end of a chapter', { smile: 0.9, tilt: -4 }],
     ['Side glance', 'looks at the evidence', { look: -1, tilt: 3 }],
     ['Blink', 'every ~3 s, never frozen', { blink: 1 }],
   ];
@@ -32,7 +32,7 @@ export const BoardCharacter: React.FC = () => {
     <AbsoluteFill style={{ background: `radial-gradient(circle at 80% 15%, #2B2219, ${C.ink} 60%)` }}>
       <Header kicker="MAIN CHARACTER · HOST" title="The Auditor" />
       <div style={{ position: 'absolute', right: 110, top: 96, width: 640, fontFamily: F.sans, fontSize: 21, lineHeight: 1.55, color: 'rgba(236,231,222,.75)' }}>
-        Silver swept-back hair, short grey beard, round gold glasses, hooded eyes, oxblood scarf, charcoal overcoat with a raised collar. Warm key light from the left, cool rim from the right. On screen only 10–15% of an episode.
+        Early 30s. Dark brown hair, short sides, textured top; light stubble; thick dark brows; brown eyes. Washed-navy chore jacket over a grey tee: he looks like the viewer. Warm key light from the left, cool rim from the right. On screen only 10–15% of an episode.
       </div>
       <div style={{ position: 'absolute', left: 60, right: 60, top: 300, display: 'flex', justifyContent: 'space-between' }}>
         {ex.map(([t, s, p]) => (

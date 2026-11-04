@@ -1,4 +1,4 @@
-أكمل العمل على قناتي الوثائقية على YouTube عن الجرائم المالية الحقيقية. اسمها المؤقت **The Auditor**، ولغتها **الإنجليزية**.
+أكمل العمل على قناتي الوثائقية على YouTube عن **المشاكل المالية التي تمس أي إنسان، وخاصة الأمريكيين** (والجرائم المالية جزء منها، انظر `docs/CHANNEL.md`). اسمها المؤقت **The Auditor**، ولغتها **الإنجليزية**.
 
 **المستودع:** `yamnaymna1212-sketch/YouTube`، الفرع `claude/eloquent-goodall-ljew33`. اقرأ أولاً `README.md` و`style/STYLE-v3.md`.
 
@@ -8,7 +8,7 @@
 - يجب ألا يبدو العمل كأنه ذكاء اصطناعي، بل مونتاج بشري احترافي: لقطات وخلفيات وزوايا متنوعة، وحركة مستمرة، وشعارات حقيقية بلا أيقونات كرتونية.
 
 ## ما هو موجود
-- `studio/`: مشروع Remotion 4.0.540. فيه المضيف v3 في `src/host/Host.tsx` (رجل حكيم بشعر فضي ولحية قصيرة ونظارة ذهبية ووشاح خمري ومعطف بياقة مرفوعة، يرمش ويتكلم)، و8 مشاهد في `src/scenes/Scenes.tsx`، والـ boards في `src/boards/Boards.tsx`، والألوان والخطوط في `src/theme.ts`.
+- `studio/`: مشروع Remotion 4.0.540. فيه المضيف v4 في `src/host/Host.tsx` (رجل في أوائل الثلاثينات بشعر بني داكن ولحية خفيفة جداً وجاكيت كحلي فوق تيشيرت رمادي، يرمش ويتكلم)، و8 مشاهد في `src/scenes/Scenes.tsx`، والـ boards في `src/boards/Boards.tsx`، والألوان والخطوط في `src/theme.ts`.
   - صورة ثابتة: `npx remotion still src/index.ts <ID> out.png --browser-executable=/opt/pw-browsers/chromium`
   - المعرّفات: `BoardCharacter`، `BoardIcons`، و`StyleReel --frame=N`
 - `style/v3-images/`: صور الستايل الحالية: الشخصية، والخلفيات وأنواع اللقطات الثمانية، والأيقونات والألوان.
@@ -23,7 +23,12 @@
 
 ## ما زال ناقصاً
 - صورة مرخّصة لـ Ben Zhou، وشعارات Chainalysis وElliptic، ورقم القضية في المحكمة، وتقرير MSMT الأصلي.
-- تسجيل صوتي بصوتي (لم يُسجَّل بعد).
+- الصوت: رجل أمريكي بين 25 و35 (`style/VOICE.md`). إما تسجيلي أنا، أو صوت ElevenLabs (المرشّح Justin). لم يُختر بعد.
+
+## تم في 4 نوفمبر 2026
+- توسيع نطاق القناة (`docs/CHANNEL.md`)، وتغيير سطر الـ lower third إلى "Where your money actually goes. Read line by line."
+- المضيف v4 (رجل في الثلاثينات) بدلاً من v3. أُعيد رندر `BoardCharacter.png` و`shot-03.png` و`shot-08.png` و`BoardBackgrounds.jpg` كصور ثابتة فقط.
+- مواصفات الصوت (`style/VOICE.md`).
 
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

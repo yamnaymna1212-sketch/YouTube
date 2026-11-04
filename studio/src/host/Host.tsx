@@ -17,9 +17,10 @@ export type HostPose = {
   smile: number;  // 0 .. 1 (half-smile)
   tilt: number;   // head tilt in degrees
   nod: number;    // px vertical head offset
+  lookY?: number; // -1 up .. 1 down (pupils)
 };
 
-const K = {
+export const K = {
   skin: '#C99A78', skinLit: '#E0B694', skinShade: '#A77A5C', skinDeep: '#86604A',
   hair: '#2B211C', hairLit: '#4A3A30', hairShade: '#1A1411', stubble: '#3A2C24',
   iris: '#5A3E2B', lid: '#3A2620', brow: '#2A1F1A', lip: '#A86A5C', lipDark: '#7E4A40',
@@ -27,34 +28,9 @@ const K = {
   tee: '#8C9097', teeShade: '#6E7279',
 };
 
-export const HostFigure: React.FC<{ p: HostPose; style?: React.CSSProperties }> = ({ p, style }) => {
-  const eyeScale = 1 - 0.92 * p.blink;
-  const mouthH = 2 + p.talk * 22;
-  const mouthW = 46 - p.talk * 8 + p.smile * 6;
-  const lx = p.look * 6;
-  const eye = (cx: number) => (
-    <g transform={`translate(${cx} 326) scale(1 ${eyeScale})`}>
-      <path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" fill="#F1EBE2" />
-      <clipPath id={`e${cx}`}><path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" /></clipPath>
-      <g clipPath={`url(#e${cx})`}>
-        <circle cx={lx} cy={-1} r={11} fill={K.iris} />
-        <circle cx={lx} cy={-1} r={11} fill="none" stroke="#2E1F15" strokeWidth={1.6} />
-        <circle cx={lx} cy={-1} r={4.8} fill="#0D0B0A" />
-        <circle cx={lx - 3.5} cy={-4.5} r={2.4} fill="#fff" opacity={0.92} />
-        {/* upper lid shadow only — young eyes, not hooded */}
-        <path d="M-30 -17 L 30 -17 L 30 -9 C 14 -13, -14 -13, -30 -9 Z" fill={K.skin} />
-      </g>
-      <path d="M-28 0 C -16 -15, 16 -15, 28 0" stroke={K.lid} strokeWidth={3.8} fill="none" strokeLinecap="round" />
-      <path d="M-24 -18 C -10 -25, 10 -25, 24 -18" stroke={K.skinDeep} strokeWidth={1.4} fill="none" opacity={0.4} />
-      <path d="M-20 9 C -8 13, 8 13, 20 9" stroke={K.skinDeep} strokeWidth={1.1} fill="none" opacity={0.35} />
-    </g>
-  );
-  const shut = (cx: number) => p.blink > 0.6 && (
-    <path d={`M${cx - 27} 325 C ${cx - 12} 333, ${cx + 12} 333, ${cx + 27} 325`} stroke={K.lid} strokeWidth={3.6} fill="none" strokeLinecap="round" />
-  );
-  return (
-    <svg viewBox="0 0 600 760" style={style}>
-      <defs>
+export const HostDefs: React.FC = () => (
+  <>
+    <defs>
         <radialGradient id="skin4" cx="38%" cy="35%" r="70%">
           <stop offset="0%" stopColor={K.skinLit} />
           <stop offset="60%" stopColor={K.skin} />
@@ -70,22 +46,38 @@ export const HostFigure: React.FC<{ p: HostPose; style?: React.CSSProperties }> 
           <stop offset="55%" stopColor={K.stubble} stopOpacity={0.12} />
           <stop offset="100%" stopColor={K.stubble} stopOpacity={0.34} />
         </radialGradient>
-      </defs>
+    </defs>
+  </>
+);
 
-      {/* body: grey tee + open navy chore jacket */}
-      <path d="M24 760 C 34 652, 96 604, 196 586 L 404 586 C 504 604, 566 652, 576 760 Z" fill="url(#jacket4)" />
-      <path d="M232 586 L 368 586 L 346 760 L 254 760 Z" fill={K.tee} />
-      <path d="M300 640 L 300 760" stroke={K.teeShade} strokeWidth={2} opacity={0.35} />
-      <path d="M240 560 C 262 600, 338 600, 360 560 L 366 586 C 340 618, 260 618, 234 586 Z" fill={K.teeShade} />
-      <path d="M246 566 C 268 598, 332 598, 354 566" stroke="#A3A7AD" strokeWidth={4} fill="none" opacity={0.55} />
-      {/* jacket lapels (soft collar, folded down) */}
-      <path d="M198 590 L 230 586 L 262 700 L 254 760 L 210 760 C 214 700, 206 640, 198 590 Z" fill={K.jacketLit} />
-      <path d="M402 590 L 370 586 L 338 700 L 346 760 L 390 760 C 386 700, 394 640, 402 590 Z" fill={K.jacketDeep} />
-      <path d="M232 588 L 262 700 M368 588 L 338 700" stroke={K.stitch} strokeWidth={1.8} strokeDasharray="5 5" opacity={0.6} />
-      <path d="M150 660 C 160 700, 165 730, 168 760 M450 660 C 440 700, 435 730, 432 760" stroke={K.jacketDeep} strokeWidth={3} fill="none" opacity={0.7} />
-      {/* chest pocket */}
-      <path d="M408 650 L 470 646 L 474 700 L 412 704 Z" fill="none" stroke={K.stitch} strokeWidth={1.6} strokeDasharray="5 5" opacity={0.5} />
-
+// Head + neck in the 600x760 host space. Reused by the bust (HostFigure) and the full-body rig.
+export const HeadGroup: React.FC<{ p: HostPose }> = ({ p }) => {
+  const eyeScale = 1 - 0.92 * p.blink;
+  const mouthH = 2 + p.talk * 22;
+  const mouthW = 46 - p.talk * 8 + p.smile * 6;
+  const lx = p.look * 6;
+  const ly = (p.lookY ?? 0) * 4;
+  const eye = (cx: number) => (
+    <g transform={`translate(${cx} 326) scale(1 ${eyeScale})`}>
+      <path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" fill="#F1EBE2" />
+      <clipPath id={`e${cx}`}><path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" /></clipPath>
+      <g clipPath={`url(#e${cx})`}>
+        <circle cx={lx} cy={-1 + ly} r={11} fill={K.iris} />
+        <circle cx={lx} cy={-1 + ly} r={11} fill="none" stroke="#2E1F15" strokeWidth={1.6} />
+        <circle cx={lx} cy={-1 + ly} r={4.8} fill="#0D0B0A" />
+        <circle cx={lx - 3.5} cy={-4.5 + ly} r={2.4} fill="#fff" opacity={0.92} />
+        {/* upper lid shadow only — young eyes, not hooded */}
+        <path d="M-30 -17 L 30 -17 L 30 -9 C 14 -13, -14 -13, -30 -9 Z" fill={K.skin} />
+      </g>
+      <path d="M-28 0 C -16 -15, 16 -15, 28 0" stroke={K.lid} strokeWidth={3.8} fill="none" strokeLinecap="round" />
+      <path d="M-24 -18 C -10 -25, 10 -25, 24 -18" stroke={K.skinDeep} strokeWidth={1.4} fill="none" opacity={0.4} />
+      <path d="M-20 9 C -8 13, 8 13, 20 9" stroke={K.skinDeep} strokeWidth={1.1} fill="none" opacity={0.35} />
+    </g>
+  );
+  const shut = (cx: number) => p.blink > 0.6 && (
+    <path d={`M${cx - 27} 325 C ${cx - 12} 333, ${cx + 12} 333, ${cx + 27} 325`} stroke={K.lid} strokeWidth={3.6} fill="none" strokeLinecap="round" />
+  );
+  return (
       <g transform={`translate(0 ${p.nod}) rotate(${p.tilt} 300 560)`}>
         {/* neck — longer, leaner */}
         <path d="M256 470 L 344 470 L 350 572 C 320 590, 280 590, 250 572 Z" fill={K.skinShade} />
@@ -114,7 +106,7 @@ export const HostFigure: React.FC<{ p: HostPose; style?: React.CSSProperties }> 
           <path d="M212 290 C 228 276, 258 272, 282 280 L 281 291 C 258 285, 232 287, 214 298 Z" fill={K.brow} />
           <path d="M388 290 C 372 276, 342 272, 318 280 L 319 291 C 342 285, 368 287, 386 298 Z" fill={K.brow} />
         </g>
-        {eye(250)}{eye(350)}{shut(250)}{shut(350)}
+        {p.blink <= 0.85 && eye(250)}{p.blink <= 0.85 && eye(350)}{shut(250)}{shut(350)}
         {/* nose — straighter, cleaner */}
         <path d="M298 330 C 300 358, 308 380, 318 396 C 310 406, 296 406, 286 400" stroke={K.skinDeep} strokeWidth={2.8} fill="none" strokeLinecap="round" opacity={0.7} />
         <path d="M274 398 C 284 408, 302 410, 326 400 C 316 412, 290 414, 274 398 Z" fill={K.skinDeep} opacity={0.42} />
@@ -132,7 +124,30 @@ export const HostFigure: React.FC<{ p: HostPose; style?: React.CSSProperties }> 
         <path d="M280 488 C 292 494, 308 494, 320 488" stroke={K.skinDeep} strokeWidth={2} fill="none" opacity={0.35} />
         {/* cool rim: soft edge wash instead of a hard line */}
         <path d="M432 326 C 432 400, 412 450, 378 482 C 400 440, 414 390, 416 330 C 418 280, 410 240, 396 214 C 420 240, 432 280, 432 326 Z" fill="#A9BED2" opacity={0.22} />
-              </g>
+      </g>
+  );
+};
+
+export const HostFigure: React.FC<{ p: HostPose; style?: React.CSSProperties }> = ({ p, style }) => {
+  return (
+    <svg viewBox="0 0 600 760" style={style}>
+      <HostDefs />
+
+      {/* body: grey tee + open navy chore jacket */}
+      <path d="M24 760 C 34 652, 96 604, 196 586 L 404 586 C 504 604, 566 652, 576 760 Z" fill="url(#jacket4)" />
+      <path d="M232 586 L 368 586 L 346 760 L 254 760 Z" fill={K.tee} />
+      <path d="M300 640 L 300 760" stroke={K.teeShade} strokeWidth={2} opacity={0.35} />
+      <path d="M240 560 C 262 600, 338 600, 360 560 L 366 586 C 340 618, 260 618, 234 586 Z" fill={K.teeShade} />
+      <path d="M246 566 C 268 598, 332 598, 354 566" stroke="#A3A7AD" strokeWidth={4} fill="none" opacity={0.55} />
+      {/* jacket lapels (soft collar, folded down) */}
+      <path d="M198 590 L 230 586 L 262 700 L 254 760 L 210 760 C 214 700, 206 640, 198 590 Z" fill={K.jacketLit} />
+      <path d="M402 590 L 370 586 L 338 700 L 346 760 L 390 760 C 386 700, 394 640, 402 590 Z" fill={K.jacketDeep} />
+      <path d="M232 588 L 262 700 M368 588 L 338 700" stroke={K.stitch} strokeWidth={1.8} strokeDasharray="5 5" opacity={0.6} />
+      <path d="M150 660 C 160 700, 165 730, 168 760 M450 660 C 440 700, 435 730, 432 760" stroke={K.jacketDeep} strokeWidth={3} fill="none" opacity={0.7} />
+      {/* chest pocket */}
+      <path d="M408 650 L 470 646 L 474 700 L 412 704 Z" fill="none" stroke={K.stitch} strokeWidth={1.6} strokeDasharray="5 5" opacity={0.5} />
+
+      <HeadGroup p={p} />
     </svg>
   );
 };

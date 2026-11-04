@@ -1,6 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, Img, staticFile } from 'remotion';
-import { HostFigure, HostPose } from '../host/Host';
+import { HeadGroup, HostDefs, HostFigure, HostPose } from '../host/Host';
+import { BodyPose, FACE, HostBodyFigure, POSES, walkPose } from '../host/HostBody';
 import { C, F } from '../theme';
 
 const base: HostPose = { talk: 0, blink: 0, look: 0, brow: 0, smile: 0.25, tilt: 0, nod: 0 };
@@ -109,3 +110,65 @@ export const BoardIcons: React.FC = () => (
     </div>
   </AbsoluteFill>
 );
+
+// BOARD 3 — full body: the rig in six poses (every joint is a number, so it can move in any shot).
+export const BoardBody: React.FC = () => {
+  const items: [string, string, BodyPose][] = [
+    ['Idle', 'weight shifts, breathes', POSES.idle],
+    ['Explaining', 'hands at chest, talking', POSES.explain],
+    ['Pointing', 'at the document / chart', POSES.point],
+    ['Shrug', '"and nobody noticed"', POSES.shrug],
+    ['Hands on hips', 'end of a chapter', POSES.hips],
+    ['Walking', 'cycle · 34 frames', walkPose(0.25)],
+  ];
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(circle at 80% 15%, #2B2219, ${C.ink} 60%)` }}>
+      <Header kicker="MAIN CHARACTER · FULL BODY RIG" title="The Auditor, head to toe" />
+      <div style={{ position: 'absolute', right: 110, top: 96, width: 640, fontFamily: F.sans, fontSize: 21, lineHeight: 1.55, color: 'rgba(236,231,222,.75)' }}>
+        Jointed at shoulders, elbows, wrists, hips, knees and feet. Same head, same eyes. Dark jeans, white sneakers. Eyes move on their own: glances, looks up and down, quick darts between holds.
+      </div>
+      <div style={{ position: 'absolute', left: 30, right: 30, top: 250, display: 'flex', justifyContent: 'space-between' }}>
+        {items.map(([t, s, b]) => (
+          <div key={t} style={{ width: 310 }}>
+            <HostBodyFigure b={b} style={{ width: 310 }} />
+            <Label t={t} s={s} />
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+// BOARD 4 — motion: one walk cycle broken into 8 frames + the eye directions.
+export const BoardMotion: React.FC = () => {
+  const phases = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875];
+  const eyes: [string, Partial<HostPose>][] = [
+    ['Left', { look: -1 }], ['Right', { look: 1 }], ['Up', { lookY: -1, brow: 0.5 }],
+    ['Down', { lookY: 1 }], ['Up-right', { look: 0.8, lookY: -0.8 }], ['Blink', { blink: 1 }],
+  ];
+  return (
+    <AbsoluteFill style={{ background: C.graphite }}>
+      <Header kicker="MOTION · WALK CYCLE & EYES" title="Legs walk. Eyes look." />
+      <div style={{ position: 'absolute', left: 60, right: 60, top: 220, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        {phases.map((ph, i) => (
+          <div key={i} style={{ width: 200, textAlign: 'center' }}>
+            <HostBodyFigure b={walkPose(ph)} style={{ width: 200 }} />
+            <div style={{ fontFamily: F.mono, fontSize: 14, color: C.steel }}>{String(Math.round(ph * 34)).padStart(2, '0')} / 34</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ position: 'absolute', left: 60, top: 640, fontFamily: F.sans, fontSize: 18, color: C.steel, letterSpacing: 3 }}>ONE STEP CYCLE · LEFT LIFT → PASS → RIGHT LIFT · BODY BOBS AND SWAYS · ARMS SWING OPPOSITE</div>
+      <div style={{ position: 'absolute', left: 60, right: 60, top: 700, display: 'flex', justifyContent: 'space-between' }}>
+        {eyes.map(([t, p]) => (
+          <div key={t} style={{ width: 280 }}>
+            <svg viewBox="180 250 240 150" style={{ width: 280, background: '#201F22', borderRadius: 10 }}>
+              <HostDefs />
+              <HeadGroup p={{ ...FACE, ...p }} />
+            </svg>
+            <Label t={t} s="saccade · hold · snap" />
+          </div>
+        ))}
+      </div>
+    </AbsoluteFill>
+  );
+};

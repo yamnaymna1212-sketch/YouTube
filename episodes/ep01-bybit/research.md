@@ -54,7 +54,9 @@
 - البيانات التي وُقّعت فعلياً كانت `delegatecall` إلى عقد المهاجم `0x9622…7242`، فاستبدل "عقل" المحفظة بعقد يتحكم به المهاجم `0xbDd0…9516`، ثم سُحب كل شيء (S9).
 - ⚠️ **متضارب:** هل أظهرت محافظ Ledger الصلبة البيانات الحقيقية ولم تُراجع (blind signing)؟ المصادر مختلفة. في السكريبت نقول: "الشاشة أظهرت شيئاً، والتوقيع كان على شيء آخر"، ونذكر أن جهاز التوقيع لم يكشف الفرق بوضوح كافٍ، دون اتهام أي شخص.
 
-## 4. نقاط لا نقولها (تجنباً للخطأ أو الضرر)
+## 4. نقاط لا نقولها
+
+- ❌ **لم تعد Bybit "أكبر سرقة في التاريخ"**: سرقة Binance في 29 أكتوبر 2026 (~6.3 مليار $) تجاوزتها. الصيغة الصحيحة: "كانت أكبر سرقة كريبتو مسجّلة حتى أكتوبر 2026". (تجنباً للخطأ أو الضرر)
 
 - ❌ لا نقول "Bybit اختُرقت". الأدق: "أموال Bybit سُرقت عبر اختراق مزوّد خدمة اسمه Safe{Wallet}". التحقيقات لم تجد ثغرة في بنية Bybit.
 - ❌ لا نسمّي "Developer1" ولا نخمّن هويته.
@@ -87,6 +89,7 @@
 | S19 | Fortune — Chainalysis، ديسمبر 2025 | 🟡 | https://fortune.com/2025/12/18/north-korea-stole-a-record-amount-of-crypto/ |
 | S20 | Decrypt عبر Yahoo Finance، 10 أغسطس 2026 — الدعوى المدنية | 🟡 | https://finance.yahoo.com/markets/crypto/articles/bybit-sues-north-korea-over-090400772.html |
 | S21 | CSIS — The ByBit Heist and the Future of U.S. Crypto Regulation | 🟡 تحليلي | https://www.csis.org/analysis/bybit-heist-and-future-us-crypto-regulation |
+| S23 | **سرقة Binance (29 أكتوبر 2026، حوالي 6.3 مليار $)**، صارت أكبر سرقة كريبتو مسجّلة، والتقارير تربطها بـ TraderTraitor. Wikipedia «2026 Binance hack»، NPR 31 أكتوبر 2026، CNBC 29 و30 أكتوبر 2026. ⚠️ الوقائع ما زالت تتغير | 🟡 | https://www.npr.org/2026/10/31/nx-s1-6024426/binance-crypto-heist-cyber-criminals-north-korea |
 | S22 | بيان FBI وDC3 والشرطة اليابانية (NPA)، 23 ديسمبر 2024: TraderTraitor وراء سرقة DMM Bitcoin (4,502.9 BTC، ~308 مليون $، عبر مسؤول توظيف مزيف على LinkedIn وموظف في Ginco). ابحث في fbi.gov عن: "TraderTraitor Responsible for Theft of $308 Million USD from Bitcoin.DMM.com". تغطية: The Record | ✅ (الأصل) / 🟡 | https://therecord.media/fbi-largest-crypto-hack-2024-tradertraitor |
 
 ## 6. قبل النشر: ما يجب التحقق منه من المصدر الأصلي

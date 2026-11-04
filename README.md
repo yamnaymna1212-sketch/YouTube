@@ -1,20 +1,12 @@
-# YouTube — قناة "المدقّق"
+# The Auditor — documentary channel on real financial crimes (English)
 
-| الملف | المحتوى |
+| المسار | المحتوى |
 |---|---|
-| `docs/brand-decision.md` | توصية اللغة والاسم والحلقة الأولى |
-| `episodes/ep01-bybit/research.md` | التسلسل الزمني، والأرقام، و22 مصدراً، وما يجب التحقق منه قبل النشر |
-| `episodes/ep01-bybit/script.md` | السكريبت الكامل (~10 دقائق) مع المشاهد، والعناوين، والوصف |
-| `episodes/ep01-bybit/materials.md` | المواد الحقيقية لكل مشهد مع الرخصة، وخطة الموسيقى، وتعليمات تسجيل الصوت |
+| `studio/` | **مشروع Remotion الجديد** (4.0.540): المضيف v3، و8 أنواع لقطات، وعيّنة `style-reel.mp4` |
+| `style/STYLE-v3.md` | **دليل الستايل الحالي**: الألوان، والخطوط، وأنواع اللقطات، وقواعد المونتاج البشري، ومصادر المواد الحقيقية |
+| `episodes/ep01-bybit/script-en.md` | **السكريبت الإنجليزي** (~11 دقيقة) مع نوع اللقطة لكل جملة |
+| `episodes/ep01-bybit/research.md` | البحث: التسلسل الزمني و23 مصدراً (أضيفت سرقة Binance في أكتوبر 2026) |
+| `episodes/ep01-bybit/materials.md` | قائمة المواد وخطة الموسيقى وتعليمات التسجيل |
+| `style/` (v2) | مؤرشف: الستايل العربي السابق |
 
-**ما زال ناقصاً:** `channel_project.zip` (مشروع Remotion) لم يُرفع بعد إلى المستودع.
-
-## الستايل v2: "الدفتر المفتوح"
-
-| الملف | المحتوى |
-|---|---|
-| `style/STYLE.md` | دليل الستايل: البصمة، وقواعد الشعارات والشخصيات والمال والفيديو الحقيقي، وقواعد أداء المدقّق |
-| `style/frames/out/` | 9 إطارات مرجعية 1920×1080 (نظرة عامة: `_overview.jpg`) |
-| `style/frames/auditor.js` | المدقّق v2: SVG بوضعيات، جاهز للنقل إلى Remotion |
-| `style/assets/` | مواد حقيقية مع `LICENSES.md` و`registry.json` (كلمة ← شعار) |
-| `style/tools/cue-assets.js` | يطبع متى يظهر كل شعار أو شخص حسب السكريبت |
+للرندر: `cd studio && npm install && npm run render` (يستخدم Chromium الموجود في `/opt/pw-browsers/chromium`).

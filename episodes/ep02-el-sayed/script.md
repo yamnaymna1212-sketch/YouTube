@@ -57,6 +57,7 @@
 |---|---|---|
 | 1:20 | `CARD` **FILE 01 · GAS** (paper texture, red tab) | — |
 | 1:23 | `WORLD` gas station at sunset, low angle, pylon **$4.15⁹** | Let's start where Jake starts every week. Regular gas right now averages four-fifteen a gallon nationwide. That's a dollar thirteen more than a year ago. [S5] |
+| 1:29 | `METER` mini-calc slides in: **52 × $62.30 = $3,240/yr** · last year **$2,355** | Jake fills up once a week. That's about three thousand two hundred and forty dollars a year on gas. Eight hundred and eighty more than last year, for the exact same car and the exact same commute. |
 | 1:33 | `MAP` U.S. by region, colours fill in one by one | And where you live changes the bill. West Coast: five-thirty. Gulf Coast: three sixty-four. Jake's Midwest: four-ten. [S5] |
 | 1:45 | `EVIDENCE` one gallon cut into slices: crude ~½ · refining ~¼ · distribution · taxes ~⅛ | But here's what most people don't know. About half of what you pay is the price of crude oil, set on a global market. Refining is about a quarter. Taxes, about an eighth. [S6] |
 | 2:00 | `PHOTO` real 2026 pump close-up (Louisiana, March) with its real date stamp | Oil is priced by the world, not by the White House. |
@@ -72,6 +73,7 @@
 | 2:50 | `CARD` **FILE 02 · HEALTH CARE** | — |
 | 2:53 | `WORLD` Jake outside the pharmacy, reading his pay stub | Jake gets insurance through the diner. Like the average American worker, he pays about fourteen hundred and forty dollars a year for single coverage. If he had a family, it'd be six thousand eight hundred and fifty. [S7] |
 | 3:07 | `EVIDENCE` KFF data card, bar grows to **$26,993** | And that's only the worker's share. The full price of an average family plan in 2025? Almost twenty-seven thousand dollars a year. Most of it is paid by the employer, before it ever reaches the paycheck. [S7] |
+| 3:16 | `WORLD` Jake at the pharmacy counter, receipt printing | And that's before he actually gets sick. Deductibles and copays come on top, every time he walks through a door like this one. |
 | 3:20 | `FOOTAGE` El-Sayed at the hearing | El-Sayed's answer is Medicare for All: one public plan for everyone. No premiums, and mostly no deductibles or copays. [S4] |
 | 3:32 | `METER` **HEALTH: +$1,440** (green, ticks up) / `WORLD` Jake grins | For Jake, that's an instant win on paper: about fourteen hundred and forty dollars back every year. |
 | 3:40 | `KINETIC` record-scratch freeze: *"But…"* | But someone has to pay for it. |
@@ -88,6 +90,7 @@
 | 4:45 | `MAP` Michigan highlighted: **$13.73 → $15.00 (Jan 1, 2027)** | But Jake lives in Michigan, where the state minimum is already thirteen seventy-three, and it goes to fifteen dollars in January. [S10] |
 | 4:55 | `MAP` Texas and Indiana light up: **$7.25** | So a federal raise matters most in places like Texas or Indiana, where it's still seven twenty-five. [S10] |
 | 5:05 | `EVIDENCE` CBO card: **8.9M** get a raise · **~700,000** jobs lost (avg. est.) | What would a big raise actually do? When the Congressional Budget Office studied a seventeen-dollar minimum wage, it found about 8.9 million workers would get a raise, and estimated around seven hundred thousand jobs could disappear. [S11] |
+| 5:16 | `METER` calc: **$17 − $13.73 = $3.27/hr × 2,080 hrs ≈ +$6,800/yr** | Put that on Jake. If he earns the Michigan minimum and Congress passed seventeen dollars, he'd make about six thousand eight hundred dollars more a year. If his job survives. |
 | 5:22 | `WORLD` split screen: Jake A gets a raise / Jake B sees a **CLOSED** sign on the diner | Winners and losers. Both real. |
 | 5:30 | `KINETIC` *"But…"* / `WORLD` Jake on the diner steps | But here's the twist for Jake: Michigan already got most of the way there on its own. |
 | 5:40 | `METER` **PAYCHECK: small (MI) · big (TX)** | So file three, for Jake: a small change. For a Jake in Texas: a big one. |
@@ -100,9 +103,10 @@
 | 6:00 | `CARD` **FILE 04 · WHO PAYS?** | — |
 | 6:03 | `PHOTO` Capitol, slow push, money stacks drifting in | El-Sayed says the very richest Americans should pay more. His campaign hasn't published a detailed tax plan, so here's the honest version. [S4] |
 | 6:15 | `EVIDENCE` two scenario cards: **A · Taxes on the very rich & corporations** → Jake keeps most of the $1,440 · **B · Broad payroll tax on everyone** → part of it comes back out | If Medicare for All is paid mostly by the very rich and big corporations, Jake keeps most of that fourteen hundred and forty. If it's paid with a broad payroll tax on everyone, part of it comes back out of his check. |
+| 6:28 | `EVIDENCE` napkin math animates: premium line crossed out, new tax line appears with a "?" | Think of it like this: today, Jake's insurance is a private bill. Under Medicare for All, it becomes a public one. The bill doesn't vanish. It changes address. |
 | 6:35 | `WORLD` Jake at a diner booth doing math on a napkin | Either way, Jake would stop paying premiums. The real question is what replaces them. |
 | 6:45 | `KINETIC` *"But…"* / `PHOTO` Capitol | But remember: a president proposes. Congress decides. And both chambers would need to agree. |
-| 6:58 | `METER` full tally: **GAS ≈ $0 · HEALTH +$1,440 · PAY small · TAXES ?** | So here's Jake's scoreboard. |
+| 6:58 | `METER` full tally builds line by line | So here's Jake's scoreboard so far. |
 
 ### CLOSE (7:15–8:00)
 
@@ -110,6 +114,7 @@
 |---|---|---|
 | 7:15 | `WORLD` Jake walking home at dusk, wide, streetlights flicking on | So, if El-Sayed became president, would Jake be richer? On paper, his biggest bill disappears. In reality, it depends on one thing: how it's paid for. |
 | 7:30 | `EVIDENCE` the **$26,993** bar returns, huge | And that number bigger than everything else? It's this: twenty-seven thousand dollars for an average family health plan. Most Americans never see it, because it's spent before their paycheck is even printed. [S7] |
+| 7:36 | `METER` final board flips: **GAS ≈ $0 · HEALTH +$1,440 · PAY up to +$6,800 (if $17) · TAXES ?** | So Jake's final score: maybe thousands better off, maybe not, and the answer is hiding in one line of a tax bill that hasn't been written yet. |
 | 7:42 | `WORLD` Jake turns to camera, half-smile | Would you trade your premiums for higher taxes? Tell me in the comments. |
 | 7:50 | `CARD` channel end card + next episode tease | If you want to see what the next big name would do to your wallet, subscribe. I'll do the math, so you don't have to. |
 
@@ -147,7 +152,7 @@ No type repeats back to back ✓ · a new shot every 4–8 s ✓ · real materia
 | S10 | Michigan minimum $13.73 (Jan 1, 2026) → $15.00 (Jan 1, 2027); Texas & Indiana at $7.25 | [CBS Detroit](https://www.cbsnews.com/detroit/news/michigans-minimum-wage-january-2026) · [Sommers PC](https://www.sommerspc.com/blog/2026/07/minimum-wage-increases-in-2026-what-multi-state-employers-should-know/) |
 | S11 | CBO on a $17 minimum wage (Dec 2023): ~8.9M workers raised; ~700k jobs lost (avg. est.), median 500k | [SHRM on CBO](https://shrm.org/topics-tools/news/Minimum-Wage-Proposal-Cost-Jobs-CBO-Says) · [Senate HELP (minority)](https://www.help.senate.gov/rep/newsroom/press/cbo-democrats-17-minimum-wage-bill-to-cost-14-million-american-jobs) |
 
-**Jake's numbers (illustrative character, built from the averages above):** 15 gal × $4.153 = $62.30 per fill-up (a year ago 15 × $3.019 = $45.29). His health share = KFF single-coverage average ($1,440/yr ≈ $55.38 per biweekly check).
+**Jake's numbers (illustrative character, built from the averages above):** 15 gal × $4.153 = $62.30 per fill-up (a year ago 15 × $3.019 = $45.29); weekly fill-up × 52 = $3,240/yr vs $2,355 (+$885). Wage: ($17 − $13.73) × 2,080 hrs = $6,802/yr (full-time, if he earns the MI minimum; hypothetical federal $17). His health share = KFF single-coverage average ($1,440/yr ≈ $55.38 per biweekly check).
 
 ## 6. Balance check (YouTube policy and trust)
 - Both sides get their strongest real number: the plan's upside (no premiums, $1,440 back, 8.9M raises) and its costs (>$30T, ~700k jobs at risk).

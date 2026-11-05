@@ -64,5 +64,12 @@
 - Shots: $26,993 slam → KFF page → Jake's pay stub (employer line "not shown") → NASA Detroit → El-Sayed photo + lower third → "…president?" typed → "8 minutes" promise card → EIA table $4.15 → stub +$6,800 → 1973 cook 700,000 jobs → House 2008 clip $30 TRILLION → blank tax line "?" → title slam.
 - `FullBody` now takes `stub` (pay-stub text) so Jake's prop shows $13.73/hr, not $7.25.
 
+## Done 5 Nov 2026 (session 3: Cold open + Who is he? videos)
+- New compositions in `studio/src/ep02/Part1.tsx`: `EP02ColdOpen` (vo_01, 38.3 s, 10 shots) and `EP02WhoIsHe` (vo_02, 41.5 s, 11 shots). Both reuse the building blocks exported from `Hook.tsx`.
+- New shared piece: `Wallet` (JAKE'S WALLET meter, top-right), starts at $0 in the cold open.
+- Preview of hook + cold open + who is he: `episodes/ep02-el-sayed/renders/ep02-part1-v1.mp4`.
+- Open decision: the hook and vo_01 overlap ("what if he became president?" and the "one number" loop are said twice). Either trim vo_01 after "…to the U.S. Senate." or keep it.
+- The Senate hearing video is still missing, so D4 uses the public-domain still of the hearing.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

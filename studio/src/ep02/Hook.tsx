@@ -31,10 +31,10 @@ export const HOOK = {
 export const HOOK_FRAMES = 1000;
 
 // ---------- small building blocks ----------
-const useDur = () => useVideoConfig().durationInFrames;
+export const useDur = () => useVideoConfig().durationInFrames;
 
 // Slow camera move on a still: scale + drift, eased. Every still moves (no dead frames).
-const Push: React.FC<{ src: string; from?: number; to?: number; x?: [number, number]; y?: [number, number]; filter?: string; origin?: string }> = ({ src, from = 1.05, to = 1.18, x = [0, 0], y = [0, 0], filter, origin = '50% 50%' }) => {
+export const Push: React.FC<{ src: string; from?: number; to?: number; x?: [number, number]; y?: [number, number]; filter?: string; origin?: string }> = ({ src, from = 1.05, to = 1.18, x = [0, 0], y = [0, 0], filter, origin = '50% 50%' }) => {
   const f = useCurrentFrame(); const d = useDur();
   const t = interpolate(f, [0, d], [0, 1], { ...clamp, easing: io });
   return (
@@ -45,25 +45,25 @@ const Push: React.FC<{ src: string; from?: number; to?: number; x?: [number, num
 };
 
 // Impact shake for number slams (decays in ~10 frames).
-const useShake = (at: number, amp = 18) => {
+export const useShake = (at: number, amp = 18) => {
   const f = useCurrentFrame();
   const k = interpolate(f, [at, at + 12], [1, 0], clamp) * (f >= at ? 1 : 0);
   return `translate(${(random(`x${f}`) - 0.5) * amp * k}px, ${(random(`y${f}`) - 0.5) * amp * k}px)`;
 };
 
-const Src: React.FC<{ children: React.ReactNode; dark?: boolean }> = ({ children, dark }) => {
+export const Src: React.FC<{ children: React.ReactNode; dark?: boolean }> = ({ children, dark }) => {
   const f = useCurrentFrame();
   return <div style={{ position: 'absolute', right: 70, bottom: 46, fontFamily: F.mono, fontSize: 17, letterSpacing: 0.3, color: dark ? 'rgba(12,13,16,.65)' : 'rgba(236,231,222,.7)', textShadow: dark ? 'none' : '0 1px 3px rgba(0,0,0,.8)', opacity: interpolate(f, [4, 14], [0, 1], clamp) }}>SOURCE · {children}</div>;
 };
-const Archive: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Archive: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div style={{ position: 'absolute', left: 70, top: 56, display: 'flex', alignItems: 'center', gap: 12, fontFamily: F.mono, fontSize: 18, letterSpacing: 2, color: '#fff', background: 'rgba(0,0,0,.55)', padding: '7px 14px' }}>
     <span style={{ width: 12, height: 12, borderRadius: 6, background: C.red }} />{children}
   </div>
 );
-const Grade: React.FC<{ k?: number }> = ({ k = 0.6 }) => <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,${k}) 100%)` }} />;
+export const Grade: React.FC<{ k?: number }> = ({ k = 0.6 }) => <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,${k}) 100%)` }} />;
 
 // Big number that slams in: overshoot scale + blur-in + shake.
-const Slam: React.FC<{ text: string; color: string; size: number; at?: number; style?: React.CSSProperties }> = ({ text, color, size, at = 0, style }) => {
+export const Slam: React.FC<{ text: string; color: string; size: number; at?: number; style?: React.CSSProperties }> = ({ text, color, size, at = 0, style }) => {
   const f = useCurrentFrame();
   const s = interpolate(f, [at, at + 6, at + 12], [1.9, 0.96, 1], clamp);
   const o = interpolate(f, [at, at + 3], [0, 1], clamp);
@@ -71,7 +71,7 @@ const Slam: React.FC<{ text: string; color: string; size: number; at?: number; s
   return <div style={{ fontFamily: F.mono, fontWeight: 500, fontSize: size, color, lineHeight: 1, letterSpacing: -2, transform: `${useShake(at)} scale(${s})`, opacity: o, filter: `blur(${b}px)`, textShadow: '0 10px 40px rgba(0,0,0,.6)', ...style }}>{text}</div>;
 };
 
-const Label: React.FC<{ children: React.ReactNode; at?: number; color?: string; style?: React.CSSProperties }> = ({ children, at = 8, color = C.bone, style }) => {
+export const Label: React.FC<{ children: React.ReactNode; at?: number; color?: string; style?: React.CSSProperties }> = ({ children, at = 8, color = C.bone, style }) => {
   const f = useCurrentFrame();
   const t = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
   return <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 26, letterSpacing: 5, textTransform: 'uppercase', color, opacity: t, transform: `translateY(${(1 - t) * 14}px)`, ...style }}>{children}</div>;
@@ -112,7 +112,7 @@ const S2: React.FC = () => {
 };
 
 // Pay stub card (HTML, paper). `extra` adds the raise line for shot 9.
-const Stub: React.FC<{ mode: 'empty' | 'raise' }> = ({ mode }) => {
+export const Stub: React.FC<{ mode: 'empty' | 'raise' }> = ({ mode }) => {
   const f = useCurrentFrame();
   const circle = interpolate(f, [26, 48], [0, 1], { ...clamp, easing: ease });
   const row = (a: string, b: string, c?: string) => (
@@ -152,7 +152,7 @@ const Stub: React.FC<{ mode: 'empty' | 'raise' }> = ({ mode }) => {
 };
 
 // Jake's world backdrop (illustrated street at golden hour), slightly defocused for the stub shots.
-const World: React.FC<{ blur?: number }> = ({ blur = 0 }) => (
+export const World: React.FC<{ blur?: number }> = ({ blur = 0 }) => (
   <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={{ position: 'absolute', inset: 0, filter: blur ? `blur(${blur}px)` : undefined }}>
     <Sky horizon={600} />
     <Skyline base={640} />
@@ -372,7 +372,7 @@ const S13: React.FC = () => {
 };
 
 // White flash for the rapid number montage (2 frames).
-const Flash: React.FC = () => {
+export const Flash: React.FC = () => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{ background: '#fff', opacity: interpolate(f, [0, 3], [0.7, 0], clamp) }} />;
 };

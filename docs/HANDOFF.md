@@ -32,5 +32,15 @@
 - مواصفات الصوت (`style/VOICE.md`).
 - مضيف بجسم كامل متحرك: ساقان تمشيان، وذراعان تشيران وتشرحان، وعينان تتحركان وحدهما. صور ثابتة فقط حتى الآن.
 
+
+## تم في 5 نوفمبر 2026 (جلسة EP02)
+- **الحلقة الأولى المعتمدة:** "If El-Sayed Became President? Your Wallet, Explained" في `episodes/ep02-el-sayed/`. فاز El-Sayed بمقعد مجلس الشيوخ عن ميشيغان في 3 نوفمبر 2026، وهو أول سيناتور مسلم.
+- **السكريبت الكامل (8 دقائق)** في `script.md`، مع البنية وخطة اللقطات و11 مصدراً.
+- **الشخصية الرئيسية Jake (26):** شاب أمريكي بشعر بني فاتح وعينين زرقاوين، يعيش في عالم مرسوم (شارع، ومطعم Sunrise Diner، ومحطة وقود، وبنك). الكود في `studio/src/host/Guy.tsx` و`FullBody.tsx` و`studio/src/world/World.tsx`. ⚠️ يوجد أيضاً مضيف v4 (حوالي 30 سنة) من جلسة أخرى. **المستخدم طلب شاباً بين 20 و30، والمعتمد Jake.**
+- **صور الستايل:** `episodes/ep02-el-sayed/style-v2/` (عالم Jake + خريطة EIA + لقطة حقيقية + مال حقيقي + كولاج). الرخص في `LICENSES.md`.
+- **الصوت:** النصوص جاهزة في `voiceover-parts.md` (صوت Justin `bbhjR3iQ4dSHKQsgUFCH`، والموديل `eleven_v4`). **لم تُولَّد** لأن رصيد ElevenLabs انتهى (19 من 10,000). تحتاج 5,937 رصيداً لنسخة واحدة.
+- **فيديوهات حقيقية لم تُنزَّل** (Wikimedia يرجع خطأ 429 من الخادم): `File:Abdul_El_Sayed_senate_hearing.webm` و`File:Rep._Mike_Rogers_Opens_a_House_Intelligence_Committee_Hearing_on_NSA_Data_Collection_Programs.ogg`. الأفضل أن ينزّلهما المستخدم ويرفعهما إلى `studio/public/sayed/`.
+- ⚠️ صورة `File:Mike Rogers official photo.jpg` تخص Mike Rogers نائب ألاباما. لا تستخدمها أبداً.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

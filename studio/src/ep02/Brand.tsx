@@ -20,22 +20,30 @@ export const ChannelAvatar: React.FC = () => (
   </AbsoluteFill>
 );
 
+export const BANNER_NAME = 'CashCheck';
 export const ChannelBanner: React.FC = () => (
   <AbsoluteFill style={{ background: C.ink, overflow: 'hidden' }}>
     {/* real SPECIMEN notes, dark and blurred, as texture */}
     {[0, 1, 2, 3, 4, 5].map((i) => (
       <Img key={i} src={staticFile('sayed/money/usd100.jpg')} style={{ position: 'absolute', width: 900, left: -100 + i * 470, top: 180 + (i % 2) * 620, rotate: `${-14 + i * 6}deg`, filter: 'brightness(.22) saturate(.5) blur(2px)' }} />
     ))}
-    <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(12,13,16,.55), rgba(12,13,16,.95) 62%)' }} />
-    {/* safe area: 1546 × 423 centred */}
+    <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(12,13,16,.5), rgba(12,13,16,.95) 62%)' }} />
+    {/* safe area: 1546 × 423 centred — everything important lives here */}
     <div style={{ position: 'absolute', left: (2560 - 1546) / 2, top: (1440 - 423) / 2, width: 1546, height: 423, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <div>
-        <div style={{ width: 90, height: 6, background: C.red, marginBottom: 22 }} />
-        <div style={{ fontFamily: F.serif, fontSize: 150, color: C.bone, lineHeight: 0.95 }}>Wallet <span style={{ color: C.amber, fontStyle: 'italic' }}>Math</span></div>
-        <div style={{ fontFamily: F.sans, fontSize: 40, color: C.bone, opacity: 0.8, marginTop: 20 }}>Big headlines. Your money. We do the math.</div>
-        <div style={{ fontFamily: F.mono, fontSize: 28, color: C.steel, letterSpacing: 3, marginTop: 22 }}>GAS · HEALTH CARE · PAYCHECKS · TAXES</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ width: 60, height: 6, background: C.red }} />
+          <div style={{ fontFamily: F.mono, fontSize: 30, letterSpacing: 6, color: C.amber }}>{BANNER_NAME.toUpperCase()}</div>
+        </div>
+        <div style={{ fontFamily: F.sans, fontWeight: 900, fontSize: 150, lineHeight: 0.98, color: C.bone, letterSpacing: -2, marginTop: 18 }}>
+          Your Money.<br /><span style={{ color: C.amber }}>Decoded.</span>
+        </div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, marginTop: 26, background: C.red, borderRadius: 6, padding: '10px 22px' }}>
+          <svg width={26} height={26} viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff" /></svg>
+          <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 26, letterSpacing: 4, color: '#fff' }}>SUBSCRIBE</span>
+        </div>
       </div>
-      <FullBody pose="read" stub="+$1,440 − ?" face={{ look: -0.4, brow: 0.6, smile: 0.3 }} style={{ height: 520, marginRight: 30 }} />
+      <FullBody pose="cheer" face={{ look: -0.5, brow: 0.6, smile: 1 }} style={{ height: 540, marginRight: 40 }} />
     </div>
     <Grain />
   </AbsoluteFill>

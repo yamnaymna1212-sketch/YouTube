@@ -29,6 +29,21 @@
 
 ## 2. Script
 
+### HOOK v2 (0:00–0:25), replaces the first 25 s of the cold open (approved 5 Nov 2026, pending)
+
+| Time | Shot (real material) | Voice-over |
+|---|---|---|
+| 0:00 | Black. A huge amber number slams in: **$26,993**, then grain and a camera shake | Twenty-seven thousand dollars. |
+| 0:02 | `SCREEN` KFF 2025 page (`screens/kff_ehbs_2025.png`), fast push to the headline | That's what a typical family's health plan costs every year, |
+| 0:05 | `WORLD` Jake opens his pay stub; the number is NOT on it (red circle around the empty line) | and most of it never shows up on a paycheck. |
+| 0:08 | `PHOTO` El-Sayed meet-and-greet (Conlan Houston) → flash cut to `nasa_iss074e0334264` (Detroit at night) | On Tuesday, Michigan elected a senator who wants to replace that entire system. |
+| 0:13 | `KINETIC` "…president?" typed, cursor blinks, 1 s of silence | So what if he became president? |
+| 0:15 | **Rapid montage, 1 s each, one number per shot:** EIA table **$4.15** (`screens/eia_gas_diesel_update.png`) → Jake's stub **+$6,800** → `doc01` "SORRY NO GASOLINE" **700,000 jobs** → `v05` House hearing **$30 TRILLION** | In the next eight minutes: gas at four-fifteen a gallon, one paycheck that could jump sixty-eight hundred dollars, seven hundred thousand jobs on the line, and a thirty-trillion-dollar bill. |
+| 0:22 | `EVIDENCE` a blank line on a tax form, with a red "?" | And at the end, the one line that decides who pays it. |
+| 0:25 | Title slam: **IF EL-SAYED BECAME PRESIDENT?** → continue to "This is Jake…" | — |
+
+Why it works: it opens on a shocking number (pattern break), turns it into a personal question (your paycheck), adds a stake (election), then a promise list of four specific numbers, and ends on an open loop (who pays).
+
 ### COLD OPEN (0:00–0:30)
 
 | Time | Shot | Voice-over |

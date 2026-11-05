@@ -8,6 +8,13 @@
 
 Generate one part per request, `generations_count: 1` if credits are tight. Save files as `vo_01.mp3` … `vo_07.mp3` in `studio/public/sayed/vo/`.
 
+## vo_00 · HOOK v2 (540 credits)
+
+```
+Twenty-seven thousand dollars. [short pause] That's what a typical family's health plan costs every year, and most of it never shows up on a paycheck. On Tuesday, Michigan elected a senator who wants to replace that entire system. [pause] [curious] So what if he became president? In the next eight minutes: gas at four-fifteen a gallon, one paycheck that could jump sixty-eight hundred dollars, seven hundred thousand jobs on the line, and a thirty-trillion-dollar bill. [short pause] And at the end, the one line that decides who pays it.
+```
+Tried 5 Nov 2026: failed, "quota of 10000, 19 credits remaining". This is the **free plan** quota, not Pro. Nothing was charged. Flow: `b4UPp2bA1coSJLqmvcQ7`.
+
 ## vo_01 · COLD OPEN (631 credits)
 
 ```

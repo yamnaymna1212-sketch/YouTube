@@ -1,6 +1,6 @@
 # EP02 — If El-Sayed Became President? Your Wallet, Explained
 
-- **Length:** 8:00 (≈1,180 words of VO at ~150 wpm, with breathing room for visuals)
+- **Length:** ≈8:00 (≈1,020 words of VO at a calm ~130 wpm, plus chapter cards and pauses)
 - **Main character:** Jake, 26, works at the Sunrise Diner in Michigan, drives a 2012 sedan, single, employer health plan.
 - **Narrator:** off-screen, calm and conversational (American male, 25–35). Jake never speaks; he *reacts* (faces, gestures).
 - **Tone:** curious, fair, a little wry. Not news, not politics. **Math on one man's wallet.**

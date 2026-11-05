@@ -11,9 +11,14 @@
     "@remotion/media": "4.0.540",
     "@remotion/noise": "4.0.540",
     "@remotion/transitions": "4.0.540",
+    "@types/d3-geo": "^3.1.0",
+    "@types/topojson-client": "^3.1.5",
+    "d3-geo": "^3.1.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "remotion": "4.0.540"
+    "remotion": "4.0.540",
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1"
   },
   "devDependencies": {
     "@types/react": "18.3.12",

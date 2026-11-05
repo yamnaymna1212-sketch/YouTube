@@ -5,6 +5,7 @@ import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boa
 import { BodyTest } from './BodyTest';
 import { F0Jake, F1Hook, F2Gas, F3Video, F4Versus, F5Wage } from './boards/SayedFrames';
 import { StyleReel, REEL_FRAMES } from './StyleReel';
+import { W1Street, W2Gas, W3Map, W4Footage, W5Money, W6Collage } from './boards/WorldFrames';
 export const Root: React.FC = () => (
   <>
     <Composition id="StyleReel" component={StyleReel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
@@ -19,6 +20,12 @@ export const Root: React.FC = () => (
     <Still id="F4Versus" component={F4Versus} width={1920} height={1080} />
     <Still id="F5Wage" component={F5Wage} width={1920} height={1080} />
     <Still id="BodyTest" component={BodyTest} width={1920} height={1080} />
+    <Still id="W1Street" component={W1Street} width={1920} height={1080} />
+    <Still id="W2Gas" component={W2Gas} width={1920} height={1080} />
+    <Still id="W3Map" component={W3Map} width={1920} height={1080} />
+    <Still id="W4Footage" component={W4Footage} width={1920} height={1080} />
+    <Still id="W5Money" component={W5Money} width={1920} height={1080} />
+    <Still id="W6Collage" component={W6Collage} width={1920} height={1080} />
     <Still id="HostTest" component={HostTest} width={1920} height={1080} />
   </>
 );

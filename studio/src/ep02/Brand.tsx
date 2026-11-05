@@ -121,3 +121,55 @@ export const LogoSheet: React.FC = () => (
     </div>
   </AbsoluteFill>
 );
+
+// THUMBNAIL v2 — genre layout (B&W portrait left, coloured country on a dark map, bold boxed words). All assets ours:
+// licensed El-Sayed cut-out (Conlan Houston, CC BY-SA 4.0), Natural Earth borders (world-atlas, public domain).
+import { geoAlbers, geoPath as geoPath2 } from 'd3-geo';
+import { feature as feature2 } from 'topojson-client';
+import world from 'world-atlas/countries-50m.json';
+
+const BLUE = '#2F6FE0';
+const MapNA: React.FC = () => {
+  const countries = (feature2(world as any, (world as any).objects.countries) as any).features;
+  const usa = countries.find((c: any) => c.id === '840');
+  // fit the lower-48 box: build a projection fitted to a bbox polygon of the contiguous US
+  const box = { type: 'Feature', geometry: { type: 'MultiPoint', coordinates: [[-124.8, 24.5], [-66.9, 24.5], [-66.9, 49.4], [-124.8, 49.4], [-96, 49.4], [-96, 24.5]] } } as any;
+  const proj = geoAlbers().rotate([96, 0]).fitExtent([[500, 175], [1300, 575]], box);
+  const path = geoPath2(proj);
+  return (
+    <svg width={1280} height={720} style={{ position: 'absolute', inset: 0 }}>
+      <defs>
+        <filter id="relief" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves={5} seed={7} result="n" />
+          <feDiffuseLighting in="n" lightingColor="#fff" surfaceScale={2.2} result="l"><feDistantLight azimuth={225} elevation={42} /></feDiffuseLighting>
+          <feComposite in="l" in2="SourceGraphic" operator="in" result="lit" />
+          <feBlend in="SourceGraphic" in2="lit" mode="multiply" />
+        </filter>
+      </defs>
+      <rect width={1280} height={720} fill="#141821" />
+      <g filter="url(#relief)">
+        {countries.filter((c: any) => c.id !== '840').map((c: any) => <path key={c.id + (c.properties?.name ?? '')} d={path(c) || ''} fill="#5F646E" stroke="#1B1F27" strokeWidth={0.8} />)}
+        <path d={path(usa) || ''} fill={BLUE} stroke="#0D1F44" strokeWidth={1.2} />
+      </g>
+      <path d={path(usa) || ''} fill="none" stroke="#8FB4FF" strokeWidth={1.4} opacity={0.55} />
+    </svg>
+  );
+};
+
+export const EP02Thumb2: React.FC<{ words?: [string, string] }> = ({ words = ['YOU', 'PAY?'] }) => (
+  <AbsoluteFill style={{ background: '#141821', overflow: 'hidden' }}>
+    <MapNA />
+    {/* soft dark falloff behind the portrait, like a studio key */}
+    <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(10,12,16,.95) 0%, rgba(10,12,16,.75) 30%, rgba(10,12,16,0) 52%)' }} />
+    <Img src={staticFile('sayed/cut_elsayed.png')} style={{ position: 'absolute', left: -30, bottom: -20, height: 760, filter: 'grayscale(1) contrast(1.35) brightness(1.02) drop-shadow(0 20px 40px rgba(0,0,0,.7))' }} />
+    {/* boxed words */}
+    <div style={{ position: 'absolute', left: 690, top: 215, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 10 }}>
+      {words.map((w) => (
+        <span key={w} style={{ background: '#0A0A0A', color: '#fff', fontFamily: F.sans, fontWeight: 900, fontSize: 118, lineHeight: 1, letterSpacing: -2, padding: '10px 22px 14px', boxShadow: '0 10px 30px rgba(0,0,0,.45)' }}>{w}</span>
+      ))}
+    </div>
+    <Img src={staticFile('fx/grain3.png')} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', mixBlendMode: 'overlay', opacity: 0.6 }} />
+    <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 55% 50%, transparent 60%, rgba(0,0,0,.45) 100%)' }} />
+  </AbsoluteFill>
+);
+export const EP02Thumb2B: React.FC = () => <EP02Thumb2 words={['$30', 'TRILLION']} />;

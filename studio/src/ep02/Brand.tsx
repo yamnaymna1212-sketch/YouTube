@@ -76,3 +76,48 @@ export const ChannelCard: React.FC = () => (
     <Grain o={0.25} />
   </AbsoluteFill>
 );
+
+// LOGO v2 — the Dollarly mark: a serif D crossed by the two vertical strokes of a "$" (gold), with a small red
+// trend line rising inside the bowl (money + news/trends). Works in a circle crop and at tiny sizes.
+export const DollarlyMark: React.FC<{ size?: number; bg?: boolean }> = ({ size = 800, bg = true }) => {
+  const k = size / 800;
+  return (
+    <div style={{ position: 'relative', width: size, height: size, borderRadius: bg ? '50%' : 0, background: bg ? `radial-gradient(circle at 42% 35%, #232A37, ${C.ink} 72%)` : 'transparent', overflow: 'hidden' }}>
+      {bg && <div style={{ position: 'absolute', inset: 34 * k, borderRadius: '50%', border: `${8 * k}px solid ${C.amber}`, opacity: 0.95 }} />}
+      {/* $ strokes, behind the D */}
+      {[346, 428].map((x) => (
+        <div key={x} style={{ position: 'absolute', left: (x - 13) * k, top: 140 * k, width: 26 * k, height: 520 * k, background: C.amber, borderRadius: 13 * k }} />
+      ))}
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ fontFamily: F.serif, fontSize: 520 * k, color: C.bone, lineHeight: 1, marginTop: 44 * k, marginLeft: 0, textShadow: `0 ${6 * k}px ${24 * k}px rgba(0,0,0,.45)` }}>D</span>
+      </div>
+      {/* trend line inside the bowl */}
+      <svg width={size} height={size} viewBox="0 0 800 800" style={{ position: 'absolute', inset: 0 }}>
+        <polyline points="372,500 412,468 446,486 494,428" fill="none" stroke={C.red} strokeWidth={17} strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points="466,424 496,426 494,456" fill="none" stroke={C.red} strokeWidth={17} strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+};
+export const LogoAvatar: React.FC = () => (
+  <AbsoluteFill style={{ background: C.ink, alignItems: 'center', justifyContent: 'center' }}><DollarlyMark size={800} /></AbsoluteFill>
+);
+export const LogoMarkClear: React.FC = () => (
+  <AbsoluteFill style={{ background: 'transparent', alignItems: 'center', justifyContent: 'center' }}><DollarlyMark size={1024} bg={false} /></AbsoluteFill>
+);
+export const LogoSheet: React.FC = () => (
+  <AbsoluteFill style={{ background: C.paper, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 120 }}>
+    <DollarlyMark size={520} />
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
+        <DollarlyMark size={150} />
+        <div style={{ fontFamily: F.serif, fontSize: 170, color: C.ink, lineHeight: 1 }}>Dollar<span style={{ color: C.amber, fontStyle: 'italic' }}>ly</span></div>
+      </div>
+      <div style={{ fontFamily: F.sans, fontSize: 40, color: '#5A544A', marginTop: 20, marginLeft: 180 }}>Your money. Decoded.</div>
+      <div style={{ display: 'flex', gap: 40, marginTop: 70, marginLeft: 180, alignItems: 'center' }}>
+        {[120, 64, 36].map((s) => <DollarlyMark key={s} size={s} />)}
+        <span style={{ fontFamily: F.mono, fontSize: 24, color: '#7A7266' }}>still clear at small sizes</span>
+      </div>
+    </div>
+  </AbsoluteFill>
+);

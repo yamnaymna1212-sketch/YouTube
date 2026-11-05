@@ -88,5 +88,10 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - **vo_01 trimmed (user said go):** after HOOK v2 the cold open keeps only "This is Jake … the first Muslim senator in American history." + "So forget the politics for eight minutes. Let's do the math on Jake's wallet." (`KEEP_RANGES` in `tighten_vo.py`). Dropped: "within hours … what if he became president?", "Gas. Health care. Paychecks. Taxes." and "stay to the end … one number …". The cold open is now 18 s. vo_07 still says "that number bigger than everything else": the hook's $26,993 opening now sets that up.
 - Preview: `episodes/ep02-el-sayed/renders/ep02-part1-v2.mp4`.
 
+## Done 5 Nov 2026 (session 3: File 01 · Gas)
+- `studio/src/ep02/FileGas.tsx` → composition `EP02FileGas` (vo_03 tight, ≈63.7 s, 15 shots): FILE 01 card → real pump photo $4.15 → year-ago bars (+$1.13) → 52-week fill-up calendar counting to $3,240 → same car, same commute ($2,355 → $3,240, +$885) → EIA region map lighting on the words → real EIA per-gallon chart → 1975 pumpjack footage (crude ≈51%, global market) → animated gallon (refining 14.3 · distribution 17.8 · taxes 16.6) → 1973 embargo photos "Priced by the world" → "No president has a dial" → Carter 1977 energy address (policy moves prices over years, either direction) → "Not by next week" → score ≈ $0 → Jake's phone: payroll health insurance −$55.38 (tease for File 02).
+- The music is now **480 s** (whole episode, one take). The earlier renders of the hook, cold open and who-is-he used the old 132 s file, so re-render them before the final assembly so the music joins without a seam.
+- Preview: `episodes/ep02-el-sayed/renders/ep02-file01-gas-v1.mp4`.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

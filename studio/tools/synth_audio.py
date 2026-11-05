@@ -244,4 +244,4 @@ if __name__ == '__main__':
     write('sfx_counter.wav', counter())
     write('sfx_paper.wav', paper())
     write('sfx_shimmer.wav', shimmer())
-    music()
+    music(480.0)  # whole episode (~8 min) as one continuous take

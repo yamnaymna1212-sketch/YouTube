@@ -4,9 +4,10 @@
 import m00 from '../../public/sayed/vo/tight/vo_00.json';
 import m01 from '../../public/sayed/vo/tight/vo_01.json';
 import m02 from '../../public/sayed/vo/tight/vo_02.json';
+import m03 from '../../public/sayed/vo/tight/vo_03.json';
 
 type VoMap = { dur: number; map: [number, number, number][] };
-const MAPS: Record<string, VoMap> = { vo_00: m00 as VoMap, vo_01: m01 as VoMap, vo_02: m02 as VoMap };
+const MAPS: Record<string, VoMap> = { vo_00: m00 as VoMap, vo_01: m01 as VoMap, vo_02: m02 as VoMap, vo_03: m03 as VoMap };
 const FPS = 30;
 
 export const remap = (vo: string, frame: number): number => {

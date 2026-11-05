@@ -16,11 +16,11 @@ import { remap, voFrames } from './timing';
 // Cuts sit on the VO pauses (ffmpeg silencedetect). Shot types never repeat back to back.
 
 const A = (f: string) => staticFile(`sayed/${f}`);
-type Cut = [string, number, number, React.FC];
+export type Cut = [string, number, number, React.FC];
 // Cut lists are written in frames of the ORIGINAL take; `remap` moves them onto the pause-tightened VO.
 const TAIL = 10;
 export const partFrames = (vo: string) => voFrames(vo) + TAIL;
-const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[] }> = ({ cuts, vo, flashes = [], musicFrom, cues }) => (
+export const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[] }> = ({ cuts, vo, flashes = [], musicFrom, cues }) => (
   <AbsoluteFill style={{ background: '#000' }}>
     {cuts.map(([k, a, b, Comp], i) => {
       const from = remap(vo, a);
@@ -33,7 +33,7 @@ const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: n
     <FilmFinish />
   </AbsoluteFill>
 );
-const t01 = (f: number, d: number) => interpolate(f, [0, d], [0, 1], { ...clamp, easing: io });
+export const t01 = (f: number, d: number) => interpolate(f, [0, d], [0, 1], { ...clamp, easing: io });
 
 // Running scoreboard (top-right). Appears in the cold open, updated at the end of every file.
 export const Wallet: React.FC<{ value?: string; at?: number }> = ({ value = '$0', at = 0 }) => {
@@ -46,7 +46,7 @@ export const Wallet: React.FC<{ value?: string; at?: number }> = ({ value = '$0'
     </div>
   );
 };
-const Illus: React.FC = () => <div style={{ position: 'absolute', left: 60, bottom: 40, fontFamily: F.mono, fontSize: 15, color: 'rgba(236,231,222,.55)' }}>ILLUSTRATION · Jake is a composite character built from national averages</div>;
+export const Illus: React.FC = () => <div style={{ position: 'absolute', left: 60, bottom: 40, fontFamily: F.mono, fontSize: 15, color: 'rgba(236,231,222,.55)' }}>ILLUSTRATION · Jake is a composite character built from national averages</div>;
 
 // ======================= COLD OPEN =======================
 

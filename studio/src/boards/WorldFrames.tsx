@@ -68,14 +68,14 @@ export const W2Gas: React.FC = () => (
 );
 
 // W3 — REAL MAP. EIA regional prices by PADD, Michigan highlighted.
-const PADD: Record<string, [string, number]> = {};
+export const PADD: Record<string, [string, number]> = {};
 const set = (names: string[], label: string, v: number) => names.forEach(n => (PADD[n] = [label, v]));
 set(['Connecticut', 'Maine', 'Massachusetts', 'New Hampshire', 'Rhode Island', 'Vermont', 'Delaware', 'District of Columbia', 'Maryland', 'New Jersey', 'New York', 'Pennsylvania', 'Florida', 'Georgia', 'North Carolina', 'South Carolina', 'Virginia', 'West Virginia'], 'East Coast', 3.936);
 set(['Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Michigan', 'Minnesota', 'Missouri', 'Nebraska', 'North Dakota', 'South Dakota', 'Ohio', 'Oklahoma', 'Tennessee', 'Wisconsin'], 'Midwest', 4.102);
 set(['Alabama', 'Arkansas', 'Louisiana', 'Mississippi', 'New Mexico', 'Texas'], 'Gulf Coast', 3.636);
 set(['Colorado', 'Idaho', 'Montana', 'Utah', 'Wyoming'], 'Rocky Mountain', 4.213);
 set(['Alaska', 'Arizona', 'California', 'Hawaii', 'Nevada', 'Oregon', 'Washington'], 'West Coast', 5.296);
-const color = (v: number) => (v > 5 ? '#E5483B' : v > 4.15 ? '#E08A46' : v > 3.9 ? '#D9A441' : '#8FA36A');
+export const padColor = (v: number) => (v > 5 ? '#E5483B' : v > 4.15 ? '#E08A46' : v > 3.9 ? '#D9A441' : '#8FA36A');
 
 export const W3Map: React.FC = () => {
   const geo = feature(states as any, (states as any).objects.states) as any;
@@ -85,7 +85,7 @@ export const W3Map: React.FC = () => {
       <svg width={1560} height={1000} viewBox="-60 -80 1100 720" style={{ position: 'absolute', left: 0, top: 60 }}>
         {geo.features.map((f: any) => {
           const n = f.properties.name; const v = PADD[n]?.[1] ?? 4;
-          return <path key={n} d={path(f) || ''} fill={color(v)} stroke="#0E1116" strokeWidth={n === 'Michigan' ? 0 : 0.8} opacity={n === 'Michigan' ? 1 : 0.8} />;
+          return <path key={n} d={path(f) || ''} fill={padColor(v)} stroke="#0E1116" strokeWidth={n === 'Michigan' ? 0 : 0.8} opacity={n === 'Michigan' ? 1 : 0.8} />;
         })}
         {geo.features.filter((f: any) => f.properties.name === 'Michigan').map((f: any) => <path key="mi" d={path(f) || ''} fill="none" stroke="#fff" strokeWidth={3} />)}
         <g fontFamily="Inter, sans-serif" fontWeight={700} fill="#fff" fontSize={18}>

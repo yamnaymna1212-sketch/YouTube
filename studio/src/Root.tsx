@@ -6,13 +6,15 @@ import { BodyTest } from './BodyTest';
 import { F0Jake, F1Hook, F2Gas, F3Video, F4Versus, F5Wage } from './boards/SayedFrames';
 import { StyleReel, REEL_FRAMES } from './StyleReel';
 import { Hook, HOOK_FRAMES } from './ep02/Hook';
-import { ColdOpen, COLD_FRAMES, WhoIsHe, WHO_FRAMES } from './ep02/Part1';
+import { ColdOpen, COLD_FRAMES, WhoIsHe, WHO_FRAMES, partFrames } from './ep02/Part1';
+import { FileGas } from './ep02/FileGas';
 import { W1Street, W2Gas, W3Map, W4Footage, W5Money, W6Collage } from './boards/WorldFrames';
 export const Root: React.FC = () => (
   <>
     <Composition id="EP02Hook" component={Hook} durationInFrames={HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP02ColdOpen" component={ColdOpen} durationInFrames={COLD_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP02WhoIsHe" component={WhoIsHe} durationInFrames={WHO_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP02FileGas" component={FileGas} durationInFrames={partFrames('vo_03')} fps={30} width={1920} height={1080} />
     <Composition id="StyleReel" component={StyleReel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
     <Still id="BoardCharacter" component={BoardCharacter} width={1920} height={1080} />
     <Still id="BoardIcons" component={BoardIcons} width={1920} height={1080} />

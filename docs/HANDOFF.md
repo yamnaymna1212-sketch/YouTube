@@ -71,5 +71,12 @@
 - Open decision: the hook and vo_01 overlap ("what if he became president?" and the "one number" loop are said twice). Either trim vo_01 after "…to the U.S. Senate." or keep it.
 - The Senate hearing video is still missing, so D4 uses the public-domain still of the hearing.
 
+## Done 5 Nov 2026 (session 3: music and sound effects)
+- The user asked for **calm, dark, non-distracting ambient music + sound effects**.
+- All audio is **original, generated in code** by `studio/tools/synth_audio.py` (numpy, no samples, no licences): `studio/public/sayed/audio/music_ep02.mp3` (132 s, D minor: sub drone + slow pad Dm–Bb–Gm–A + air + sparse soft notes with echo + reverb) and `sfx_*.wav` (whoosh, impact, sub, riser, tick, type, counter, paper, shimmer).
+- `SoundLayer` in `Hook.tsx` places the music (volume 0.07, ≈15 dB under the VO) and per-part cue lists (`HOOK_CUES`, `COLD_CUES`, `WHO_CUES`). The music is one continuous take: each part starts it at its offset in the episode, so the parts join without a seam.
+- The final mix is normalised to -14 LUFS, true peak -1.5 dB (YouTube level).
+- Better-sounding option later: ElevenLabs music/SFX, once the account question is settled.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

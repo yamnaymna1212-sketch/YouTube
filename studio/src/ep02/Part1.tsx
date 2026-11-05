@@ -8,18 +8,19 @@ import { C, F } from '../theme';
 import { FilmFinish, clamp, ease, io } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
 import { Car, Diner, GasStation, Lamp, LightWrap, Sky, Skyline, Street, Tree, W } from '../world/World';
-import { Archive, Flash, Grade, Label, Push, Slam, Src, World, useDur, useShake } from './Hook';
+import { Archive, Cue, Flash, Grade, HOOK_FRAMES, Label, Push, Slam, SoundLayer, Src, World, useDur, useShake } from './Hook';
 
 // EP02 · COLD OPEN (vo_01, 38.1 s) and WHO IS HE? (vo_02, 41.2 s).
 // Cuts sit on the VO pauses (ffmpeg silencedetect). Shot types never repeat back to back.
 
 const A = (f: string) => staticFile(`sayed/${f}`);
 type Cut = [string, number, number, React.FC];
-const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[] }> = ({ cuts, vo, flashes = [] }) => (
+const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[] }> = ({ cuts, vo, flashes = [], musicFrom, cues }) => (
   <AbsoluteFill style={{ background: '#000' }}>
     {cuts.map(([k, a, b, Comp]) => <Sequence key={k} from={a} durationInFrames={b - a} name={k}><Comp /></Sequence>)}
     {flashes.map((at) => <Sequence key={at} from={at} durationInFrames={4}><Flash /></Sequence>)}
     <Audio src={A(`vo/${vo}.mp3`)} />
+    <SoundLayer musicFrom={musicFrom} cues={cues} />
     <FilmFinish />
   </AbsoluteFill>
 );
@@ -262,7 +263,12 @@ const COLD: Cut[] = [
   ['hidden', 918, 1016, C9], ['close', 1016, 1150, C10],
 ];
 export const COLD_FRAMES = 1150;
-export const ColdOpen: React.FC = () => <Cuts cuts={COLD} vo="vo_01" flashes={[596]} />;
+const COLD_CUES: Cue[] = [
+  [0, 'whoosh_short', 0.15], [110, 'whoosh_short', 0.2], [114, 'counter', 0.3], [214, 'whoosh', 0.18], [352, 'shimmer', 0.18],
+  [454, 'type', 0.22], [596, 'impact', 0.3], [664, 'whoosh', 0.2], [724, 'tick', 0.2],
+  [785, 'sub', 0.32], [813, 'sub', 0.32], [841, 'sub', 0.32], [870, 'impact', 0.32], [918, 'riser', 0.12], [1016, 'paper', 0.22],
+];
+export const ColdOpen: React.FC = () => <Cuts cuts={COLD} vo="vo_01" flashes={[596]} musicFrom={HOOK_FRAMES} cues={COLD_CUES} />;
 
 // ======================= WHO IS HE? =======================
 
@@ -496,4 +502,10 @@ const WHO: Cut[] = [
   ['reality', 913, 1050, D9], ['congress', 1050, 1105, D10], ['jake', 1105, 1245, D11],
 ];
 export const WHO_FRAMES = 1245;
-export const WhoIsHe: React.FC = () => <Cuts cuts={WHO} vo="vo_02" />;
+const WHO_CUES: Cue[] = [
+  [0, 'paper', 0.25], [4, 'sub', 0.3], [59, 'whoosh_short', 0.2], [122, 'whoosh', 0.18], [130, 'tick', 0.2], [192, 'tick', 0.2],
+  [290, 'whoosh_short', 0.18], [410, 'whoosh', 0.2], [561, 'tick', 0.2], [664, 'paper', 0.22], [672, 'tick', 0.18],
+  [762, 'tick', 0.22], [810, 'tick', 0.22], [855, 'tick', 0.22], [913, 'whoosh', 0.18], [1050, 'tick', 0.2], [1058, 'tick', 0.2],
+  [1066, 'tick', 0.2], [1105, 'shimmer', 0.16],
+];
+export const WhoIsHe: React.FC = () => <Cuts cuts={WHO} vo="vo_02" musicFrom={HOOK_FRAMES + COLD_FRAMES} cues={WHO_CUES} />;

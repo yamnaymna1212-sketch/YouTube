@@ -129,7 +129,7 @@ import { feature as feature2 } from 'topojson-client';
 import world from 'world-atlas/countries-50m.json';
 
 const BLUE = '#2F6FE0';
-const MapNA: React.FC = () => {
+const MapNA: React.FC<{ glow?: boolean }> = ({ glow }) => {
   const countries = (feature2(world as any, (world as any).objects.countries) as any).features;
   const usa = countries.find((c: any) => c.id === '840');
   // fit the lower-48 box: build a projection fitted to a bbox polygon of the contiguous US
@@ -151,7 +151,8 @@ const MapNA: React.FC = () => {
         {countries.filter((c: any) => c.id !== '840').map((c: any) => <path key={c.id + (c.properties?.name ?? '')} d={path(c) || ''} fill="#5F646E" stroke="#1B1F27" strokeWidth={0.8} />)}
         <path d={path(usa) || ''} fill={BLUE} stroke="#0D1F44" strokeWidth={1.2} />
       </g>
-      <path d={path(usa) || ''} fill="none" stroke="#8FB4FF" strokeWidth={1.4} opacity={0.55} />
+      {glow && <path d={path(usa) || ''} fill="none" stroke="#4F8DFF" strokeWidth={14} opacity={0.55} style={{ filter: 'blur(10px)' }} />}
+      <path d={path(usa) || ''} fill="none" stroke={glow ? '#BFD6FF' : '#8FB4FF'} strokeWidth={glow ? 2.6 : 1.4} opacity={glow ? 0.95 : 0.55} />
     </svg>
   );
 };
@@ -173,3 +174,24 @@ export const EP02Thumb2: React.FC<{ words?: [string, string] }> = ({ words = ['Y
   </AbsoluteFill>
 );
 export const EP02Thumb2B: React.FC = () => <EP02Thumb2 words={['$30', 'TRILLION']} />;
+
+
+// THUMBNAIL v3 — the user's layout (colour portrait left, glowing blue U.S., big italic words), minus its weak points:
+// real licensed photo (no AI face), correct words tied to the episode, HYPOTHETICAL tag, clean map, soft glow, brand mark.
+export const EP02Thumb3: React.FC<{ words?: [string, string] }> = ({ words = ['YOU', 'PAY?'] }) => (
+  <AbsoluteFill style={{ background: '#141821', overflow: 'hidden' }}>
+    <MapNA glow />
+    <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(10,12,16,.92) 0%, rgba(10,12,16,.6) 30%, rgba(10,12,16,0) 50%)' }} />
+    <Img src={staticFile('sayed/cut_elsayed.png')} style={{ position: 'absolute', left: -40, bottom: -30, height: 780, filter: 'contrast(1.12) saturate(.95) brightness(1.02) drop-shadow(0 20px 40px rgba(0,0,0,.7))' }} />
+    <div style={{ position: 'absolute', left: 600, right: 30, top: 205, textAlign: 'center' }}>
+      {words.map((w) => (
+        <div key={w} style={{ fontFamily: F.sans, fontWeight: 900, fontStyle: 'italic', fontSize: 168, lineHeight: 0.98, color: '#fff', letterSpacing: -3,
+          WebkitTextStroke: '10px #050608', paintOrder: 'stroke fill', textShadow: '0 10px 30px rgba(0,0,0,.65)' } as React.CSSProperties}>{w}</div>
+      ))}
+    </div>
+    <span style={{ position: 'absolute', right: 26, top: 24, fontFamily: F.mono, fontSize: 24, letterSpacing: 3, background: C.red, color: '#fff', padding: '6px 14px' }}>HYPOTHETICAL</span>
+    <div style={{ position: 'absolute', right: 26, bottom: 22 }}><DollarlyMark size={84} /></div>
+    <Img src={staticFile('fx/grain3.png')} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', mixBlendMode: 'overlay', opacity: 0.35 }} />
+    <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 55% 50%, transparent 62%, rgba(0,0,0,.4) 100%)' }} />
+  </AbsoluteFill>
+);

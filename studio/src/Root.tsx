@@ -9,6 +9,9 @@ import { Hook, HOOK_FRAMES } from './ep02/Hook';
 import { ColdOpen, COLD_FRAMES, WhoIsHe, WHO_FRAMES, partFrames } from './ep02/Part1';
 import { FileGas } from './ep02/FileGas';
 import { FileHealth } from './ep02/FileHealth';
+import { FilePay } from './ep02/FilePay';
+import { FileWhoPays } from './ep02/FileWho';
+import { Close, CLOSE_EXTRA } from './ep02/Close';
 import { W1Street, W2Gas, W3Map, W4Footage, W5Money, W6Collage } from './boards/WorldFrames';
 export const Root: React.FC = () => (
   <>
@@ -17,6 +20,9 @@ export const Root: React.FC = () => (
     <Composition id="EP02WhoIsHe" component={WhoIsHe} durationInFrames={WHO_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP02FileGas" component={FileGas} durationInFrames={partFrames('vo_03')} fps={30} width={1920} height={1080} />
     <Composition id="EP02FileHealth" component={FileHealth} durationInFrames={partFrames('vo_04')} fps={30} width={1920} height={1080} />
+    <Composition id="EP02FilePay" component={FilePay} durationInFrames={partFrames('vo_05')} fps={30} width={1920} height={1080} />
+    <Composition id="EP02FileWhoPays" component={FileWhoPays} durationInFrames={partFrames('vo_06')} fps={30} width={1920} height={1080} />
+    <Composition id="EP02Close" component={Close} durationInFrames={partFrames('vo_07') + CLOSE_EXTRA} fps={30} width={1920} height={1080} />
     <Composition id="StyleReel" component={StyleReel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
     <Still id="BoardCharacter" component={BoardCharacter} width={1920} height={1080} />
     <Still id="BoardIcons" component={BoardIcons} width={1920} height={1080} />

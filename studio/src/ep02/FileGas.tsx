@@ -185,7 +185,7 @@ const G6b: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: '#000', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${interpolate(f, [0, 140], [1.05, 1.14], clamp)})` }}>
-        <Video src={A('footage/v01_pumpjack_1975.mp4')} muted style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(.8) contrast(1.05) brightness(.7)' }} />
+        <Video src={A('footage/v01_pumpjack_1975.mp4')} muted trimBefore={30} playbackRate={0.55} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(.8) contrast(1.05) brightness(.7)' }} />
       </div>
       <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(12,13,16,.9), transparent 60%)' }} />
       <div style={{ position: 'absolute', left: 120, top: 330 }}>

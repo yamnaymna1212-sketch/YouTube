@@ -6,9 +6,12 @@ import m01 from '../../public/sayed/vo/tight/vo_01.json';
 import m02 from '../../public/sayed/vo/tight/vo_02.json';
 import m03 from '../../public/sayed/vo/tight/vo_03.json';
 import m04 from '../../public/sayed/vo/tight/vo_04.json';
+import m05 from '../../public/sayed/vo/tight/vo_05.json';
+import m06 from '../../public/sayed/vo/tight/vo_06.json';
+import m07 from '../../public/sayed/vo/tight/vo_07.json';
 
 type VoMap = { dur: number; map: [number, number, number][] };
-const MAPS: Record<string, VoMap> = { vo_00: m00 as VoMap, vo_01: m01 as VoMap, vo_02: m02 as VoMap, vo_03: m03 as VoMap, vo_04: m04 as VoMap };
+const MAPS: Record<string, VoMap> = { vo_00: m00 as VoMap, vo_01: m01 as VoMap, vo_02: m02 as VoMap, vo_03: m03 as VoMap, vo_04: m04 as VoMap, vo_05: m05 as VoMap, vo_06: m06 as VoMap, vo_07: m07 as VoMap };
 const FPS = 30;
 
 export const remap = (vo: string, frame: number): number => {

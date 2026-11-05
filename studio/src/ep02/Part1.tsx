@@ -21,11 +21,11 @@ export type Cut = [string, number, number, React.FC];
 // Cut lists are written in frames of the ORIGINAL take; `remap` moves them onto the pause-tightened VO.
 const TAIL = 10;
 export const partFrames = (vo: string) => voFrames(vo) + TAIL;
-export const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[] }> = ({ cuts, vo, flashes = [], musicFrom, cues }) => (
+export const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[]; extra?: number }> = ({ cuts, vo, flashes = [], musicFrom, cues, extra = 0 }) => (
   <AbsoluteFill style={{ background: '#000' }}>
     {cuts.map(([k, a, b, Comp], i) => {
       const from = remap(vo, a);
-      const to = i === cuts.length - 1 ? partFrames(vo) : remap(vo, b);
+      const to = i === cuts.length - 1 ? partFrames(vo) + extra : remap(vo, b);
       return <Sequence key={k} from={from} durationInFrames={Math.max(1, to - from)} name={k}><Comp /></Sequence>;
     })}
     {flashes.map((at) => <Sequence key={at} from={remap(vo, at)} durationInFrames={4}><Flash /></Sequence>)}

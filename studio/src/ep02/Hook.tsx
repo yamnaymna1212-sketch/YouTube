@@ -385,7 +385,7 @@ const S11: React.FC = () => {
 };
 
 // 12 · EVIDENCE: a tax bill with one blank line, red "?" drops in.
-const S12: React.FC = () => {
+export const S12: React.FC = () => {
   const f = useCurrentFrame(); const d = useDur();
   const t = interpolate(f, [0, d], [0, 1], { ...clamp, easing: io });
   const q = interpolate(f, [30, 40], [0, 1], clamp);

@@ -1,5 +1,7 @@
 # EP02 · YouTube upload pack
 
+Channel name (recommended): **Dollar Decoded** (@DollarDecoded). Alternatives: Main Street Money, The Money Brief, Wallet Math.
+
 ## Title (pick one, the first is recommended)
 1. **If El-Sayed Became President, Would You Be Richer?**
 2. What Would President El-Sayed Do to Your Paycheck?
@@ -53,24 +55,23 @@ Michigan just elected Abdul El-Sayed to the U.S. Senate. So what if he became pr
 • Music and sound effects: original, made for this channel.
 
 🛠 HOW THIS VIDEO WAS MADE
-Idea, topic, story and the character of Jake: [YOUR NAME]. I chose the question, directed every scene, checked each number against the sources above, and reviewed every cut and asked for changes before publishing (timing, pauses, sound, animation, icons).
+Idea, topic, story and the character of Jake are mine. I chose the question, directed every scene, checked each number against the sources above, and reviewed every cut and asked for changes before publishing (timing, pauses, sound, animation, icons).
 AI tools I used, openly:
 • Voice: the narration is an AI voice made with ElevenLabs (voice "Justin"). It does not imitate any real person.
 • Script: drafted with the help of Claude (Anthropic), then fact-checked by me against the sources listed.
 • Visuals: the animation, explainer icons, charts and motion graphics were built with Claude Code (an AI coding assistant) in Remotion, from my direction.
-[ONLY IF TRUE] Final edit, color and sound mix: DaVinci Resolve.
 
 💬 Would you trade your premiums for higher taxes? Tell me in the comments.
-🔔 Subscribe for more: big headlines, your money, we do the math.
+🔔 Subscribe for personal finance, money news and U.S. economic trends, decoded.
 
-#WalletMath #MedicareForAll #MinimumWage #GasPrices #PersonalFinance #ElSayed #Michigan
+#DollarDecoded #MedicareForAll #MinimumWage #GasPrices #PersonalFinance #ElSayed #Michigan
 ---
 
 ## Tags (paste into YouTube Studio → Tags; under 500 characters)
-El-Sayed, Abdul El-Sayed, El-Sayed president, Medicare for All, minimum wage, $17 minimum wage, gas prices, health insurance cost, family health plan cost, payroll tax, Michigan Senate 2026, personal finance, your paycheck, taxes explained, economics explained, what if president, wallet math
+El-Sayed, Abdul El-Sayed, El-Sayed president, Medicare for All, minimum wage, $17 minimum wage, gas prices, health insurance cost, family health plan cost, payroll tax, Michigan Senate 2026, personal finance, your paycheck, taxes explained, economics explained, what if president, dollar decoded
 
 ## Hashtags (the first 3 show above the title)
-#WalletMath #MedicareForAll #MinimumWage
+#DollarDecoded #MedicareForAll #MinimumWage
 
 ## YouTube Studio settings
 - **Altered or synthetic content:** YouTube asks for this when realistic content could be mistaken for real people or events. The AI narrator does not imitate a real person and Jake is clearly an illustration, so as I understand YouTube's guidance it is not required. The AI use is still stated in the description above.

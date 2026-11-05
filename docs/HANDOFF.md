@@ -78,5 +78,14 @@
 - The final mix is normalised to -14 LUFS, true peak -1.5 dB (YouTube level).
 - Better-sounding option later: ElevenLabs music/SFX, once the account question is settled.
 
+## Done 5 Nov 2026 (session 3: v2 after user feedback)
+User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pauses but keep the speech natural; add real explainer icons, real money and real logos.
+- **SFX:** whoosh, impact, sub, riser and shimmer are removed. `SoundLayer` only plays `tick`, `type`, `counter`, `paper`, with every cue capped at volume 0.1 (`SOFT` / `SFX_MAX` in `Hook.tsx`). The music stays at 0.07.
+- **Pauses:** `studio/tools/tighten_vo.py` shortens every pause longer than 0.18 s to 0.16 s and writes `vo/tight/vo_XX.mp3` plus `vo_XX.json` (an old→new time map). `src/ep02/timing.ts` `remap()` moves every cut, flash, cue and in-shot beat onto the tight take, so the cut lists stay written in original-take frames. Total VO: 6:43 → 6:07 (the 8-minute gap grows; vo_05b/05c will help).
+- **Icons:** `lucide-react` 0.469.0 (ISC), clean line icons via `Ico` (fuel, heart-pulse, banknote, briefcase, landmark, receipt, vote, wallet, scroll).
+- **Real money:** `public/sayed/money/usd1|20|100.jpg`, the U.S. Currency Education Program SPECIMEN images from uscurrency.gov (`Note`). Used behind $26,993, stacked on +$6,800, and as $62 (3×$20 + 2×$1) at the pump.
+- **Real logos:** `public/sayed/logos/` eia.png (eia.gov), nasa.png (nasa.gov), house.svg (house.gov), kff.png (crop of the KFF screenshot). Shown in the source line (`Src logo=`). Gas brands appear only through real photos (RaceTrac 2026 pump, Chevron 1973), not as standalone logos.
+- Preview: `episodes/ep02-el-sayed/renders/ep02-part1-v2.mp4`.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

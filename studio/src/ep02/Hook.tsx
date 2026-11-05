@@ -5,6 +5,8 @@ import { C, F } from '../theme';
 import { FilmFinish, clamp, ease, io } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
 import { Diner, Lamp, LightWrap, Sky, Skyline, Street, Tree } from '../world/World';
+import { Banknote, Briefcase, Fuel, HeartPulse, Landmark, Receipt, type LucideIcon } from 'lucide-react';
+import { remap, voFrames } from './timing';
 
 // EP02 · HOOK v2 (0:00–0:33). Cut to the real VO take vo_00.mp3 (31.5 s) + a 1.8 s title slam.
 // Shot boundaries sit on the pauses in the VO (ffmpeg silencedetect), so every cut lands on a breath.
@@ -13,7 +15,7 @@ import { Diner, Lamp, LightWrap, Sky, Skyline, Street, Tree } from '../world/Wor
 const A = (f: string) => staticFile(`sayed/${f}`);
 
 // Cut list in frames @30fps: [start, end]
-export const HOOK = {
+const HOOK_RAW = {
   slam: [0, 78],        // "Twenty-seven thousand dollars."
   kff: [78, 180],       // "That's what a typical family's health plan costs every year,"
   stub: [180, 262],     // "and most of it never shows up on a paycheck."
@@ -28,7 +30,29 @@ export const HOOK = {
   line: [843, 946],     // "And at the end, the one line that decides who pays it."
   title: [946, 1000],   // title slam
 } as const;
-export const HOOK_FRAMES = 1000;
+// Remapped onto the pause-tightened take (vo/tight/vo_00.mp3).
+const RH = (f: number) => remap('vo_00', f);
+export const HOOK = Object.fromEntries(Object.entries(HOOK_RAW).map(([k, [a, b]]) => [k, k === 'title' ? [RH(a), RH(a) + 54] : [RH(a), RH(b)]])) as Record<keyof typeof HOOK_RAW, [number, number]>;
+export const HOOK_FRAMES = HOOK.title[1];
+
+// Clean line icons (Lucide, ISC licence) — used like an explainer: one icon per idea, never cartoon art.
+export const Ico: React.FC<{ I: LucideIcon; size?: number; color?: string; at?: number; style?: React.CSSProperties }> = ({ I, size = 64, color = C.bone, at = 0, style }) => {
+  const f = useCurrentFrame();
+  const t = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
+  return <span style={{ display: 'inline-flex', opacity: t, transform: `scale(${0.7 + 0.3 * t})`, ...style }}><I size={size} color={color} strokeWidth={1.6} /></span>;
+};
+
+// Real organisation logo chip (official logo files / screenshot crops; used only to credit a source).
+export const LogoChip: React.FC<{ file: string; h?: number; dark?: boolean; style?: React.CSSProperties }> = ({ file, h = 30, dark, style }) => (
+  <span style={{ display: 'inline-flex', alignItems: 'center', background: dark ? '#0B1B2E' : 'rgba(255,255,255,.94)', padding: '6px 10px', borderRadius: 4, boxShadow: '0 4px 14px rgba(0,0,0,.35)', ...style }}>
+    <Img src={staticFile(`sayed/logos/${file}`)} style={{ height: h }} />
+  </span>
+);
+
+// Real banknote (U.S. Currency Education Program SPECIMEN images, uscurrency.gov).
+export const Note: React.FC<{ v?: 1 | 20 | 100; w?: number; style?: React.CSSProperties }> = ({ v = 100, w = 520, style }) => (
+  <Img src={staticFile(`sayed/money/usd${v}.jpg`)} style={{ width: w, borderRadius: 4, boxShadow: '0 18px 40px rgba(0,0,0,.5)', ...style }} />
+);
 
 // ---------- small building blocks ----------
 export const useDur = () => useVideoConfig().durationInFrames;
@@ -51,9 +75,9 @@ export const useShake = (at: number, amp = 18) => {
   return `translate(${(random(`x${f}`) - 0.5) * amp * k}px, ${(random(`y${f}`) - 0.5) * amp * k}px)`;
 };
 
-export const Src: React.FC<{ children: React.ReactNode; dark?: boolean }> = ({ children, dark }) => {
+export const Src: React.FC<{ children: React.ReactNode; dark?: boolean; logo?: string; logoDark?: boolean }> = ({ children, dark, logo, logoDark }) => {
   const f = useCurrentFrame();
-  return <div style={{ position: 'absolute', right: 70, bottom: 46, fontFamily: F.mono, fontSize: 17, letterSpacing: 0.3, color: dark ? 'rgba(12,13,16,.65)' : 'rgba(236,231,222,.7)', textShadow: dark ? 'none' : '0 1px 3px rgba(0,0,0,.8)', opacity: interpolate(f, [4, 14], [0, 1], clamp) }}>SOURCE · {children}</div>;
+  return <div style={{ position: 'absolute', right: 70, bottom: 46, display: 'flex', alignItems: 'center', gap: 14, fontFamily: F.mono, fontSize: 17, letterSpacing: 0.3, color: dark ? 'rgba(12,13,16,.65)' : 'rgba(236,231,222,.7)', textShadow: dark ? 'none' : '0 1px 3px rgba(0,0,0,.8)', opacity: interpolate(f, [4, 14], [0, 1], clamp) }}>{logo && <LogoChip file={logo} h={24} dark={logoDark} />}<span>SOURCE · {children}</span></div>;
 };
 export const Archive: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div style={{ position: 'absolute', left: 70, top: 56, display: 'flex', alignItems: 'center', gap: 12, fontFamily: F.mono, fontSize: 18, letterSpacing: 2, color: '#fff', background: 'rgba(0,0,0,.55)', padding: '7px 14px' }}>
@@ -83,8 +107,13 @@ export const Label: React.FC<{ children: React.ReactNode; at?: number; color?: s
 const S1: React.FC = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: C.ink, alignItems: 'center', justifyContent: 'center' }}>
+    <AbsoluteFill style={{ background: C.ink, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+      {[0, 1, 2, 3].map((i) => (
+        <Note key={i} v={100} w={760} style={{ position: 'absolute', left: 120 + i * 300, top: 120 + (i % 2) * 520, rotate: `${-14 + i * 9}deg`, filter: 'brightness(.32) saturate(.6) blur(1.5px)', translate: `${interpolate(f, [0, 78], [0, -40 + i * 20], clamp)}px 0px`, opacity: interpolate(f, [6, 20], [0, 1], clamp) }} />
+      ))}
+      <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(12,13,16,.55), rgba(12,13,16,.92) 70%)' }} />
       <div style={{ transform: `scale(${interpolate(f, [12, 78], [1, 1.06], clamp)})`, textAlign: 'center' }}>
+        <Ico I={HeartPulse} size={72} color={C.red} at={20} style={{ marginBottom: 10 }} />
         <Slam text="$26,993" color={C.amber} size={300} at={6} />
         <Label at={30} color={C.steel} style={{ marginTop: 26 }}>a year · one family health plan</Label>
       </div>
@@ -106,7 +135,7 @@ const S2: React.FC = () => {
         <div style={{ position: 'absolute', left: 182, top: 448, height: 46, width: 840 * hl, background: C.amber, opacity: 0.35, mixBlendMode: 'multiply' }} />
       </div>
       <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(0,0,0,.25), transparent 25%, transparent 75%, rgba(0,0,0,.3))' }} />
-      <Src>KFF Employer Health Benefits Survey · Oct 22, 2025</Src>
+      <Src logo="kff.png" logoDark>KFF Employer Health Benefits Survey · Oct 22, 2025</Src>
     </AbsoluteFill>
   );
 };
@@ -191,7 +220,7 @@ const S4: React.FC = () => (
       <Label at={4} color={C.steel}>Tuesday · Nov 3, 2026</Label>
       <div style={{ fontFamily: F.serif, fontSize: 130, color: C.bone, lineHeight: 1, marginTop: 10, opacity: interpolate(useCurrentFrame(), [24, 34], [0, 1], clamp) }}>Michigan</div>
     </div>
-    <Src>NASA · ISS074-E-334264 · Detroit at night</Src>
+    <Src logo="nasa.png">NASA · ISS074-E-334264 · Detroit at night</Src>
   </AbsoluteFill>
 );
 
@@ -232,6 +261,7 @@ const S6: React.FC = () => {
 
 // 7 · CARD: the promise — four numbered slots tick on.
 const SLOTS = ['GAS', 'PAYCHECK', 'JOBS', 'THE BILL'];
+const SLOT_ICONS = [Fuel, Banknote, Briefcase, Receipt];
 const S7: React.FC = () => {
   const f = useCurrentFrame();
   return (
@@ -243,6 +273,7 @@ const S7: React.FC = () => {
           const t = interpolate(f, [10 + i * 6, 20 + i * 6], [0, 1], { ...clamp, easing: ease });
           return (
             <div key={s} style={{ width: 250, borderTop: `4px solid ${i === 3 ? C.red : C.ink}`, paddingTop: 12, opacity: t, transform: `translateY(${(1 - t) * 20}px)` }}>
+              <Ico I={SLOT_ICONS[i]} size={46} color={i === 3 ? C.red : C.ink} at={10 + i * 6} style={{ marginBottom: 8 }} />
               <div style={{ fontFamily: F.mono, fontSize: 20, color: '#7A7266' }}>FILE 0{i + 1}</div>
               <div style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 30, color: C.ink }}>{s}</div>
             </div>
@@ -266,10 +297,10 @@ const S8: React.FC = () => {
       </div>
       <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(12,13,16,.92) 0%, rgba(12,13,16,.75) 38%, transparent 62%)' }} />
       <div style={{ position: 'absolute', left: 110, top: 230 }}>
-        <Label at={0} color={C.steel}>U.S. regular gas · per gallon</Label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}><Ico I={Fuel} size={40} color={C.steel} /><Label at={0} color={C.steel}>U.S. regular gas · per gallon</Label></div>
         <Slam text="$4.15" color={C.amber} size={230} at={4} style={{ marginTop: 16 }} />
       </div>
-      <Src>U.S. EIA · Gasoline & Diesel Fuel Update · Nov 3, 2026</Src>
+      <Src logo="eia.png">U.S. EIA · Gasoline & Diesel Fuel Update · Nov 3, 2026</Src>
     </AbsoluteFill>
   );
 };
@@ -284,7 +315,12 @@ const S9: React.FC = () => {
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.45)' }} />
       <div style={{ position: 'absolute', left: 160, top: 120, transform: `perspective(1600px) rotateX(16deg) rotateZ(-6deg) scale(${1.05 + 0.08 * t})`, transformOrigin: '50% 50%' }}><Stub mode="raise" /></div>
       <div style={{ position: 'absolute', right: 120, top: 360, textAlign: 'right' }}>
-        <Slam text="+$6,800" color={C.amber} size={190} at={30} />
+        <div style={{ position: 'relative', height: 0 }}>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Note key={i} v={100} w={430} style={{ position: 'absolute', right: 20 + i * 14, top: -300 - i * 10, rotate: `${-6 + i * 3}deg`, opacity: interpolate(useCurrentFrame(), [18 + i * 3, 26 + i * 3], [0, 1], clamp), translate: `0px ${interpolate(useCurrentFrame(), [18 + i * 3, 30 + i * 3], [-40, 0], { ...clamp, easing: ease })}px` }} />
+          ))}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 18 }}><Ico I={Banknote} size={84} color={C.amber} at={30} /><Slam text="+$6,800" color={C.amber} size={190} at={30} /></div>
         <Label at={42} color={C.bone} style={{ marginTop: 18 }}>a year · if his job survives</Label>
       </div>
       <Grade k={0.5} />
@@ -299,7 +335,7 @@ const S10: React.FC = () => (
     <Push src={A('real/doc12_the-cook-at-texan-cafe.jpg')} from={1.15} to={1.3} x={[-20, 30]} origin="30% 45%" filter="saturate(.8) contrast(1.08)" />
     <AbsoluteFill style={{ background: 'linear-gradient(0deg, rgba(12,13,16,.92) 0%, rgba(12,13,16,.6) 45%, transparent 75%)' }} />
     <div style={{ position: 'absolute', right: 120, bottom: 150, textAlign: 'right' }}>
-      <Slam text="700,000" color={C.red} size={210} at={3} />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 20 }}><Ico I={Briefcase} size={90} color={C.red} at={3} /><Slam text="700,000" color={C.red} size={210} at={3} /></div>
       <Label at={14} style={{ marginTop: 16 }}>jobs on the line · CBO estimate</Label>
     </div>
     <Archive>ARCHIVE · 1973</Archive>
@@ -317,11 +353,12 @@ const S11: React.FC = () => {
       </div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.45)' }} />
       <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <Ico I={Landmark} size={90} color={C.bone} at={3} style={{ marginBottom: 12 }} />
         <Slam text="$30 TRILLION" color={C.amber} size={200} at={3} />
         <Label at={14} style={{ marginTop: 20 }}>Medicare for All · 10-year cost estimates</Label>
       </AbsoluteFill>
       <Archive>U.S. HOUSE · 2008 · ARCHIVE</Archive>
-      <Src>Estimates: Mercatus Center (2018) · Urban Institute (2019)</Src>
+      <Src logo="house.svg" logoDark>Estimates: Mercatus Center (2018) · Urban Institute (2019)</Src>
     </AbsoluteFill>
   );
 };
@@ -374,21 +411,22 @@ const S13: React.FC = () => {
 
 // ---------- sound: dark ambient bed (one continuous take) + sound effects ----------
 // All audio is original, generated by studio/tools/synth_audio.py (no samples, no licences).
-export type Cue = [number, string, number?]; // [frame, sfx name, volume]
+export type Cue = [number, string, number?]; // [frame in the ORIGINAL take, sfx name, volume]
 export const MUSIC_VOL = 0.07; // ≈15 dB under the VO
-export const SoundLayer: React.FC<{ musicFrom: number; cues: Cue[] }> = ({ musicFrom, cues }) => (
+// Viewer feedback (5 Nov): no whooshes, booms or loud hits — they distract. Only soft, small sounds,
+// always quiet. Anything not in SOFT is ignored, and no cue can play louder than SFX_MAX.
+const SOFT = new Set(['tick', 'type', 'counter', 'paper']);
+const SFX_MAX = 0.1;
+export const SoundLayer: React.FC<{ musicFrom: number; cues: Cue[]; vo: string }> = ({ musicFrom, cues, vo }) => (
   <>
     <Audio src={A('audio/music_ep02.mp3')} trimBefore={musicFrom} volume={MUSIC_VOL} />
-    {cues.map(([at, name, vol = 0.3], i) => (
-      <Sequence key={i} from={at} durationInFrames={90} layout="none"><Audio src={A(`audio/sfx_${name}.wav`)} volume={vol} /></Sequence>
+    {cues.filter(([, n]) => SOFT.has(n)).map(([at, name, vol = 0.08], i) => (
+      <Sequence key={i} from={remap(vo, at)} durationInFrames={90} layout="none"><Audio src={A(`audio/sfx_${name}.wav`)} volume={Math.min(vol, SFX_MAX)} /></Sequence>
     ))}
   </>
 );
 export const HOOK_CUES: Cue[] = [
-  [6, 'impact', 0.3], [78, 'whoosh_short', 0.22], [180, 'paper', 0.25], [206, 'tick', 0.18],
-  [262, 'whoosh', 0.2], [324, 'whoosh_short', 0.18], [420, 'type', 0.22], [472, 'riser', 0.18],
-  [536, 'sub', 0.34], [594, 'whoosh_short', 0.2], [624, 'sub', 0.34], [695, 'sub', 0.34],
-  [771, 'impact', 0.32], [843, 'paper', 0.25], [879, 'tick', 0.25], [946, 'impact', 0.3], [950, 'shimmer', 0.2],
+  [180, 'paper', 0.08], [206, 'tick', 0.06], [420, 'type', 0.08], [843, 'paper', 0.08], [879, 'tick', 0.07],
 ];
 
 // White flash for the rapid number montage (2 frames).
@@ -412,8 +450,8 @@ export const Hook: React.FC = () => (
     {[HOOK.pay[0], HOOK.jobs[0], HOOK.bill[0], HOOK.title[0]].map((at) => (
       <Sequence key={at} from={at} durationInFrames={4}><Flash /></Sequence>
     ))}
-    <Audio src={A('vo/vo_00.mp3')} />
-    <SoundLayer musicFrom={0} cues={HOOK_CUES} />
+    <Audio src={A('vo/tight/vo_00.mp3')} />
+    <SoundLayer musicFrom={0} cues={HOOK_CUES} vo="vo_00" />
     <FilmFinish />
   </AbsoluteFill>
 );

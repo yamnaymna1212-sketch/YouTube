@@ -8,19 +8,28 @@ import { C, F } from '../theme';
 import { FilmFinish, clamp, ease, io } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
 import { Car, Diner, GasStation, Lamp, LightWrap, Sky, Skyline, Street, Tree, W } from '../world/World';
-import { Archive, Cue, Flash, Grade, HOOK_FRAMES, Label, Push, Slam, SoundLayer, Src, World, useDur, useShake } from './Hook';
+import { Archive, Cue, Flash, Grade, HOOK_FRAMES, Ico, Label, LogoChip, Note, Push, Slam, SoundLayer, Src, World, useDur, useShake } from './Hook';
+import { Banknote, Fuel, HeartPulse, Landmark, ScrollText, UserRound, Vote, Wallet as WalletIcon } from 'lucide-react';
+import { remap, voFrames } from './timing';
 
 // EP02 · COLD OPEN (vo_01, 38.1 s) and WHO IS HE? (vo_02, 41.2 s).
 // Cuts sit on the VO pauses (ffmpeg silencedetect). Shot types never repeat back to back.
 
 const A = (f: string) => staticFile(`sayed/${f}`);
 type Cut = [string, number, number, React.FC];
+// Cut lists are written in frames of the ORIGINAL take; `remap` moves them onto the pause-tightened VO.
+const TAIL = 10;
+export const partFrames = (vo: string) => voFrames(vo) + TAIL;
 const Cuts: React.FC<{ cuts: Cut[]; vo: string; flashes?: number[]; musicFrom: number; cues: Cue[] }> = ({ cuts, vo, flashes = [], musicFrom, cues }) => (
   <AbsoluteFill style={{ background: '#000' }}>
-    {cuts.map(([k, a, b, Comp]) => <Sequence key={k} from={a} durationInFrames={b - a} name={k}><Comp /></Sequence>)}
-    {flashes.map((at) => <Sequence key={at} from={at} durationInFrames={4}><Flash /></Sequence>)}
-    <Audio src={A(`vo/${vo}.mp3`)} />
-    <SoundLayer musicFrom={musicFrom} cues={cues} />
+    {cuts.map(([k, a, b, Comp], i) => {
+      const from = remap(vo, a);
+      const to = i === cuts.length - 1 ? partFrames(vo) : remap(vo, b);
+      return <Sequence key={k} from={from} durationInFrames={Math.max(1, to - from)} name={k}><Comp /></Sequence>;
+    })}
+    {flashes.map((at) => <Sequence key={at} from={remap(vo, at)} durationInFrames={4}><Flash /></Sequence>)}
+    <Audio src={A(`vo/tight/${vo}.mp3`)} />
+    <SoundLayer musicFrom={musicFrom} cues={cues} vo={vo} />
     <FilmFinish />
   </AbsoluteFill>
 );
@@ -32,7 +41,7 @@ export const Wallet: React.FC<{ value?: string; at?: number }> = ({ value = '$0'
   const t = interpolate(f, [at, at + 14], [0, 1], { ...clamp, easing: ease });
   return (
     <div style={{ position: 'absolute', right: 60, top: 50, background: 'rgba(12,13,16,.86)', padding: '14px 22px', borderLeft: `4px solid ${C.amber}`, opacity: t, transform: `translateY(${(1 - t) * -16}px)` }}>
-      <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 16, letterSpacing: 4, color: C.steel }}>JAKE'S WALLET</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: F.sans, fontWeight: 600, fontSize: 16, letterSpacing: 4, color: C.steel }}><WalletIcon size={18} color={C.amber} strokeWidth={1.8} />JAKE'S WALLET</div>
       <div style={{ fontFamily: F.mono, fontSize: 44, color: C.amber, lineHeight: 1.1 }}>{value}</div>
     </div>
   );
@@ -93,7 +102,16 @@ const C2: React.FC = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: F.mono, fontSize: 34, color: '#7CF0A2' }}><span style={{ fontSize: 20, color: '#9AA2AD', fontFamily: F.sans, fontWeight: 700, letterSpacing: 3 }}>GALLONS</span><span>{gal.toFixed(3)}</span></div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: F.mono, fontSize: 34, color: '#7CF0A2' }}><span style={{ fontSize: 20, color: '#9AA2AD', fontFamily: F.sans, fontWeight: 700, letterSpacing: 3 }}>PRICE / GAL</span><span>4.153</span></div>
       </div>
-      <Src>U.S. EIA · U.S. regular avg $4.153, week of Nov 2, 2026 · 15 gal fill-up</Src>
+      {/* real pump photo (real station brand visible) */}
+      <div style={{ position: 'absolute', left: 90, top: 90, width: 520, height: 340, overflow: 'hidden', border: '6px solid #F3EFE7', boxShadow: '0 30px 60px rgba(0,0,0,.55)', transform: `rotate(${-2 + t}deg)` }}>
+        <Push src={A('racetrac_gas_station_jefferson_parish_louisiana_5_march_2026_1.jpg')} from={1.1} to={1.2} filter="saturate(.9)" />
+        <div style={{ position: 'absolute', left: 10, bottom: 8, fontFamily: F.mono, fontSize: 14, color: '#fff', background: 'rgba(0,0,0,.65)', padding: '3px 8px' }}>REAL PUMP · Louisiana · Mar 5, 2026</div>
+      </div>
+      {/* real money: three $20s + two $1s ≈ $62 */}
+      {[[20, 0], [20, 1], [20, 2], [1, 3], [1, 4]].map(([v, i]) => (
+        <Note key={i} v={v as 20 | 1} w={300} style={{ position: 'absolute', left: 1330 + i * 26, top: 90 + i * 14, rotate: `${-10 + i * 5}deg`, opacity: interpolate(f, [60 + i * 3, 68 + i * 3], [0, 1], clamp), translate: `0px ${interpolate(f, [60 + i * 3, 72 + i * 3], [-30, 0], { ...clamp, easing: ease })}px` }} />
+      ))}
+      <Src logo="eia.png">U.S. EIA · U.S. regular avg $4.153, week of Nov 2, 2026 · 15 gal fill-up · Photo: Infrogmation (CC BY-SA 4.0) · Notes: uscurrency.gov</Src>
     </AbsoluteFill>
   );
 };
@@ -132,7 +150,7 @@ const C4: React.FC = () => {
         <div style={{ fontFamily: F.serif, fontSize: 104, color: C.bone, lineHeight: 1.02 }}>The <i style={{ color: C.amber }}>first</i> Muslim<br />U.S. senator.</div>
         <Label at={20} color={C.steel} style={{ marginTop: 22 }}>in American history</Label>
       </div>
-      <Src>NASA · ISS074-E-642367 · Fact: CBS News / AP, Nov 4, 2026</Src>
+      <Src logo="nasa.png">NASA · ISS074-E-642367 · Fact: CBS News / AP, Nov 4, 2026</Src>
     </AbsoluteFill>
   );
 };
@@ -199,12 +217,15 @@ const C7: React.FC = () => {
 };
 
 // C8 · KINETIC on real photos: Gas. Health care. Paychecks. Taxes. — one word per beat.
-const BEATS: [number, string, string, string][] = [
+const C8_AT = 785; // shot start in the original take; beats are placed on the words, then remapped
+const RAW_BEATS: [number, string, string, string][] = [
   [0, 'Gas.', 'gas_pump_indiana_usa.jpg', 'Photo: Wikimedia Commons'],
   [28, 'Health care.', 'real/doc11_x-ray-treatment-at-george-washington.jpg', 'EPA DOCUMERICA · 1973'],
   [56, 'Paychecks.', 'real/doc09_the-young-waitress-at-the-local-aw-snack.jpg', 'EPA DOCUMERICA · 1973'],
   [85, 'Taxes.', 'screens/house_gov.png', 'house.gov'],
 ];
+const BEATS = RAW_BEATS.map(([x, ...r]) => [remap('vo_01', C8_AT + x) - remap('vo_01', C8_AT), ...r] as [number, string, string, string]);
+const BEAT_ICONS = [Fuel, HeartPulse, Banknote, Landmark];
 const C8: React.FC = () => {
   const f = useCurrentFrame();
   const i = BEATS.filter(([at]) => f >= at).length - 1;
@@ -215,7 +236,8 @@ const C8: React.FC = () => {
         <Push src={A(img)} from={1.12} to={1.22} filter="grayscale(.35) brightness(.5) contrast(1.1)" />
       </Sequence>
       <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <div key={word} style={{ transform: useShake(at, 14) }}>
+        <div key={word} style={{ transform: useShake(at, 8), textAlign: 'center' }}>
+          {(() => { const I = BEAT_ICONS[Math.max(0, i)]; return <I size={110} color={i === 3 ? C.red : C.amber} strokeWidth={1.4} style={{ opacity: interpolate(f, [at, at + 5], [0, 1], clamp) }} />; })()}
           <div style={{ fontFamily: F.serif, fontSize: 210, color: i === 3 ? C.red : C.bone, transform: `scale(${interpolate(f, [at, at + 6], [1.3, 1], clamp)})`, opacity: interpolate(f, [at, at + 3], [0, 1], clamp) }}>{word}</div>
         </div>
       </AbsoluteFill>
@@ -262,11 +284,9 @@ const COLD: Cut[] = [
   ['search', 446, 596, C5], ['pres', 596, 664, C6], ['walk', 664, 785, C7], ['beats', 785, 918, C8],
   ['hidden', 918, 1016, C9], ['close', 1016, 1150, C10],
 ];
-export const COLD_FRAMES = 1150;
-const COLD_CUES: Cue[] = [
-  [0, 'whoosh_short', 0.15], [110, 'whoosh_short', 0.2], [114, 'counter', 0.3], [214, 'whoosh', 0.18], [352, 'shimmer', 0.18],
-  [454, 'type', 0.22], [596, 'impact', 0.3], [664, 'whoosh', 0.2], [724, 'tick', 0.2],
-  [785, 'sub', 0.32], [813, 'sub', 0.32], [841, 'sub', 0.32], [870, 'impact', 0.32], [918, 'riser', 0.12], [1016, 'paper', 0.22],
+export const COLD_FRAMES = partFrames('vo_01');
+const COLD_CUES: Cue[] = [ // soft only (see SoundLayer)
+  [114, 'counter', 0.08], [454, 'type', 0.08], [724, 'tick', 0.06], [1016, 'paper', 0.07],
 ];
 export const ColdOpen: React.FC = () => <Cuts cuts={COLD} vo="vo_01" flashes={[596]} musicFrom={HOOK_FRAMES} cues={COLD_CUES} />;
 
@@ -304,7 +324,7 @@ const D3: React.FC = () => {
     const o = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
     return (
       <div style={{ background: 'rgba(12,13,16,.86)', padding: '22px 30px', borderLeft: `4px solid ${C.red}`, width: 640, opacity: o, transform: `translateX(${(1 - o) * -30}px)`, marginBottom: 22 }}>
-        <div style={{ fontFamily: F.mono, fontSize: 20, color: C.steel, letterSpacing: 2 }}>{top}</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: F.mono, fontSize: 20, color: C.steel, letterSpacing: 2 }}>{top.startsWith('2018') ? <Vote size={22} color={C.red} strokeWidth={1.8} /> : <HeartPulse size={22} color={C.red} strokeWidth={1.8} />}{top}</div>
         <div style={{ fontFamily: F.serif, fontSize: 54, color: C.bone, lineHeight: 1.1 }}>{big}</div>
         <div style={{ fontFamily: F.sans, fontSize: 22, color: 'rgba(236,231,222,.7)' }}>{sub}</div>
       </div>
@@ -425,7 +445,10 @@ const D7: React.FC = () => {
 };
 
 // D8 · EVIDENCE: three platform cards on the beats.
-const PLANKS: [number, string, string][] = [[2, 'Medicare for All', 'one public health plan for everyone'], [50, 'A higher minimum wage', 'federal floor is $7.25 today'], [95, 'Higher taxes on the very rich', 'no detailed tax plan published yet']];
+const D8_AT = 760;
+const PLANKS: [number, string, string][] = ([[2, 'Medicare for All', 'one public health plan for everyone'], [50, 'A higher minimum wage', 'federal floor is $7.25 today'], [95, 'Higher taxes on the very rich', 'no detailed tax plan published yet']] as [number, string, string][])
+  .map(([x, a, b]) => [remap('vo_02', D8_AT + x) - remap('vo_02', D8_AT), a, b]);
+const PLANK_ICONS = [HeartPulse, Banknote, Landmark];
 const D8: React.FC = () => {
   const f = useCurrentFrame();
   return (
@@ -434,7 +457,7 @@ const D8: React.FC = () => {
         const o = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
         return (
           <div key={a} style={{ display: 'flex', alignItems: 'baseline', gap: 36, marginBottom: 46, opacity: o, transform: `translateX(${(1 - o) * 40}px)` }}>
-            <div style={{ fontFamily: F.mono, fontSize: 40, color: C.red }}>0{i + 1}</div>
+            <div style={{ fontFamily: F.mono, fontSize: 40, color: C.red, display: 'flex', alignItems: 'center', gap: 22 }}>0{i + 1}{(() => { const I = PLANK_ICONS[i]; return <I size={70} color={C.amber} strokeWidth={1.4} />; })()}</div>
             <div>
               <div style={{ fontFamily: F.serif, fontSize: 92, color: C.bone, lineHeight: 1 }}>{a}</div>
               <div style={{ fontFamily: F.sans, fontSize: 26, color: 'rgba(236,231,222,.6)', marginTop: 8 }}>{b}</div>
@@ -458,7 +481,7 @@ const D9: React.FC = () => {
         <Label at={2} color={C.amber}>Reality check</Label>
         <div style={{ fontFamily: F.serif, fontSize: 100, color: C.bone, lineHeight: 1.05, marginTop: 10, opacity: interpolate(f, [12, 24], [0, 1], clamp) }}>A president<br />can’t do it alone.</div>
       </div>
-      <Src>house.gov (screenshot, Nov 5, 2026)</Src>
+      <Src logo="house.svg" logoDark>house.gov (screenshot, Nov 5, 2026)</Src>
     </AbsoluteFill>
   );
 };
@@ -466,9 +489,11 @@ const D9: React.FC = () => {
 // D10 · EVIDENCE diagram: President → Congress → Law.
 const D10: React.FC = () => {
   const f = useCurrentFrame();
+  const NODE_ICONS = [UserRound, Landmark, ScrollText];
   const node = (i: number, label: string, hot = false) => {
     const o = interpolate(f, [i * 8, i * 8 + 10], [0, 1], { ...clamp, easing: ease });
-    return <div style={{ width: 420, padding: '30px 0', textAlign: 'center', border: `3px solid ${hot ? C.red : C.ink}`, background: hot ? C.red : 'transparent', color: hot ? '#fff' : C.ink, fontFamily: F.serif, fontSize: 66, opacity: o, transform: `scale(${0.9 + 0.1 * o})` }}>{label}</div>;
+    const I = NODE_ICONS[i];
+    return <div style={{ width: 420, padding: '30px 0', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, border: `3px solid ${hot ? C.red : C.ink}`, background: hot ? C.red : 'transparent', color: hot ? '#fff' : C.ink, fontFamily: F.serif, fontSize: 66, opacity: o, transform: `scale(${0.9 + 0.1 * o})` }}><I size={60} color={hot ? '#fff' : C.ink} strokeWidth={1.5} />{label}</div>;
   };
   const arrow = (i: number) => <div style={{ fontFamily: F.sans, fontSize: 60, color: '#7A7266', opacity: interpolate(f, [i * 8 + 4, i * 8 + 12], [0, 1], clamp) }}>→</div>;
   return (
@@ -501,11 +526,9 @@ const WHO: Cut[] = [
   ['versus', 410, 545, D5], ['map', 545, 664, D6], ['diner', 664, 760, D7], ['planks', 760, 913, D8],
   ['reality', 913, 1050, D9], ['congress', 1050, 1105, D10], ['jake', 1105, 1245, D11],
 ];
-export const WHO_FRAMES = 1245;
-const WHO_CUES: Cue[] = [
-  [0, 'paper', 0.25], [4, 'sub', 0.3], [59, 'whoosh_short', 0.2], [122, 'whoosh', 0.18], [130, 'tick', 0.2], [192, 'tick', 0.2],
-  [290, 'whoosh_short', 0.18], [410, 'whoosh', 0.2], [561, 'tick', 0.2], [664, 'paper', 0.22], [672, 'tick', 0.18],
-  [762, 'tick', 0.22], [810, 'tick', 0.22], [855, 'tick', 0.22], [913, 'whoosh', 0.18], [1050, 'tick', 0.2], [1058, 'tick', 0.2],
-  [1066, 'tick', 0.2], [1105, 'shimmer', 0.16],
+export const WHO_FRAMES = partFrames('vo_02');
+const WHO_CUES: Cue[] = [ // soft only (see SoundLayer)
+  [0, 'paper', 0.07], [130, 'tick', 0.06], [192, 'tick', 0.06], [664, 'paper', 0.07],
+  [762, 'tick', 0.06], [810, 'tick', 0.06], [855, 'tick', 0.06], [1050, 'tick', 0.05], [1058, 'tick', 0.05], [1066, 'tick', 0.05],
 ];
 export const WhoIsHe: React.FC = () => <Cuts cuts={WHO} vo="vo_02" musicFrom={HOOK_FRAMES + COLD_FRAMES} cues={WHO_CUES} />;

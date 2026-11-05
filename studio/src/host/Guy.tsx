@@ -17,14 +17,15 @@ export const GuyFigure: React.FC<{ p: HostPose; style?: React.CSSProperties; svg
   const mouthH = 2 + p.talk * 24;
   const mouthW = 46 - p.talk * 8 + p.smile * 8;
   const lx = p.look * 6;
+  const ly = (p.lookY ?? 0) * 4;
   const eye = (cx: number) => (
     <g transform={`translate(${cx} 326) scale(1 ${eyeScale})`}>
       <path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" fill="#F2EDE5" />
       <clipPath id={`g${cx}`}><path d="M-27 0 C -15 -16, 15 -16, 27 0 C 15 11, -15 11, -27 0 Z" /></clipPath>
       <g clipPath={`url(#g${cx})`}>
-        <circle cx={lx} cy={-1} r={11} fill={K.iris} />
-        <circle cx={lx} cy={-1} r={5} fill="#0B0908" />
-        <circle cx={lx - 3.5} cy={-5} r={2.6} fill="#fff" />
+        <circle cx={lx} cy={-1 + ly} r={11} fill={K.iris} />
+        <circle cx={lx} cy={-1 + ly} r={5} fill="#0B0908" />
+        <circle cx={lx - 3.5} cy={-5 + ly} r={2.6} fill="#fff" />
       </g>
       <path d="M-28 0 C -15 -17, 15 -17, 28 0" stroke={K.lid} strokeWidth={4.4} fill="none" strokeLinecap="round" />
       <path d="M-24 -10 C -12 -21, 12 -21, 24 -10" stroke={K.skinDeep} strokeWidth={1.4} fill="none" opacity={0.45} />

@@ -1,9 +1,11 @@
 import React from 'react';
-import { AbsoluteFill, Img, Sequence, interpolate, random, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, Sequence, interpolate, random, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { noise2D } from '@remotion/noise';
 import { Audio, Video } from '@remotion/media';
 import { C, F } from '../theme';
 import { FilmFinish, clamp, ease, io } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
+import { LiveJake } from '../host/LiveJake';
 import { Diner, Lamp, LightWrap, Sky, Skyline, Street, Tree } from '../world/World';
 import { Banknote, Briefcase, Fuel, HeartPulse, Landmark, Receipt, type LucideIcon } from 'lucide-react';
 import { remap, voFrames } from './timing';
@@ -36,10 +38,25 @@ export const HOOK = Object.fromEntries(Object.entries(HOOK_RAW).map(([k, [a, b]]
 export const HOOK_FRAMES = HOOK.title[1];
 
 // Clean line icons (Lucide, ISC licence) — used like an explainer: one icon per idea, never cartoon art.
-export const Ico: React.FC<{ I: LucideIcon; size?: number; color?: string; at?: number; style?: React.CSSProperties }> = ({ I, size = 64, color = C.bone, at = 0, style }) => {
-  const f = useCurrentFrame();
-  const t = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
-  return <span style={{ display: 'inline-flex', opacity: t, transform: `scale(${0.7 + 0.3 * t})`, ...style }}><I size={size} color={color} strokeWidth={1.6} /></span>;
+// Pro icon badge: the icon sits in a soft glowing disc, a thin ring draws itself around it, the icon springs in
+// (overshoot + settle) and then floats gently. `plain` gives the bare sprung icon (for tight inline spots).
+export const Ico: React.FC<{ I: LucideIcon; size?: number; color?: string; at?: number; style?: React.CSSProperties; plain?: boolean }> = ({ I, size = 64, color = C.bone, at = 0, style, plain }) => {
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const pop = spring({ frame: f - at, fps, config: { damping: 11, stiffness: 160, mass: 0.6 } });
+  const ring = spring({ frame: f - at - 2, fps, config: { damping: 20, stiffness: 70 } });
+  const float = Math.sin((f - at) / 18) * size * 0.03 * Math.min(1, Math.max(0, (f - at) / 20));
+  const icon = <I size={size} color={color} strokeWidth={1.5} absoluteStrokeWidth={size > 90} style={{ transform: `scale(${0.4 + 0.6 * pop}) rotate(${(1 - pop) * -14}deg)`, filter: `drop-shadow(0 0 ${size * 0.12}px ${color}55)` }} />;
+  if (plain) return <span style={{ display: 'inline-flex', opacity: Math.min(1, pop * 1.4), transform: `translateY(${float}px)`, ...style }}>{icon}</span>;
+  const D = size * 1.75, r = D / 2 - 2;
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: D, height: D, flex: 'none', opacity: Math.min(1, pop * 1.5), transform: `translateY(${float}px)`, ...style }}>
+      <span style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: `radial-gradient(circle at 35% 30%, ${color}38, ${color}12 55%, transparent 72%)`, transform: `scale(${0.6 + 0.4 * pop})` }} />
+      <svg width={D} height={D} style={{ position: 'absolute', inset: 0, transform: 'rotate(-90deg)' }}>
+        <circle cx={D / 2} cy={D / 2} r={r} fill="none" stroke={color} strokeOpacity={0.55} strokeWidth={Math.max(1.5, size / 36)} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ring} />
+      </svg>
+      {icon}
+    </span>
+  );
 };
 
 // Real organisation logo chip (official logo files / screenshot crops; used only to credit a source).
@@ -61,18 +78,21 @@ export const useDur = () => useVideoConfig().durationInFrames;
 export const Push: React.FC<{ src: string; from?: number; to?: number; x?: [number, number]; y?: [number, number]; filter?: string; origin?: string }> = ({ src, from = 1.05, to = 1.18, x = [0, 0], y = [0, 0], filter, origin = '50% 50%' }) => {
   const f = useCurrentFrame(); const d = useDur();
   const t = interpolate(f, [0, d], [0, 1], { ...clamp, easing: io });
+  // gentle handheld drift (smooth noise), like a camera operator holding the frame
+  const hx = noise2D(src + 'x', f / 80, 0) * 7, hy = noise2D(src + 'y', f / 80, 5) * 5, hr = noise2D(src + 'r', f / 120, 9) * 0.25;
   return (
     <AbsoluteFill style={{ overflow: 'hidden' }}>
-      <Img src={src} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transformOrigin: origin, transform: `translate(${x[0] + (x[1] - x[0]) * t}px, ${y[0] + (y[1] - y[0]) * t}px) scale(${from + (to - from) * t})`, filter }} />
+      <Img src={src} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transformOrigin: origin, transform: `translate(${x[0] + (x[1] - x[0]) * t + hx}px, ${y[0] + (y[1] - y[0]) * t + hy}px) rotate(${hr}deg) scale(${from + (to - from) * t})`, filter }} />
     </AbsoluteFill>
   );
 };
 
 // Impact shake for number slams (decays in ~10 frames).
+// Number "punch": a short, clean downward settle (no random jitter — that reads as amateur).
 export const useShake = (at: number, amp = 18) => {
-  const f = useCurrentFrame();
-  const k = interpolate(f, [at, at + 12], [1, 0], clamp) * (f >= at ? 1 : 0);
-  return `translate(${(random(`x${f}`) - 0.5) * amp * k}px, ${(random(`y${f}`) - 0.5) * amp * k}px)`;
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const k = spring({ frame: f - at, fps, config: { damping: 14, stiffness: 180 } });
+  return `translateY(${(1 - k) * -amp * 0.8}px)`;
 };
 
 export const Src: React.FC<{ children: React.ReactNode; dark?: boolean; logo?: string; logoDark?: boolean }> = ({ children, dark, logo, logoDark }) => {
@@ -88,17 +108,18 @@ export const Grade: React.FC<{ k?: number }> = ({ k = 0.6 }) => <AbsoluteFill st
 
 // Big number that slams in: overshoot scale + blur-in + shake.
 export const Slam: React.FC<{ text: string; color: string; size: number; at?: number; style?: React.CSSProperties }> = ({ text, color, size, at = 0, style }) => {
-  const f = useCurrentFrame();
-  const s = interpolate(f, [at, at + 6, at + 12], [1.9, 0.96, 1], clamp);
-  const o = interpolate(f, [at, at + 3], [0, 1], clamp);
-  const b = interpolate(f, [at, at + 6], [16, 0], clamp);
-  return <div style={{ fontFamily: F.mono, fontWeight: 500, fontSize: size, color, lineHeight: 1, letterSpacing: -2, transform: `${useShake(at)} scale(${s})`, opacity: o, filter: `blur(${b}px)`, textShadow: '0 10px 40px rgba(0,0,0,.6)', ...style }}>{text}</div>;
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const k = spring({ frame: f - at, fps, config: { damping: 13, stiffness: 150, mass: 0.7 } });
+  const o = interpolate(f, [at, at + 4], [0, 1], clamp);
+  const b = interpolate(k, [0, 1], [12, 0], clamp);
+  return <div style={{ fontFamily: F.mono, fontWeight: 500, fontSize: size, color, lineHeight: 1, letterSpacing: interpolate(k, [0, 1], [10, -2]), transform: `translateY(${(1 - k) * size * 0.25}px) scale(${0.85 + 0.15 * k})`, transformOrigin: '50% 80%', opacity: o, filter: `blur(${b}px)`, textShadow: '0 10px 40px rgba(0,0,0,.6)', ...style }}>{text}</div>;
 };
 
 export const Label: React.FC<{ children: React.ReactNode; at?: number; color?: string; style?: React.CSSProperties }> = ({ children, at = 8, color = C.bone, style }) => {
-  const f = useCurrentFrame();
-  const t = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
-  return <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 26, letterSpacing: 5, textTransform: 'uppercase', color, opacity: t, transform: `translateY(${(1 - t) * 14}px)`, ...style }}>{children}</div>;
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const t = spring({ frame: f - at, fps, config: { damping: 22, stiffness: 120 } });
+  // wipe reveal left→right with a soft settle
+  return <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 26, letterSpacing: 5, textTransform: 'uppercase', color, clipPath: `inset(-20% ${(1 - t) * 100}% -20% 0)`, transform: `translateX(${(1 - t) * -16}px)`, opacity: Math.min(1, t * 3), ...style }}>{children}</div>;
 };
 
 // ---------- shots ----------
@@ -202,7 +223,7 @@ const S3: React.FC = () => {
     <AbsoluteFill style={{ background: C.ink, overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.08 + 0.05 * t})` }}><World blur={6} /></div>
       <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(12,13,16,.15), rgba(12,13,16,.55))' }} />
-      <FullBody pose="read" stub="$13.73/hr" face={{ look: 0.45, brow: 0.7, smile: 0, blink }} style={{ position: 'absolute', left: 120 - 30 * t, top: 120, height: 1000 }} />
+      <LiveJake pose="read" seed="s3" stub="$13.73/hr" beats={[{ at: 30, r: 'worry' }]} style={{ position: 'absolute', left: 120 - 30 * t, top: 120, height: 1000 }} />
       <div style={{ position: 'absolute', right: 120, top: 210, transform: `rotate(${-2 + 1.5 * t}deg) translateY(${(1 - t) * 20}px)` }}><Stub mode="empty" /></div>
       <Grade k={0.5} />
       <div style={{ position: 'absolute', left: 70, bottom: 46, fontFamily: F.mono, fontSize: 16, color: 'rgba(236,231,222,.6)' }}>ILLUSTRATION · Jake is a composite character built from national averages</div>

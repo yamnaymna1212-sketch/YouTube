@@ -8,6 +8,7 @@ import { ArrowDownRight, ArrowUpRight, CalendarDays, CalendarX, Car as CarIcon, 
 import { C, F } from '../theme';
 import { clamp, ease } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
+import { LiveJake } from '../host/LiveJake';
 import { Car, GasStation, LightWrap, Sky, Skyline, Street, W as WC } from '../world/World';
 import { PADD, padColor } from '../boards/WorldFrames';
 import { Archive, Cue, Grade, HOOK_FRAMES, Ico, Label, Note, Push, Slam, Src, World, useDur } from './Hook';
@@ -70,7 +71,7 @@ const G2: React.FC = () => {
         {col('NOV 2025', '$3.02', 302, 0, C.steel)}
         {col('NOV 2026', '$4.15', 415, 8, C.amber)}
         <div style={{ alignSelf: 'center', display: 'flex', alignItems: 'center', gap: 12, opacity: fade(f, 30) }}>
-          <ArrowUpRight size={90} color={C.red} strokeWidth={1.6} />
+          <Ico I={ArrowUpRight} plain size={90} color={C.red} at={30} />
           <div style={{ fontFamily: F.mono, fontSize: 96, color: C.red }}>+$1.13</div>
         </div>
       </div>
@@ -221,7 +222,7 @@ const G6c: React.FC = () => {
           const o = at === 0 ? 1 : fade(f, rel(at, 1100));
           return (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 26, marginBottom: 54, opacity: o, transform: `translateX(${(1 - o) * 30}px)` }}>
-              <I size={64} color={col} strokeWidth={1.5} />
+              <Ico I={I} size={46} color={col} at={at === 0 ? 0 : rel(at, 1100)} />
               <div style={{ fontFamily: F.mono, fontSize: 64, color: col, width: 220 }}>{pct.toFixed(1)}%</div>
               <div style={{ fontFamily: F.serif, fontSize: 60, color: C.bone }}>{name}</div>
             </div>
@@ -330,7 +331,7 @@ const G12: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.2 + 0.05 * t})` }}><World blur={8} /></div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.35)' }} />
-      <FullBody pose="stand" face={{ look: interpolate(f, [0, 40], [0, 0.6], clamp), brow: 0.6, smile: 0 }} style={{ position: 'absolute', left: 300, top: 160, height: 1000 }} />
+      <LiveJake pose="stand" seed="g12" beats={[{ at: rel(1970, 1924), r: 'surprise', hold: 30 }, { at: rel(1970, 1924) + 30, r: 'worry' }]} style={{ position: 'absolute', left: 300, top: 160, height: 1000 }} />
       <div style={{ position: 'absolute', right: 160, top: 300, width: 640, background: 'rgba(244,242,238,.97)', borderRadius: 26, padding: '26px 30px', boxShadow: '0 30px 70px rgba(0,0,0,.5)', opacity: n, transform: `translateY(${(1 - n) * -40}px)` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: F.sans, fontWeight: 600, fontSize: 22, color: '#666' }}><Smartphone size={24} color="#666" strokeWidth={1.8} />PAYROLL · now</div>
         <div style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 34, color: '#222', marginTop: 8 }}>Health insurance −$55.38</div>

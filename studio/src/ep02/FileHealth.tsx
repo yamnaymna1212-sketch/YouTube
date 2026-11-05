@@ -5,6 +5,7 @@ import { ArrowRight, Banknote, Building2, CircleHelp, CircleX, HeartPulse, Landm
 import { C, F } from '../theme';
 import { clamp, ease } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
+import { LiveJake } from '../host/LiveJake';
 import { Archive, Cue, Ico, Label, Note, Push, Slam, Src, World, useDur } from './Hook';
 import { Cut, Cuts, Illus, Wallet, t01 } from './Part1';
 import { GAS_MUSIC_FROM } from './FileGas';
@@ -43,7 +44,7 @@ const H1: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.15 + 0.05 * t})` }}><World blur={7} /></div>
       <AbsoluteFill style={{ background: 'linear-gradient(90deg, transparent 30%, rgba(12,13,16,.85) 70%)' }} />
-      <FullBody pose="read" stub="−$55.38" face={{ look: 0.45, brow: 0.5, smile: 0, blink: f % 70 > 65 ? 1 : 0 }} style={{ position: 'absolute', left: 180, top: 120, height: 1000 }} />
+      <LiveJake pose="read" seed="h1" stub="−$55.38" beats={[{ at: rel(160, 67), r: 'worry' }]} style={{ position: 'absolute', left: 180, top: 120, height: 1000 }} />
       <div style={{ position: 'absolute', right: 140, top: 290, width: 640, opacity: o, transform: `translateX(${(1 - o) * 30}px)` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}><User size={40} color={C.steel} strokeWidth={1.6} /><Label at={0} color={C.steel}>Single coverage · his share</Label></div>
         <Slam text="$1,440" color={C.amber} size={170} at={rel(160, 67)} style={{ marginTop: 10 }} />
@@ -61,12 +62,12 @@ const H2: React.FC = () => {
     <AbsoluteFill style={{ background: C.graphite, alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 120 }}>
         <div style={{ textAlign: 'center', opacity: 0.55 }}>
-          <User size={130} color={C.steel} strokeWidth={1.3} />
+          <Ico I={User} size={84} color={C.steel} at={0} />
           <div style={{ fontFamily: F.mono, fontSize: 70, color: C.steel }}>$1,440</div>
           <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 22, letterSpacing: 4, color: C.steel }}>SINGLE</div>
         </div>
         <div style={{ textAlign: 'center', opacity: fade(f, 4), transform: `scale(${0.9 + 0.1 * fade(f, 4)})` }}>
-          <Users size={170} color={C.amber} strokeWidth={1.3} />
+          <Ico I={Users} size={110} color={C.amber} at={4} />
           <div style={{ fontFamily: F.mono, fontSize: 120, color: C.amber }}>$6,850</div>
           <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 24, letterSpacing: 4, color: C.bone }}>FAMILY · WORKER'S SHARE / YEAR</div>
         </div>
@@ -108,7 +109,7 @@ const H4: React.FC = () => {
   const f = useCurrentFrame(); const d = useDur();
   const box = (I: any, label: string, x: number, col: string, dim = false) => (
     <div style={{ position: 'absolute', left: x, top: 380, width: 340, textAlign: 'center', opacity: dim ? 0.45 : 1 }}>
-      <I size={130} color={col} strokeWidth={1.3} />
+      <Ico I={I} size={86} color={col} at={x / 120} />
       <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 28, letterSpacing: 3, color: col, marginTop: 10 }}>{label}</div>
     </div>
   );
@@ -118,7 +119,7 @@ const H4: React.FC = () => {
       {box(Building2, 'EMPLOYER', 140, C.bone)}
       {box(Receipt, "JAKE'S PAYCHECK", 790, C.steel, true)}
       {box(ShieldPlus, 'INSURANCE COMPANY', 1440, C.amber)}
-      <div style={{ position: 'absolute', left: 900, top: 330, opacity: fade(f, 30) }}><CircleX size={120} color={C.red} strokeWidth={1.6} /></div>
+      <div style={{ position: 'absolute', left: 900, top: 330, opacity: fade(f, 30) }}><Ico I={CircleX} plain size={120} color={C.red} at={30} /></div>
       {/* money arcs over the paycheck */}
       {[0, 1, 2].map((i) => {
         const p = Math.max(0, Math.min(1, fly - i * 0.12));
@@ -138,7 +139,7 @@ const H5: React.FC = () => {
     const o = fade(f, at);
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: 18, background: 'rgba(12,13,16,.86)', padding: '18px 28px', borderLeft: `4px solid ${C.red}`, marginBottom: 20, opacity: o, transform: `translateX(${(1 - o) * -30}px)` }}>
-        <I size={46} color={C.red} strokeWidth={1.6} /><span style={{ fontFamily: F.serif, fontSize: 60, color: C.bone }}>{txt}</span>
+        <Ico I={I} plain size={46} color={C.red} at={at} /><span style={{ fontFamily: F.serif, fontSize: 60, color: C.bone }}>{txt}</span>
       </div>
     );
   };
@@ -190,7 +191,7 @@ const H7: React.FC = () => {
         const o = fade(f, at);
         return (
           <div key={a} style={{ display: 'flex', alignItems: 'center', gap: 34, marginBottom: 40, opacity: o, transform: `translateX(${(1 - o) * 30}px)` }}>
-            <CircleX size={80} color={C.red} strokeWidth={1.5} />
+            <Ico I={CircleX} size={50} color={C.red} at={at} />
             <div style={{ fontFamily: F.serif, fontSize: 100, color: C.ink, width: 640, textDecoration: `line-through ${C.red}` }}>{a}</div>
             <div style={{ fontFamily: F.sans, fontWeight: 600, fontSize: 32, letterSpacing: 3, color: '#7A7266' }}>{b.toUpperCase()}</div>
           </div>
@@ -208,7 +209,7 @@ const H8: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.2 + 0.05 * t})` }}><World blur={9} /></div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.3)' }} />
-      <FullBody pose="stand" face={{ look: 0, smile: interpolate(f, [10, 30], [0.2, 1], clamp), brow: 0.2 }} style={{ position: 'absolute', left: 260, top: 80, height: 1250 }} />
+      <LiveJake pose="stand" seed="h8" beats={[{ at: rel(1272, 1192), r: 'cheer', hold: 45 }, { at: rel(1272, 1192), r: 'smile' }]} style={{ position: 'absolute', left: 260, top: 80, height: 1250 }} />
       <div style={{ position: 'absolute', right: 140, top: 330, textAlign: 'right' }}>
         <Label at={0} color="#fff">An instant win · on paper</Label>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 18 }}><Ico I={Banknote} size={90} color={GREEN} at={rel(1272, 1192)} /><Slam text="+$1,440" color={GREEN} size={180} at={rel(1272, 1192)} /></div>
@@ -269,7 +270,7 @@ const H11: React.FC = () => {
   const tilt = interpolate(f, [30, 70, 110, 150], [0, -8, 8, 0], clamp);
   return (
     <AbsoluteFill style={{ background: C.graphite, alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ transform: `rotate(${tilt}deg)`, transition: 'none' }}><Scale size={260} color={C.bone} strokeWidth={1.1} /></div>
+      <div style={{ transform: `rotate(${tilt}deg)`, transition: 'none' }}><Ico I={Scale} size={170} color={C.bone} at={0} /></div>
       <div style={{ fontFamily: F.serif, fontSize: 80, color: C.bone, marginTop: 20 }}>New taxes. The <i style={{ color: C.amber }}>design</i> decides.</div>
       <div style={{ display: 'flex', gap: 80, marginTop: 34, opacity: fade(f, rel(1800, 1661)) }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: F.sans, fontSize: 36, color: GREEN }}><TrendingUp size={46} color={GREEN} strokeWidth={1.6} />Jake ahead</span>
@@ -287,8 +288,8 @@ const H12: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.3 + 0.05 * t})` }}><World blur={12} /></div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.35)' }} />
-      <FullBody pose="read" stub="+$1,440 − ?" face={{ look: 0.45, brow: 0.9, smile: 0 }} style={{ position: 'absolute', left: 500, top: 40, height: 1400 }} />
-      <div style={{ position: 'absolute', left: 1240, top: 230, opacity: q, transform: `translateY(${(1 - q) * -80}px)` }}><CircleHelp size={200} color={C.red} strokeWidth={1.4} /></div>
+      <LiveJake pose="read" seed="h12" stub="+$1,440 − ?" beats={[{ at: 10, r: 'doubt' }]} style={{ position: 'absolute', left: 500, top: 40, height: 1400 }} />
+      <div style={{ position: 'absolute', left: 1240, top: 230, opacity: q, transform: `translateY(${(1 - q) * -80}px)` }}><Ico I={CircleHelp} size={130} color={C.red} at={6} /></div>
       <div style={{ position: 'absolute', left: 110, top: 150, fontFamily: F.serif, fontStyle: 'italic', fontSize: 70, color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,.6)', opacity: fade(f, rel(1930, 1870)) }}>Hold on to that question mark.</div>
       <Wallet value="+$1,440 − ?" />
       <Illus />

@@ -7,6 +7,7 @@ import states from 'us-atlas/states-albers-10m.json';
 import { C, F } from '../theme';
 import { FilmFinish, clamp, ease, io } from '../ui/Film';
 import { FullBody } from '../host/FullBody';
+import { LiveJake } from '../host/LiveJake';
 import { Car, Diner, GasStation, Lamp, LightWrap, Sky, Skyline, Street, Tree, W } from '../world/World';
 import { Archive, Cue, Flash, Grade, HOOK_FRAMES, Ico, Label, LogoChip, Note, Push, Slam, SoundLayer, Src, World, useDur, useShake } from './Hook';
 import { Banknote, Fuel, HeartPulse, Landmark, ScrollText, UserRound, Vote, Wallet as WalletIcon } from 'lucide-react';
@@ -65,7 +66,7 @@ const C1: React.FC = () => {
           <Car x={1450} base={1040} s={1.0} color="#6E8FA8" flip />
           <LightWrap />
         </svg>
-        <FullBody pose="stand" face={{ look: 0.6, smile: 0.35, blink: f % 60 > 55 ? 1 : 0 }} style={{ position: 'absolute', left: 1040, top: 400, height: 560 }} />
+        <LiveJake pose="stand" seed="c1" beats={[{ at: 8, r: 'smile' }, { at: 8, r: 'nod', hold: 26 }]} style={{ position: 'absolute', left: 1040, top: 400, height: 560 }} />
       </div>
       <div style={{ position: 'absolute', left: 1330, top: 470, opacity: o, transform: `translateX(${(1 - o) * 20}px)` }}>
         <div style={{ width: 50, height: 3, background: C.red, marginBottom: 10 }} />
@@ -92,7 +93,7 @@ const C2: React.FC = () => {
           <Car x={560} base={1020} s={1.15} color="#6E8FA8" />
           <LightWrap />
         </svg>
-        <FullBody pose="pump" face={{ look: -0.6, brow: 0.8, smile: 0 }} style={{ position: 'absolute', left: 840, top: 420, height: 620 }} />
+        <LiveJake pose="pump" seed="c2" face={{ look: -0.5 }} beats={[{ at: 66, r: 'surprise', hold: 24 }, { at: 90, r: 'worry' }]} style={{ position: 'absolute', left: 840, top: 420, height: 620 }} />
       </div>
       {/* pump display close-up insert */}
       <div style={{ position: 'absolute', right: 110, top: 470, width: 560, background: '#101317', border: '6px solid #D9D4CA', borderRadius: 10, padding: '24px 34px', boxShadow: '0 30px 70px rgba(0,0,0,.6)', transform: `rotate(${1.5 - t}deg)` }}>
@@ -205,7 +206,7 @@ const C7: React.FC = () => {
           <Car x={1500} base={1050} s={1.1} color="#6E8FA8" />
           <LightWrap />
         </svg>
-        <FullBody pose="stand" face={{ look: 0.8, smile: 0.2 }} style={{ position: 'absolute', left: 700 + 380 * t, top: 380 - bob, height: 640 }} />
+        <LiveJake pose="stand" seed="c7" walk face={{ look: 0.7 }} style={{ position: 'absolute', left: 700 + 380 * t, top: 380, height: 640 }} />
       </div>
       <div style={{ position: 'absolute', left: 110, top: 150 }}>
         <div style={{ fontFamily: F.serif, fontSize: 84, color: '#fff', lineHeight: 1.05, textShadow: '0 4px 30px rgba(0,0,0,.5)', opacity: interpolate(f, [56, 70], [0, 1], clamp) }}>Forget the politics.<br /><i style={{ color: C.amber }}>Do the math.</i></div>
@@ -237,7 +238,7 @@ const C8: React.FC = () => {
       </Sequence>
       <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center' }}>
         <div key={word} style={{ transform: useShake(at, 8), textAlign: 'center' }}>
-          {(() => { const I = BEAT_ICONS[Math.max(0, i)]; return <I size={110} color={i === 3 ? C.red : C.amber} strokeWidth={1.4} style={{ opacity: interpolate(f, [at, at + 5], [0, 1], clamp) }} />; })()}
+          <Ico I={BEAT_ICONS[Math.max(0, i)]} size={84} color={i === 3 ? C.red : C.amber} at={at} style={{ marginBottom: 10 }} />
           <div style={{ fontFamily: F.serif, fontSize: 210, color: i === 3 ? C.red : C.bone, transform: `scale(${interpolate(f, [at, at + 6], [1.3, 1], clamp)})`, opacity: interpolate(f, [at, at + 3], [0, 1], clamp) }}>{word}</div>
         </div>
       </AbsoluteFill>
@@ -272,7 +273,7 @@ const C10: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.25 + 0.05 * t})` }}><World blur={10} /></div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.35)' }} />
-      <FullBody pose="read" stub="$13.73/hr" face={{ look: interpolate(f, [0, 60, 80], [0.5, 0.5, 0], clamp), brow: 0.6, smile: 0.1, blink: f % 75 > 70 ? 1 : 0 }} style={{ position: 'absolute', left: 560 - 20 * t, top: 60, height: 1300 }} />
+      <LiveJake pose="read" seed="c10" stub="$13.73/hr" beats={[{ at: 40, r: 'doubt' }]} style={{ position: 'absolute', left: 560 - 20 * t, top: 60, height: 1300 }} />
       <Wallet />
       <Illus />
     </AbsoluteFill>
@@ -435,7 +436,7 @@ const D7: React.FC = () => {
           <LightWrap />
         </svg>
       </div>
-      <FullBody pose="stand" face={{ look: 0.7, brow: 0.5, smile: 0.1 }} style={{ position: 'absolute', left: 240, top: 260, height: 860 }} />
+      <LiveJake pose="stand" seed="d7" beats={[{ at: 14, r: 'think' }]} style={{ position: 'absolute', left: 240, top: 260, height: 860 }} />
       <div style={{ position: 'absolute', right: 140, top: 260, width: 700, background: C.paper, padding: '30px 36px', boxShadow: '0 30px 70px rgba(0,0,0,.5)', opacity: o, transform: `translateY(${(1 - o) * 30}px) rotate(-1.5deg)` }}>
         <div style={{ fontFamily: F.mono, fontSize: 18, color: '#7A7266', letterSpacing: 2 }}>HIS PLATFORM</div>
         <div style={{ fontFamily: F.serif, fontSize: 64, color: C.ink, lineHeight: 1.05, marginTop: 6 }}>Easy to say.<br /><i style={{ color: C.red }}>Expensive to do.</i></div>
@@ -458,7 +459,7 @@ const D8: React.FC = () => {
         const o = interpolate(f, [at, at + 12], [0, 1], { ...clamp, easing: ease });
         return (
           <div key={a} style={{ display: 'flex', alignItems: 'baseline', gap: 36, marginBottom: 46, opacity: o, transform: `translateX(${(1 - o) * 40}px)` }}>
-            <div style={{ fontFamily: F.mono, fontSize: 40, color: C.red, display: 'flex', alignItems: 'center', gap: 22 }}>0{i + 1}{(() => { const I = PLANK_ICONS[i]; return <I size={70} color={C.amber} strokeWidth={1.4} />; })()}</div>
+            <div style={{ fontFamily: F.mono, fontSize: 40, color: C.red, display: 'flex', alignItems: 'center', gap: 22 }}>0{i + 1}<Ico I={PLANK_ICONS[i]} size={52} color={C.amber} at={at} /></div>
             <div>
               <div style={{ fontFamily: F.serif, fontSize: 92, color: C.bone, lineHeight: 1 }}>{a}</div>
               <div style={{ fontFamily: F.sans, fontSize: 26, color: 'rgba(236,231,222,.6)', marginTop: 8 }}>{b}</div>
@@ -494,7 +495,7 @@ const D10: React.FC = () => {
   const node = (i: number, label: string, hot = false) => {
     const o = interpolate(f, [i * 8, i * 8 + 10], [0, 1], { ...clamp, easing: ease });
     const I = NODE_ICONS[i];
-    return <div style={{ width: 420, padding: '30px 0', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, border: `3px solid ${hot ? C.red : C.ink}`, background: hot ? C.red : 'transparent', color: hot ? '#fff' : C.ink, fontFamily: F.serif, fontSize: 66, opacity: o, transform: `scale(${0.9 + 0.1 * o})` }}><I size={60} color={hot ? '#fff' : C.ink} strokeWidth={1.5} />{label}</div>;
+    return <div style={{ width: 420, padding: '30px 0', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, border: `3px solid ${hot ? C.red : C.ink}`, background: hot ? C.red : 'transparent', color: hot ? '#fff' : C.ink, fontFamily: F.serif, fontSize: 66, opacity: o, transform: `scale(${0.9 + 0.1 * o})` }}><Ico I={I} plain size={60} color={hot ? '#fff' : C.ink} at={i * 8} />{label}</div>;
   };
   const arrow = (i: number) => <div style={{ fontFamily: F.sans, fontSize: 60, color: '#7A7266', opacity: interpolate(f, [i * 8 + 4, i * 8 + 12], [0, 1], clamp) }}>→</div>;
   return (
@@ -512,7 +513,7 @@ const D11: React.FC = () => {
     <AbsoluteFill style={{ overflow: 'hidden', background: C.ink }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${1.3 + 0.05 * t})` }}><World blur={12} /></div>
       <AbsoluteFill style={{ background: 'rgba(12,13,16,.3)' }} />
-      <FullBody pose="stand" face={{ look: 0, brow: interpolate(f, [20, 34], [0.2, 1], clamp), smile: 0.3, blink: f % 80 > 75 ? 1 : 0 }} style={{ position: 'absolute', left: 900 + 10 * t, top: 40, height: 1700 }} />
+      <LiveJake pose="stand" seed="d11" beats={[{ at: 18, r: 'shrug', hold: 50 }, { at: 18, r: 'doubt' }]} style={{ position: 'absolute', left: 900 + 10 * t, top: 40, height: 1700 }} />
       <div style={{ position: 'absolute', left: 110, top: 420 }}>
         <div style={{ fontFamily: F.serif, fontStyle: 'italic', fontSize: 96, color: '#fff', textShadow: '0 4px 30px rgba(0,0,0,.6)', opacity: interpolate(f, [50, 64], [0, 1], clamp) }}>What changes for Jake?</div>
       </div>

@@ -28,13 +28,13 @@ const Nozzle = () => (
     <rect x={-6} y={128} width={12} height={54} rx={4} fill="#808080" />
   </g>
 );
-const Paycheck = () => (
+const Paycheck: React.FC<{ text?: string }> = ({ text = '$7.25/hr' }) => (
   <g transform="translate(90 -30) rotate(-3)">
     <rect x={-150} y={-90} width={260} height={160} rx={6} fill={K.paper} stroke="#CFC8BA" strokeWidth={3} />
     <text x={-130} y={-56} fontFamily="Inter, sans-serif" fontWeight={700} fontSize={20} fill="#3A352E">PAY STUB</text>
     <rect x={-130} y={-36} width={190} height={8} rx={4} fill="#C9C1B3" />
     <rect x={-130} y={-18} width={160} height={8} rx={4} fill="#C9C1B3" />
-    <text x={-130} y={40} fontFamily="JetBrains Mono, monospace" fontSize={24} fill="#3F7A55">$7.25/hr</text>
+    <text x={-130} y={40} fontFamily="JetBrains Mono, monospace" fontSize={24} fill="#3F7A55">{text}</text>
   </g>
 );
 
@@ -45,7 +45,7 @@ const POSES: Record<BodyPose, { front: [number, number]; back: [number, number] 
   point: { front: [96, 0], back: [-6, 4] },
 };
 
-export const FullBody: React.FC<{ pose?: BodyPose; face?: Partial<HostPose>; style?: React.CSSProperties }> = ({ pose = 'stand', face = {}, style }) => {
+export const FullBody: React.FC<{ pose?: BodyPose; face?: Partial<HostPose>; style?: React.CSSProperties; stub?: string }> = ({ pose = 'stand', face = {}, style, stub }) => {
   const p: HostPose = { talk: 0, blink: 0, look: 0, brow: 0, smile: 0.25, tilt: 0, nod: 0, ...face };
   const a = POSES[pose];
   const s = 0.78, ox = 260 - 300 * s, oy = 478 - 522 * s; // head scale + offset (host coords -> body coords)
@@ -71,7 +71,7 @@ export const FullBody: React.FC<{ pose?: BodyPose; face?: Partial<HostPose>; sty
       <Arm x={148} y={520} a1={a.front[0]} a2={a.front[1]} front>
         {pose === 'pump' && <Nozzle />}
         {pose === 'point' && <path d="M-10 -6 L -64 -8 Q -74 0 -64 8 L -10 8 Z" fill={K.skin} />}
-        {pose === 'read' && <Paycheck />}
+        {pose === 'read' && <Paycheck text={stub} />}
       </Arm>
     </svg>
   );

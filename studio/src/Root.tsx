@@ -5,9 +5,11 @@ import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boa
 import { BodyTest } from './BodyTest';
 import { F0Jake, F1Hook, F2Gas, F3Video, F4Versus, F5Wage } from './boards/SayedFrames';
 import { StyleReel, REEL_FRAMES } from './StyleReel';
+import { Hook, HOOK_FRAMES } from './ep02/Hook';
 import { W1Street, W2Gas, W3Map, W4Footage, W5Money, W6Collage } from './boards/WorldFrames';
 export const Root: React.FC = () => (
   <>
+    <Composition id="EP02Hook" component={Hook} durationInFrames={HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="StyleReel" component={StyleReel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
     <Still id="BoardCharacter" component={BoardCharacter} width={1920} height={1080} />
     <Still id="BoardIcons" component={BoardIcons} width={1920} height={1080} />

@@ -58,5 +58,11 @@
 - **Script expanded** to reach 8 min: new parts `vo_05b` (the employer's hidden $7,885) and `vo_05c` (how big is $30T, and why most of it replaces existing spending), in `voiceover-parts.md` and `script.md` File 04. Not voiced yet: waiting for the user's OK on the text and the pronunciation list.
 - New flow: `8mneAJ4NpfLpbKgS0KsJ`. Listen for how "El-Sayed" is pronounced (written in IPA in the text) before the edit.
 
+## Done 5 Nov 2026 (session 3: HOOK v1 video)
+- **User asked to start the hook.** New composition `EP02Hook` in `studio/src/ep02/Hook.tsx` (33.3 s, 13 shots cut on the pauses of `vo_00.mp3`). Render: `npx remotion render src/index.ts EP02Hook out/ep02-hook.mp4 --browser-executable=/opt/pw-browsers/chromium --concurrency=4`.
+- Compressed copy: `episodes/ep02-el-sayed/renders/ep02-hook-v1.mp4`.
+- Shots: $26,993 slam → KFF page → Jake's pay stub (employer line "not shown") → NASA Detroit → El-Sayed photo + lower third → "…president?" typed → "8 minutes" promise card → EIA table $4.15 → stub +$6,800 → 1973 cook 700,000 jobs → House 2008 clip $30 TRILLION → blank tax line "?" → title slam.
+- `FullBody` now takes `stub` (pay-stub text) so Jake's prop shows $13.73/hr, not $7.25.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

@@ -59,7 +59,7 @@
 | 1:23 | `WORLD` gas station at sunset, low angle, pylon **$4.15⁹** | Let's start where Jake starts every week. Regular gas right now averages four-fifteen a gallon nationwide. That's a dollar thirteen more than a year ago. [S5] |
 | 1:29 | `METER` mini-calc slides in: **52 × $62.30 = $3,240/yr** · last year **$2,355** | Jake fills up once a week. That's about three thousand two hundred and forty dollars a year on gas. Eight hundred and eighty more than last year, for the exact same car and the exact same commute. |
 | 1:33 | `MAP` U.S. by region, colours fill in one by one | And where you live changes the bill. West Coast: five-thirty. Gulf Coast: three sixty-four. Jake's Midwest: four-ten. [S5] |
-| 1:45 | `EVIDENCE` one gallon cut into slices: crude ~½ · refining ~¼ · distribution · taxes ~⅛ | But here's what most people don't know. About half of what you pay is the price of crude oil, set on a global market. Refining is about a quarter. Taxes, about an eighth. [S6] |
+| 1:45 | `EVIDENCE` real EIA chart `screens/eia_what_we_pay_per_gallon.png` (2025: crude 51.4% · distribution 17.8% · taxes 16.6% · refining 14.3%), slow push-in, then cut to `FOOTAGE` `v01_pumpjack_1975` (crude) → `PHOTO` `doc07` refinery | But here's what most people don't know. About half of what you pay is the price of crude oil, set on a global market. The other half is split three ways: refining, getting it to the station, and taxes. Roughly a sixth each. [S6] |
 | 2:00 | `PHOTO` real 2026 pump close-up (Louisiana, March) with its real date stamp | Oil is priced by the world, not by the White House. |
 | 2:08 | `WORLD` Jake at the pump, shrugs | Which means no president, El-Sayed or anyone else, has a dial for gas prices. |
 | 2:20 | `KINETIC` *"But…"* | But a president can push energy policy, and that can move prices over years, in either direction. Not by next week. |
@@ -145,7 +145,7 @@ No type repeats back to back ✓ · a new shot every 4–8 s ✓ · real materia
 | S3 | Senate HELP Committee testimony, 11 Jul 2024 (video, public domain) | Wikimedia Commons: `File:Abdul_El_Sayed_senate_hearing.webm` |
 | S4 | Platform: Medicare for All, higher federal minimum wage, taxing the rich, employer payroll-tax cut for small business | [Michigan Public, 20 Oct 2026](https://michiganpublic.org/politics-government/2026-10-20/el-sayed-rogers-drill-down-on-issues-at-detroit-economic-club-forum) · [Fox News rally coverage](https://www.foxnews.com/media/el-sayed-rallygoers-urge-major-change-cash-handouts-fight-cost-crisis.amp) |
 | S5 | U.S. regular $4.153 (+$1.134 y/y); West Coast $5.296; Gulf $3.636; Midwest $4.102; week of 2 Nov 2026 | [EIA Gasoline & Diesel Fuel Update](https://www.eia.gov/petroleum/gasdiesel/) ⚠️ update to latest week |
-| S6 | Price of a gallon: ~50% crude, ~24% refining, ~13% distribution, ~13% taxes (Aug 2026) | [EIA](https://www.eia.gov/petroleum/gasdiesel/) |
+| S6 | What a gallon of regular pays for, 2025 avg ($3.10/gal): crude oil 51.4%, distribution & marketing 17.8%, federal & state taxes 16.6%, refining 14.3% | [EIA, Gasoline explained: Factors affecting gasoline prices](https://www.eia.gov/energyexplained/gasoline/factors-affecting-gasoline-prices.php) (screenshot 5 Nov 2026) |
 | S7 | 2025 avg premiums: family $26,993 (worker pays $6,850); single $9,325 (worker pays $1,440) | [KFF 2025 Employer Health Benefits Survey](https://www.kff.org/report/2025-employer-health-benefits-survey/) |
 | S8 | Medicare for All 10-yr cost estimates: Mercatus Center $32.6T (2018); Urban Institute ~$34T (2019) | Mercatus (Blahous, 2018) · Urban Institute (2019) ⚠️ link primary PDFs before publishing |
 | S9 | Federal minimum wage $7.25 since 24 Jul 2009; longest freeze since 1938 | U.S. Department of Labor · [Axios Detroit](https://www.axios.com/local/detroit/2026/01/05/michigan-minimum-wage-2025-2026-raise) |
@@ -158,3 +158,38 @@ No type repeats back to back ✓ · a new shot every 4–8 s ✓ · real materia
 - Both sides get their strongest real number: the plan's upside (no premiums, $1,440 back, 8.9M raises) and its costs (>$30T, ~700k jobs at risk).
 - No prediction of who is "right". The video ends on a question for the viewer.
 - "Hypothetical" appears on screen in the cold open and in the description.
+
+---
+
+## 7. Real materials map (added 5 Nov 2026)
+
+All files are under `studio/public/sayed/`. Licences are in `LICENSES.md`, and the overview board is `materials-v3/real-materials-board.jpg`. These are B-roll inserts placed over the existing VO, so no VO change is needed except for S6. Keep each insert 2–4 s and give it a push, pan or parallax so nothing sits still.
+
+| Time | Insert | File | On-screen tag (bottom-left, mono) |
+|---|---|---|---|
+| 0:03 | Detroit at night from orbit, slow zoom | `real/nasa_iss074e0334264.jpg` | NASA · ISS · 2026 |
+| 0:30 | Michigan from orbit under the collage | `real/nasa_iss074e0642367.jpg`, `real/nasa_sl2-05-389.jpg` | NASA |
+| 0:36 | Detroit's industrial past: Ford River Rouge aerial | `footage/v08_ford_river_rouge_aerial_1927.mp4` | National Archives · 1927 |
+| 1:05 | house.gov home page (Capitol) behind the President → Congress → Law diagram | `screens/house_gov.png` | house.gov |
+| 1:23 | Real EIA weekly table, highlight the U.S. row (4.153, +1.134) | `screens/eia_gas_diesel_update.png` | U.S. EIA · Nov 3, 2026 |
+| 1:33 | Same table, highlight West Coast / Gulf / Midwest rows | `screens/eia_gas_diesel_update.png` | U.S. EIA |
+| 1:45 | EIA per-gallon chart → pumpjack → refinery → gasoline animation | `screens/eia_what_we_pay_per_gallon.png`, `footage/v01_pumpjack_1975.mp4` (use 0:00–0:04 only), `real/doc07_…refinery…jpg`, `footage/v03_gasoline_spray_1935.mp4` | EIA · EPA DOCUMERICA 1973 · 1935 film |
+| 2:00 | **Proof that the world sets the price:** 1973 oil embargo. "SORRY NO GASOLINE" → odd-even rationing with a 15-gal limit → gas line | `real/doc01…`, `real/doc02…`, `real/doc13…`, `real/doc04…` | EPA DOCUMERICA · 1973–74 |
+| 2:20 | "a president can push energy policy": Carter's 1977 energy address | `footage/v02_carter_energy_1977.mp4` | National Archives · 1977 |
+| 2:28 | Congress argues about gas prices, 2008 (generic, no names shown) | `footage/v05_house_gas_prices_hearing_2008.mp4` | U.S. House · 2008 |
+| 3:07 | KFF report page under the $26,993 bar | `screens/kff_ehbs_2025.png` | KFF · Oct 22, 2025 |
+| 3:16 | Real hospital moment, 1973 | `real/doc11_x-ray…jpg` | EPA DOCUMERICA |
+| 3:50 | House hearing on employer health care (generic Congress shot) | `footage/v06_house_employer_health_hearing_2009.mp4` (use 0:00–0:05) | U.S. House · 2009 |
+| 4:33 | DOL minimum wage page, highlight "$7.25 per hour effective July 24, 2009" | `screens/dol_minimum_wage.png` | U.S. Dept. of Labor |
+| 4:40 | Work Pays America (1937, the era of the first minimum wage, 1938) | `footage/v13_payroll_office_1937.mp4` | WPA film · 1937 |
+| 5:05 | Real diner and restaurant workers (Jake's world, real version) | `real/doc09_…waitress…jpg`, `real/doc12_…cook…jpg`, `real/doc10_drive-in…jpg` | EPA DOCUMERICA · 1973 |
+| 5:12 | Congress on wages (generic) | `footage/v07_house_wage_hearing_2009.mp4` | U.S. House · 2009 |
+| 5:35 | Michigan built on paychecks: Ford assembly line | `footage/v09_ford_assembly_1927.mp4` | National Archives |
+| 6:28 | "The bill changes address": an income split into jars, then a budget ledger | `footage/v11_income_jars_1948.mp4`, `footage/v12_budget_ledger_1948.mp4` | Coronet film · 1948 |
+| 7:15 | City lights from orbit as Jake walks home | `real/nasa_iss075e0227352.jpg` | NASA · ISS · 2026 |
+| spare | Car service 1940, gas station from above 1973, Detroit by day | `footage/v10_car_service_1940.mp4`, `real/doc05…`, `real/nasa_iss073e0814049.jpg` | — |
+
+**Rules for these inserts**
+- Hearing clips are **generic "Congress at work" shots**. Never caption a person in them by name, and never imply that the hearing was about El-Sayed.
+- Archival photos and films always carry their year on screen, so no one mistakes 1973 for today.
+- Still missing (Wikimedia blocks this server with 429): `Abdul_El_Sayed_senate_hearing.webm`. The user should download it by hand and place it in `studio/public/sayed/`.

@@ -42,5 +42,15 @@
 - **فيديوهات حقيقية لم تُنزَّل** (Wikimedia يرجع خطأ 429 من الخادم): `File:Abdul_El_Sayed_senate_hearing.webm` و`File:Rep._Mike_Rogers_Opens_a_House_Intelligence_Committee_Hearing_on_NSA_Data_Collection_Programs.ogg`. الأفضل أن ينزّلهما المستخدم ويرفعهما إلى `studio/public/sayed/`.
 - ⚠️ صورة `File:Mike Rogers official photo.jpg` تخص Mike Rogers نائب ألاباما. لا تستخدمها أبداً.
 
+## Done 5 Nov 2026 (session 2: real materials)
+- **32 new real assets** in `studio/public/sayed/`, all public domain or screenshots of official websites, with licences in `episodes/ep02-el-sayed/LICENSES.md`:
+  - `real/`: 13 EPA DOCUMERICA photos (1973 gas lines, refinery, oil wells, diner, hospital) and 6 NASA photos (Detroit and Michigan from the ISS).
+  - `footage/`: 13 eight-second clips, 720p and muted, from the National Archives, U.S. House hearings and Prelinger films (Carter 1977, gas-prices hearing 2008, Ford River Rouge 1927, "Down the Gasoline Trail" 1935, and others).
+  - `screens/`: EIA (weekly prices + what a gallon pays for), DOL ($7.25), KFF 2025, house.gov.
+- **Where each one goes in the timeline:** `script.md` §7. **Board:** `episodes/ep02-el-sayed/materials-v3/real-materials-board.jpg`.
+- **Fact fix:** the official EIA chart (2025) says crude 51% · distribution 18% · taxes 17% · refining 14%. The VO line in `script.md` and `voiceover-parts.md` (vo_03) changed to "split three ways… roughly a sixth each".
+- Hearing clips are generic "Congress" shots only: never name a person in them.
+- Still missing: the El-Sayed Senate hearing video (Wikimedia 429). The VO has not been generated (ElevenLabs credits).
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

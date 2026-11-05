@@ -1,0 +1,155 @@
+# EP02 — If El-Sayed Became President? Your Wallet, Explained
+
+- **Length:** 8:00 (≈1,180 words of VO at ~150 wpm, with breathing room for visuals)
+- **Main character:** Jake, 26, works at the Sunrise Diner in Michigan, drives a 2012 sedan, single, employer health plan.
+- **Narrator:** off-screen, calm and conversational (American male, 25–35). Jake never speaks; he *reacts* (faces, gestures).
+- **Tone:** curious, fair, a little wry. Not news, not politics. **Math on one man's wallet.**
+- **Status of facts:** written 5 Nov 2026. El-Sayed **won** the Michigan Senate race on 3 Nov 2026 (AP call). Re-check numbers marked ⚠️ on publish day.
+
+---
+
+## 1. The structure (why people keep watching)
+
+| Device | Where | Why it works |
+|---|---|---|
+| **Cold open in Jake's life** | 0:00 | Starts with a feeling everyone has (paying for gas), not with a politician |
+| **Open loop #1:** "one number bigger than everything else, and almost nobody sees it" | 0:25, paid off 7:35 | Viewers stay to get the answer |
+| **The promise:** "Gas. Health care. Paychecks. Taxes." | 0:22 | Tells viewers exactly what they get, so they don't leave guessing |
+| **JAKE'S WALLET meter** (running scoreboard, top-right) | updates at the end of every file | A "score" makes viewers want the final total |
+| **4 numbered FILES** (chapter cards) | every ~90 s | Clear progress; YouTube chapters in the description |
+| **"But…" turn** inside every file | 2:20, 3:55, 5:30, 6:40 | Each file has a twist, so no file is predictable |
+| **Mini-cliffhanger** at the end of every file | 2:45, 4:25, 5:55 | Pulls viewers into the next file |
+| **Pattern interrupt every 4–8 s** | whole video | Shot type changes constantly (table in §3) |
+| **Payoff + one question to comment** | 7:30 | Closes the loops, drives comments (algorithm signal) |
+
+**Shot-type legend:** `WORLD` Jake's illustrated city · `FOOTAGE` real video · `PHOTO` real photo · `MAP` real-data map · `EVIDENCE` real document/data card · `CARD` chapter card · `KINETIC` big words on screen · `METER` Jake's Wallet update.
+**Rule:** never two shots of the same type back to back, and never the same camera angle twice in a row.
+
+---
+
+## 2. Script
+
+### COLD OPEN (0:00–0:30)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 0:00 | `WORLD` close-up, low angle: pump numbers spinning, stop at **$62.30**. Jake exhales. | This is Jake. He's twenty-six, he lives in Michigan, and he just paid sixty-two dollars to fill up a 2012 sedan. |
+| 0:07 | `PHOTO` El-Sayed with voters (Conlan Houston) → push-in. Lower third: *Abdul El-Sayed · U.S. Senator-elect (D-MI)* | On Tuesday night, Jake's state elected Abdul El-Sayed to the U.S. Senate. The first Muslim senator in American history. [S1] |
+| 0:13 | `KINETIC` on black: *"…president?"* typed, cursor blinking | And within hours, people online were asking a much bigger question. |
+| 0:16 | `PHOTO` Capitol at dusk, title slams in: **IF EL-SAYED BECAME PRESIDENT?** | What if he became president? |
+| 0:19 | `WORLD` Jake walking to his car, wide | So forget the politics for eight minutes. Let's do the math on Jake's wallet. / Gas. Health care. Paychecks. Taxes. |
+| 0:25 | `METER` appears top-right: **JAKE'S WALLET · $0** | And stay to the end, because one number in this video is bigger than everything else combined, and almost nobody ever sees it on their paycheck. |
+
+### WHO IS HE? (0:30–1:20)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 0:30 | `PHOTO` collage: campaign photos, slow parallax | First: who is he? Abdul El-Sayed is a doctor. He ran Detroit's health department, and in 2018 he ran for governor and lost the primary. [S2] |
+| 0:40 | `FOOTAGE` Senate HELP hearing, Jul 2024 (real, public domain) | Here he is in 2024, testifying before the Senate's health committee. [S3] |
+| 0:46 | `PHOTO` split: El-Sayed vs. Mike Rogers, vote bar animates to ~6 pts | On Tuesday he beat Republican Mike Rogers, a former congressman and FBI agent, by about six points with most ballots counted. [S1] ⚠️ final margin |
+| 0:55 | `WORLD` Jake at the diner counter, reading the news on his phone | His platform is easy to say and expensive to do: Medicare for All, a higher minimum wage, and higher taxes on the very rich. [S4] |
+| 1:05 | `EVIDENCE` simple diagram: President → Congress → Law (thin lines) | One reality check before we start: a president can't do any of this alone. Congress writes the laws. |
+| 1:12 | `WORLD` Jake looks up at camera, eyebrow raised | So think of it this way: what changes for Jake if El-Sayed got his way? |
+
+### FILE 01 · GAS (1:20–2:50)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 1:20 | `CARD` **FILE 01 · GAS** (paper texture, red tab) | — |
+| 1:23 | `WORLD` gas station at sunset, low angle, pylon **$4.15⁹** | Let's start where Jake starts every week. Regular gas right now averages four-fifteen a gallon nationwide. That's a dollar thirteen more than a year ago. [S5] |
+| 1:33 | `MAP` U.S. by region, colours fill in one by one | And where you live changes the bill. West Coast: five-thirty. Gulf Coast: three sixty-four. Jake's Midwest: four-ten. [S5] |
+| 1:45 | `EVIDENCE` one gallon cut into slices: crude ~½ · refining ~¼ · distribution · taxes ~⅛ | But here's what most people don't know. About half of what you pay is the price of crude oil, set on a global market. Refining is about a quarter. Taxes, about an eighth. [S6] |
+| 2:00 | `PHOTO` real 2026 pump close-up (Louisiana, March) with its real date stamp | Oil is priced by the world, not by the White House. |
+| 2:08 | `WORLD` Jake at the pump, shrugs | Which means no president, El-Sayed or anyone else, has a dial for gas prices. |
+| 2:20 | `KINETIC` *"But…"* | But a president can push energy policy, and that can move prices over years, in either direction. Not by next week. |
+| 2:35 | `METER` **GAS: ≈ $0** (grey) | So, file one, for Jake's wallet: roughly zero. |
+| 2:42 | `WORLD` Jake's phone buzzes: *"Payroll: health insurance −$55.38"* | The next file is different. A president really could change this one, and it's the bill Jake never thinks about. |
+
+### FILE 02 · HEALTH CARE (2:50–4:30)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 2:50 | `CARD` **FILE 02 · HEALTH CARE** | — |
+| 2:53 | `WORLD` Jake outside the pharmacy, reading his pay stub | Jake gets insurance through the diner. Like the average American worker, he pays about fourteen hundred and forty dollars a year for single coverage. If he had a family, it'd be six thousand eight hundred and fifty. [S7] |
+| 3:07 | `EVIDENCE` KFF data card, bar grows to **$26,993** | And that's only the worker's share. The full price of an average family plan in 2025? Almost twenty-seven thousand dollars a year. Most of it is paid by the employer, before it ever reaches the paycheck. [S7] |
+| 3:20 | `FOOTAGE` El-Sayed at the hearing | El-Sayed's answer is Medicare for All: one public plan for everyone. No premiums, and mostly no deductibles or copays. [S4] |
+| 3:32 | `METER` **HEALTH: +$1,440** (green, ticks up) / `WORLD` Jake grins | For Jake, that's an instant win on paper: about fourteen hundred and forty dollars back every year. |
+| 3:40 | `KINETIC` record-scratch freeze: *"But…"* | But someone has to pay for it. |
+| 3:45 | `EVIDENCE` two study cards side by side: **$32.6T** (Mercatus, 2018) · **$34T** (Urban Institute, 2019) / 10 years | Independent estimates put the cost of Medicare for All at more than thirty trillion dollars over ten years. [S8] |
+| 3:58 | `WORLD` Jake's grin fades; meter shows **+$1,440 − ?** | That money would come from new taxes, and how those taxes are designed decides whether Jake comes out ahead or behind. |
+| 4:15 | `WORLD` close-up: the "?" lands on Jake's pay stub | Hold on to that question mark. We'll come back to it. First: Jake's paycheck. |
+
+### FILE 03 · PAYCHECK (4:30–6:00)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 4:30 | `CARD` **FILE 03 · PAYCHECK** | — |
+| 4:33 | `EVIDENCE` real $100 notes + **$7.25/hr** · *"since July 24, 2009"* | The federal minimum wage is seven twenty-five an hour. It hasn't moved since July 2009: the longest freeze since the minimum wage was created in 1938. [S9] |
+| 4:45 | `MAP` Michigan highlighted: **$13.73 → $15.00 (Jan 1, 2027)** | But Jake lives in Michigan, where the state minimum is already thirteen seventy-three, and it goes to fifteen dollars in January. [S10] |
+| 4:55 | `MAP` Texas and Indiana light up: **$7.25** | So a federal raise matters most in places like Texas or Indiana, where it's still seven twenty-five. [S10] |
+| 5:05 | `EVIDENCE` CBO card: **8.9M** get a raise · **~700,000** jobs lost (avg. est.) | What would a big raise actually do? When the Congressional Budget Office studied a seventeen-dollar minimum wage, it found about 8.9 million workers would get a raise, and estimated around seven hundred thousand jobs could disappear. [S11] |
+| 5:22 | `WORLD` split screen: Jake A gets a raise / Jake B sees a **CLOSED** sign on the diner | Winners and losers. Both real. |
+| 5:30 | `KINETIC` *"But…"* / `WORLD` Jake on the diner steps | But here's the twist for Jake: Michigan already got most of the way there on its own. |
+| 5:40 | `METER` **PAYCHECK: small (MI) · big (TX)** | So file three, for Jake: a small change. For a Jake in Texas: a big one. |
+| 5:50 | `WORLD` Jake looks at the "?" still floating on his stub | Which brings us back to that question mark. Who pays? |
+
+### FILE 04 · WHO PAYS? (6:00–7:15)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 6:00 | `CARD` **FILE 04 · WHO PAYS?** | — |
+| 6:03 | `PHOTO` Capitol, slow push, money stacks drifting in | El-Sayed says the very richest Americans should pay more. His campaign hasn't published a detailed tax plan, so here's the honest version. [S4] |
+| 6:15 | `EVIDENCE` two scenario cards: **A · Taxes on the very rich & corporations** → Jake keeps most of the $1,440 · **B · Broad payroll tax on everyone** → part of it comes back out | If Medicare for All is paid mostly by the very rich and big corporations, Jake keeps most of that fourteen hundred and forty. If it's paid with a broad payroll tax on everyone, part of it comes back out of his check. |
+| 6:35 | `WORLD` Jake at a diner booth doing math on a napkin | Either way, Jake would stop paying premiums. The real question is what replaces them. |
+| 6:45 | `KINETIC` *"But…"* / `PHOTO` Capitol | But remember: a president proposes. Congress decides. And both chambers would need to agree. |
+| 6:58 | `METER` full tally: **GAS ≈ $0 · HEALTH +$1,440 · PAY small · TAXES ?** | So here's Jake's scoreboard. |
+
+### CLOSE (7:15–8:00)
+
+| Time | Shot | Voice-over |
+|---|---|---|
+| 7:15 | `WORLD` Jake walking home at dusk, wide, streetlights flicking on | So, if El-Sayed became president, would Jake be richer? On paper, his biggest bill disappears. In reality, it depends on one thing: how it's paid for. |
+| 7:30 | `EVIDENCE` the **$26,993** bar returns, huge | And that number bigger than everything else? It's this: twenty-seven thousand dollars for an average family health plan. Most Americans never see it, because it's spent before their paycheck is even printed. [S7] |
+| 7:42 | `WORLD` Jake turns to camera, half-smile | Would you trade your premiums for higher taxes? Tell me in the comments. |
+| 7:50 | `CARD` channel end card + next episode tease | If you want to see what the next big name would do to your wallet, subscribe. I'll do the math, so you don't have to. |
+
+---
+
+## 3. Shot rhythm check (first 90 seconds)
+
+`WORLD` → `PHOTO` → `KINETIC` → `PHOTO` → `WORLD` → `METER` → `PHOTO` → `FOOTAGE` → `PHOTO` → `WORLD` → `EVIDENCE` → `WORLD` → `CARD` → `WORLD` → `MAP` → `EVIDENCE` → `PHOTO` → `WORLD`
+No type repeats back to back ✓ · a new shot every 4–8 s ✓ · real material in ~50% of shots ✓
+
+---
+
+## 4. Title, thumbnail, description
+
+- **Title:** If El-Sayed Became President? Your Wallet, Explained
+- **Thumbnail:** left: real photo of El-Sayed (cut out, high contrast). Right: Jake holding his pay stub, shocked. Middle: a big **$?** in amber. Max 3 words: **"YOUR WALLET?"**
+- **Chapters (description):** 0:00 Jake's $62 fill-up · 0:30 Who is El-Sayed? · 1:20 File 01: Gas · 2:50 File 02: Health care · 4:30 File 03: Paycheck · 6:00 File 04: Who pays? · 7:15 Jake's final score
+- **Disclaimer line:** *Educational content, not financial or political advice. Hypothetical scenario: El-Sayed is a U.S. Senator-elect, not a presidential candidate.*
+
+---
+
+## 5. Sources
+
+| # | Fact | Source |
+|---|---|---|
+| S1 | El-Sayed defeats Rogers, AP call 4 Nov 2026; first Muslim U.S. senator; ~6-pt lead with ~85% counted | [CBS News](https://www.cbsnews.com/news/michigan-2026-senate-el-sayed-rogers/) · [Axios](https://www.axios.com/2026/11/04/michigan-senate-results-el-sayed-rogers) · [Bridge Michigan](https://bridgemi.com/michigan-politics/michigan-us-senate-election-results-abdul-el-sayed-vs-mike-rogers/) |
+| S2 | Physician; former Detroit health director; 2018 governor primary | [Bridge Michigan profile](https://bridgemi.com/michigan-politics/abdul-el-sayed-us-senate-run-if-you-want-fighter-ive-got-receipts/) ⚠️ verify wording |
+| S3 | Senate HELP Committee testimony, 11 Jul 2024 (video, public domain) | Wikimedia Commons: `File:Abdul_El_Sayed_senate_hearing.webm` |
+| S4 | Platform: Medicare for All, higher federal minimum wage, taxing the rich, employer payroll-tax cut for small business | [Michigan Public, 20 Oct 2026](https://michiganpublic.org/politics-government/2026-10-20/el-sayed-rogers-drill-down-on-issues-at-detroit-economic-club-forum) · [Fox News rally coverage](https://www.foxnews.com/media/el-sayed-rallygoers-urge-major-change-cash-handouts-fight-cost-crisis.amp) |
+| S5 | U.S. regular $4.153 (+$1.134 y/y); West Coast $5.296; Gulf $3.636; Midwest $4.102; week of 2 Nov 2026 | [EIA Gasoline & Diesel Fuel Update](https://www.eia.gov/petroleum/gasdiesel/) ⚠️ update to latest week |
+| S6 | Price of a gallon: ~50% crude, ~24% refining, ~13% distribution, ~13% taxes (Aug 2026) | [EIA](https://www.eia.gov/petroleum/gasdiesel/) |
+| S7 | 2025 avg premiums: family $26,993 (worker pays $6,850); single $9,325 (worker pays $1,440) | [KFF 2025 Employer Health Benefits Survey](https://www.kff.org/report/2025-employer-health-benefits-survey/) |
+| S8 | Medicare for All 10-yr cost estimates: Mercatus Center $32.6T (2018); Urban Institute ~$34T (2019) | Mercatus (Blahous, 2018) · Urban Institute (2019) ⚠️ link primary PDFs before publishing |
+| S9 | Federal minimum wage $7.25 since 24 Jul 2009; longest freeze since 1938 | U.S. Department of Labor · [Axios Detroit](https://www.axios.com/local/detroit/2026/01/05/michigan-minimum-wage-2025-2026-raise) |
+| S10 | Michigan minimum $13.73 (Jan 1, 2026) → $15.00 (Jan 1, 2027); Texas & Indiana at $7.25 | [CBS Detroit](https://www.cbsnews.com/detroit/news/michigans-minimum-wage-january-2026) · [Sommers PC](https://www.sommerspc.com/blog/2026/07/minimum-wage-increases-in-2026-what-multi-state-employers-should-know/) |
+| S11 | CBO on a $17 minimum wage (Dec 2023): ~8.9M workers raised; ~700k jobs lost (avg. est.), median 500k | [SHRM on CBO](https://shrm.org/topics-tools/news/Minimum-Wage-Proposal-Cost-Jobs-CBO-Says) · [Senate HELP (minority)](https://www.help.senate.gov/rep/newsroom/press/cbo-democrats-17-minimum-wage-bill-to-cost-14-million-american-jobs) |
+
+**Jake's numbers (illustrative character, built from the averages above):** 15 gal × $4.153 = $62.30 per fill-up (a year ago 15 × $3.019 = $45.29). His health share = KFF single-coverage average ($1,440/yr ≈ $55.38 per biweekly check).
+
+## 6. Balance check (YouTube policy and trust)
+- Both sides get their strongest real number: the plan's upside (no premiums, $1,440 back, 8.9M raises) and its costs (>$30T, ~700k jobs at risk).
+- No prediction of who is "right". The video ends on a question for the viewer.
+- "Hypothetical" appears on screen in the cold open and in the description.

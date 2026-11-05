@@ -62,3 +62,17 @@ export const EP02Thumb: React.FC = () => (
     <span style={{ position: 'absolute', left: 30, top: 28, fontFamily: F.mono, fontSize: 26, letterSpacing: 3, background: C.red, color: '#fff', padding: '6px 14px' }}>HYPOTHETICAL</span>
   </AbsoluteFill>
 );
+
+// Channel card (cover image for platforms that need ≥1024×576): name, line, small subscribe — no tagline sentence.
+export const ChannelCard: React.FC = () => (
+  <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 45%, #171B23, ${C.ink} 70%)`, alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: 240, height: 8, background: C.red, marginBottom: 50 }} />
+    <div style={{ fontFamily: F.serif, fontSize: 400, color: C.bone, lineHeight: 1 }}>Dollar<span style={{ color: C.amber, fontStyle: 'italic' }}>ly</span></div>
+    <div style={{ fontFamily: F.sans, fontSize: 72, color: C.steel, marginTop: 30 }}>Your money. Decoded.</div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 22, marginTop: 80, background: C.red, padding: '30px 70px', borderRadius: 14 }}>
+      <svg width={56} height={56} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M10.27 21a2 2 0 0 0 3.46 0" /><path d="M3.26 15.33A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.67C19.41 13.96 18 12.5 18 8A6 6 0 0 0 6 8c0 4.5-1.41 5.96-2.74 7.33" /></svg>
+      <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 64, letterSpacing: 8, color: '#fff' }}>SUBSCRIBE</span>
+    </div>
+    <Grain o={0.25} />
+  </AbsoluteFill>
+);

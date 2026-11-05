@@ -12,7 +12,7 @@ import { FileHealth } from './ep02/FileHealth';
 import { FilePay } from './ep02/FilePay';
 import { FileWhoPays } from './ep02/FileWho';
 import { Close, CLOSE_EXTRA } from './ep02/Close';
-import { ChannelAvatar, ChannelBanner, EP02Thumb } from './ep02/Brand';
+import { ChannelAvatar, ChannelBanner, ChannelCard, EP02Thumb } from './ep02/Brand';
 import { W1Street, W2Gas, W3Map, W4Footage, W5Money, W6Collage } from './boards/WorldFrames';
 export const Root: React.FC = () => (
   <>
@@ -26,6 +26,7 @@ export const Root: React.FC = () => (
     <Composition id="EP02Close" component={Close} durationInFrames={partFrames('vo_07') + CLOSE_EXTRA} fps={30} width={1920} height={1080} />
     <Still id="ChannelAvatar" component={ChannelAvatar} width={800} height={800} />
     <Still id="ChannelBanner" component={ChannelBanner} width={2560} height={1440} />
+    <Still id="ChannelCard" component={ChannelCard} width={2560} height={1440} />
     <Still id="EP02Thumb" component={EP02Thumb} width={1280} height={720} />
     <Composition id="StyleReel" component={StyleReel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
     <Still id="BoardCharacter" component={BoardCharacter} width={1920} height={1080} />

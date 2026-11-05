@@ -93,5 +93,9 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - The music is now **480 s** (whole episode, one take). The earlier renders of the hook, cold open and who-is-he used the old 132 s file, so re-render them before the final assembly so the music joins without a seam.
 - Preview: `episodes/ep02-el-sayed/renders/ep02-file01-gas-v1.mp4`.
 
+## Done 5 Nov 2026 (session 3: File 02 · Health care)
+- `studio/src/ep02/FileHealth.tsx` → `EP02FileHealth` (vo_04 tight, ≈60.6 s, 13 shots): FILE 02 card → Jake reads his stub ($1,440 single share, $55.38 a check, KFF) → single vs family icons ($6,850) → KFF page, then the $26,993 bar split worker $6,850 / employer $20,143 → explainer: real $100 notes fly from the employer to the insurer over Jake's crossed-out paycheck → 1973 hospital photo + deductibles/copays chips → El-Sayed at the Senate HELP hearing, "Medicare for All · one public plan" → checklist (premiums none, deductibles and copays mostly none) → Jake grins, +$1,440, wallet meter updates → "But… someone has to pay for it." → Mercatus $32.6T / Urban $34T cards over blurred House 2009 footage (nameplate cropped and blurred, no names) → scale icon "the design decides: ahead / behind" → "?" lands on Jake's stub, wallet "+$1,440 − ?".
+- Preview: `episodes/ep02-el-sayed/renders/ep02-file02-health-v1.mp4`.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

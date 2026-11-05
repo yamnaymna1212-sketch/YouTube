@@ -105,5 +105,9 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - The pumpjack shot now plays the clip from 1 s at 0.55× so only the pumpjack shows.
 - **Full episode v1:** `episodes/ep02-el-sayed/renders/ep02-full-v1.mp4` (hook → close, ≈5:55). Still missing: vo_05b + vo_05c (new File 04 script, not voiced; ElevenLabs account to confirm), which would bring it to ≈7:30.
 
+## Channel name: **Dollarly** (5 Nov 2026)
+- Chosen by the user. Banner line "Your Money. Decoded." Files: `channel/ChannelAvatar.png` (D + $), `channel/ChannelBanner.png`, `episodes/ep02-el-sayed/thumbnail-v1.png`. Source: `studio/src/ep02/Brand.tsx` (Stills ChannelAvatar, ChannelBanner, EP02Thumb).
+- The EP02 end card now says Dollarly. Upload text: `episodes/ep02-el-sayed/youtube-upload.md`.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

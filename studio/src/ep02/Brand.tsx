@@ -3,7 +3,7 @@ import { AbsoluteFill, Img, staticFile } from 'remotion';
 import { C, F } from '../theme';
 import { FullBody } from '../host/FullBody';
 
-// Channel identity: "Wallet Math". Stills only.
+// Channel identity: "Dollarly". Stills only.
 //  ChannelAvatar 800×800 (YouTube crops to a circle) · ChannelBanner 2560×1440 (safe area 1546×423 centred)
 //  EP02Thumb 1280×720.
 const Grain: React.FC<{ o?: number }> = ({ o = 0.35 }) => <Img src={staticFile('fx/grain2.png')} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', mixBlendMode: 'overlay', opacity: o }} />;
@@ -12,7 +12,7 @@ export const ChannelAvatar: React.FC = () => (
   <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 38%, #1E2430, ${C.ink} 70%)`, alignItems: 'center', justifyContent: 'center' }}>
     <div style={{ position: 'absolute', width: 640, height: 640, borderRadius: '50%', border: `10px solid ${C.amber}`, opacity: 0.9 }} />
     <div style={{ display: 'flex', alignItems: 'baseline', marginTop: -30 }}>
-      <span style={{ fontFamily: F.serif, fontSize: 380, color: C.bone, lineHeight: 1 }}>W</span>
+      <span style={{ fontFamily: F.serif, fontSize: 380, color: C.bone, lineHeight: 1 }}>D</span>
       <span style={{ fontFamily: F.mono, fontSize: 150, color: C.amber, lineHeight: 1, marginLeft: -6 }}>$</span>
     </div>
     <div style={{ width: 230, height: 14, background: C.red, marginTop: 6 }} />
@@ -20,7 +20,7 @@ export const ChannelAvatar: React.FC = () => (
   </AbsoluteFill>
 );
 
-export const BANNER_NAME = 'CashCheck';
+export const BANNER_NAME = 'Dollarly';
 export const ChannelBanner: React.FC = () => (
   <AbsoluteFill style={{ background: C.ink, overflow: 'hidden' }}>
     {/* real SPECIMEN notes, dark and blurred, as texture */}

@@ -116,8 +116,8 @@ const K7: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: C.ink, alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ width: interpolate(f, [0, 20], [0, 120], { ...clamp, easing: ease }), height: 4, background: C.red, marginBottom: 26 }} />
-      <div style={{ fontFamily: F.serif, fontSize: 150, color: C.bone }}>The Auditor</div>
-      <div style={{ fontFamily: F.sans, fontSize: 30, color: C.steel, marginTop: 6, opacity: fade(f, 10) }}>Where your money actually goes. Read line by line.</div>
+      <div style={{ fontFamily: F.serif, fontSize: 150, color: C.bone }}>Dollar<span style={{ color: C.amber, fontStyle: 'italic' }}>ly</span></div>
+      <div style={{ fontFamily: F.sans, fontSize: 30, color: C.steel, marginTop: 6, opacity: fade(f, 10) }}>Your money. Decoded.</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 60, background: C.red, padding: '18px 40px', borderRadius: 8, opacity: fade(f, rel(1120, 1069)), transform: `scale(${0.9 + 0.1 * fade(f, rel(1120, 1069))})` }}>
         <Ico I={Bell} plain size={40} color="#fff" at={rel(1120, 1069)} />
         <span style={{ fontFamily: F.sans, fontWeight: 700, fontSize: 34, letterSpacing: 4, color: '#fff' }}>SUBSCRIBE</span>

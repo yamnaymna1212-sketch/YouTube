@@ -1,6 +1,6 @@
 # EP02 · YouTube upload pack
 
-Channel name (recommended): **Dollar Decoded** (@DollarDecoded). Alternatives: Main Street Money, The Money Brief, Wallet Math.
+Channel name: **Dollarly** (@Dollarly) · banner line: "Your Money. Decoded."
 
 ## Title (pick one, the first is recommended)
 1. **If El-Sayed Became President, Would You Be Richer?**
@@ -62,16 +62,16 @@ AI tools I used, openly:
 • Visuals: the animation, explainer icons, charts and motion graphics were built with Claude Code (an AI coding assistant) in Remotion, from my direction.
 
 💬 Would you trade your premiums for higher taxes? Tell me in the comments.
-🔔 Subscribe for personal finance, money news and U.S. economic trends, decoded.
+🔔 Subscribe to Dollarly for personal finance, money news and U.S. economic trends. Your money. Decoded.
 
-#DollarDecoded #MedicareForAll #MinimumWage #GasPrices #PersonalFinance #ElSayed #Michigan
+#Dollarly #MedicareForAll #MinimumWage #GasPrices #PersonalFinance #ElSayed #Michigan
 ---
 
 ## Tags (paste into YouTube Studio → Tags; under 500 characters)
-El-Sayed, Abdul El-Sayed, El-Sayed president, Medicare for All, minimum wage, $17 minimum wage, gas prices, health insurance cost, family health plan cost, payroll tax, Michigan Senate 2026, personal finance, your paycheck, taxes explained, economics explained, what if president, dollar decoded
+El-Sayed, Abdul El-Sayed, El-Sayed president, Medicare for All, minimum wage, $17 minimum wage, gas prices, health insurance cost, family health plan cost, payroll tax, Michigan Senate 2026, personal finance, your paycheck, taxes explained, economics explained, what if president, dollarly
 
 ## Hashtags (the first 3 show above the title)
-#DollarDecoded #MedicareForAll #MinimumWage
+#Dollarly #MedicareForAll #MinimumWage
 
 ## YouTube Studio settings
 - **Altered or synthetic content:** YouTube asks for this when realistic content could be mistaken for real people or events. The AI narrator does not imitate a real person and Jake is clearly an illustration, so as I understand YouTube's guidance it is not required. The AI use is still stated in the description above.

@@ -97,5 +97,13 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - `studio/src/ep02/FileHealth.tsx` → `EP02FileHealth` (vo_04 tight, ≈60.6 s, 13 shots): FILE 02 card → Jake reads his stub ($1,440 single share, $55.38 a check, KFF) → single vs family icons ($6,850) → KFF page, then the $26,993 bar split worker $6,850 / employer $20,143 → explainer: real $100 notes fly from the employer to the insurer over Jake's crossed-out paycheck → 1973 hospital photo + deductibles/copays chips → El-Sayed at the Senate HELP hearing, "Medicare for All · one public plan" → checklist (premiums none, deductibles and copays mostly none) → Jake grins, +$1,440, wallet meter updates → "But… someone has to pay for it." → Mercatus $32.6T / Urban $34T cards over blurred House 2009 footage (nameplate cropped and blurred, no names) → scale icon "the design decides: ahead / behind" → "?" lands on Jake's stub, wallet "+$1,440 − ?".
 - Preview: `episodes/ep02-el-sayed/renders/ep02-file02-health-v1.mp4`.
 
+## Done 5 Nov 2026 (session 3: rest of the episode + full v1)
+- User feedback on v2: "no animation pro, the character doesn't live or react, the icons aren't pro". Fixes:
+  - `studio/src/host/LiveJake.tsx`: idle life (breathing, weight shift, head micro-motion, blink rhythm with double blinks, eye saccades) + spring reactions on cue (`beats`: surprise, smile, cheer, worry, doubt, shrug, nod, think) + walk cycle. `FullBody` got `arms`, `stride`, `breathe`, the new poses shrug/cheer/think, and `lookY`. Every Jake shot uses LiveJake.
+  - `Ico` is now a pro badge (glowing disc + self-drawing ring + spring pop + gentle float). Slam uses a spring (no random jitter), Label uses a wipe reveal, and photos get a smooth handheld drift (noise).
+- New parts: `FilePay.tsx` (EP02FilePay, vo_05), `FileWho.tsx` (EP02FileWhoPays, vo_06), `Close.tsx` (EP02Close, vo_07, end card held 2 s), plus the shared `Score.tsx` (scoreboard).
+- The pumpjack shot now plays the clip from 1 s at 0.55× so only the pumpjack shows.
+- **Full episode v1:** `episodes/ep02-el-sayed/renders/ep02-full-v1.mp4` (hook → close, ≈5:55). Still missing: vo_05b + vo_05c (new File 04 script, not voiced; ElevenLabs account to confirm), which would bring it to ≈7:30.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

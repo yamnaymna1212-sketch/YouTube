@@ -4,7 +4,22 @@
 - **Model:** `eleven_v4` (audio tags like [pause] supported; El-Sayed written in IPA `/ɛl sɑˈjɛd/` so it is pronounced correctly)
 - **ElevenLabs flow:** `8rqBqDkk7D0KYLRyTq6p` ("EP02 — El-Sayed: Your Wallet (VO)")
 - **Cost:** 5,937 credits for ONE take of all 7 parts (two takes = 11,874).
-- **Status (5 Nov 2026):** not generated. Every request failed: the account had **19 credits left of a 10,000 monthly quota**. Nothing was charged.
+- **Status (5 Nov 2026, session 3): ✅ GENERATED.** One take of each part (vo_00 to vo_07), 6,438 credits total. Files are in `studio/public/sayed/vo/`.
+- **New ElevenLabs flow:** `8mneAJ4NpfLpbKgS0KsJ` (the old flows above were no longer reachable).
+
+| File | Part | Length |
+|---|---|---|
+| `vo_00.mp3` | HOOK v2 | 0:31.6 |
+| `vo_01.mp3` | Cold open | 0:38.1 |
+| `vo_02.mp3` | Who is he? | 0:41.2 |
+| `vo_03.mp3` | File 01 · Gas | 1:10.2 |
+| `vo_04.mp3` | File 02 · Health care | 1:06.8 |
+| `vo_05.mp3` | File 03 · Paycheck | 1:08.6 |
+| `vo_06.mp3` | File 04 · Who pays? | 0:46.0 |
+| `vo_07.mp3` | Close | 0:40.9 |
+| | **Total** | **6:43** (6:11 without the hook) |
+
+- Earlier status: the first attempts failed because the account had 19 credits left of a 10,000 monthly quota.
 
 Generate one part per request, `generations_count: 1` if credits are tight. Save files as `vo_01.mp3` … `vo_07.mp3` in `studio/public/sayed/vo/`.
 
@@ -13,7 +28,7 @@ Generate one part per request, `generations_count: 1` if credits are tight. Save
 ```
 Twenty-seven thousand dollars. [short pause] That's what a typical family's health plan costs every year, and most of it never shows up on a paycheck. On Tuesday, Michigan elected a senator who wants to replace that entire system. [pause] [curious] So what if he became president? In the next eight minutes: gas at four-fifteen a gallon, one paycheck that could jump sixty-eight hundred dollars, seven hundred thousand jobs on the line, and a thirty-trillion-dollar bill. [short pause] And at the end, the one line that decides who pays it.
 ```
-Tried 5 Nov 2026: failed, "quota of 10000, 19 credits remaining". This is the **free plan** quota, not Pro. Nothing was charged. Flow: `b4UPp2bA1coSJLqmvcQ7`.
+First try 5 Nov 2026: failed, "quota of 10000, 19 credits remaining". This is the **free plan** quota, not Pro. Nothing was charged. Flow: `b4UPp2bA1coSJLqmvcQ7`.
 
 ## vo_01 · COLD OPEN (631 credits)
 

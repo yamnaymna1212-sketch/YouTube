@@ -54,6 +54,8 @@
 
 ## Done 5 Nov 2026 (session 3: voiceover)
 - **VO generated:** `studio/public/sayed/vo/vo_00.mp3` (HOOK v2) to `vo_07.mp3`, Justin voice, `eleven_v4`, one take each (6,438 credits). Total length 6:43; with the hook replacing the first ~25 s of the cold open, it comes to about 6:20. That is shorter than the 8-minute target, so the edit needs B-roll pauses or more script.
+- ElevenLabs account is now **Creator, ≈123k credits** (the old "10,000 quota / 19 credits" note is outdated).
+- **Script expanded** to reach 8 min: new parts `vo_05b` (the employer's hidden $7,885) and `vo_05c` (how big is $30T, and why most of it replaces existing spending), in `voiceover-parts.md` and `script.md` File 04. Not voiced yet: waiting for the user's OK on the text and the pronunciation list.
 - New flow: `8mneAJ4NpfLpbKgS0KsJ`. Listen for how "El-Sayed" is pronounced (written in IPA in the text) before the edit.
 
 ## التعديلات التي أريدها الآن

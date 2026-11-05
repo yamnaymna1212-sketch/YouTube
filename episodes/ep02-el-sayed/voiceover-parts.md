@@ -3,7 +3,7 @@
 - **Voice:** Justin – Authentic Professional · `bbhjR3iQ4dSHKQsgUFCH` (young, American, calm)
 - **Model:** `eleven_v4` (audio tags like [pause] supported; El-Sayed written in IPA `/ɛl sɑˈjɛd/` so it is pronounced correctly)
 - **ElevenLabs flow:** `8rqBqDkk7D0KYLRyTq6p` ("EP02 — El-Sayed: Your Wallet (VO)")
-- **Cost:** 5,937 credits for ONE take of all 7 parts (two takes = 11,874).
+- **Cost:** ≈6,440 credits for ONE take of vo_00–vo_07 (two takes ≈12,900). Account: Creator plan, ≈123k credits.
 - **Status (5 Nov 2026, session 3): ✅ GENERATED.** One take of each part (vo_00 to vo_07), 6,438 credits total. Files are in `studio/public/sayed/vo/`.
 - **New ElevenLabs flow:** `8mneAJ4NpfLpbKgS0KsJ` (the old flows above were no longer reachable).
 
@@ -19,7 +19,7 @@
 | `vo_07.mp3` | Close | 0:40.9 |
 | | **Total** | **6:43** (6:11 without the hook) |
 
-- Earlier status: the first attempts failed because the account had 19 credits left of a 10,000 monthly quota.
+- Earlier status: the first attempts failed with "quota of 10000, 19 credits remaining". That is **no longer true**: the account is now on the **Creator** plan with ≈123,000 credits (user screenshot, 5 Nov 2026). Credits are not a constraint; two takes per part are fine.
 
 Generate one part per request, `generations_count: 1` if credits are tight. Save files as `vo_01.mp3` … `vo_07.mp3` in `studio/public/sayed/vo/`.
 
@@ -58,6 +58,22 @@ Jake gets insurance through the diner. Like the average American worker, he pays
 
 ```
 The federal minimum wage is seven twenty-five an hour. It hasn't moved since July 2009: the longest freeze since the minimum wage was created in 1938. But Jake lives in Michigan, where the state minimum is already thirteen seventy-three, and it goes to fifteen dollars in January. So a federal raise matters most in places like Texas or Indiana, where it's still seven twenty-five. What would a big raise actually do? When the Congressional Budget Office studied a seventeen-dollar minimum wage, it found about 8.9 million workers would get a raise, and estimated around seven hundred thousand jobs could disappear. Put that on Jake. If he earns the Michigan minimum and Congress passed seventeen dollars, he'd make about six thousand eight hundred dollars more a year. [short pause] If his job survives. Winners and losers. Both real. But here's the twist for Jake: Michigan already got most of the way there on its own. So file three, for Jake: a small change. For a Jake in Texas: a big one. Which brings us back to that question mark. Who pays?
+```
+
+## vo_05b · FILE 04 · THE MONEY JAKE NEVER SEES (new, ≈0:40) · ⏸ not generated yet
+
+Goes between vo_05 and vo_06.
+
+```
+Start with a number that's hiding behind Jake's pay stub. Jake pays fourteen hundred and forty dollars a year for his insurance. But the full price of his plan is about nine thousand three hundred. The diner pays the rest: almost seven thousand nine hundred dollars a year, for one worker. [short pause] For a family plan, the employer's share is about twenty thousand. That money is part of what it costs to employ Jake. It just never shows up as pay. So if Medicare for All ended employer premiums, that money would go somewhere. Into Jake's paycheck as a raise. Into the new tax. Or it stays with the company. [short pause] And no law automatically sends it to Jake. /ɛl sɑˈjɛd/ has also proposed cutting payroll taxes for small businesses, places like Jake's diner.
+```
+
+## vo_05c · FILE 04 · HOW BIG IS THIRTY TRILLION? (new, ≈0:45) · ⏸ not generated yet
+
+Goes right after vo_05b, before vo_06.
+
+```
+Now, that thirty-trillion-dollar price tag. Over ten years, that's about three trillion dollars a year. Spread over about three hundred and forty million Americans, it's roughly nine to ten thousand dollars per person, every year. [pause] Sounds impossible. But here's the part that's easy to miss. Most of that money is already being spent today, by employers, by families, and by the government. Premiums, deductibles, copays. Medicare for All doesn't add thirty trillion dollars of new health care. It moves most of the bill from private wallets to the public budget. The fight is over what's left: does the total go up or down, and who covers the gap? [short pause] The studies disagree on that, mostly over how much doctors and hospitals would be paid. And that's exactly where Jake's tax bill gets decided.
 ```
 
 ## vo_06 · FILE 04 · WHO PAYS? (747 credits)

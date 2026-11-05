@@ -111,12 +111,23 @@ Why it works: it opens on a shocking number (pattern break), turns it into a per
 | 5:40 | `METER` **PAYCHECK: small (MI) · big (TX)** | So file three, for Jake: a small change. For a Jake in Texas: a big one. |
 | 5:50 | `WORLD` Jake looks at the "?" still floating on his stub | Which brings us back to that question mark. Who pays? |
 
-### FILE 04 · WHO PAYS? (6:00–7:15)
+### FILE 04 · WHO PAYS? (6:00–8:35)  ·  expanded 5 Nov 2026 (+≈1:50, new VO parts vo_05b and vo_05c)
+
+Times after 7:22 shift by ≈+1:20 from the original table (the rest of File 04 runs ≈7:22–8:35, the Close ≈8:35–9:20 before the HOOK v2 trim; ≈8:00–8:30 once the hook replaces the first 25 s and pauses are tightened).
 
 | Time | Shot | Voice-over |
 |---|---|---|
 | 6:00 | `CARD` **FILE 04 · WHO PAYS?** | — |
-| 6:03 | `PHOTO` Capitol, slow push, money stacks drifting in | El-Sayed says the very richest Americans should pay more. His campaign hasn't published a detailed tax plan, so here's the honest version. [S4] |
+| 6:03 | `WORLD` Jake's pay stub, macro shot; the "employer share" line is blank, then fills in amber: **$7,885** | Start with a number that's hiding behind Jake's pay stub. Jake pays fourteen hundred and forty dollars a year for his insurance. But the full price of his plan is about nine thousand three hundred. The diner pays the rest: almost seven thousand nine hundred dollars a year, for one worker. [S7] |
+| 6:16 | `EVIDENCE` KFF card: family plan **$26,993** split into **$6,850 worker / $20,143 employer** | For a family plan, the employer's share is about twenty thousand. That money is part of what it costs to employ Jake. It just never shows up as pay. [S7] |
+| 6:24 | `EVIDENCE` three arrows from the $7,885: **→ Jake's paycheck · → the new tax · → the company** / then `PHOTO` `doc09` waitress (1973) | So if Medicare for All ended employer premiums, that money would go somewhere. Into Jake's paycheck as a raise. Into the new tax. Or it stays with the company. And no law automatically sends it to Jake. |
+| 6:35 | `WORLD` the Sunrise Diner owner behind the register | El-Sayed has also proposed cutting payroll taxes for small businesses, places like Jake's diner. [S4] |
+| 6:41 | `KINETIC` **$30,000,000,000,000** counts up, then divides: **÷ 10 years = $3T a year** | Now, that thirty-trillion-dollar price tag. Over ten years, that's about three trillion dollars a year. |
+| 6:47 | `PHOTO` `nasa_iss075e0227352` city lights from orbit, counter: **÷ 340M people ≈ $9–10K each, per year** | Spread over about three hundred and forty million Americans, it's roughly nine to ten thousand dollars per person, every year. [S12] |
+| 6:54 | `KINETIC` *"But…"* / `FOOTAGE` `v11_income_jars_1948` | Sounds impossible. But here's the part that's easy to miss. Most of that money is already being spent today, by employers, by families, and by the government. Premiums, deductibles, copays. [S13] |
+| 7:04 | `EVIDENCE` two stacked bars: **today: private + public** → **M4A: mostly public**, same height, a small "?" on top | Medicare for All doesn't add thirty trillion dollars of new health care. It moves most of the bill from private wallets to the public budget. The fight is over what's left: does the total go up or down, and who covers the gap? |
+| 7:15 | `EVIDENCE` the two study cards again (Mercatus $32.6T · Urban $34T) | The studies disagree on that, mostly over how much doctors and hospitals would be paid. And that's exactly where Jake's tax bill gets decided. [S13] |
+| 7:22 | `PHOTO` Capitol, slow push, money stacks drifting in | El-Sayed says the very richest Americans should pay more. His campaign hasn't published a detailed tax plan, so here's the honest version. [S4] |
 | 6:15 | `EVIDENCE` two scenario cards: **A · Taxes on the very rich & corporations** → Jake keeps most of the $1,440 · **B · Broad payroll tax on everyone** → part of it comes back out | If Medicare for All is paid mostly by the very rich and big corporations, Jake keeps most of that fourteen hundred and forty. If it's paid with a broad payroll tax on everyone, part of it comes back out of his check. |
 | 6:28 | `EVIDENCE` napkin math animates: premium line crossed out, new tax line appears with a "?" | Think of it like this: today, Jake's insurance is a private bill. Under Medicare for All, it becomes a public one. The bill doesn't vanish. It changes address. |
 | 6:35 | `WORLD` Jake at a diner booth doing math on a napkin | Either way, Jake would stop paying premiums. The real question is what replaces them. |
@@ -165,9 +176,11 @@ No type repeats back to back ✓ · a new shot every 4–8 s ✓ · real materia
 | S8 | Medicare for All 10-yr cost estimates: Mercatus Center $32.6T (2018); Urban Institute ~$34T (2019) | Mercatus (Blahous, 2018) · Urban Institute (2019) ⚠️ link primary PDFs before publishing |
 | S9 | Federal minimum wage $7.25 since 24 Jul 2009; longest freeze since 1938 | U.S. Department of Labor · [Axios Detroit](https://www.axios.com/local/detroit/2026/01/05/michigan-minimum-wage-2025-2026-raise) |
 | S10 | Michigan minimum $13.73 (Jan 1, 2026) → $15.00 (Jan 1, 2027); Texas & Indiana at $7.25 | [CBS Detroit](https://www.cbsnews.com/detroit/news/michigans-minimum-wage-january-2026) · [Sommers PC](https://www.sommerspc.com/blog/2026/07/minimum-wage-increases-in-2026-what-multi-state-employers-should-know/) |
+| S12 | U.S. resident population ≈ 340 million (mid-2024 estimate) | U.S. Census Bureau, Vintage 2024 population estimates ⚠️ link the release |
+| S13 | Medicare for All's federal cost largely replaces existing private, state and federal health spending; total national spending in the estimates moves far less than the federal cost, and the result depends heavily on provider payment rates | Mercatus (Blahous, 2018) · Urban Institute (2019) ⚠️ quote the exact national-spending lines from the PDFs before publishing |
 | S11 | CBO on a $17 minimum wage (Dec 2023): ~8.9M workers raised; ~700k jobs lost (avg. est.), median 500k | [SHRM on CBO](https://shrm.org/topics-tools/news/Minimum-Wage-Proposal-Cost-Jobs-CBO-Says) · [Senate HELP (minority)](https://www.help.senate.gov/rep/newsroom/press/cbo-democrats-17-minimum-wage-bill-to-cost-14-million-american-jobs) |
 
-**Jake's numbers (illustrative character, built from the averages above):** 15 gal × $4.153 = $62.30 per fill-up (a year ago 15 × $3.019 = $45.29); weekly fill-up × 52 = $3,240/yr vs $2,355 (+$885). Wage: ($17 − $13.73) × 2,080 hrs = $6,802/yr (full-time, if he earns the MI minimum; hypothetical federal $17). His health share = KFF single-coverage average ($1,440/yr ≈ $55.38 per biweekly check).
+**Jake's numbers (illustrative character, built from the averages above):** 15 gal × $4.153 = $62.30 per fill-up (a year ago 15 × $3.019 = $45.29); weekly fill-up × 52 = $3,240/yr vs $2,355 (+$885). Employer share of his plan: $9,325 − $1,440 = $7,885/yr (family: $26,993 − $6,850 = $20,143). $30T ÷ 10 yrs ÷ 340M ≈ $8,800/person/yr ($32.6T → $9,600; $34T → $10,000). Wage: ($17 − $13.73) × 2,080 hrs = $6,802/yr (full-time, if he earns the MI minimum; hypothetical federal $17). His health share = KFF single-coverage average ($1,440/yr ≈ $55.38 per biweekly check).
 
 ## 6. Balance check (YouTube policy and trust)
 - Both sides get their strongest real number: the plan's upside (no premiums, $1,440 back, 8.9M raises) and its costs (>$30T, ~700k jobs at risk).

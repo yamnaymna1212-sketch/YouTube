@@ -279,16 +279,17 @@ const C10: React.FC = () => {
   );
 };
 
+// After HOOK v2, vo_01 keeps only "This is Jake … first Muslim senator …" + "So forget the politics …"
+// (tools/tighten_vo.py KEEP_RANGES). C5 search, C6 "PRESIDENT?", C8 beats, C9 hidden number and C10
+// are no longer used here (kept in the file for reuse).
 const COLD: Cut[] = [
-  ['jake', 0, 110, C1], ['pump', 110, 214, C2], ['sayed', 214, 352, C3], ['first', 352, 446, C4],
-  ['search', 446, 596, C5], ['pres', 596, 664, C6], ['walk', 664, 785, C7], ['beats', 785, 918, C8],
-  ['hidden', 918, 1016, C9], ['close', 1016, 1150, C10],
+  ['jake', 0, 110, C1], ['pump', 110, 214, C2], ['sayed', 214, 352, C3], ['first', 352, 664, C4], ['walk', 664, 785, C7],
 ];
 export const COLD_FRAMES = partFrames('vo_01');
 const COLD_CUES: Cue[] = [ // soft only (see SoundLayer)
-  [114, 'counter', 0.08], [454, 'type', 0.08], [724, 'tick', 0.06], [1016, 'paper', 0.07],
+  [114, 'counter', 0.08], [724, 'tick', 0.06],
 ];
-export const ColdOpen: React.FC = () => <Cuts cuts={COLD} vo="vo_01" flashes={[596]} musicFrom={HOOK_FRAMES} cues={COLD_CUES} />;
+export const ColdOpen: React.FC = () => <Cuts cuts={COLD} vo="vo_01" musicFrom={HOOK_FRAMES} cues={COLD_CUES} />;
 
 // ======================= WHO IS HE? =======================
 

@@ -15,6 +15,11 @@ KEEP = 0.16      # pause kept between phrases (s)
 EDGE = 0.04      # silence kept at the very start/end (s)
 MIN_SIL = 0.18   # only pauses longer than this are shortened
 THRESH = '-38dB'
+# Editorial cuts (original-take seconds to KEEP). vo_01: after HOOK v2 the cold open no longer repeats
+# "what if he became president?", the Gas/Health/Paychecks/Taxes promise or the "one number" loop.
+KEEP_RANGES = {
+    'vo_01': [(0.0, 15.0), (22.0, 26.2)],  # "This is Jake … first Muslim senator …" + "So forget the politics … Jake's wallet."
+}
 
 
 def silences(path):
@@ -42,6 +47,8 @@ def main(names):
             if a > t: segs.append([t, a])
             t = b
         if t < dur: segs.append([t, dur])
+        if name in KEEP_RANGES:  # drop everything outside the editorial keep ranges
+            segs = [[max(a, ka), min(b, kb)] for a, b in segs for ka, kb in KEEP_RANGES[name] if min(b, kb) - max(a, ka) > 0.05]
         out, mp, cur = [], [], 0.0
         fade = int(0.006 * SR)
         for i, (a, b) in enumerate(segs):

@@ -85,6 +85,7 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - **Icons:** `lucide-react` 0.469.0 (ISC), clean line icons via `Ico` (fuel, heart-pulse, banknote, briefcase, landmark, receipt, vote, wallet, scroll).
 - **Real money:** `public/sayed/money/usd1|20|100.jpg`, the U.S. Currency Education Program SPECIMEN images from uscurrency.gov (`Note`). Used behind $26,993, stacked on +$6,800, and as $62 (3×$20 + 2×$1) at the pump.
 - **Real logos:** `public/sayed/logos/` eia.png (eia.gov), nasa.png (nasa.gov), house.svg (house.gov), kff.png (crop of the KFF screenshot). Shown in the source line (`Src logo=`). Gas brands appear only through real photos (RaceTrac 2026 pump, Chevron 1973), not as standalone logos.
+- **vo_01 trimmed (user said go):** after HOOK v2 the cold open keeps only "This is Jake … the first Muslim senator in American history." + "So forget the politics for eight minutes. Let's do the math on Jake's wallet." (`KEEP_RANGES` in `tighten_vo.py`). Dropped: "within hours … what if he became president?", "Gas. Health care. Paychecks. Taxes." and "stay to the end … one number …". The cold open is now 18 s. vo_07 still says "that number bigger than everything else": the hook's $26,993 opening now sets that up.
 - Preview: `episodes/ep02-el-sayed/renders/ep02-part1-v2.mp4`.
 
 ## التعديلات التي أريدها الآن

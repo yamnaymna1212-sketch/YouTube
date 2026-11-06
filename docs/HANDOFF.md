@@ -109,5 +109,12 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - Chosen by the user. Banner line "Your Money. Decoded." Files: `channel/ChannelAvatar.png` (D + $), `channel/ChannelBanner.png`, `episodes/ep02-el-sayed/thumbnail-v1.png`. Source: `studio/src/ep02/Brand.tsx` (Stills ChannelAvatar, ChannelBanner, EP02Thumb).
 - The EP02 end card now says Dollarly. Upload text: `episodes/ep02-el-sayed/youtube-upload.md`.
 
+## Next steps (as of 6 Nov 2026)
+1. Voice vo_05b + vo_05c (in `voiceover-parts.md`) **only after confirming ElevenLabs is linked to the user's own account** (the earlier generations went to workspace 6aa0af90…, which the user could not see in their History). Then run `tools/tighten_vo.py`, add them to the start of File 04, re-render, and update the chapter times in `youtube-upload.md`.
+2. The user picks the thumbnail word (v3 layout; options: YOU PAY? · TAX SHOCK · $30 TRILLION).
+3. Add links for the sources marked ⚠️ in `script.md` (Mercatus/Urban PDFs, the Census population estimate).
+4. Optional: the real Senate hearing video (`Abdul_El_Sayed_senate_hearing.webm`) if the user uploads it to `studio/public/sayed/`.
+5. Upload settings: not made for kids, no age limit, altered content = No, category Education.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

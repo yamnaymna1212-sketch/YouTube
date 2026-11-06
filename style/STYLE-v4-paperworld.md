@@ -39,3 +39,21 @@ Every pawn is rigged, not static:
 - No gore, no casualty "animation", no mushroom-cloud gag shots; consequences shown as maps, numbers and institutions.
 - No fake quotes. Every statement attributed with a source chip; ⚠️ items re-checked on publish day.
 - No logos of companies as standalone images; no deepfakes; no copied footage from news channels.
+
+## 6. TV-first rules (user feedback, 6 Nov 2026) — non-negotiable
+Most viewers watch on a TV (EP02 analytics: TV 48%).
+- **One idea per screen.** One headline (≤ 6 words) + at most one supporting line. No paragraphs, no small side notes except the source chip.
+- **Giant type:** headline ≥ 84 px, key number ≥ 200 px at 1080p; labels ≥ 30 px. Text sits on a solid band or a dark gradient, never on busy imagery.
+- **Map first.** The map is the main explainer: rings, routes, arrows and icon badges on a real NASA image or a drawn paper map.
+- **Icons in badges** (Lucide, bone disc + ink ring + hard shadow). A badge flips red with a slash when the thing breaks (power, roads, water, buildings). Max 5 badges per screen, spaced on a grid, never overlapping text.
+- **No dead air.** Something moves every second: Jake (PiP or full), route dashes, tankers, ring growth, badge float, camera push.
+
+## 7. Pace and linking (retention)
+- Cut every 3–5 s in the story, 5–8 s in an explainer. A scene never ends without a reason to see the next one (question, sound, motion).
+- **Every cut is linked**, never a plain cut between unrelated images:
+  - *Zoom-through:* the camera flies into a screen/photo that becomes the next full shot (bunker monitor → Hormuz map). Demo: `episodes/ep03-iran/style/SF7-transition-strip.jpg`.
+  - *Match shape:* a ring on the map becomes the siren wave / the clock face / the gas-pump dial.
+  - *Carry the motion:* a moving element (tanker, arrow, Jake walking) exits one shot and enters the next from the same side.
+  - *Taped print:* real photos slide in as prints onto the current board, then the camera pushes into them full-frame.
+- Real images always arrive through one of these links, with the source chip.
+- The bomb moment is lived three ways at once: the **map** (rings, badges flip), the **world** (Jake's screens), **Jake** (reaction in PiP).

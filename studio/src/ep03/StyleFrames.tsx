@@ -3,7 +3,7 @@ import { AbsoluteFill, Img, interpolate, random, spring, staticFile, useCurrentF
 import { noise2D } from '@remotion/noise';
 import { LiveJake } from '../host/LiveJake';
 import { F } from '../theme';
-import { KeyRound } from 'lucide-react';
+import { KeyRound, Car, Building2, Bird, Zap, Droplets, Plane, Fuel, type LucideIcon } from 'lucide-react';
 import { Card, P, Pawn } from './PaperWorld';
 
 // EP03 style frames — one look across story (cartoon), explainer (paper map) and proof (real material).
@@ -290,6 +290,135 @@ export const SF5Proof: React.FC = () => {
       <Card x={1240} y={1000} at={40} size={34} rot={1}>Proof, not panic</Card>
       <WhatIf /><Bug left />
       <Grain k={0.05} />
+    </AbsoluteFill>
+  );
+};
+
+// =====================================================================
+// v2 — TV rules: one idea per screen, giant type, map-first, icons in badges, motion that carries into the next shot.
+
+const Headline: React.FC<{ kicker?: string; children: React.ReactNode; dark?: boolean; at?: number; x?: number; y?: number; size?: number }> = ({ kicker, children, dark, at = 0, x = 70, y = 130, size = 92 }) => {
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const s = spring({ frame: f - at, fps, config: { damping: 18, stiffness: 120 } });
+  return (
+    <div style={{ position: 'absolute', left: x, top: y, transform: `translateY(${(1 - s) * 30}px)`, opacity: s }}>
+      {kicker && <div style={{ fontFamily: F.mono, fontSize: 28, letterSpacing: 4, color: dark ? P.amber : P.red }}>{kicker}</div>}
+      <div style={{ fontFamily: F.serif, fontSize: size, lineHeight: 1, color: dark ? P.bone : P.ink, marginTop: 6, textShadow: dark ? '0 4px 24px rgba(0,0,0,.6)' : 'none' }}>{children}</div>
+    </div>
+  );
+};
+
+// Icon badge for the paper world: bone disc, ink ring, spring pop; `hit` turns it red with a slash.
+const Badge: React.FC<{ I: LucideIcon; x: number; y: number; at?: number; hit?: number; label?: string; size?: number }> = ({ I, x, y, at = 0, hit = -1, label, size = 92 }) => {
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const s = spring({ frame: f - at, fps, config: { damping: 11, stiffness: 160 } });
+  const h = hit >= 0 ? spring({ frame: f - hit, fps, config: { damping: 14, stiffness: 140 } }) : 0;
+  const float = Math.sin(f / 20 + x) * 4;
+  return (
+    <div style={{ position: 'absolute', left: x, top: y + float, transform: `translate(-50%,-50%) scale(${s})` }}>
+      <div style={{ width: size, height: size, borderRadius: '50%', background: h > 0.5 ? P.red : P.bone, border: `5px solid ${P.ink}`, boxShadow: '6px 6px 0 rgba(27,34,48,.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+        <I size={size * 0.52} color={h > 0.5 ? P.bone : P.ink} strokeWidth={2.4} />
+        {h > 0 && <div style={{ position: 'absolute', width: size * 0.9 * h, height: 6, background: h > 0.5 ? P.bone : P.red, transform: 'rotate(-45deg)', borderRadius: 3 }} />}
+      </div>
+      {label && <div style={{ position: 'absolute', top: size + 10, left: '50%', transform: 'translateX(-50%)', fontFamily: cond2, fontWeight: 700, fontSize: 30, color: P.ink, background: P.bone, border: `3px solid ${P.ink}`, padding: '0 10px', whiteSpace: 'nowrap', letterSpacing: 1 }}>{label}</div>}
+    </div>
+  );
+};
+const cond2 = 'Barlow Condensed, Inter, sans-serif';
+
+// ---------- 4v2 · Map, TV-legible: one fact, giant number, map fills the frame
+export const SF4MapTV: React.FC = () => {
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const zoom = 1.12 + f / 1600;
+  return (
+    <AbsoluteFill style={{ background: P.ink }}>
+      <Img src={staticFile('iran/hormuz_s04-37-716.jpg')} style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover', filter: 'sepia(.5) saturate(.65) contrast(1.08) brightness(.9)', transform: `scale(${zoom})` }} />
+      <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(12,13,16,.82) 0%, rgba(12,13,16,.35) 45%, transparent 70%)' }} />
+      {/* the shipping lane: one thick animated route through the strait */}
+      <svg style={{ position: 'absolute', inset: 0 }} width="1920" height="1080">
+        <path id="lane" d="M 1880 980 C 1600 820 1450 640 1300 560 C 1150 480 1000 470 860 380" fill="none" stroke={P.amber} strokeWidth="14" strokeDasharray="34 22" strokeDashoffset={-f * 3} strokeLinecap="round" opacity="0.95" />
+      </svg>
+      {[0, 1, 2].map((k) => {
+        const t = ((f / 120 + k / 3) % 1);
+        const x = interpolate(t, [0, 1], [1850, 880]), y = interpolate(t, [0, 0.5, 1], [960, 560, 390]);
+        return <div key={k} style={{ position: 'absolute', left: x, top: y, transform: 'translate(-50%,-50%)', opacity: interpolate(t, [0, 0.1, 0.9, 1], [0, 1, 1, 0]) }}><Badge I={Fuel} x={0} y={0} size={70} /></div>;
+      })}
+      <Card x={1330} y={470} at={10} size={52} rot={-2}>Strait of Hormuz</Card>
+      <Headline kicker="RING 2 · THE REGION" dark at={4} y={330} size={210}>1 in 5</Headline>
+      <div style={{ position: 'absolute', left: 74, top: 590, fontFamily: F.sans, fontWeight: 700, fontSize: 64, color: P.bone, lineHeight: 1.1, opacity: spring({ frame: f - 14, fps, config: { damping: 18 } }) }}>of the world's oil<br />sails through here.</div>
+      <Src dark style={{ left: 74, bottom: 46 }}>U.S. EIA ⚠ verify · Map: NASA STS-4 photo S04-37-716 (1982), public domain</Src>
+      <WhatIf dark /><Bug dark />
+      <Grain k={0.05} />
+    </AbsoluteFill>
+  );
+};
+
+// ---------- 6 · Ring 0 — the first ten seconds, on the map (illustrative city, no gore)
+export const SF6Ring0: React.FC = () => {
+  const f = useCurrentFrame(); const { fps } = useVideoConfig();
+  const rings = [
+    { r: 110, c: '#F6F1E4', label: 'FIREBALL', fill: 'rgba(246,241,228,.85)' },
+    { r: 250, c: P.red, label: 'BLAST', fill: 'rgba(180,69,47,.28)' },
+    { r: 400, c: P.amber, label: 'HEAT', fill: 'rgba(217,164,65,.16)' },
+  ];
+  const cx = 760, cy = 650;
+  return (
+    <AbsoluteFill style={{ background: '#E4DAC0' }}>
+      {/* drawn city map: blocks, river, roads */}
+      <svg style={{ position: 'absolute', inset: 0 }} width="1920" height="1080">
+        <rect width="1920" height="1080" fill="#E4DAC0" />
+        {Array.from({ length: 26 }).map((_, i) => Array.from({ length: 15 }).map((__, j) => (
+          <rect key={i + '-' + j} x={20 + i * 74} y={20 + j * 72} width={60} height={58} rx={6} fill={random('b' + i + j) > 0.2 ? '#D3C7A7' : '#B9C9A3'} stroke="#B8AA86" strokeWidth="2" />
+        )))}
+        <path d="M -20 820 C 300 760 520 900 860 860 C 1200 820 1400 980 1940 900" fill="none" stroke="#8FA9B8" strokeWidth="60" opacity="0.9" />
+        <path d="M 0 300 L 1920 420 M 1180 0 L 1060 1080" stroke={P.bone} strokeWidth="22" />
+      </svg>
+      {/* fallout plume, downwind */}
+      <div style={{ position: 'absolute', left: cx, top: cy - 120, width: 1100 * spring({ frame: f - 40, fps, config: { damping: 30, stiffness: 40 } }), height: 240, background: 'linear-gradient(90deg, rgba(90,80,70,.45), rgba(90,80,70,0))', borderRadius: '0 50% 50% 0', transformOrigin: '0 50%', transform: 'rotate(-12deg)' }} />
+      <div style={{ position: 'absolute', left: 1500, top: 300, fontFamily: cond2, fontWeight: 700, fontSize: 34, color: '#4b4338', letterSpacing: 2, transform: 'rotate(-12deg)' }}>FALLOUT · DOWNWIND →</div>
+      {rings.slice().reverse().map((g, i) => {
+        const s = spring({ frame: f - 6 - (2 - i) * 6, fps, config: { damping: 18, stiffness: 70 } });
+        return (
+          <React.Fragment key={g.label}>
+            <div style={{ position: 'absolute', left: cx - g.r * s, top: cy - g.r * s, width: g.r * 2 * s, height: g.r * 2 * s, borderRadius: '50%', background: g.fill, border: `6px solid ${g.c === '#F6F1E4' ? P.ink : g.c}` }} />
+            <div style={{ position: 'absolute', left: cx + Math.cos([-0.5, 2.6, -0.75][2 - i]) * g.r * s - 60, top: cy + Math.sin([-0.5, 2.6, -0.75][2 - i]) * g.r * s - 26, fontFamily: cond2, fontWeight: 700, fontSize: 34, background: P.bone, border: `4px solid ${P.ink}`, padding: '0 12px', color: P.ink, opacity: s, letterSpacing: 2 }}>{g.label}</div>
+          </React.Fragment>
+        );
+      })}
+      {/* what happens, as icon states (no casualty imagery) */}
+      <Badge I={Building2} x={cx - 190} y={cy + 40} at={20} hit={40} />
+      <Badge I={Zap} x={cx + 330} y={cy + 120} at={26} hit={50} label="POWER OUT" />
+      <Badge I={Car} x={cx - 330} y={cy + 200} at={32} hit={60} label="ROADS STOP" />
+      <Badge I={Bird} x={cx - 120} y={cy - 300} at={38} label="BIRDS FLEE" />
+      <Badge I={Droplets} x={cx - 520} y={cy - 160} at={44} hit={70} label="WATER UNSAFE" />
+      {/* one headline only */}
+      <div style={{ position: 'absolute', left: 0, top: 0, right: 0, height: 250, background: P.ink, borderBottom: `5px solid ${P.ink}`, boxShadow: '0 8px 0 rgba(27,34,48,.2)' }} />
+      <Headline kicker="RING 0 · THE FIRST 10 SECONDS" dark x={70} y={110} size={84}>Three rings. Ten seconds.</Headline>
+      {/* Jake PiP — always reacting */}
+      <div style={{ position: 'absolute', right: 60, bottom: 60, width: 420, height: 300, background: '#1A1C21', border: `5px solid ${P.ink}`, boxShadow: '10px 10px 0 rgba(27,34,48,.3)', overflow: 'hidden' }}>
+        <LiveJake pose="stand" seed="sf6" beats={[{ at: 10, r: 'surprise', hold: 30 }, { at: 45, r: 'worry', hold: 300 }]} style={{ position: 'absolute', left: 100, top: 10, height: 620 }} />
+        <div style={{ position: 'absolute', left: 10, top: 8, fontFamily: F.mono, fontSize: 18, color: '#cfd6e2' }}>JAKE · BUNKER · 04:12</div>
+      </div>
+      <Src style={{ left: 420, bottom: 30, background: 'rgba(246,241,228,.9)', padding: '2px 8px' }}>Illustration · ring sizes depend on weapon yield ⚠ (Glasstone & Dolan; NUKEMAP)</Src>
+      <WhatIf dark /><Bug left />
+      <Grain k={0.04} />
+    </AbsoluteFill>
+  );
+};
+
+// ---------- Transition demo: the bunker screen IS the map (zoom-through match cut)
+export const SFTransition: React.FC = () => {
+  const f = useCurrentFrame();
+  const t = interpolate(f, [0, 45], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: (x) => x * x * (3 - 2 * x) });
+  // monitor 4 in SF3 is at x 960..1580, y 570..870 → centre (1270, 720), width 620
+  const k = interpolate(t, [0, 1], [1, 1920 / 620]);
+  const ox = interpolate(t, [0, 1], [0, 960 - 1270 * (1920 / 620)]);
+  const oy = interpolate(t, [0, 1], [0, 540 - 720 * (1920 / 620)]);
+  const mapIn = interpolate(f, [34, 46], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  return (
+    <AbsoluteFill style={{ background: P.ink }}>
+      <AbsoluteFill style={{ transformOrigin: '0 0', transform: `translate(${ox}px, ${oy}px) scale(${k})` }}><SF3Bunker /></AbsoluteFill>
+      <AbsoluteFill style={{ opacity: mapIn }}><SF4MapTV /></AbsoluteFill>
     </AbsoluteFill>
   );
 };

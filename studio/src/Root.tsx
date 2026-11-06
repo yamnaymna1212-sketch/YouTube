@@ -1,6 +1,7 @@
 import React from 'react';
 import { Composition, Still } from 'remotion';
 import { PaperBoardStage, PaperBoardStrait } from './ep03/PaperWorld';
+import { SF1Siren, SF2Sky, SF3Bunker, SF4Rings, SF5Proof } from './ep03/StyleFrames';
 import { HostTest } from './HostTest';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
 import { BodyTest } from './BodyTest';
@@ -46,8 +47,13 @@ export const Root: React.FC = () => (
     <Still id="F3Video" component={F3Video} width={1920} height={1080} />
     <Still id="F4Versus" component={F4Versus} width={1920} height={1080} />
     <Still id="F5Wage" component={F5Wage} width={1920} height={1080} />
-    <Still id="PaperBoardStage" component={PaperBoardStage} width={1920} height={1080} />
-    <Still id="PaperBoardStrait" component={PaperBoardStrait} width={1920} height={1080} />
+    <Composition id="PaperBoardStage" component={PaperBoardStage} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="PaperBoardStrait" component={PaperBoardStrait} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="SF1Siren" component={SF1Siren} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="SF2Sky" component={SF2Sky} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="SF3Bunker" component={SF3Bunker} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="SF4Rings" component={SF4Rings} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="SF5Proof" component={SF5Proof} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Still id="BodyTest" component={BodyTest} width={1920} height={1080} />
     <Still id="W1Street" component={W1Street} width={1920} height={1080} />
     <Still id="W2Gas" component={W2Gas} width={1920} height={1080} />

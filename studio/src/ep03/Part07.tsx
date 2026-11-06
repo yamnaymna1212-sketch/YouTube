@@ -92,7 +92,7 @@ const Halt: React.FC<{ at: number; stopAt: number }> = ({ at, stopAt }) => {
       <div style={{ position: 'absolute', left: 110, top: 300, fontFamily: F.serif, fontSize: 340, color: P.red, lineHeight: 1 }}>{pct.toFixed(1)}%</div>
       <Badge I={TrendingDown} x={1300} y={420} at={at} size={190} label="S&P 500" />
       {f > stopAt && <div style={{ position: 'absolute', left: 110, top: 720, transform: `scale(${st})`, transformOrigin: '0 50%', display: 'flex', alignItems: 'center', gap: 24, background: P.bone, border: `7px solid ${P.ink}`, padding: '16px 34px' }}><Pause size={90} color={P.ink} fill={P.ink} /><div style={{ fontFamily: cond2, fontWeight: 700, fontSize: 92, color: P.ink }}>TRADING PAUSED · 15 MIN</div></div>}
-      <Src dark style={{ left: 110, bottom: 40 }}>Market-wide circuit breaker, Level 1 (S&P 500 −7%) · SEC/NYSE rules ⚠ confirm</Src>
+      <Src dark style={{ left: 110, bottom: 40 }}>Market-wide circuit breaker, Level 1: S&P 500 −7% → 15-minute halt (SEC investor bulletin)</Src>
     </Stage>
   );
 };

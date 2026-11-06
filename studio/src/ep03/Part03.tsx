@@ -159,7 +159,7 @@ const TwoTruths: React.FC<{ inspAt: number; kgAt: number; whereAt: number; intel
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontFamily: F.mono, fontSize: 26, color: '#6b6250', letterSpacing: 3 }}><Eye size={44} color={P.ink} />U.S. INTELLIGENCE</div>
         <div style={{ fontFamily: F.serif, fontSize: 104, color: P.ink, lineHeight: 1.05, marginTop: 40 }}>“Iran is not building a nuclear weapon.”</div>
       </Panel>}
-      <Src style={{ left: 120, bottom: 40 }}>IAEA reports via ISIS (Jun 2026) · Bulletin of the Atomic Scientists (Mar 2026) · U.S. assessment via CRS IF12106 ⚠ confirm wording</Src>
+      <Src style={{ left: 120, bottom: 40 }}>IAEA reports via ISIS (Jun 2026) · Bulletin of the Atomic Scientists (Mar 2026) · U.S. intelligence assessment as cited in CRS IF12106</Src>
     </Paper>
   );
 };

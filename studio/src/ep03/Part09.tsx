@@ -56,7 +56,7 @@ const Money: React.FC<{ yrAt: number; dateAt: number; stopAt: number }> = ({ yrA
       </div>
       <Badge I={Banknote} x={1000} y={560} at={dateAt} hit={dateAt + 12} size={210} label="NO MONEY FOR THE BOMBING" />
       {f > stopAt && <div style={{ position: 'absolute', left: 1500, top: 560, transform: `translate(-50%,-50%) scale(${2 - st}) rotate(-8deg)`, opacity: st, border: `9px solid ${P.red}`, padding: '4px 30px', fontFamily: cond2, fontWeight: 700, fontSize: 110, color: P.red }}>STOPPED</div>}
-      <Src style={{ left: 90, bottom: 40 }}>U.S. bombing in Cambodia ended 15 Aug 1973, the date set by Congress in its funding cut-off ⚠ confirm (CRS)</Src>
+      <Src style={{ left: 90, bottom: 40 }}>Bombing in Cambodia ended 15 Aug 1973, the funding deadline set by Congress (P.L. 93-50; CRS RL33803)</Src>
     </Base>
   );
 };
@@ -109,7 +109,7 @@ const Clock62: React.FC<{ at: number; bothAt: number }> = ({ at, bothAt }) => {
         <Pawn x={60} y={260} base={P.blue} scale={0.8} seed="dem" hop={bothAt} /><Pawn x={220} y={260} base={P.red} scale={0.8} seed="rep" hop={bothAt + 6} />
         <div style={{ position: 'absolute', left: 340, top: 80, width: 460, fontFamily: F.sans, fontWeight: 700, fontSize: 40, color: P.ink }}>Presidents of both parties say the clock doesn't bind them</div>
       </div>}
-      <Src style={{ left: 90, bottom: 40 }}>50 U.S.C. §1544(b) ⚠ confirm wording</Src>
+      <Src style={{ left: 90, bottom: 40 }}>War Powers Resolution, 50 U.S.C. §1544(b)</Src>
     </Base>
   );
 };
@@ -121,7 +121,7 @@ const Lawful: React.FC<{ at: number; hardAt: number }> = ({ at, hardAt }) => (
     <div style={{ position: 'absolute', left: 0, top: 0 }}><Pawn x={420} y={900} base="#8b93a1" scale={1.6} hat seed="officer" hop={at} /></div>
     <Badge I={BookOpen} x={960} y={560} at={at} size={220} label="THE LAW" />
     <Badge I={Scale} x={1440} y={560} at={hardAt} size={220} label="WHAT IS LAWFUL?" />
-    <Src dark style={{ left: 90, bottom: 40 }}>Duty to obey lawful orders: UCMJ Art. 92 ⚠ confirm</Src>
+    <Src dark style={{ left: 90, bottom: 40 }}>Duty to obey lawful orders: UCMJ Art. 92</Src>
   </Base>
 );
 

@@ -94,7 +94,7 @@ const Water: React.FC<{ radAt: number; seaAt: number; tapsAt: number }> = ({ rad
       <div style={{ position: 'absolute', left: 0, right: 0, top: 820, height: 260, background: '#8FA9B8', borderTop: `6px solid ${P.ink}` }} />
       <Badge I={Factory} x={1260} y={760} at={seaAt} size={170} label="DESALINATION" />
       <Badge I={Droplets} x={1620} y={760} at={tapsAt} hit={tapsAt + 12} size={170} label="TAPS" />
-      <Src style={{ left: 90, bottom: 40 }}>Gulf states rely heavily on desalinated seawater ⚠ add dated source</Src>
+      <Src style={{ left: 90, bottom: 40 }}>Gulf desalination: e.g. Kuwait ≈ 90%, Oman ≈ 86% of drinking water (Arab Center DC; Al Jazeera, Mar 2026)</Src>
     </Base>
   );
 };
@@ -134,7 +134,7 @@ const Petrov: React.FC<{ yrAt: number; fiveAt: number; errAt: number; rightAt: n
       </div>
       {f > errAt && <Badge I={X} x={1500} y={480} at={errAt} size={170} label="COMPUTER ERROR" />}
       {f > rightAt && <Badge I={Check} x={1500} y={800} at={rightAt} size={170} label="HE WAS RIGHT" />}
-      <Src dark style={{ left: 90, bottom: 40 }}>Soviet early-warning false alarm, 26 Sep 1983 ⚠ add source</Src>
+      <Src dark style={{ left: 90, bottom: 40 }}>Soviet early-warning false alarm, 26 Sep 1983 (Lt. Col. Stanislav Petrov)</Src>
     </Base>
   );
 };

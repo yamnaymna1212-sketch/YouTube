@@ -112,11 +112,11 @@ const Qeshm: React.FC<{ pinAt: number; remAt: number }> = ({ pinAt, remAt }) => 
         </div>
         {[0, 1].map((k) => { const r = ((f / 40 + k / 2) % 1); return <div key={k} style={{ position: 'absolute', left: qx - r * 90, top: qy - r * 90, width: r * 180, height: r * 180, borderRadius: '50%', border: `3px solid rgba(180,69,47,${(1 - r) * pin})` }} />; })}
       </AbsoluteFill>
-      <Headline kicker="ELECTION DAY · 3 NOV 2026" dark x={80} y={640} size={120} at={pinAt}>Qeshm Island</Headline>
+      <Headline kicker="ELECTION WEEK · 2 NOV 2026" dark x={80} y={640} size={120} at={pinAt}>Qeshm Island</Headline>
       <FlagLabel c="ir" name="Iran" x={260} y={560} at={pinAt + 6} />
       <div style={{ position: 'absolute', left: 84, top: 830, fontFamily: F.sans, fontWeight: 700, fontSize: 48, color: P.bone, opacity: sp(f, pinAt + 10, fps) }}>Strait of Hormuz</div>
       {f > remAt && <Card x={1500} y={900} at={remAt} size={54} rot={-2}>Remember this spot</Card>}
-      <Src dark style={{ left: 84, bottom: 36 }}>Strike reported by Al Jazeera, 5 Nov 2026 ⚠ confirm · Map: NASA STS-4 S04-37-716, public domain</Src>
+      <Src dark style={{ left: 84, bottom: 36 }}>U.S. "defensive" strikes on Qeshm, 2 Nov 2026 (NBC, CBS, ABC, Stars and Stripes) · Map: NASA STS-4 S04-37-716, public domain</Src>
       <WhatIf dark /><Bug dark /><Grain k={0.05} />
     </AbsoluteFill>
   );
@@ -163,7 +163,7 @@ const Billions: React.FC<{ at: number }> = ({ at }) => {
       <Headline kicker="PENTAGON ESTIMATE · BY MAY 2026" x={110} y={250} size={90}>War cost so far</Headline>
       <div style={{ position: 'absolute', left: 104, top: 420, fontFamily: F.serif, fontSize: 300, color: P.ink, lineHeight: 1 }}>${v.toFixed(0)}B</div>
       <Badge I={Banknote} x={230} y={850} at={at} size={130} label="BILLION" />
-      <Src style={{ left: 110, bottom: 40 }}>Pentagon estimate as reported (May 2026) ⚠ confirm · Notes: U.S. Currency Education Program specimen images</Src>
+      <Src style={{ left: 110, bottom: 40 }}>Pentagon acting comptroller to Congress, 12 May 2026 (≈ $29B) · Notes: U.S. Currency Education Program specimen images</Src>
       <WhatIf /><Bug /><Grain k={0.04} />
     </AbsoluteFill>
   );

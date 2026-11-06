@@ -120,7 +120,7 @@ const Sensors: React.FC<{ at: number; worldAt: number }> = ({ at, worldAt }) => 
       <Badge I={Radar} x={1720} y={250} at={at + 12} size={150} label="STATIONS" />
       {f > worldAt && <Badge I={Globe} x={1720} y={620} at={worldAt} size={150} label="THE WORLD KNOWS" />}
       <Headline kicker="WITHIN MINUTES" dark x={90} y={720} size={84} at={at}>Sensors hear it</Headline>
-      <Src dark style={{ left: 90, bottom: 30 }}>Network built to detect nuclear tests (CTBTO International Monitoring System) ⚠ confirm · stations illustrative</Src>
+      <Src dark style={{ left: 90, bottom: 30 }}>CTBTO International Monitoring System (seismic, infrasound, hydroacoustic, radionuclide) · dots illustrative</Src>
       <WhatIf dark /><Bug dark /><Grain k={0.05} />
     </AbsoluteFill>
   );
@@ -174,7 +174,7 @@ const CarMyth: React.FC<{ mythAt: number; highAt: number }> = ({ mythAt, highAt 
         <div style={{ position: 'absolute', left: 0, right: 0, bottom: 60, height: 10, background: '#8B7F62' }} />
         <Badge I={Volume2} x={240} y={520} at={highAt + 10} size={120} label="THIS SCENARIO: GROUND" />
       </div>
-      <Src style={{ left: 90, bottom: 40 }}>Electromagnetic pulse over a wide area needs a burst high above the atmosphere (Glasstone & Dolan, ch. 11) ⚠ confirm</Src>
+      <Src style={{ left: 90, bottom: 40 }}>Wide-area EMP comes from high-altitude bursts (Glasstone & Dolan, The Effects of Nuclear Weapons, ch. 11)</Src>
       <WhatIf /><Bug /><Grain k={0.04} />
     </AbsoluteFill>
   );

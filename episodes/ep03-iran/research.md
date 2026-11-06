@@ -50,3 +50,12 @@ Status key: ✔ found in a primary/authoritative source · ◐ reported by news,
 | G8 | 26 Sep 1983 Soviet early-warning false alarm (Stanislav Petrov) | ⚠ | add a reliable source |
 | G9 | Hiroshima order: Truman, Aug 1945 (Hiroshima 6 Aug, Nagasaki 9 Aug) | ✔ | National Archives / Truman Library |
 | G10 | Jake burns ≈ 780 gal/yr ($3,240 ÷ $4.15 from EP02) → +$1/gal ≈ +$780/yr; Jake earns $13.73/h ≈ $549/week | ✔ (EP02 internal numbers) | EP02 script |
+
+## H. Verification pass (6 Nov 2026, during render)
+| Item | Result | Sources |
+|---|---|---|
+| A5 Qeshm strike | ✔ happened, but on **Mon 2 Nov 2026 (eve of the election)**, described as limited "defensive" strikes. **VO says "on election day" → inaccurate**; on-screen kicker changed to "ELECTION WEEK · 2 NOV 2026". Fix the VO line ("on the eve of the election") if regenerating. | [NBC](https://www.nbcnews.com/world/iran/us-conducted-defensive-strikes-iranian-targets-strait-hormuz-us-offici-rcna607161) · [CBS](https://www.cbsnews.com/news/u-s-strikes-iran-targets/) · [ABC](https://abcnews.com/International/us-carries-defensive-airstrikes-irans-qeshm-island-officials/story?id=137792518) · [Stars and Stripes](https://www.stripes.com/theaters/middle_east/2026-11-03/us-strikes-iran-qeshm-island-hormuz-23348317.html) |
+| G1 $29 bn | ✔ Pentagon acting comptroller, 12 May 2026 (critics say it's low) | [Fiscal Times](https://www.thefiscaltimes.com/2026/05/12/Pentagon-Estimate-Iran-War-Cost-Rises-29-Billion) · [Al-Monitor](https://www.al-monitor.com/originals/2026/05/pentagon-says-us-cost-iran-war-nearing-29-billion) |
+| B3 Cambodia 1973 | ✔ bombing ended 15 Aug 1973, the funding deadline in P.L. 93-50 | [CRS RL33803](https://www.everycrsreport.com/reports/RL33803.html) |
+| G7 desalination | ✔ e.g. Kuwait ≈ 90%, Oman ≈ 86%, Saudi ≈ 70% of drinking water; Qatar/Bahrain > 90% | [Al Jazeera, 12 Mar 2026](https://aljazeera.com/news/2026/3/12/how-much-of-the-gulfs-water-comes-from-desalination-plants) · [Arab Center DC](https://arabcenterdc.org/resource/the-costs-and-benefits-of-water-desalination-in-the-gulf/) |
+| G4 circuit breaker, G5 War Powers 60+30, G6 UCMJ Art. 92, G8 Petrov 1983, G2 CTBTO, E3 EMP | standard, well-documented facts; source lines on screen name the primary source | SEC; 50 U.S.C. §1544(b); UCMJ; CTBTO; Glasstone & Dolan |

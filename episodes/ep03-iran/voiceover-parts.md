@@ -4,12 +4,12 @@
 - **Delivery:** calm, serious, clear. Not dramatic, not rushed. Keep the EP02 voice settings.
 - **Save as:** `vo_00.mp3` … `vo_09.mp3` (one file per part) → upload to `studio/public/iran/vo/` or send them here. I tighten the pauses and cut the scenes to them.
 - **Pronunciation:** Hormuz = hor-MOOZ · Qeshm = KESH-um · Natanz = na-TAHNZ · Fordow = for-DOH. If a name comes out wrong, regenerate only that part.
-- **Total:** 1752 words ≈ 9.7 min after pause tightening, + ≈ 15 s of silent beats (siren, archive film, end card).
+- **Total:** 1747 words ≈ 9.7 min after pause tightening, + ≈ 15 s of silent beats (siren, archive film, end card).
 - Shot 1 (siren) is silent; vo_00 starts with the first spoken line.
 
 ## vo_00 · COLD OPEN — 4:00 a.m. (0:00–0:50)  (146 words, ≈49 s after tightening)
 
-It's four in the morning. A siren. Jake gets up, opens the window, and looks. Nothing. Just the city, asleep.
+It's four in the morning. A siren.  Jake gets up, opens the window, and looks. Nothing. Just the city, asleep.
 
 Five seconds later, a sound he has never heard. A roar, somewhere above the clouds. His phone lights up. Seek shelter now.
 
@@ -149,13 +149,13 @@ And when companies are scared, they stop hiring. Airlines, travel, anything peop
 
 That's the money. But it isn't the biggest ring.
 
-## vo_07 · RING 4 — THE WORLD (8:00–9:00)  (192 words, ≈64 s after tightening)
+## vo_07 · RING 4 — THE WORLD (8:00–9:00)  (187 words, ≈62 s after tightening)
 
 No country has used a nuclear weapon in war since 1945. Eighty-one years.
 
-And here's the uncomfortable part. Would it even work? If nobody knows exactly where Iran's uranium is, no weapon can promise to destroy it. The line would be crossed, and the goal might still be missed.
+And here's the uncomfortable part. Would it even work? If nobody knows exactly where Iran's uranium is, no weapon can promise to destroy it. The taboo would be broken, and the goal could still be missed.
 
-That line would be crossed. Allies would have to choose: stand with Washington, or step back. Rivals would take notes.
+Allies would have to choose: stand with Washington, or step back. Rivals would take notes.
 
 And every government that ever asked, quietly, do we need a bomb of our own? would feel it had its answer.
 
@@ -193,6 +193,6 @@ And for Jake, the bill from one order on the other side of the world: more for g
 
 Fear moves faster than facts. That's why we did the math.
 
-Outside, it's a normal morning. A neighbour jogging. A bus on time. The world hasn't ended. But the price of a world like this is already on Jake's receipts.
+Outside, it's a normal morning. A neighbor jogging. A bus on time. The world hasn't ended. But the price of a world like this is already on Jake's receipts.
 
 Which ring surprised you most? Tell us in the comments. And if you want the next one decoded, subscribe. It's free.

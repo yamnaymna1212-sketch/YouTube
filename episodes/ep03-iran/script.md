@@ -26,7 +26,7 @@ Legend: **A** Jake story · **B** map explainer · **C** real footage/photo · *
 | # | Shot | VO |
 |---|---|---|
 | 1 | A · Black. Red digits 4:00. A siren rises. Jake's eyes open. → siren wave rings | *(siren, 2 s)* |
-| 2 | A · Jake at the window. The city, quiet. → window frame becomes phone frame | It's four in the morning. A siren. Jake gets up, opens the window, and looks. Nothing. Just the city, asleep. |
+| 2 | A · Jake at the window. The city, quiet. → window frame becomes phone frame | It's four in the morning. A siren. *(real siren sound, 2–3 s, VO paused)* Jake gets up, opens the window, and looks. Nothing. Just the city, asleep. |
 | 3 | A · Phone lights: "Seek shelter now." Sky: a roar, searchlights. | Five seconds later, a sound he has never heard. A roar, somewhere above the clouds. His phone lights up. Seek shelter now. |
 | 4 | A · Jake freezes, then runs; grabs the key from the hook. → stairwell spiral | He doesn't know what's happening. Nobody on his street does. But he knows where the key is. |
 | 5 | A · Bunker door slams; four screens flicker on. → push into screen 4 | His grandfather built a shelter under the house in the nineteen-sixties. Jake always thought it was a joke. Tonight, it's the only place he wants to be. |
@@ -119,8 +119,8 @@ Legend: **A** Jake story · **B** map explainer · **C** real footage/photo · *
 | # | Shot | VO |
 |---|---|---|
 | 54 | C · Real archive print → counter "1945 … 81 years" | No country has used a nuclear weapon in war since 1945. Eighty-one years. [E4] |
-| 54a | D · Question card: 'Would it even work?' | And here's the uncomfortable part. Would it even work? If nobody knows exactly where Iran's uranium is, no weapon can promise to destroy it. The line would be crossed, and the goal might still be missed. [C1] |
-| 55 | B · World map: allied pawns turn away, rival pawns step forward | That line would be crossed. Allies would have to choose: stand with Washington, or step back. Rivals would take notes. |
+| 54a | D · Question card: 'Would it even work?' | And here's the uncomfortable part. Would it even work? If nobody knows exactly where Iran's uranium is, no weapon can promise to destroy it. The taboo would be broken, and the goal could still be missed. [C1] |
+| 55 | B · World map: allied pawns turn away, rival pawns step forward | Allies would have to choose: stand with Washington, or step back. Rivals would take notes. |
 | 56 | B · Countries light up one by one: "Do we need one?" | And every government that ever asked, quietly, do we need a bomb of our own? would feel it had its answer. |
 | 56a | B · Fallout arrow crossing borders; Gulf desalination plant badges | Radiation doesn't stop at borders. And across the Gulf, millions of people drink water made from the sea, at plants on the coast. If the water is contaminated, the taps are in danger. [⚠ desalination share] |
 | 56b | D · UN Security Council table: five chairs, one 'VETO' card | At the United Nations, the Security Council meets within hours. But any one of its five permanent members can block any action. Including the United States. |
@@ -145,7 +145,7 @@ Legend: **A** Jake story · **B** map explainer · **C** real footage/photo · *
 | 65 | C · Hawaii alert text card | Now, remember Jake's siren? In 2018, more than a million people in Hawaii got this message on their phones. It was a mistake. It took thirty-eight minutes to correct. [F1] |
 | 65a | E · Jake's wallet meter final: GAS ↑ · 401(k) ↓ · PRICES ↑ | And for Jake, the bill from one order on the other side of the world: more for gas, more for groceries, less in his retirement account. Before a single shot is fired at America. |
 | 66 | A · Bunker door opens; daylight; Jake steps out | Fear moves faster than facts. That's why we did the math. |
-| 66a | A · Outside: ordinary morning, a neighbour jogs past, a bus goes by | Outside, it's a normal morning. A neighbour jogging. A bus on time. The world hasn't ended. But the price of a world like this is already on Jake's receipts. |
+| 66a | A · Outside: ordinary morning, a neighbour jogs past, a bus goes by | Outside, it's a normal morning. A neighbor jogging. A bus on time. The world hasn't ended. But the price of a world like this is already on Jake's receipts. |
 | 67 | D · End card: Dollarly · "Your Money. Decoded." | Which ring surprised you most? Tell us in the comments. And if you want the next one decoded, subscribe. It's free. |
 
 ---

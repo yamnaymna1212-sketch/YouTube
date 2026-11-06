@@ -119,7 +119,7 @@ const NoFirstUse: React.FC<{ at: number }> = ({ at }) => {
 // 19 · buried sites: cross-section under a mountain (illustrative, no real coordinates)
 const Buried: React.FC<{ mtnAt: number; bombAt: number }> = ({ mtnAt, bombAt }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
-  const s = sp(f, mtnAt, fps, 18, 80);
+  const s = sp(f, 4, fps, 18, 80); // the mountain rises as the shot opens
   const drop = interpolate(f - bombAt, [0, 24], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   return (
     <Paper>

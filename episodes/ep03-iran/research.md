@@ -38,3 +38,15 @@ Status key: ✔ found in a primary/authoritative source · ◐ reported by news,
 
 ## F. Story precedent
 | F1 | Hawaii false missile alert, 13 Jan 2018: "BALLISTIC MISSILE THREAT INBOUND TO HAWAII. SEEK IMMEDIATE SHELTER. THIS IS NOT A DRILL." Correction took 38 minutes; no second-person check | ◐ | FCC investigation reports (Jan & Apr 2018) — [NPR](https://www.npr.org/sections/thetwo-way/2018/04/11/601394064/federal-communications-commission-dont-say-this-is-not-a-drill-during-drills) · [VOA](https://www.voanews.com/a/report-blames-hawaii-missile-scare-on-human-error-poor-safeguards/4341666.html) — link the FCC PDF |
+
+## G. Added for script v2 (all to confirm before recording)
+| G1 | Pentagon estimate ≈ $29 bn spent on the war by May 2026 | ◐ | reported in the Al Jazeera/FindLaw coverage of the Senate vote (A3) — find the primary DoD figure |
+| G2 | Global seismic/infrasound network built to detect nuclear tests (CTBTO International Monitoring System) | ⚠ | ctbto.org |
+| G3 | Tens of thousands of U.S. troops at bases around the Gulf | ⚠ | DoD / CRS — use "tens of thousands" unless a dated figure is found |
+| G4 | Market-wide circuit breaker: S&P 500 −7% → 15-minute halt (Level 1) | ◐ | SEC / NYSE rules |
+| G5 | War Powers Resolution 60-day limit + 30-day withdrawal; presidents of both parties have disputed it | ◐ | 50 U.S.C. §1544(b); CRS |
+| G6 | Duty to obey only lawful orders (UCMJ Art. 92) | ◐ | CRS / UCMJ |
+| G7 | Gulf states depend heavily on desalinated seawater | ⚠ | find a dated share (e.g. World Bank / IEA) |
+| G8 | 26 Sep 1983 Soviet early-warning false alarm (Stanislav Petrov) | ⚠ | add a reliable source |
+| G9 | Hiroshima order: Truman, Aug 1945 (Hiroshima 6 Aug, Nagasaki 9 Aug) | ✔ | National Archives / Truman Library |
+| G10 | Jake burns ≈ 780 gal/yr ($3,240 ÷ $4.15 from EP02) → +$1/gal ≈ +$780/yr; Jake earns $13.73/h ≈ $549/week | ✔ (EP02 internal numbers) | EP02 script |

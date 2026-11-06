@@ -1,6 +1,7 @@
 import React from 'react';
 import { Composition, Still } from 'remotion';
 import { PaperBoardStage, PaperBoardStrait } from './ep03/PaperWorld';
+import { EP03Part01, EP03_P1_FRAMES } from './ep03/Part01';
 import { SF1Siren, SF2Sky, SF3Bunker, SF4Rings, SF5Proof, SF4MapTV, SF6Ring0, SFTransition } from './ep03/StyleFrames';
 import { HostTest } from './HostTest';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
@@ -53,6 +54,7 @@ export const Root: React.FC = () => (
     <Composition id="SF2Sky" component={SF2Sky} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF3Bunker" component={SF3Bunker} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF4Rings" component={SF4Rings} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part01" component={EP03Part01} durationInFrames={EP03_P1_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="SF4MapTV" component={SF4MapTV} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF6Ring0" component={SF6Ring0} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SFTransition" component={SFTransition} durationInFrames={60} fps={30} width={1920} height={1080} />

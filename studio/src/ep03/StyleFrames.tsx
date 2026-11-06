@@ -9,7 +9,7 @@ import { Card, P, Pawn } from './PaperWorld';
 // EP03 style frames — one look across story (cartoon), explainer (paper map) and proof (real material).
 // Shared language: ink outline + hard shadow, paper grain over everything, WHAT IF badge, time chip, warm grade on real media.
 
-const Grain: React.FC<{ k?: number }> = ({ k = 0.07 }) => {
+export const Grain: React.FC<{ k?: number }> = ({ k = 0.07 }) => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill style={{ pointerEvents: 'none', mixBlendMode: 'overlay', opacity: 1 }}>
@@ -21,30 +21,30 @@ const Grain: React.FC<{ k?: number }> = ({ k = 0.07 }) => {
   );
 };
 
-const WhatIf: React.FC<{ dark?: boolean }> = ({ dark }) => (
+export const WhatIf: React.FC<{ dark?: boolean }> = ({ dark }) => (
   <div style={{ position: 'absolute', left: 48, top: 40, display: 'flex', gap: 12, alignItems: 'center', fontFamily: F.mono, fontSize: 22, letterSpacing: 2 }}>
     <span style={{ background: P.red, color: P.bone, padding: '6px 12px', border: `3px solid ${P.ink}`, fontWeight: 500 }}>WHAT IF</span>
     <span style={{ color: dark ? 'rgba(246,241,228,.75)' : P.ink }}>HYPOTHETICAL SCENARIO</span>
   </div>
 );
 
-const TimeChip: React.FC<{ t: string; label: string; dark?: boolean }> = ({ t, label, dark }) => (
+export const TimeChip: React.FC<{ t: string; label: string; dark?: boolean }> = ({ t, label, dark }) => (
   <div style={{ position: 'absolute', right: 48, top: 36, textAlign: 'right' }}>
     <div style={{ fontFamily: F.mono, fontSize: 54, color: dark ? P.bone : P.ink, letterSpacing: 2 }}>{t}</div>
     <div style={{ fontFamily: F.mono, fontSize: 20, color: dark ? 'rgba(246,241,228,.65)' : '#6b6250', letterSpacing: 3 }}>{label}</div>
   </div>
 );
 
-const Bug: React.FC<{ dark?: boolean; left?: boolean }> = ({ dark, left }) => (
+export const Bug: React.FC<{ dark?: boolean; left?: boolean }> = ({ dark, left }) => (
   <div style={{ position: 'absolute', ...(left ? { left: 48 } : { right: 48 }), bottom: 36, fontFamily: F.sans, fontWeight: 700, fontSize: 22, color: dark ? 'rgba(246,241,228,.6)' : 'rgba(27,34,48,.55)', letterSpacing: 1 }}>DOLLARLY</div>
 );
 
-const Src: React.FC<{ children: React.ReactNode; dark?: boolean; style?: React.CSSProperties }> = ({ children, dark, style }) => (
+export const Src: React.FC<{ children: React.ReactNode; dark?: boolean; style?: React.CSSProperties }> = ({ children, dark, style }) => (
   <div style={{ position: 'absolute', fontFamily: F.mono, fontSize: 18, color: dark ? 'rgba(246,241,228,.75)' : '#5c5444', letterSpacing: 1, ...style }}>{children}</div>
 );
 
 // Real photo shown as a taped print, with slow handheld drift and warm grade.
-const Print: React.FC<{ src: string; x: number; y: number; w: number; h: number; rot?: number; caption?: string; at?: number; pos?: string }> = ({ src, x, y, w, h, rot = 0, caption, at = 0, pos = '50% 50%' }) => {
+export const Print: React.FC<{ src: string; x: number; y: number; w: number; h: number; rot?: number; caption?: string; at?: number; pos?: string }> = ({ src, x, y, w, h, rot = 0, caption, at = 0, pos = '50% 50%' }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   const s = spring({ frame: f - at, fps, config: { damping: 15, stiffness: 120 } });
   const dx = noise2D('px' + src, f / 80, 0) * 4, dy = noise2D('py' + src, f / 80, 1) * 4;
@@ -60,7 +60,7 @@ const Print: React.FC<{ src: string; x: number; y: number; w: number; h: number;
   );
 };
 
-const Skyline: React.FC<{ y: number; color: string; lit?: boolean; seed?: string; h?: number }> = ({ y, color, lit, seed = 'sk', h = 1 }) => (
+export const Skyline: React.FC<{ y: number; color: string; lit?: boolean; seed?: string; h?: number }> = ({ y, color, lit, seed = 'sk', h = 1 }) => (
   <>
     {Array.from({ length: 14 }).map((_, i) => {
       const w = 60 + random(seed + 'w' + i) * 70, hh = (120 + random(seed + 'h' + i) * 260) * h, x = i * 55 + random(seed + 'x' + i) * 20;
@@ -152,7 +152,7 @@ export const SF2Sky: React.FC = () => {
 };
 
 // ---------- 3 · Bunker — watching the city on screens (real NASA night imagery on the monitors)
-const Monitor: React.FC<{ x: number; y: number; w: number; h: number; src?: string; label: string; off?: number; flicker?: boolean }> = ({ x, y, w, h, src, label, off = 0, flicker }) => {
+export const Monitor: React.FC<{ x: number; y: number; w: number; h: number; src?: string; label: string; off?: number; flicker?: boolean }> = ({ x, y, w, h, src, label, off = 0, flicker }) => {
   const f = useCurrentFrame();
   const fl = flicker ? (random('fl' + Math.floor(f / 3)) > 0.75 ? 0.35 : 1) : 1;
   return (
@@ -297,7 +297,7 @@ export const SF5Proof: React.FC = () => {
 // =====================================================================
 // v2 — TV rules: one idea per screen, giant type, map-first, icons in badges, motion that carries into the next shot.
 
-const Headline: React.FC<{ kicker?: string; children: React.ReactNode; dark?: boolean; at?: number; x?: number; y?: number; size?: number }> = ({ kicker, children, dark, at = 0, x = 70, y = 130, size = 92 }) => {
+export const Headline: React.FC<{ kicker?: string; children: React.ReactNode; dark?: boolean; at?: number; x?: number; y?: number; size?: number }> = ({ kicker, children, dark, at = 0, x = 70, y = 130, size = 92 }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   const s = spring({ frame: f - at, fps, config: { damping: 18, stiffness: 120 } });
   return (
@@ -309,7 +309,7 @@ const Headline: React.FC<{ kicker?: string; children: React.ReactNode; dark?: bo
 };
 
 // Icon badge for the paper world: bone disc, ink ring, spring pop; `hit` turns it red with a slash.
-const Badge: React.FC<{ I: LucideIcon; x: number; y: number; at?: number; hit?: number; label?: string; size?: number }> = ({ I, x, y, at = 0, hit = -1, label, size = 92 }) => {
+export const Badge: React.FC<{ I: LucideIcon; x: number; y: number; at?: number; hit?: number; label?: string; size?: number }> = ({ I, x, y, at = 0, hit = -1, label, size = 92 }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   const s = spring({ frame: f - at, fps, config: { damping: 11, stiffness: 160 } });
   const h = hit >= 0 ? spring({ frame: f - hit, fps, config: { damping: 14, stiffness: 140 } }) : 0;
@@ -324,7 +324,7 @@ const Badge: React.FC<{ I: LucideIcon; x: number; y: number; at?: number; hit?: 
     </div>
   );
 };
-const cond2 = 'Barlow Condensed, Inter, sans-serif';
+export const cond2 = 'Barlow Condensed, Inter, sans-serif';
 
 // ---------- 4v2 · Map, TV-legible: one fact, giant number, map fills the frame
 export const SF4MapTV: React.FC = () => {

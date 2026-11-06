@@ -6,6 +6,7 @@ import { F } from '../theme';
 import { Building, Card, P, Pawn } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Print, Src, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound } from './Part01';
+import { Flag, FlagLabel } from './Real';
 import { fr, partEnd, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_07');
@@ -56,7 +57,7 @@ const Allies: React.FC<{ chooseAt: number; backAt: number; notesAt: number }> = 
     <Base>
       <Headline kicker="ALLIES AND RIVALS" x={90} y={90} size={110} at={0}>Everyone chooses</Headline>
       <Building kind="wh" x={960} y={640} scale={0.8} />
-      <Card x={960} y={330} at={0} size={38}>Washington</Card>
+      <FlagLabel c="us" name="Washington" x={960} y={330} at={0} size={40} />
       {[0, 1, 2].map((k) => <div key={k} style={{ position: 'absolute', left: 0, top: 0, transform: `translateX(${-turn(k) * 160}px)`, opacity: 1 - turn(k) * 0.45 }}><Pawn x={380 + k * 140} y={860} base={P.blue} seed={'al' + k} hop={chooseAt + k * 5} /></div>)}
       <Card x={520} y={930} at={chooseAt} size={34}>Allies: stay or step back</Card>
       {[0, 1, 2].map((k) => <Pawn key={k} x={1300 + k * 160} y={860} base="#8b93a1" seed={'rv' + k} hat={k === 1} />)}
@@ -110,7 +111,7 @@ const UN: React.FC<{ fiveAt: number; vetoAt: number; usAt: number }> = ({ fiveAt
         const veto = i === 0 ? f > usAt : f > vetoAt && i === 3;
         return <React.Fragment key={n}>
           <Pawn x={400 + i * 280} y={790} base={i === 0 ? P.blue : '#8b93a1'} seed={'un' + i} hop={fiveAt + i * 5} />
-          <Card x={400 + i * 280} y={880} at={fiveAt + i * 5} size={32}>{n}</Card>
+          <FlagLabel c={(['us', 'gb', 'fr', 'ru', 'cn'] as const)[i]} name={n} x={400 + i * 280} y={890} at={fiveAt + i * 5} size={30} />
           {veto && <div style={{ position: 'absolute', left: 400 + i * 280, top: 470, transform: `translate(-50%,-50%) scale(${sp(f, i === 0 ? usAt : vetoAt, fps, 10, 180)})`, background: P.red, color: P.bone, border: `5px solid ${P.ink}`, padding: '6px 18px', fontFamily: cond2, fontWeight: 700, fontSize: 54 }}>VETO</div>}
         </React.Fragment>;
       })}
@@ -146,7 +147,7 @@ const Capitals: React.FC<{ qAt: number }> = ({ qAt }) => {
     <AbsoluteFill style={{ background: '#1A1C21' }}>
       {caps.map((c, i) => (
         <div key={c} style={{ position: 'absolute', left: 140 + (i % 2) * 640, top: 150 + Math.floor(i / 2) * 400, width: 600, height: 360, background: '#05070B', border: '8px solid #2B2F38', outline: `4px solid ${P.ink}`, padding: 30 }}>
-          <div style={{ fontFamily: cond2, fontWeight: 700, fontSize: 54, color: P.bone }}>{c}</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}><Flag c={(['us', 'ir', 'ru', 'cn'] as const)[i]} w={90} /><div style={{ fontFamily: cond2, fontWeight: 700, fontSize: 54, color: P.bone }}>{c}</div></div>
           {[0, 1, 2].map((k) => <div key={k} style={{ marginTop: 24, height: 20, width: `${90 - k * 22}%`, background: 'rgba(246,241,228,.22)' }} />)}
           <div style={{ position: 'absolute', right: 20, top: 20, width: 14, height: 14, borderRadius: 7, background: P.red, opacity: (f + i * 7) % 30 < 15 ? 1 : 0.2 }} />
         </div>

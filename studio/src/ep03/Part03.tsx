@@ -7,6 +7,7 @@ import { F } from '../theme';
 import { Building, Card, P, Pawn, Road } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Print, Src, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound, Push } from './Part01';
+import { Flag, FlagLabel } from './Real';
 import { fr, partEnd, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_02');
@@ -41,6 +42,7 @@ const OnePerson: React.FC<{ presAt: number }> = ({ presAt }) => {
     <Paper>
       <Push to={1.05} dur={150}>
         <Building kind="wh" x={480} y={700} />
+        <Flag c="us" w={110} x={520} y={380} pole at={6} />
         <Road y={680} label="PENNSYLVANIA AVENUE" x1={600} x2={1500} />
         <Pawn x={760} y={730} base={P.blue} seed="pres15" hop={presAt} scale={1.2} />
         <Card x={760} y={790} at={presAt + 4} size={34}>The President</Card>
@@ -129,6 +131,7 @@ const Buried: React.FC<{ mtnAt: number; bombAt: number }> = ({ mtnAt, bombAt }) 
         {drop >= 1 && <g><circle cx={890} cy={640} r={40} fill="none" stroke={P.red} strokeWidth={8} /><line x1={862} y1={612} x2={918} y2={668} stroke={P.red} strokeWidth={8} /></g>}
       </svg>
       <Card x={890} y={915} at={mtnAt + 10} size={40}>Nuclear site</Card>
+      <FlagLabel c="ir" name="Iran" x={1580} y={440} at={mtnAt + 6} />
       <Badge I={Mountain} x={1580} y={240} at={mtnAt} size={170} label="DEEP UNDERGROUND" />
       <Headline kicker="WHY CONSIDER IT AT ALL?" x={90} y={90} size={96}>Buried in mountains</Headline>
       <Src style={{ left: 90, bottom: 40 }}>Illustration, not to scale · CRS R40094</Src>

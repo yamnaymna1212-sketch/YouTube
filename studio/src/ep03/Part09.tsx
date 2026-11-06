@@ -6,6 +6,7 @@ import { F } from '../theme';
 import { Card, P, Pawn } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Print, Src, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound } from './Part01';
+import { FilmPrint, Flag } from './Real';
 import { fr, partEnd, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_08');
@@ -64,6 +65,7 @@ const Money: React.FC<{ yrAt: number; dateAt: number; stopAt: number }> = ({ yrA
 const Hearings: React.FC<{ a: number; b: number; c: number }> = ({ a, b, c }) => (
   <Base>
     <Headline kicker="KEY 2 · HEARINGS" x={90} y={90} size={110} at={0}>Questions under oath</Headline>
+    <FilmPrint src="sayed/footage/v07_house_wage_hearing_2009.mp4" x={1180} y={70} w={620} h={300} rot={2} at={4} caption="A U.S. House committee hearing · house.gov · public domain" />
     <Badge I={Users} x={480} y={580} at={a} size={220} label="WITNESSES" />
     <Badge I={FileText} x={960} y={580} at={b} size={220} label="DOCUMENTS" />
     <Badge I={Mic} x={1440} y={580} at={c} size={220} label="UNDER OATH" />

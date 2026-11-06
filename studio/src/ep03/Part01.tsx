@@ -7,6 +7,7 @@ import { F } from '../theme';
 import { Card, P } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Monitor, Skyline, Src, TimeChip, WhatIf, cond2 } from './StyleFrames';
 import { FPS, fr, partEnd, partStart, shotT, wordT } from './t';
+import { NightCity } from './Real';
 
 // ===== shared EP03 building blocks =====
 
@@ -81,7 +82,7 @@ const RoomSiren: React.FC<{ look?: boolean }> = ({ look }) => {
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 180, background: '#0C1320', borderTop: `4px solid ${P.ink}` }} />
       <div style={{ position: 'absolute', left: 980, top: 130, width: 760, height: 620, border: `10px solid ${P.bone}`, outline: `5px solid ${P.ink}`, overflow: 'hidden', background: 'linear-gradient(#1D2B4A, #3A3150)' }}>
         <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 70% 75%, rgba(180,69,47,${0.25 + pulse * 0.5}), transparent 60%)` }} />
-        <div style={{ position: 'absolute', left: 0, top: 0, width: 760 }}><Skyline y={620} color="#18223A" lit seed="w1" /></div>
+        <div style={{ position: 'absolute', left: -560, top: -300, width: 1920, height: 1080, transform: 'scale(.92)' }}><NightCity red={0.25 + pulse * 0.4} /></div>
         {[0, 1, 2].map((k) => { const r = ((f / 30 + k / 3) % 1); return <div key={k} style={{ position: 'absolute', left: 540 - r * 420, top: 470 - r * 420, width: r * 840, height: r * 840, borderRadius: '50%', border: `4px solid rgba(246,241,228,${0.55 * (1 - r)})` }} />; })}
         <div style={{ position: 'absolute', left: 372, top: 0, width: 10, height: 620, background: P.bone, borderLeft: `3px solid ${P.ink}`, borderRight: `3px solid ${P.ink}` }} />
       </div>
@@ -104,10 +105,10 @@ const Sky: React.FC<{ alertAt: number; roarAt: number }> = ({ alertAt, roarAt })
   const alert = spring({ frame: f - alertAt, fps, config: { damping: 13, stiffness: 150 } });
   const shake = f > roarAt ? noise2D('sh', f / 3, 0) * 4 : 0;
   return (
-    <AbsoluteFill style={{ background: 'linear-gradient(#0E1424 0%, #2B2546 60%, #5A3140 100%)', transform: `translate(${shake}px, ${shake / 2}px)` }}>
+    <AbsoluteFill style={{ background: '#0E1424', transform: `translate(${shake}px, ${shake / 2}px)` }}>
+      <NightCity red={0.3} />
       {[0, 1, 2].map((k) => <div key={k} style={{ position: 'absolute', left: 300 + k * 600, bottom: 200, width: 60, height: 1100, transformOrigin: '50% 100%', transform: `rotate(${Math.sin(f / 40 + k * 2) * 25}deg)`, background: 'linear-gradient(transparent, rgba(246,241,228,.16))' }} />)}
       {f > roarAt && [0, 1].map((k) => { const t = (((f - roarAt) / 70 + k * 0.5) % 1); return <div key={k} style={{ position: 'absolute', left: -300 + t * 2400, top: 120 + k * 140 - t * 60, width: 380, height: 5, background: 'linear-gradient(90deg, transparent, rgba(246,241,228,.85))', transform: 'rotate(-6deg)' }} />; })}
-      <div style={{ position: 'absolute', left: 0, top: 0, width: 1920 }}><Skyline y={1080} color="#151C2E" lit seed="w2" h={1.6} /></div>
       <div style={{ position: 'absolute', left: 160, top: 360, width: 560, height: 720, background: '#2A3550', border: `5px solid ${P.ink}` }}>
         {[0, 1, 2, 3].map((k) => <div key={k} style={{ position: 'absolute', left: 40 + (k % 2) * 380, top: 450 + Math.floor(k / 2) * 130, width: 90, height: 80, background: k === 1 ? '#E9C46A' : '#1B2440', border: `4px solid ${P.ink}` }} />)}
         <div style={{ position: 'absolute', left: 120, top: 90, width: 320, height: 300, background: '#E9C46A', border: `6px solid ${P.ink}`, overflow: 'hidden' }}>

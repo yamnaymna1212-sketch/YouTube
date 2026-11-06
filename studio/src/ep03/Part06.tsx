@@ -6,6 +6,7 @@ import { F } from '../theme';
 import { Card, P } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Print, Src, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound, Push } from './Part01';
+import { Flag, FlagLabel, FilmPrint } from './Real';
 import { fr, partEnd, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_05');
@@ -52,6 +53,9 @@ const Big: React.FC<{ n: string; line: string; kicker: string; at?: number; y?: 
 const ZoomOut: React.FC<{ at: number }> = ({ at }) => (
   <Strait zoom={[1.9, 1.12]} tankers={false}>
     <Card x={1330} y={470} at={at} size={60} rot={-2}>Strait of Hormuz</Card>
+    <FlagLabel c="ir" name="Iran" x={1080} y={210} at={at + 8} />
+    <FlagLabel c="om" name="Oman" x={1560} y={900} at={at + 14} />
+    <FlagLabel c="ae" name="U.A.E." x={1000} y={860} at={at + 20} />
     <Headline kicker="RING 2 · THE FIRST WEEK" dark y={330} size={120} at={at}>The region</Headline>
   </Strait>
 );
@@ -65,6 +69,7 @@ const Insurance: React.FC<{ insAt: number; stopAt: number; attAt: number }> = ({
       <Headline kicker="WITHOUT INSURANCE" dark y={300} size={130} at={0}>Tankers don't sail</Headline>
       <Badge I={ShieldOff} x={300} y={720} at={insAt} hit={insAt + 10} size={170} label="INSURANCE" />
       {f > attAt && <Badge I={Flame} x={640} y={720} at={attAt} size={150} label="TANKER ATTACKS" />}
+      <FilmPrint src="iran/footage/navy1968_ship_side.mp4" x={1300} y={150} w={520} h={300} rot={2} at={6} caption="Ship at sea · U.S. Navy film, 1968 · CC0" />
       {f > stopAt && <div style={{ position: 'absolute', left: 1330, top: 640, transform: `translate(-50%,-50%) scale(${2 - st}) rotate(-8deg)`, opacity: st, border: `8px solid ${P.red}`, padding: '4px 26px', fontFamily: cond2, fontWeight: 700, fontSize: 90, color: P.red, background: 'rgba(12,13,16,.6)', letterSpacing: 6 }}>STOPPED</div>}
     </Strait>
   );
@@ -87,6 +92,8 @@ const Bases: React.FC<{ numAt: number; alertAt: number }> = ({ numAt, alertAt })
     {[[1000, 300], [1500, 250], [1240, 760], [1700, 640]].map(([x, y], i) => <Badge key={i} I={Shield} x={x} y={y} at={numAt + i * 5} size={110} label="U.S. BASE" />)}
     <Big kicker="AMERICAN TROOPS IN THE GULF" n="10,000s" line="all within reach" at={numAt} />
     <Badge I={ShieldAlert} x={300} y={880} at={alertAt} size={150} label="HIGHEST ALERT" />
+    <Flag c="us" w={150} x={560} y={880} at={numAt + 4} />
+    <FilmPrint src="iran/footage/navy1968_at_sea.mp4" x={1280} y={600} w={520} h={290} rot={-2} at={alertAt} caption="U.S. Navy at sea · 1968 film · CC0" />
   </Strait>
 );
 
@@ -134,7 +141,7 @@ const Asia: React.FC<{ at: number; names: number[] }> = ({ at, names }) => {
       <svg style={{ position: 'absolute', inset: 0 }} width="1920" height="1080">
         {list.map((_, i) => <path key={i} d={`M 760 520 C 1000 ${380 + i * 110} 1150 ${300 + i * 150} 1380 ${300 + i * 150}`} fill="none" stroke={P.amber} strokeWidth={10} strokeDasharray="30 18" strokeDashoffset={-f * 3} opacity={sp(f, names[i], fps)} />)}
       </svg>
-      {list.map((n, i) => <div key={n} style={{ position: 'absolute', left: 1400, top: 260 + i * 150, transform: `scale(${sp(f, names[i], fps, 12, 160)})`, transformOrigin: '0 50%', background: P.bone, border: `5px solid ${P.ink}`, padding: '6px 26px', fontFamily: cond2, fontWeight: 700, fontSize: 64, color: P.ink }}>{n}</div>)}
+      {list.map((n, i) => <FlagLabel key={n} c={(['cn', 'in', 'jp', 'kr'] as const)[i]} name={n} x={1560} y={300 + i * 150} at={names[i]} size={60} />)}
       <Badge I={Ship} x={760} y={520} at={at} size={140} />
       <Src dark style={{ left: 110, bottom: 40 }}>U.S. EIA #65504: ≈ 84% of Hormuz crude and condensate went to Asia in 2024</Src>
       <WhatIf dark /><Bug dark /><Grain k={0.05} />

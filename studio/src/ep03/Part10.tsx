@@ -6,6 +6,7 @@ import { F } from '../theme';
 import { P, Pawn } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Skyline, Src, TimeChip, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound } from './Part01';
+import { NightCity } from './Real';
 import { VO_DUR, fr, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_09');
@@ -79,7 +80,7 @@ const Morning: React.FC<{ jogAt: number; busAt: number; rcptAt: number }> = ({ j
   const bx = interpolate(f - busAt, [0, 90], [2000, -500], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   return (
     <AbsoluteFill style={{ background: 'linear-gradient(#BFD6E6, #F3E6C8)' }}>
-      <div style={{ position: 'absolute', left: 0, top: 0, width: 1920 }}><Skyline y={820} color="#9AA9B8" seed="day" h={1.4} /></div>
+      <div style={{ position: 'absolute', left: 0, top: -180, width: 1920, height: 1080 }}><NightCity dawn={1} streets={false} /></div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 820, bottom: 0, background: '#8B8F96', borderTop: `6px solid ${P.ink}` }} />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 930, height: 10, background: P.bone, opacity: 0.6 }} />
       {f > jogAt && <Pawn x={jx} y={860} base="#4E7A4A" scale={0.8} seed="jog" hop={-1} />}

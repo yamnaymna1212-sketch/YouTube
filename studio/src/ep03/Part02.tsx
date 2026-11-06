@@ -1,11 +1,12 @@
 import React from 'react';
-import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Img, OffthreadVideo, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { Banknote, CalendarDays, Crosshair, Droplet, Gavel, Landmark, MapPin, PenLine, Route, Vote, X, Check } from 'lucide-react';
 import { LiveJake } from '../host/LiveJake';
 import { F } from '../theme';
 import { Card, P } from './PaperWorld';
 import { Badge, Bug, Grain, Headline, Print, Src, WhatIf, cond2 } from './StyleFrames';
 import { At, Enter, PartSound, Push } from './Part01';
+import { Flag, FlagLabel } from './Real';
 import { fr, partEnd, partStart, shotT, wordT } from './t';
 
 const B = partStart('vo_01');
@@ -45,6 +46,8 @@ const WarStart: React.FC<{ strikeAt: number; congAt: number }> = ({ strikeAt, co
           </div>;
         })}
         <Card x={1000} y={170} at={strikeAt + 4} size={60}>U.S. strikes Iran</Card>
+        <Flag c="us" w={170} x={700} y={170} at={strikeAt + 4} />
+        <Flag c="ir" w={170} x={1300} y={170} at={strikeAt + 8} />
       </div>
       <Calendar date="28" sub="FEB 2026" x={calX} size={calS} />
       {f > congAt && (
@@ -80,7 +83,7 @@ const Votes: React.FC<{ marchAt: number; juneAt: number; symAt: number; onAt: nu
   const st = sp(f, symAt, fps, 9, 200);
   return (
     <AbsoluteFill style={{ background: P.paper }}>
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.14 }}><Img src={staticFile('sayed/screens/house_gov.png')} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(1)' }} /></div>
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.22 }}><OffthreadVideo src={staticFile('sayed/footage/v05_house_gas_prices_hearing_2008.mp4')} muted style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(.6) blur(3px)' }} /></div>
       <VoteCard month="MARCH" result="FAILED" ok={false} at={marchAt} x={160} />
       <VoteCard month="JUNE" result="PASSED" ok score="215–208" at={juneAt} x={1100} />
       {f > symAt && (
@@ -88,7 +91,7 @@ const Votes: React.FC<{ marchAt: number; juneAt: number; symAt: number; onAt: nu
       )}
       {f > symAt && <Badge I={PenLine} x={600} y={830} at={symAt + 6} size={130} label="PRESIDENT'S HAND" />}
       {f > onAt && <Badge I={Route} x={960} y={830} at={onAt} size={130} label="THE WAR WENT ON" />}
-      <Src style={{ left: 70, bottom: 40 }}>Votes: House, Mar 2026 (failed) · 3 Jun 2026, 215–208 (NPR, Washington Post)</Src>
+      <Src style={{ left: 70, bottom: 40 }}>Background: U.S. House floor footage (house.gov, public domain) · Votes: House, Mar 2026 (failed) · 3 Jun 2026, 215–208 (NPR, Washington Post)</Src>
       <WhatIf /><Bug /><Grain k={0.04} />
     </AbsoluteFill>
   );
@@ -110,6 +113,7 @@ const Qeshm: React.FC<{ pinAt: number; remAt: number }> = ({ pinAt, remAt }) => 
         {[0, 1].map((k) => { const r = ((f / 40 + k / 2) % 1); return <div key={k} style={{ position: 'absolute', left: qx - r * 90, top: qy - r * 90, width: r * 180, height: r * 180, borderRadius: '50%', border: `3px solid rgba(180,69,47,${(1 - r) * pin})` }} />; })}
       </AbsoluteFill>
       <Headline kicker="ELECTION DAY · 3 NOV 2026" dark x={80} y={640} size={120} at={pinAt}>Qeshm Island</Headline>
+      <FlagLabel c="ir" name="Iran" x={260} y={560} at={pinAt + 6} />
       <div style={{ position: 'absolute', left: 84, top: 830, fontFamily: F.sans, fontWeight: 700, fontSize: 48, color: P.bone, opacity: sp(f, pinAt + 10, fps) }}>Strait of Hormuz</div>
       {f > remAt && <Card x={1500} y={900} at={remAt} size={54} rot={-2}>Remember this spot</Card>}
       <Src dark style={{ left: 84, bottom: 36 }}>Strike reported by Al Jazeera, 5 Nov 2026 ⚠ confirm · Map: NASA STS-4 S04-37-716, public domain</Src>

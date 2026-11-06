@@ -83,7 +83,7 @@ const Votes: React.FC<{ marchAt: number; juneAt: number; symAt: number; onAt: nu
   const st = sp(f, symAt, fps, 9, 200);
   return (
     <AbsoluteFill style={{ background: P.paper }}>
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.22 }}><OffthreadVideo src={staticFile('sayed/footage/v05_house_gas_prices_hearing_2008.mp4')} muted style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(.6) blur(3px)' }} /></div>
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.16 }}><OffthreadVideo src={staticFile('sayed/footage/v05_house_gas_prices_hearing_2008.mp4')} muted style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(.7) blur(6px)' }} /></div>
       <VoteCard month="MARCH" result="FAILED" ok={false} at={marchAt} x={160} />
       <VoteCard month="JUNE" result="PASSED" ok score="215–208" at={juneAt} x={1100} />
       {f > symAt && (
@@ -126,7 +126,7 @@ const Qeshm: React.FC<{ pinAt: number; remAt: number }> = ({ pinAt, remAt }) => 
 const OilChart: React.FC<{ at: number }> = ({ at }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   const pts = [[0, 113], [1, 93], [2, 100]] as const;
-  const X = (i: number) => 360 + i * 600, Y = (v: number) => 860 - (v - 85) * 22;
+  const X = (i: number) => 360 + i * 600, Y = (v: number) => 920 - (v - 85) * 18;
   const prog = interpolate(f - at, [0, 70], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const d = `M ${X(0)} ${Y(113)} L ${X(1)} ${Y(93)} L ${X(2)} ${Y(100)}`;
   return (

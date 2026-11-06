@@ -70,13 +70,13 @@ const Allies: React.FC<{ chooseAt: number; backAt: number; notesAt: number }> = 
 const Need: React.FC<{ at: number; ansAt: number }> = ({ at, ansAt }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   return (
-    <Base dark>
-      <Headline kicker="EVERY GOVERNMENT THAT EVER ASKED" dark x={90} y={90} size={110} at={0}>Do we need one?</Headline>
+    <Base>
+      <Headline kicker="EVERY GOVERNMENT THAT EVER ASKED" x={90} y={90} size={110} at={0}>Do we need one?</Headline>
       {Array.from({ length: 12 }).map((_, i) => {
         const x = 220 + (i % 6) * 300, y = 470 + Math.floor(i / 6) * 300;
         return <React.Fragment key={i}><Pawn x={x} y={y + 120} base="#8b93a1" scale={0.6} seed={'nd' + i} /><Badge I={CircleHelp} x={x} y={y - 40} at={at + i * 4} hit={f > ansAt ? ansAt + i * 2 : -1} size={90} /></React.Fragment>;
       })}
-      <Src dark style={{ left: 90, bottom: 40 }}>Illustration · no country named</Src>
+      <Src style={{ left: 90, bottom: 40 }}>Illustration · no country named</Src>
     </Base>
   );
 };

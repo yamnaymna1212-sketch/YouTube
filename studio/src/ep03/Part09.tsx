@@ -116,12 +116,12 @@ const Clock62: React.FC<{ at: number; bothAt: number }> = ({ at, bothAt }) => {
 
 // 62b · lawful orders only
 const Lawful: React.FC<{ at: number; hardAt: number }> = ({ at, hardAt }) => (
-  <Base dark>
-    <Headline kicker="INSIDE THE MILITARY" dark x={90} y={90} size={110} at={0}>Lawful orders only</Headline>
+  <Base>
+    <Headline kicker="INSIDE THE MILITARY" x={90} y={90} size={110} at={0}>Lawful orders only</Headline>
     <div style={{ position: 'absolute', left: 0, top: 0 }}><Pawn x={420} y={900} base="#8b93a1" scale={1.6} hat seed="officer" hop={at} /></div>
     <Badge I={BookOpen} x={960} y={560} at={at} size={220} label="THE LAW" />
     <Badge I={Scale} x={1440} y={560} at={hardAt} size={220} label="WHAT IS LAWFUL?" />
-    <Src dark style={{ left: 90, bottom: 40 }}>Duty to obey lawful orders: UCMJ Art. 92</Src>
+    <Src style={{ left: 90, bottom: 40 }}>Duty to obey lawful orders: UCMJ Art. 92</Src>
   </Base>
 );
 
@@ -155,7 +155,7 @@ export const EP03Part09: React.FC = () => {
   const w = (id: string, x: string, n = 0) => rel(wordT(id, x, n), s(id));
   return (
     <AbsoluteFill style={{ background: '#000' }}>
-      <At base={B} from={s('59')} to={s('60')} name="59"><Enter kind="zoom"><Three at={[w('59', 'three'), w('59', 'three') + 6, w('59', 'keys')]} /></Enter></At>
+      <At base={B} from={s('59')} to={s('60')} name="59"><Enter kind="zoom"><Three at={[4, 10, 16]} /></Enter></At>
       <At base={B} from={s('60')} to={s('61')} name="60"><Enter kind="slideL"><Money yrAt={w('60', '1973')} dateAt={w('60', 'money', 1)} stopAt={w('60', 'stopped')} /></Enter></At>
       <At base={B} from={s('61')} to={s('62')} name="61"><Enter kind="slideL"><Hearings a={w('61', 'witnesses')} b={w('61', 'documents')} c={w('61', 'oath')} /></Enter></At>
       <At base={B} from={s('62')} to={s('62a')} name="62"><Enter kind="slideL"><WarVotes at={w('62', 'june')} /></Enter></At>

@@ -2,6 +2,15 @@ import React from 'react';
 import { Composition, Still } from 'remotion';
 import { PaperBoardStage, PaperBoardStrait } from './ep03/PaperWorld';
 import { EP03Part01, EP03_P1_FRAMES } from './ep03/Part01';
+import { EP03Part02, EP03_P2_FRAMES } from './ep03/Part02';
+import { EP03Part03, EP03_P3_FRAMES } from './ep03/Part03';
+import { EP03Part04, EP03_P4_FRAMES } from './ep03/Part04';
+import { EP03Part05, EP03_P5_FRAMES } from './ep03/Part05';
+import { EP03Part06, EP03_P6_FRAMES } from './ep03/Part06';
+import { EP03Part07, EP03_P7_FRAMES } from './ep03/Part07';
+import { EP03Part08, EP03_P8_FRAMES } from './ep03/Part08';
+import { EP03Part09, EP03_P9_FRAMES } from './ep03/Part09';
+import { EP03Part10, EP03_P10_FRAMES } from './ep03/Part10';
 import { SF1Siren, SF2Sky, SF3Bunker, SF4Rings, SF5Proof, SF4MapTV, SF6Ring0, SFTransition } from './ep03/StyleFrames';
 import { HostTest } from './HostTest';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
@@ -55,6 +64,15 @@ export const Root: React.FC = () => (
     <Composition id="SF3Bunker" component={SF3Bunker} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF4Rings" component={SF4Rings} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part01" component={EP03Part01} durationInFrames={EP03_P1_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part02" component={EP03Part02} durationInFrames={EP03_P2_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part03" component={EP03Part03} durationInFrames={EP03_P3_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part04" component={EP03Part04} durationInFrames={EP03_P4_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part05" component={EP03Part05} durationInFrames={EP03_P5_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part06" component={EP03Part06} durationInFrames={EP03_P6_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part07" component={EP03Part07} durationInFrames={EP03_P7_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part08" component={EP03Part08} durationInFrames={EP03_P8_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part09" component={EP03Part09} durationInFrames={EP03_P9_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP03Part10" component={EP03Part10} durationInFrames={EP03_P10_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="SF4MapTV" component={SF4MapTV} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF6Ring0" component={SF6Ring0} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SFTransition" component={SFTransition} durationInFrames={60} fps={30} width={1920} height={1080} />

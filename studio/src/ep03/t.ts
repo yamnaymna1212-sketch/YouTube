@@ -3,8 +3,8 @@ import cues from './cues.json';
 // cues.json is produced by tools/ep03_cues.py from the script + word timings.
 export const FPS = 30;
 type Shot = { id: string; part: string; t: number; words: [string, number, number][] };
-const shots = (cues as { shots: Shot[] }).shots;
-export const VO_DUR = (cues as { dur: number }).dur;
+const shots = (cues as unknown as { shots: Shot[] }).shots;
+export const VO_DUR = (cues as unknown as { dur: number }).dur;
 export const shotT = (id: string) => { const s = shots.find((x) => x.id === id); if (!s) throw new Error('no shot ' + id); return s.t; };
 /** start time (s) of the n-th word in shot `id` containing `w` (case-insensitive) */
 export const wordT = (id: string, w: string, nth = 0) => {

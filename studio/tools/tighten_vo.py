@@ -9,7 +9,7 @@ import json, os, re, subprocess, sys
 import numpy as np
 
 SR = 48000
-VO = os.path.join(os.path.dirname(__file__), '..', 'public', 'sayed', 'vo')
+VO = os.environ.get('VO_DIR') or os.path.join(os.path.dirname(__file__), '..', 'public', 'sayed', 'vo')  # VO_DIR=studio/public/iran/vo for EP03
 OUT = os.path.join(VO, 'tight')
 KEEP = 0.16      # pause kept between phrases (s)
 EDGE = 0.04      # silence kept at the very start/end (s)
@@ -17,6 +17,11 @@ MIN_SIL = 0.18   # only pauses longer than this are shortened
 THRESH = '-38dB'
 # Editorial cuts (original-take seconds to KEEP). vo_01: after HOOK v2 the cold open no longer repeats
 # "what if he became president?", the Gas/Health/Paychecks/Taxes promise or the "one number" loop.
+# Extra silence inserted before the first phrase that starts at/after an original-take time (s): room for a sound effect.
+# EP03 vo_full: after "It's four in the morning. A siren." the real siren plays alone.
+GAPS = {
+    'vo_full': [(2.44, 2.8)],
+}
 KEEP_RANGES = {
     'vo_01': [(0.0, 15.0), (22.0, 26.2)],  # "This is Jake … first Muslim senator …" + "So forget the politics … Jake's wallet."
 }
@@ -53,6 +58,9 @@ def main(names):
         fade = int(0.006 * SR)
         for i, (a, b) in enumerate(segs):
             pad = EDGE if i == 0 else KEEP
+            for gt, gl in GAPS.get(name, []):
+                if i > 0 and segs[i - 1][0] < gt <= a:  # first phrase after the gap point
+                    pad += gl
             out.append(np.zeros(int(pad * SR), dtype='<f4')); cur += pad
             s, e = int(a * SR), int(b * SR)
             chunk = x[s:e].copy()

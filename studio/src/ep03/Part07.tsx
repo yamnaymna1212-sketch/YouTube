@@ -20,7 +20,7 @@ const Stage: React.FC<{ children: React.ReactNode; dark?: boolean; kicker: strin
     {jake && <div style={{ position: 'absolute', right: 50, bottom: 50, width: 380, height: 280, background: '#1A1C21', border: `5px solid ${P.ink}`, boxShadow: '10px 10px 0 rgba(27,34,48,.3)', overflow: 'hidden' }}>
       <LiveJake pose="stand" seed={'p7' + title} beats={[{ at: jake.at, r: jake.r, hold: 400 }]} style={{ position: 'absolute', left: 90, top: 10, height: 580 }} />
     </div>}
-    <WhatIf dark={dark} /><Bug dark={dark} left={!!jake} /><Grain k={0.04} />
+    <WhatIf dark={dark} />{!jake && <Bug dark={dark} />}<Grain k={0.04} />
   </AbsoluteFill>
 );
 

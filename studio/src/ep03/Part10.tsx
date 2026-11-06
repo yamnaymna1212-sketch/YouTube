@@ -67,7 +67,8 @@ const Door: React.FC<{ factsAt: number }> = ({ factsAt }) => {
       <div style={{ position: 'absolute', left: 760, top: 120, width: 520, height: 860, background: '#3A3F48', border: `8px solid ${P.ink}`, transformOrigin: '0 50%', transform: `perspective(1600px) rotateY(${-80 * open}deg)` }} />
       <AbsoluteFill style={{ background: `radial-gradient(ellipse at 52% 50%, rgba(255,240,200,${0.35 * open}), transparent 60%)` }} />
       <LiveJake pose="stand" walk={f > 30 && f < 110} seed="p10door" beats={[{ at: 10, r: 'smile', hold: 400 }]} style={{ position: 'absolute', left: x, top: 220, height: 860, filter: `brightness(${0.7 + open * 0.3})` }} />
-      <Headline kicker="" dark x={90} y={120} size={100} at={factsAt}>Fear moves faster than facts.</Headline>
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 260, background: 'linear-gradient(transparent, rgba(12,13,16,.92) 45%)' }} />
+      <Headline kicker="" dark x={90} y={860} size={100} at={factsAt}>Fear moves faster than facts.</Headline>
       <WhatIf dark /><TimeChip t="07:30" label="DAY 1" dark /><Bug dark /><Grain />
     </AbsoluteFill>
   );
@@ -116,7 +117,7 @@ export const EP03Part10: React.FC = () => {
   const w = (id: string, x: string, n = 0) => rel(wordT(id, x, n), s(id));
   return (
     <AbsoluteFill style={{ background: '#000' }}>
-      <At base={B} from={s('65')} to={s('65a')} name="65"><Enter kind="zoom"><Hawaii msgAt={w('65', 'message')} mistakeAt={w('65', 'mistake')} minAt={w('65', 'minutes')} /></Enter></At>
+      <At base={B} from={s('65')} to={s('65a')} name="65"><Enter kind="zoom"><Hawaii msgAt={6} mistakeAt={w('65', 'mistake')} minAt={w('65', 'minutes')} /></Enter></At>
       <At base={B} from={s('65a')} to={s('66')} name="65a"><Enter kind="slideL"><Bill gasAt={w('65a', 'gas')} groAt={w('65a', 'groceries')} retAt={w('65a', 'retirement')} shotAt={w('65a', 'shot')} /></Enter></At>
       <At base={B} from={s('66')} to={s('66a')} name="66"><Enter kind="fade"><Door factsAt={w('66', 'fear')} /></Enter></At>
       <At base={B} from={s('66a')} to={s('67')} name="66a"><Enter kind="fade"><Morning jogAt={w('66a', 'jogging')} busAt={w('66a', 'bus')} rcptAt={w('66a', 'receipts')} /></Enter></At>

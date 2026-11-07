@@ -1,27 +1,6 @@
 // EP04 timing. Until the user sends the Flint VO, every time is an ESTIMATE (≈3 words/s, like the tight EP02/EP03 takes).
 // When the VO arrives: run faster-whisper → words.json, then replace EST with real word starts (same keys) and every
 // cut/badge/door below lands on the spoken word automatically.
-export const HOOK_EST = {
-  friday: 0.0,      // "Friday, December eleventh."
-  midnight: 1.7,    // "At midnight, the money that keeps the federal government running runs out."
-  runsOut: 4.9,     //   "...runs out."
-  party: 5.8,       // "And the party that has to fix it just lost its majority."
-  lost: 8.1,        //   "...lost its majority."
-  nov3: 9.6,        // "On November third, voters handed Congress to the Democrats."
-  democrats: 11.6,
-  jake: 12.8,       // "Jake doesn't care who won."
-  question: 14.4,   // "He cares about one question."
-  what: 16.0,       // "What does this do to my money?"
-  because: 18.4,    // "Because Congress decides three things that hit your wallet."
-  open: 22.2,       // "Whether the government stays open."
-  store: 24.3,      // "What some things cost at the store."
-  war: 26.0,        // "And who pays for the war."
-  threeDoors: 26.6, // "Three doors."
-  letsOpen: 27.7,   // "Let's open them, in the order they hit."
-  end: 30.2,
-} as const;
-export const T = HOOK_EST;
-export const HOOK_DUR = 29.9; // seconds: VO + the camera flying through door 1 into gold light (Part02 opens on that light)
 
 // ---- whole-episode word clock (tools/ep04_est.py → cues.json). Estimate now, real VO words later; same API.
 import cues from './cues.json';
@@ -39,3 +18,15 @@ export const wordT = (i: number, w: string, nth = 0) => {
   if (!hits.length) throw new Error(`no word "${w}" in paragraph ${i}`);
   return hits[Math.min(nth, hits.length - 1)][1];
 };
+
+// ---- hook times, straight from the narrator's words (paragraphs 0–4)
+export const T = {
+  friday: wordT(0, 'Friday'), midnight: wordT(0, 'At'), runsOut: wordT(0, 'runs'),
+  party: paraT(1), lost: wordT(1, 'lost'),
+  nov3: paraT(2), democrats: wordT(2, 'Democrats'), jake: wordT(2, 'Jake'), question: wordT(2, 'He'), what: wordT(2, 'What'),
+  because: paraT(3), open: wordT(3, 'open'), store: wordT(3, 'store'), war: wordT(3, 'war'),
+  threeDoors: paraT(4), letsOpen: wordT(4, "Let's"), end: paraEnd(4),
+};
+/** the hook runs until Part 02 starts, so the parts join with no gap on the VO clock */
+export const HOOK_DUR = paraT(5);
+export const VO_FILE = 'ep04/vo/vo_ep04.mp3';

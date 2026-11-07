@@ -42,8 +42,6 @@ export const Sound: React.FC<{ base: number; vo?: string; music: string; musicBa
     {vo && <Audio src={staticFile(vo)} trimBefore={fr(base)} volume={1} />}
     {/* calm dark ambient music, one continuous take across all parts */}
     <Audio src={staticFile(music)} trimBefore={fr(musicBase ?? base)} volume={0.07} />
-    {/* paper-world air bed, very low, always there so no second is silent */}
-    <Audio src={staticFile('ep04/audio/amb_air.mp3')} loop volume={0.025} />
     {cues.filter(([, n]) => SOFT.has(n)).map(([t, n, v = 0.06], i) => (
       <Sequence key={i} from={fr(t - base)} durationInFrames={60} layout="none"><Audio src={staticFile(`iran/audio/sfx_${n}.wav`)} volume={Math.min(v, 0.1)} /></Sequence>
     ))}

@@ -15,7 +15,7 @@ PARTS="${*:-$ALL}"
 START=$(date +%s)
 for p in $PARTS; do
   echo "== rendering EP05$p  ($(date +%H:%M))"
-  npx remotion render src/index.ts EP05$p "$OUT/parts/EP05$p.mp4" --concurrency=75% --log=error
+  npx remotion render src/index.ts EP05$p "$OUT/parts/EP05$p.mp4" --concurrency=4 --log=error
 done
 for p in $ALL; do echo "file '$OUT/parts/EP05$p.mp4'"; done > "$OUT/list.txt"
 npx remotion ffmpeg -y -f concat -safe 0 -i "$OUT/list.txt" -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k "$OUT/ep05-full.mp4"

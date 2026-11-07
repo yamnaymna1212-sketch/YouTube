@@ -10,16 +10,15 @@ Legend: **A** Jake/paper story · **B** map explainer · **C** real photo/footag
 
 ---
 
-## vo_00 · HOOK v2 (0:00–0:32) · built: `studio/src/ep04/Hook.tsx` (EP04Hook)
-| # | Shot (brand family) | VO |
+## vo_00 · HOOK v2 (0:00–0:32) · built: `studio/src/ep04/Hook.tsx` (EP04Hook) · mix: story → explainer → story → explainer
+| # | Shot | VO |
 |---|---|---|
-| 1 | NIGHT MAP · dark US map, glowing outline draws, pin on Washington; "— THE DEADLINE / December 11, 2026 / The money runs out"; clock 11:59:5x → 12:00:00 "FUNDING LAPSES"; camera flies into D.C. [B1] | Friday, December eleventh. At midnight, the money that keeps the federal government running runs out. |
-| 2 | REAL FILM · Treasury vault door, 1930s (Prelinger, PD), label "THE MONEY RUNS OUT" | *(…runs out.)* |
-| 3 | PAPER STAGE · White House ↔ Capitol on Pennsylvania Avenue; red pawns at Congress go grey, stamp "MAJORITY LOST", card "Majority until Jan 3" [A3] | And the party that has to fix it just lost its majority. |
-| 4 | ARCHIVE PRINT · official 2025 portrait (White House, PD) in a white print + 1930s House-chamber film print; name card "NOVEMBER 3, 2026 / Donald J. Trump / 47th president · second term. His party just lost Congress."; chips House → Democrats · Senate → Democrats [A1] | On November third, voters handed Congress to the Democrats. |
-| 5 | JAKE EXPLAINS · Jake shrugs, thinks, worries; card "WHAT DOES THIS DO TO MY MONEY?"; wallet chip "$ ?" | Jake doesn't care who won. He cares about one question. What does this do to my money? |
-| 6 | PAPER MAP + DOORS · faded paper US map, pin on Congress; three doors rise on the words: 1 STAYS OPEN? · 2 THE PRICE TAG · 3 THE WAR BILL; title "Three doors to your wallet" [A4] | Because Congress decides three things that hit your wallet. Whether the government stays open. What some things cost at the store. And who pays for the war. |
-| 7 | Door 1 swings open → camera flies through it → CHAPTER "Door one · The Shutdown Clock · Friday, December 11" | Three doors. Let's open them, in the order they hit. |
+| 1 | STORY · Jake's apartment at night, DEC 11 circled on the wall calendar. Camera pulls back from his TV: night map "December 11, 2026 / The money runs out", clock 11:59:5x → 12:00 "FUNDING LAPSES". Jake thinks, then startles. TV cuts to the archive Capitol dome (the only real shot) and the camera dives into the TV. | Friday, December eleventh. At midnight, the money that keeps the federal government running runs out. |
+| 2 | EXPLAINER · paper US map, grey route arcs, red pawns hop into Washington; House/Senate seat charts; at "lost" they flip blue, pawns go grey, stamp MAJORITY LOST; card "Majority until Jan 3" | And the party that has to fix it just lost its majority. |
+| 3 | EXPLAINER · "2026 / 3 November 2026", big House and Senate seat charts fill blue, pawn "Trump · 2026" hops in the middle | On November third, voters handed Congress to the Democrats. |
+| 4 | STORY · back to Jake: he switches the TV off ("Who won? Not the point."), bills on the table (RENT · CAR · PHONE), phone buzz from Dana (illustrative): "If they shut down on Dec 11, I don't get paid." → card "WHAT DOES THIS DO TO MY MONEY?" | Jake doesn't care who won. He cares about one question. What does this do to my money? |
+| 5 | EXPLAINER · paper stage White House ↔ Capitol on Pennsylvania Avenue; three doors rise on the words; Jake stands at the side and points | Because Congress decides three things that hit your wallet. Whether the government stays open. What some things cost at the store. And who pays for the war. |
+| 6 | Door 1 swings open → camera flies through → CHAPTER "Door one · The Shutdown Clock" | Three doors. Let's open them, in the order they hit. |
 
 ## vo_01 · NOTHING CHANGES TOMORROW (0:40–1:25)
 | # | Shot | VO |

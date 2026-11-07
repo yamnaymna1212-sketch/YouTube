@@ -29,6 +29,12 @@ References the user liked: Precedent (cream paper, serif name cards, framed real
 4. **ARCHIVE PRINT** — real photo or real film inside a white print frame with soft drop shadow + year tag, beside a name card (red kicker, serif name, two short lines). Or full-frame film with a warm grade and a source chip.
 5. **JAKE EXPLAINS** — Jake (LiveJake) on the paper floor beside ONE big card. Short beats only (3–6 s), 1–2 per chapter, always reacting (shrug, think, worry, smile).
 
+## 3b. The mix (user feedback, 7 Nov 2026) — non-negotiable
+- **≈70% explainer in the paper style** (stage, maps, pawns + route arcs, House/Senate seat charts, quote cards, doors, calendars).
+- **≈20% Jake's story**: he lives the episode (his apartment, his TV, his bills, a text from his cousin Dana). The story opens each chapter and the explainer answers it; we go back to Jake after every big number.
+- **≤10% real material**, used as a moment, not a slideshow: shown *inside the story* (on Jake's TV, his phone) or as one framed print. Never a long run of photos.
+- **Linked**: story → (camera dives into the TV/phone) → explainer → (zoom out to Jake) → story. Every scene hands a shape, a motion or a question to the next.
+
 ## 4. Fixed brand elements (every shot)
 - Source chip bottom-left (mono). Logo + DOLLARLY bug bottom-right. Film grain over everything.
 - Chapter cards: red kicker "DOOR ONE" + serif title + red rule; entered by flying through a door/pin.

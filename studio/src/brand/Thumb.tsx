@@ -75,3 +75,44 @@ export const Thumb: React.FC<{ l1: string; l2: string; strip: string; photo: str
 export const EP04Thumb: React.FC = () => <Thumb l1="Trump lost" l2="Congress" strip="3 things hit your wallet" photo="ep04/real/trump_official_2025.jpg" art="doors" />;
 export const EP04ThumbB: React.FC = () => <Thumb l1="3 things" l2="you'll pay" strip="Trump lost Congress" photo="ep04/real/trump_official_2025.jpg" art="doors" />;
 export const EP03ThumbV2: React.FC = () => <Thumb l1="What if?" l2="One order" strip="Iran · gas · your money" photo="ep04/real/trump_official_2025.jpg" art="iran" />;
+
+// ---------------------------------------------------------------------------------------------
+// EP05 · clean thumbnail (user brief): only 3 subjects on a clean background — El-Sayed (real photo, CC BY-SA 4.0
+// Conlan Houston, background removed only, face untouched) · a red gas gallon with the price · a paper U.S. map (Michigan lit).
+const GasCan: React.FC<{ x: number; y: number; h: number; price: string }> = ({ x, y, h, price }) => {
+  const w = h * 0.78;
+  return (
+    <div style={{ position: 'absolute', left: x, top: y, width: w, height: h, filter: 'drop-shadow(14px 18px 0 rgba(27,34,48,.22))' }}>
+      <svg viewBox="0 0 312 400" width={w} height={h} style={{ position: 'absolute', overflow: 'visible' }}>
+        {/* spout + handle */}
+        <path d="M232 70 L270 20 L296 34 L262 92 Z" fill={B.ink} />
+        <path d="M70 70 Q70 18 130 18 L190 18 Q236 18 236 64" fill="none" stroke={B.ink} strokeWidth={22} strokeLinecap="round" />
+        {/* body */}
+        <path d="M30 96 Q30 70 56 70 L250 70 Q282 70 282 102 L282 372 Q282 392 262 392 L50 392 Q30 392 30 372 Z" fill={B.red} stroke={B.ink} strokeWidth={10} strokeLinejoin="round" />
+        <rect x={52} y={92} width={60} height={290} rx={10} fill="rgba(255,255,255,.12)" />
+      </svg>
+      {/* price label on the can */}
+      <div style={{ position: 'absolute', left: w * 0.1, right: w * 0.06, top: h * 0.4, background: B.bone, border: `6px solid ${B.ink}`, textAlign: 'center', fontFamily: display, fontWeight: 800, fontSize: h * 0.2, lineHeight: 1.15, color: B.ink, transform: 'rotate(-4deg)' }}>{price}</div>
+    </div>
+  );
+};
+
+export const EP05ThumbCore: React.FC<{ tag?: string }> = ({ tag }) => (
+  <AbsoluteFill style={{ background: `radial-gradient(ellipse at 38% 45%, #F3EDDD 0%, ${B.paper} 55%, #E2D7BC 100%)` }}>
+    {/* U.S. map, Michigan lit */}
+    <div style={{ position: 'absolute', left: 30, top: 70 }}>
+      <PaperUS x={0} y={0} w={800} fill={(n) => (n === 'Michigan' ? B.blue : undefined)} />
+    </div>
+    {/* gallon + price */}
+    <GasCan x={120} y={330} h={360} price="$4.15" />
+    {/* El-Sayed, real photo (background removed only) */}
+    <Img src={staticFile('sayed/cut_elsayed.png')} style={{ position: 'absolute', right: -20, bottom: 0, height: 700, filter: 'drop-shadow(-18px 20px 30px rgba(40,30,10,.35)) contrast(1.04) saturate(1.05)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 14%)', maskImage: 'linear-gradient(to right, transparent 0%, #000 14%)' }} />
+    {tag && <div style={{ position: 'absolute', left: 520, top: 360, background: B.ink, color: B.bone, fontFamily: cond, fontWeight: 800, fontSize: 64, padding: '2px 22px', letterSpacing: 2, boxShadow: `7px 7px 0 ${B.red}`, transform: 'rotate(-3deg)' }}>{tag}</div>}
+    <div style={{ position: 'absolute', left: 22, top: 18, display: 'flex', alignItems: 'center', gap: 8, opacity: 0.9 }}>
+      <Img src={staticFile('brand/logo.png')} style={{ width: 34, height: 34 }} />
+      <div style={{ fontFamily: cond, fontWeight: 800, fontSize: 24, color: B.ink, letterSpacing: 3 }}>DOLLARLY</div>
+    </div>
+  </AbsoluteFill>
+);
+export const EP05Thumb: React.FC = () => <EP05ThumbCore />;
+export const EP05ThumbB: React.FC = () => <EP05ThumbCore tag="WHAT IF?" />;

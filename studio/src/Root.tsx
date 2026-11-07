@@ -32,7 +32,7 @@ import { EP05Part07, EP05_P7_FRAMES } from './ep05/Part07';
 import { EP05Part08, EP05_P8_FRAMES } from './ep05/Part08';
 import { EP05Part09, EP05_P9_FRAMES } from './ep05/Part09';
 import { EP05Part10, EP05_P10_FRAMES } from './ep05/Part10';
-import { EP04Thumb, EP04ThumbB, EP03ThumbV2 } from './brand/Thumb';
+import { EP04Thumb, EP04ThumbB, EP03ThumbV2, EP05Thumb, EP05ThumbB } from './brand/Thumb';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
 import { BodyTest } from './BodyTest';
 import { F0Jake, F1Hook, F2Gas, F3Video, F4Versus, F5Wage } from './boards/SayedFrames';
@@ -83,6 +83,8 @@ export const Root: React.FC = () => (
     <Composition id="SF2Sky" component={SF2Sky} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF3Bunker" component={SF3Bunker} durationInFrames={150} fps={30} width={1920} height={1080} />
     <Composition id="SF4Rings" component={SF4Rings} durationInFrames={150} fps={30} width={1920} height={1080} />
+    <Still id="EP05Thumb" component={EP05Thumb} width={1280} height={720} />
+    <Still id="EP05ThumbB" component={EP05ThumbB} width={1280} height={720} />
     <Still id="EP04Thumb" component={EP04Thumb} width={1280} height={720} />
     <Still id="EP04ThumbB" component={EP04ThumbB} width={1280} height={720} />
     <Still id="EP03ThumbV2" component={EP03ThumbV2} width={1280} height={720} />

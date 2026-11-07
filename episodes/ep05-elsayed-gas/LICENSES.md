@@ -13,3 +13,4 @@
 | `studio/public/ep05/audio/music_ep05.mp3` | ambient music | generated in code (`tools/synth_ep05.py`) | original |
 | SFX tick/type/counter/paper | `studio/public/iran/audio/` | see EP03 LICENSES | as listed there |
 | VO | ElevenLabs "Jarnathan", user's own account | — | user's ElevenLabs licence |
+| `studio/public/sayed/cut_elsayed.png` → `thumbnail-v1.png`, `thumbnail-v1b.png` | El-Sayed, background removed only (face untouched) | Conlan Houston, Wikimedia Commons | CC BY-SA 4.0 — credit in the description; the thumbnail is a derivative under the same licence |

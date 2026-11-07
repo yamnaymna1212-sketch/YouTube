@@ -5,7 +5,30 @@
 2. President El-Sayed vs. $4 Gas: The Real Math
 3. 5 Levers a President Has on Gas Prices (Only 1 Really Matters)
 
-## Description
+## Description (simple — use this one)
+If Abdul El-Sayed became president, what would happen to your gas price? We look at the 5 things a president can actually do, and the real math on one driver's yearly gas bill.
+
+This is a "what if" video. El-Sayed is a Senator-elect, not a presidential candidate. Not financial or political advice.
+
+0:00 Jake's $62 tank
+0:30 Who is El-Sayed?
+1:39 What's inside a gallon
+2:52 Lever 1 · Emergency oil reserve
+3:40 Lever 2 · Gas tax
+4:34 Lever 3 · Small switches
+4:57 Lever 4 · War and peace
+5:53 Lever 5 · The long game
+6:40 Who it hits
+7:38 What you can do
+
+Script researched from official sources: U.S. EIA, U.S. Department of Energy, news reports and fact checks.
+Voice: AI (ElevenLabs). Thumbnail: Lightroom, Picsart, Nano Banana Pro.
+Photo of El-Sayed: Conlan Houston (CC BY-SA 4.0).
+
+Dollarly — Your Money. Decoded.
+#GasPrices #ElSayed #PersonalFinance
+
+## Description (long, with full source links)
 Gas is $4.15 a gallon — $1.13 more than a year ago. Michigan just elected Abdul El-Sayed to the U.S. Senate, and people are already asking about 2028. So: if he became president, what would actually happen to the number on your pump?
 
 A president has five levers on gas prices. Four are smaller than you think. One is bigger than anything on the ballot. We pull all five and do the math on one driver's real yearly gas bill.

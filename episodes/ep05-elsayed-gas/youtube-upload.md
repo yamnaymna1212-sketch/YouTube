@@ -38,7 +38,12 @@ This is a hypothetical: El-Sayed is a Senator-elect, not a presidential candidat
 - fueleconomy.gov, Gas Mileage Tips: https://www.fueleconomy.gov/feg/drive.shtml
 Jake, Maya, Luis and Walter are illustrative characters. "Jake's" math: 15 gal/week × 52 = 780 gal/yr.
 
-Real images: U.S. Senate HELP Committee (public domain), Conlan Houston (CC BY-SA 4.0), NASA, U.S. EIA, public-domain archive film. Narration is AI-generated. Music and sound are original.
+🛠 How this video was made (transparency)
+- Research: the script was researched by hand from the official data and news sources listed above (EIA, DOE, campaign statements, debate coverage, fact checks). Every number is sourced.
+- Voice: the narration is AI-generated with ElevenLabs.
+- Thumbnail: edited with Adobe Lightroom, Picsart and Nano Banana Pro (AI).
+- Real images: U.S. Senate HELP Committee (public domain), Conlan Houston (CC BY-SA 4.0), NASA, U.S. EIA, public-domain archive film.
+- Animation, music and sound effects are original.
 
 ## Tags
 gas prices, El-Sayed, Abdul El-Sayed, gas tax, Strategic Petroleum Reserve, oil prices, Strait of Hormuz, Michigan, president, 2028, personal finance, economy explained, Dollarly

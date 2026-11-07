@@ -308,7 +308,7 @@ export const GulfMap: React.FC<{ at?: number; stopAt?: number; share?: number; r
           const gold = share >= 0 && f >= share && i % 5 === 0;
           return (
             <div key={i} style={{ position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) rotate(${ang}deg)` }}>
-              <svg width={58} height={20} viewBox="0 0 58 20"><path d="M2 4 L46 4 L56 10 L46 16 L2 16 Z" fill={redK > 0.5 ? B.red : gold ? B.gold : B.nightText} stroke={B.ink} strokeWidth={2.5} /></svg>
+              <svg width={92} height={32} viewBox="0 0 58 20"><path d="M2 4 L46 4 L56 10 L46 16 L2 16 Z" fill={redK > 0.5 ? B.red : gold ? B.gold : B.nightText} stroke={B.ink} strokeWidth={2.5} /></svg>
             </div>
           );
         })}

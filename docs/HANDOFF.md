@@ -151,5 +151,11 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 3. Audio (done 7 Nov): EP04 has its own ambient music + beds from `tools/synth_ep04.py` (`public/ep04/audio/`: music_ep04 one take across all parts, amb_air under everything, amb_room in Jake's apartment). For sound-only changes, render each part with `--codec=wav` (≈1.5 min each) and mux onto the existing video parts instead of re-rendering pictures.
 4. **VO rule from the user:** cut every pause clean and even, VO LOUDER than now → `tools/ep04_vo.sh` (tighten 0.16 s, de-ess, compressor, −15 LUFS VO; music 0.07 under it; final −14 LUFS).
 
+## Dollarly skill (7 Nov 2026)
+- **`.claude/skills/dollarly-episode/`** — the whole channel workflow as a Claude skill: `SKILL.md` (8 steps idea→upload), `references/rules.md` (all user rules), `references/pipeline.md` (commands), `references/shot-kit.md` (reusable components), `scripts/new_episode.sh epNN slug` (scaffold).
+- Generic tools: `studio/tools/dollarly_tts.py` (local Kokoro VO for any episode, pauses cut, word timings → cues.json), `studio/tools/render_episode.sh` (render parts + join at −14 LUFS).
+- Installed plugins the skill uses: Remotion, Social Media Skills (hook-writer, youtube-long-form, thumbnail-design…), TubeAlfred (needs authorization in claude.ai connector settings).
+- EP04 final state: narrator VO (Kokoro am_michael) 8:59, all parts re-rendered, preview in git; 1080p full file only on the render machine (178 MB).
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

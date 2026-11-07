@@ -116,5 +116,25 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 4. Optional: the real Senate hearing video (`Abdul_El_Sayed_senate_hearing.webm`) if the user uploads it to `studio/public/sayed/`.
 5. Upload settings: not made for kids, no age limit, altered content = No, category Education.
 
+
+## Done 6–7 Nov 2026 (session 4: EP03 · "If Trump Nuked Iran, What Would Happen to You?")
+- **EP02 follow-ups:** ElevenLabs connector still pointed at workspace `6aa0af90…` (not the user's account) → nothing generated there; vo_05b/05c NOT voiced. Source links added in `ep02-el-sayed/script.md` (Census ✔; Mercatus/Urban primary PDFs still to swap in). EP02 analytics read (AVD 2:07/5:57 ≈ 36%, 95% browse/suggested, 0 search, TV 48%).
+- **EP03 is finished and uploaded by the user** (`episodes/ep03-iran/`). 10:12, 1080p, −14 LUFS.
+  - Story-led explainer: Jake at 4 a.m. (siren → shelter → screens) + six "rings" (one order → first 10 s → nearest town → Strait of Hormuz → your money → the world → Congress's three keys) + close (Hawaii 2018 false alert). Real 2026 context (U.S.–Iran war since 28 Feb 2026) + hypothetical nuclear order, labelled WHAT IF on every frame.
+  - Files: `script.md` (shots + VO, research refs), `research.md` (sources + verification pass §H), `vo-clean.txt` (copy-paste VO), `voiceover-parts.md`, `concept.md`, `shot-grammar.md`, `thumbnail.md`, `youtube-upload.md` (title, description, chapters, sources, tags, settings), `LICENSES.md`.
+  - Style: `style/STYLE-v4-paperworld.md` (paper world + TV-first rules: one idea per screen, giant type, map first, icons in badges, linked transitions). Style frames in `episodes/ep03-iran/style/`.
+  - **Voice:** user generated it in their own ElevenLabs account, voice "Flint – Deep, Raspy and Warm" (`studio/public/iran/vo/vo_full.mp3`, 11:43 → 10:09 tight with a 2.8 s siren gap). Word timings by faster-whisper → `vo_full.words.json`; `studio/tools/ep03_cues.py` aligns every script shot to the words → `studio/src/ep03/cues.json`; all cuts/icons/badges fire on the spoken word (`wordT()` in `src/ep03/t.ts`).
+  - **Code:** `studio/src/ep03/Part01.tsx` … `Part10.tsx` (compositions EP03Part01–10), shared blocks in `Part01.tsx` (At, Enter, Push, PartSound), `StyleFrames.tsx` (Badge, Headline, Print, Monitor…), `PaperWorld.tsx` (pawns, buildings, cards), `Real.tsx` (real flags, near-real NightCity, FilmPrint).
+  - **Render:** `studio/tools/render_ep03.sh 1 2 … 10` (≈5–7 min per part, no GPU) → `episodes/ep03-iran/renders/parts/EP03PartNN.mp4` (all saved in git). `studio/tools/assemble_ep03.sh` joins them + two-pass loudnorm → `renders/ep03-full-v1.mp4` (158 MB, gitignored: rebuild it with the script) and `ep03-full-v1-preview720.mp4` (in git).
+  - Real material: NASA STS-4 Hormuz photo, NASA ISS night photos, Operation Crossroads 1946 film (DoD), About Fallout 1963 (OCD), Beans Bullets and Black Oil 1968 (DoD, CC0), House footage, Truman Library page, EPA DOCUMERICA 1973, flags (flag-icons, MIT), Mixkit siren. Licences in `episodes/ep03-iran/LICENSES.md`.
+  - SFX tool: `studio/tools/sfx_fetch.py` (Openverse search/download + licence ledger). Freesound/Pixabay/Wikimedia are blocked from this server; Mixkit and archive.org work.
+- **Known issue:** VO says "on Election Day" for the Qeshm strike; reports put it on 2 Nov 2026 (eve of the election). On-screen text is correct. Fix = re-voice one line and splice.
+- **Upload choices given to the user:** category Education (type: Concept overview), not made for kids, altered content = No (AI narration only) unless the thumbnail uses an AI-edited real face. Recommended title: "If Trump Nuked Iran, What Would Happen to You?". ⚠️ The user's thumbnail looked like an AI-styled photo of Trump: advised replacing it with an official (public-domain) photo + "WHAT IF?".
+
+## Next steps (as of 7 Nov 2026)
+1. Read EP03 analytics after 48 h (CTR, retention curve) and compare with EP02.
+2. Optional EP03 v1.1: re-voiced Qeshm line; smaller fixes listed in the session (dark red kickers on dim maps in Part 5).
+3. EP02: vo_05b/05c still unvoiced (user can generate them in their own ElevenLabs account); Mercatus/Urban PDF links.
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

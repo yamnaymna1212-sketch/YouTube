@@ -1,7 +1,7 @@
 #!/bin/bash
 # Render EP03 parts one after another (no GPU: each part takes ~20 min). Usage: tools/render_ep03.sh 3 4 5 ...
 cd "$(dirname "$0")/.."
-OUT=/tmp/claude-0/ep03
+OUT=${OUT:-/home/user/YouTube/episodes/ep03-iran/renders/parts}
 mkdir -p $OUT
 while pgrep -f "remotion render src/index.ts EP03Part" >/dev/null; do sleep 15; done
 for n in "$@"; do

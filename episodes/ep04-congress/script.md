@@ -3,20 +3,23 @@
 **Title:** Trump Just Lost Congress. 3 Things Happen to Your Money.
 **Channel:** Dollarly · "Your Money. Decoded."
 **Frame:** real, fresh news (3 Nov 2026 midterms) + three "doors" a viewer can act on. Every claim sourced in `research.md` (refs in [brackets]). Neutral: both sides stated, "could happen" and "who decides", never a prediction.
-**Length:** VO 1,617 words ≈ 9:00 at 180 wpm (tight take) + ≈ 20 s silent beats ≈ **9:20**. Good for the 9–10 min target; a long first take can be tightened with `tighten_vo.py`.
+**Length:** VO ≈1,600 words (hook v2) ≈ 9:00 at 180 wpm (tight take) + ≈ 20 s silent beats ≈ **9:20**. Good for the 9–10 min target; a long first take can be tightened with `tighten_vo.py`.
 **Voice:** the user generates it in their own ElevenLabs account (voice "Flint", eleven_v4). Paste `vo-clean.txt`. I do not generate audio.
 **Style:** `style/STYLE-v4-paperworld.md`: one idea per screen, giant type for TV, map first, Lucide icons in badges, real flags and photos, a source line on every shot, every scene linked to the next. Sound: tick/type/counter/paper only (max 0.1) + calm dark ambient music. Pauses via `tighten_vo.py`; cuts on spoken words (`wordT()`).
 Legend: **A** Jake/paper story · **B** map explainer · **C** real photo/footage · **D** document card · **E** data. **→** links into the next shot.
 
 ---
 
-## vo_00 · COLD OPEN (0:00–0:40)
-| # | Shot | VO |
+## vo_00 · HOOK v2 (0:00–0:32) · built: `studio/src/ep04/Hook.tsx` (EP04Hook)
+| # | Shot (brand family) | VO |
 |---|---|---|
-| 1 | A · Jake's TV, a US map turning red/blue tile by tile. → map tile becomes a calendar square | It's a Tuesday night in November. Jake is watching the map turn. Red, blue, red, blue. By morning, every channel says the same thing: Democrats have won Congress. |
-| 2 | A · Jake, mug in hand, phone alert "Congress: Democrats" [A1]. Wallet meter top-right. | Jake doesn't care who won. Jake cares about one question. What does this do to my money? |
-| 3 | B · Capitol photo (public domain) → three paper doors rise on the map, labelled with icons | Because Congress isn't a TV show. It decides whether the government stays open, what some things cost at the store, and who pays for the war you've been reading about. |
-| 4 | E · Calendar flips to FRI 11 DEC, red ring 🔁 | So here are three things that could happen to your money, in the order they hit. The first one has a date on the calendar. Friday, December eleventh. |
+| 1 | NIGHT MAP · dark US map, glowing outline draws, pin on Washington; "— THE DEADLINE / December 11, 2026 / The money runs out"; clock 11:59:5x → 12:00:00 "FUNDING LAPSES"; camera flies into D.C. [B1] | Friday, December eleventh. At midnight, the money that keeps the federal government running runs out. |
+| 2 | REAL FILM · Treasury vault door, 1930s (Prelinger, PD), label "THE MONEY RUNS OUT" | *(…runs out.)* |
+| 3 | PAPER STAGE · White House ↔ Capitol on Pennsylvania Avenue; red pawns at Congress go grey, stamp "MAJORITY LOST", card "Majority until Jan 3" [A3] | And the party that has to fix it just lost its majority. |
+| 4 | ARCHIVE PRINT · official 2025 portrait (White House, PD) in a white print + 1930s House-chamber film print; name card "NOVEMBER 3, 2026 / Donald J. Trump / 47th president · second term. His party just lost Congress."; chips House → Democrats · Senate → Democrats [A1] | On November third, voters handed Congress to the Democrats. |
+| 5 | JAKE EXPLAINS · Jake shrugs, thinks, worries; card "WHAT DOES THIS DO TO MY MONEY?"; wallet chip "$ ?" | Jake doesn't care who won. He cares about one question. What does this do to my money? |
+| 6 | PAPER MAP + DOORS · faded paper US map, pin on Congress; three doors rise on the words: 1 STAYS OPEN? · 2 THE PRICE TAG · 3 THE WAR BILL; title "Three doors to your wallet" [A4] | Because Congress decides three things that hit your wallet. Whether the government stays open. What some things cost at the store. And who pays for the war. |
+| 7 | Door 1 swings open → camera flies through it → CHAPTER "Door one · The Shutdown Clock · Friday, December 11" | Three doors. Let's open them, in the order they hit. |
 
 ## vo_01 · NOTHING CHANGES TOMORROW (0:40–1:25)
 | # | Shot | VO |

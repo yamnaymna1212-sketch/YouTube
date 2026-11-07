@@ -51,4 +51,4 @@ Category: Education · Not made for kids · Altered content: **No** (AI narratio
 - [ ] AP call for El-Sayed still standing; birthplace (Michigan) confirmed.
 - [ ] No federal gas-tax suspension passed in 2026 (congress.gov).
 - [ ] E15 / Jones Act waiver dates on epa.gov / dhs.gov.
-- [x] Thumbnail: `thumbnail-v1.png` (clean: El-Sayed real photo + gallon $4.15 + U.S. map) or `thumbnail-v1b.png` (+ WHAT IF?). Photo CC BY-SA 4.0 Conlan Houston, background removed only.
+- [x] Thumbnail: **`thumbnail-v2.png` (final, simple: real photo + IF HE'S PRESIDENT + GAS $5.00?)**. Older: `thumbnail-v1.png` (clean: El-Sayed real photo + gallon $4.15 + U.S. map) or `thumbnail-v1b.png` (+ WHAT IF?). Photo CC BY-SA 4.0 Conlan Houston, background removed only.

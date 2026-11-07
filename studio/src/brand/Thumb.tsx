@@ -116,3 +116,24 @@ export const EP05ThumbCore: React.FC<{ tag?: string }> = ({ tag }) => (
 );
 export const EP05Thumb: React.FC = () => <EP05ThumbCore />;
 export const EP05ThumbB: React.FC = () => <EP05ThumbCore tag="WHAT IF?" />;
+
+// EP05 v2 · simple (user: "easy to understand, simple"): 2 things only — real El-Sayed photo + one giant pump price.
+// $5 is from the VO ("Michigan gas hit five dollars"); the "?" keeps it a what-if, not a claim. ≤5 words.
+export const EP05ThumbSimple: React.FC = () => (
+  <AbsoluteFill style={{ background: `radial-gradient(ellipse at 35% 50%, #F5EFE0 0%, ${B.paper} 60%, #E2D7BC 100%)` }}>
+    <Img src={staticFile('sayed/cut_elsayed.png')} style={{ position: 'absolute', right: -30, bottom: 0, height: 720, filter: 'drop-shadow(-18px 20px 30px rgba(40,30,10,.35)) contrast(1.05) saturate(1.05)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 12%)', maskImage: 'linear-gradient(to right, transparent 0%, #000 12%)' }} />
+    {/* question line */}
+    <div style={{ position: 'absolute', left: 60, top: 70, fontFamily: cond, fontWeight: 800, fontSize: 92, lineHeight: 1, color: B.ink, letterSpacing: 1 }}>
+      IF HE&apos;S <span style={{ color: B.red }}>PRESIDENT</span>
+    </div>
+    {/* pump price sign */}
+    <div style={{ position: 'absolute', left: 60, top: 220, width: 640, background: B.ink, borderRadius: 26, padding: '22px 30px 30px', boxShadow: `14px 16px 0 ${B.red}` }}>
+      <div style={{ fontFamily: cond, fontWeight: 800, fontSize: 52, color: B.bone, letterSpacing: 8 }}>GAS</div>
+      <div style={{ fontFamily: cond, fontWeight: 800, fontSize: 240, lineHeight: 0.95, color: '#FFD23F', textAlign: 'center' }}>$5.00?</div>
+    </div>
+    <div style={{ position: 'absolute', left: 22, top: 18, display: 'flex', alignItems: 'center', gap: 8, opacity: 0.85 }}>
+      <Img src={staticFile('brand/logo.png')} style={{ width: 30, height: 30 }} />
+      <div style={{ fontFamily: cond, fontWeight: 800, fontSize: 20, color: B.ink, letterSpacing: 3 }}>DOLLARLY</div>
+    </div>
+  </AbsoluteFill>
+);

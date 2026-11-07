@@ -136,5 +136,19 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 2. Optional EP03 v1.1: re-voiced Qeshm line; smaller fixes listed in the session (dark red kickers on dim maps in Part 5).
 3. EP02: vo_05b/05c still unvoiced (user can generate them in their own ElevenLabs account); Mercatus/Urban PDF links.
 
+## Done 7 Nov 2026 (session 5: EP04 · "Trump Just Lost Congress. 3 Things Happen to Your Money.")
+- **Topic chosen with the user** after competitor research (Precedent / Factora "Trump Just Lost Congress" format) + polls (cost of living, health care). Facts checked: Democrats won both chambers (AP calls; AK & MS Senate still open on Nov 6), stopgap P.L. 119-103 runs to **Dec 11, 2026**, SCOTUS struck IEEPA tariffs 6–3 on Feb 20, 2026 (*Learning Resources v. Trump*), refunds go to importers.
+- **Files:** `episodes/ep04-congress/` → `script.md` (shots), `vo-clean.txt` (paste into ElevenLabs, ≈1,600 words ≈ 9–10 min), `research.md` (✔/◐/⚠ per fact), `LICENSES.md`, `thumbnail-v1.png` (+ `thumbnail-v1b.png`), style stills in `style/`.
+- **Brand v5:** `style/BRAND-v5-dollarly.md` + `studio/src/brand/Brand.tsx` (kit) + `Thumb.tsx` (one thumbnail template for the channel; `episodes/ep03-iran/thumbnail-v2-brand.png` = replacement EP03 cover with the official portrait, no AI face). User rules now in the doc: ≈70% paper explainer / ≈20% Jake story / ≤10% real; **no dead second** (something new every 1–1.5 s); ≤ 5 words on screen; rich world (skyline, floor, walking pawns, Jake reacting) — "keep it like the hook", not icons on empty paper.
+- **Real material (PD):** 25 clips in `studio/public/ep04/footage/` (Prelinger: "The Powers of Congress" 1947, "Washington: The Nation's Capitol", "A Day in Congress"), White House 2025 official portrait.
+- **Code:** `studio/src/ep04/` → `Hook.tsx` (EP04Hook), `Part02.tsx`…`Part09.tsx` (EP04Part02–09), `parts.tsx` (World backdrop, Slot, Stamp, FlipCalendar, Bill), `Story.tsx` (Apartment + TV, Hemicycle, PhoneText, Route), `kit.tsx`, `t.ts` (word clock), `cues.json`.
+- **Timing:** **no VO yet** → `tools/ep04_est.py` writes an ESTIMATED time for every word (3 w/s). When the user sends the Flint VO: `tighten_vo.py` → faster-whisper words → `python3 tools/ep04_est.py --words <tight words.json>` → every shot/icon moves onto the real words (hook still uses its own `T` constants in `t.ts`: replace them from the same words file).
+- **Render:** `tools/render_ep04.sh Hook Part02 … Part09` → `episodes/ep04-congress/renders/parts/`; `tools/assemble_ep04.sh` → `ep04-full-v1-novo.mp4` (gitignored) + `-preview720.mp4`.
+
+## Next steps (as of 7 Nov 2026, session 5)
+1. User generates the EP04 VO from `vo-clean.txt` (Flint, own account) → re-time (above) → re-render all parts → loudnorm assembly.
+2. Before upload: re-check the Dec 11 deadline (a new stopgap would change door one), AP final tallies, the refund figure (CBP/CIT) and the $29B Pentagon estimate (find primaries).
+3. Optional: EP04 music cue from `synth_audio.py` (parts use the EP03 music as placeholder).
+
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

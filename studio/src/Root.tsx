@@ -22,6 +22,7 @@ import { EP04Part06, EP04_P6_FRAMES } from './ep04/Part06';
 import { EP04Part07, EP04_P7_FRAMES } from './ep04/Part07';
 import { EP04Part08, EP04_P8_FRAMES } from './ep04/Part08';
 import { EP04Part09, EP04_P9_FRAMES } from './ep04/Part09';
+import { EP05Hook, EP05_HOOK_FRAMES } from './ep05/Hook';
 import { EP04Thumb, EP04ThumbB, EP03ThumbV2 } from './brand/Thumb';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
 import { BodyTest } from './BodyTest';
@@ -84,6 +85,7 @@ export const Root: React.FC = () => (
     <Composition id="EP04Part04" component={EP04Part04} durationInFrames={EP04_P4_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP04Part03" component={EP04Part03} durationInFrames={EP04_P3_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP04Part02" component={EP04Part02} durationInFrames={EP04_P2_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Hook" component={EP05Hook} durationInFrames={EP05_HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP04Hook" component={EP04Hook} durationInFrames={EP04_HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part01" component={EP03Part01} durationInFrames={EP03_P1_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part02" component={EP03Part02} durationInFrames={EP03_P2_FRAMES} fps={30} width={1920} height={1080} />

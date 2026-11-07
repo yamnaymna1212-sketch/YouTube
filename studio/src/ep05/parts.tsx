@@ -5,9 +5,9 @@ import { B, cond, display } from '../brand/Brand';
 import { At, Sound, fr, type Cue } from './kit';
 import { paraT, VO_FILE } from './t';
 
-// Shared pieces for EP05 parts 2–9. A part = a run of paragraphs of vo-clean.txt on the word clock (t.ts).
+// Shared pieces for EP05 parts 2–10. A part = a run of paragraphs of vo-clean.txt on the word clock (t.ts).
 
-export const MUSIC = 'ep05/audio/music_ep04.mp3';
+export const MUSIC = 'ep05/audio/music_ep05.mp3';
 export const rel = (sec: number, shotStart: number) => fr(sec - shotStart);
 export const ease = (x: number) => 1 - Math.pow(1 - x, 3);
 export const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
@@ -104,7 +104,7 @@ const Monument: React.FC<{ x: number; y: number; h: number }> = ({ x, y, h }) =>
     <path d={`M18 ${h} L24 30 L30 0 L36 30 L42 ${h} Z`} fill={B.bone} stroke={B.ink} strokeWidth={4} strokeLinejoin="round" />
   </svg>
 );
-export const World: React.FC<{ children?: React.ReactNode; kind?: 'stage' | 'map' | 'plain'; jake?: false | { beats?: Beat[]; pose?: 'stand' | 'think' | 'point' | 'shrug' }; floor?: number; push?: number }> = ({ children, kind = 'stage', jake = {}, floor = 900, push = 1 }) => {
+export const World: React.FC<{ children?: React.ReactNode; kind?: 'stage' | 'map' | 'plain' | 'road'; jake?: false | { beats?: Beat[]; pose?: 'stand' | 'think' | 'point' | 'shrug' }; floor?: number; push?: number; whatIf?: boolean }> = ({ children, kind = 'road', jake = {}, floor = 900, push = 1, whatIf = true }) => {
   const f = useCurrentFrame();
   const drift = 0.07 * (1 - Math.exp(-f / 260)); // slow push that settles (never runs away on long shots)
   return (
@@ -115,6 +115,11 @@ export const World: React.FC<{ children?: React.ReactNode; kind?: 'stage' | 'map
           <Monument x={720} y={floor} h={480} />
           <Building kind="cap" x={1180} y={floor} scale={0.95} />
           <Building kind="pent" x={1760} y={floor} scale={0.7} />
+        </AbsoluteFill>
+      )}
+      {kind === 'road' && (
+        <AbsoluteFill style={{ opacity: 0.4, transform: `translateX(${-f * 0.15}px)` }}>
+          <RoadHorizon floor={floor} />
         </AbsoluteFill>
       )}
       {kind === 'map' && <AbsoluteFill style={{ opacity: 0.2 }}><PUS x={260} y={100} w={1400} /></AbsoluteFill>}
@@ -130,7 +135,23 @@ export const World: React.FC<{ children?: React.ReactNode; kind?: 'stage' | 'map
         <LiveJake pose={jake.pose ?? 'stand'} seed={'w' + (jake.beats?.[0]?.at ?? 0)} beats={jake.beats ?? [{ at: 6, r: 'think', hold: 400 }]}
           style={{ position: 'absolute', left: 1560, top: floor - 500, height: 550, transform: 'scaleX(-1)' }} />
       )}
+      {whatIf && <WhatIfTag />}
       <Bug2 /><Grain2 />
     </PG>
   );
 };
+
+// EP05 horizon: a small gas station, a pumpjack, a refinery and a town on the horizon (the "road" world).
+import { Pumpjack, Refinery, WhatIfTag } from './props';
+const RoadHorizon: React.FC<{ floor: number }> = ({ floor }) => (
+  <>
+    {Array.from({ length: 9 }).map((_, i) => <div key={i} style={{ position: 'absolute', left: 1180 + i * 70, top: floor - 120 - (i % 3) * 60, width: 60, height: 120 + (i % 3) * 60, background: B.bone, border: `4px solid ${B.ink}` }} />)}
+    <div style={{ position: 'absolute', left: 160, top: floor - 210, width: 460, height: 40, background: B.red, border: `5px solid ${B.ink}` }} />
+    {[190, 560].map((x) => <div key={x} style={{ position: 'absolute', left: x, top: floor - 170, width: 22, height: 170, background: B.bone, border: `4px solid ${B.ink}` }} />)}
+    {[300, 440].map((x) => <div key={x} style={{ position: 'absolute', left: x, top: floor - 110, width: 60, height: 110, background: B.bone, border: `4px solid ${B.ink}` }} />)}
+    <div style={{ position: 'absolute', left: 60, top: floor - 330, width: 90, height: 70, background: B.bone, border: `4px solid ${B.ink}`, fontFamily: cond, fontWeight: 800, fontSize: 36, textAlign: 'center', lineHeight: '62px', color: B.ink }}>4.15</div>
+    <div style={{ position: 'absolute', left: 100, top: floor - 260, width: 10, height: 260, background: B.ink }} />
+    <Pumpjack x={820} y={floor} scale={0.8} />
+    <Refinery x={1900} y={floor} scale={0.9} />
+  </>
+);

@@ -8,17 +8,17 @@ import { F } from '../theme';
 
 // ---------- Jake's apartment at night (story world). The TV screen renders any 1920×1080 scene, scaled.
 export const TV_BOX = { x: 900, y: 210, w: 820, h: 461 };
-export const Apartment: React.FC<{ tv?: React.ReactNode; tvOn?: number; children?: React.ReactNode; lamp?: number }> = ({ tv, tvOn = 1, children, lamp = 1 }) => {
+export const Apartment: React.FC<{ tv?: React.ReactNode; tvOn?: number; children?: React.ReactNode; lamp?: number; dawn?: boolean }> = ({ tv, tvOn = 1, children, lamp = 1, dawn }) => {
   const f = useCurrentFrame();
   const flick = 0.92 + Math.sin(f / 3.3) * 0.03 + Math.sin(f / 7.1) * 0.03;
   const sc = TV_BOX.w / 1920;
   return (
-    <AbsoluteFill style={{ background: '#1A2236', overflow: 'hidden' }}>
+    <AbsoluteFill style={{ background: dawn ? '#3A4560' : '#1A2236', overflow: 'hidden' }}>
       {/* wallpaper stripes */}
       {Array.from({ length: 24 }).map((_, i) => <div key={i} style={{ position: 'absolute', left: i * 84, top: 0, width: 4, height: 1080, background: 'rgba(246,241,228,.035)' }} />)}
       {/* window with the city */}
       <div style={{ position: 'absolute', left: 90, top: 120, width: 560, height: 520, border: `10px solid ${B.bone}`, outline: `5px solid ${B.ink}`, overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', left: -700, top: -360, width: 1920, height: 1080, transform: 'scale(.75)' }}><NightCity /></div>
+        <div style={{ position: 'absolute', left: -700, top: -360, width: 1920, height: 1080, transform: 'scale(.75)' }}><NightCity dawn={dawn ? 1 : 0} /></div>
         <div style={{ position: 'absolute', left: 270, top: 0, width: 10, height: 520, background: B.bone, borderLeft: `3px solid ${B.ink}`, borderRight: `3px solid ${B.ink}` }} />
       </div>
       {/* wall calendar */}

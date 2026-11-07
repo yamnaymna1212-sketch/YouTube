@@ -14,6 +14,9 @@ import { EP03Part10, EP03_P10_FRAMES } from './ep03/Part10';
 import { SF1Siren, SF2Sky, SF3Bunker, SF4Rings, SF5Proof, SF4MapTV, SF6Ring0, SFTransition } from './ep03/StyleFrames';
 import { HostTest } from './HostTest';
 import { EP04Hook, EP04_HOOK_FRAMES } from './ep04/Hook';
+import { EP04Part02, EP04_P2_FRAMES } from './ep04/Part02';
+import { EP04Part03, EP04_P3_FRAMES } from './ep04/Part03';
+import { EP04Part04, EP04_P4_FRAMES } from './ep04/Part04';
 import { EP04Thumb, EP04ThumbB, EP03ThumbV2 } from './brand/Thumb';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
 import { BodyTest } from './BodyTest';
@@ -68,6 +71,9 @@ export const Root: React.FC = () => (
     <Still id="EP04Thumb" component={EP04Thumb} width={1280} height={720} />
     <Still id="EP04ThumbB" component={EP04ThumbB} width={1280} height={720} />
     <Still id="EP03ThumbV2" component={EP03ThumbV2} width={1280} height={720} />
+    <Composition id="EP04Part04" component={EP04Part04} durationInFrames={EP04_P4_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP04Part03" component={EP04Part03} durationInFrames={EP04_P3_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP04Part02" component={EP04Part02} durationInFrames={EP04_P2_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP04Hook" component={EP04Hook} durationInFrames={EP04_HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part01" component={EP03Part01} durationInFrames={EP03_P1_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part02" component={EP03Part02} durationInFrames={EP03_P2_FRAMES} fps={30} width={1920} height={1080} />

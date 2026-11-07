@@ -231,7 +231,7 @@ const S6Chapter: React.FC = () => (
 export const EP04_HOOK_FRAMES = fr(HOOK_DUR);
 const CUT = {
   s1: [0, T.party], s2: [T.party, T.nov3], s3: [T.nov3, T.jake], s4: [T.jake, T.because],
-  s5: [T.because, T.letsOpen + 1.85], s6: [T.letsOpen + 1.85, HOOK_DUR],
+  s5: [T.because, T.letsOpen + 1.85], s6: [T.letsOpen + 1.85, HOOK_DUR], // door light hands over to Part02 (Jake's morning)
 } as const;
 
 export const EP04Hook: React.FC = () => (
@@ -241,7 +241,7 @@ export const EP04Hook: React.FC = () => (
     <At from={CUT.s3[0]} to={CUT.s3[1]} name="3 seat charts"><S3Seats start={CUT.s3[0]} /></At>
     <At from={CUT.s4[0]} to={CUT.s4[1]} name="4 story · jake"><S4Jake start={CUT.s4[0]} /></At>
     <At from={CUT.s5[0]} to={CUT.s5[1]} name="5 stage + doors"><S5Stage start={CUT.s5[0]} /></At>
-    <At from={CUT.s6[0]} to={CUT.s6[1]} name="6 chapter"><S6Chapter /></At>
+    <At from={CUT.s6[0]} to={CUT.s6[1]} name="6 door light"><AbsoluteFill style={{ background: `linear-gradient(${B.gold}, #F6E3A8)` }} /></At>
     <Sound base={0} music="iran/audio/music_ep03.mp3" cues={[
       [0.4, 'tick', 0.04], [1.4, 'tick', 0.04], [2.4, 'tick', 0.04], [3.4, 'tick', 0.04], [4.4, 'tick', 0.05],
       [T.party + 1.4, 'paper', 0.05], [T.lost, 'paper', 0.08], [T.nov3 + 0.1, 'paper', 0.06], [T.question + 0.2, 'type', 0.06],

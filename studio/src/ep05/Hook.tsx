@@ -181,11 +181,11 @@ export const EP05_HOOK_FRAMES = fr(HOOK_DUR);
 const T0 = 0, T1 = W(0, 'year') - 0.15, T2 = paraT(1), T3 = W(1, 'And', 0), T4 = paraT(2), T5 = paraT(3);
 export const EP05Hook: React.FC = () => (
   <AbsoluteFill style={{ background: B.paper }}>
-    <At from={T0} to={T1} name="1 story · pump"><S1 s={T0} end={T1} /></At>
-    <At from={T1} to={T2} name="2 display"><S2 s={T1} /></At>
-    <At from={T2} to={T3} name="3 night map"><S3 s={T2} /></At>
-    <At from={T3} to={T4} name="4 2028"><S4 s={T3} /></At>
-    <At from={T4} to={T5} name="5 story · this number"><S5 s={T4} end={T5} /></At>
+    <At from={T0} to={T1 + 0.5} name="1 story · pump"><S1 s={T0} end={T1} /></At>
+    <At from={T1} to={T2 + 0.5} name="2 display"><S2 s={T1} /></At>
+    <At from={T2} to={T3 + 0.5} name="3 night map"><S3 s={T2} /></At>
+    <At from={T3} to={T4 + 0.5} name="4 2028"><S4 s={T3} /></At>
+    <At from={T4} to={T5 + 0.5} name="5 story · this number"><S5 s={T4} end={T5} /></At>
     <At from={T5} to={HOOK_DUR} name="6 dashboard"><S6 s={T5} end={HOOK_DUR} /></At>
     <Sound base={0} vo={VO_FILE} music={MUSIC} cues={[
       [0.2, 'counter', 0.05], [W(0, 'year'), 'counter', 0.04], [W(0, 'forty-five') + 0.6, 'paper', 0.07],

@@ -20,7 +20,8 @@ export const PartShell: React.FC<{ first: number; shots: Shot[]; cues?: Cue[] }>
   const base = paraT(first);
   return (
     <AbsoluteFill style={{ background: B.paper }}>
-      {shots.map(([a, b, el, name], i) => <At key={i} from={a} to={b} base={base} name={name ?? `shot ${i + 1}`}>{el(a)}</At>)}
+      {/* each shot stays 0.5 s under the next one, so a sliding/zooming entrance never reveals empty paper */}
+      {shots.map(([a, b, el, name], i) => <At key={i} from={a} to={i < shots.length - 1 ? b + 0.5 : b} base={base} name={name ?? `shot ${i + 1}`}>{el(a)}</At>)}
       <Sound base={base} vo={VO_FILE} music={MUSIC} cues={cues} />
     </AbsoluteFill>
   );

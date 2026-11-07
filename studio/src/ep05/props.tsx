@@ -86,7 +86,7 @@ export const PumpChip: React.FC<{ value: React.ReactNode; at?: number; dark?: bo
 };
 
 /** Top-left WHAT IF tag (hypothetical, on every frame from the moment it's stamped). */
-export const WhatIfTag: React.FC<{ dark?: boolean; at?: number }> = ({ dark, at = 0 }) => {
+export const WhatIfTag: React.FC<{ dark?: boolean; at?: number }> = ({ dark, at = -100 }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig();
   const s = spr(f, at, fps, 14, 160);
   return (
@@ -159,7 +159,7 @@ export const Console: React.FC<{ x?: number; y?: number; scale?: number; at?: nu
         const p = pop ? (pop[i] ?? 0) : 0;
         const show = pop ? spr(f, p, fps, 10, 170) : 1;
         const pulled = (pulls[i] ?? -1) >= 0 ? spr(f, pulls[i], fps, 9, 120) : 0;
-        const ang = -28 + pulled * 56;
+        const ang = -18 + pulled * 36;
         const L = big ? 520 : 260;
         const knob = big ? 120 : 76;
         const d = dim.includes(i) ? 0.35 : 1;

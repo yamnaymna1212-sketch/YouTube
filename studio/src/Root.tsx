@@ -25,6 +25,13 @@ import { EP04Part09, EP04_P9_FRAMES } from './ep04/Part09';
 import { EP05Hook, EP05_HOOK_FRAMES } from './ep05/Hook';
 import { EP05Part02, EP05_P2_FRAMES } from './ep05/Part02';
 import { EP05Part03, EP05_P3_FRAMES } from './ep05/Part03';
+import { EP05Part04, EP05_P4_FRAMES } from './ep05/Part04';
+import { EP05Part05, EP05_P5_FRAMES } from './ep05/Part05';
+import { EP05Part06, EP05_P6_FRAMES } from './ep05/Part06';
+import { EP05Part07, EP05_P7_FRAMES } from './ep05/Part07';
+import { EP05Part08, EP05_P8_FRAMES } from './ep05/Part08';
+import { EP05Part09, EP05_P9_FRAMES } from './ep05/Part09';
+import { EP05Part10, EP05_P10_FRAMES } from './ep05/Part10';
 import { EP04Thumb, EP04ThumbB, EP03ThumbV2 } from './brand/Thumb';
 import { BoardBody, BoardCharacter, BoardIcons, BoardMotion } from './boards/Boards';
 import { BodyTest } from './BodyTest';
@@ -89,6 +96,13 @@ export const Root: React.FC = () => (
     <Composition id="EP04Part02" component={EP04Part02} durationInFrames={EP04_P2_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP05Part02" component={EP05Part02} durationInFrames={EP05_P2_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP05Part03" component={EP05Part03} durationInFrames={EP05_P3_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part04" component={EP05Part04} durationInFrames={EP05_P4_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part05" component={EP05Part05} durationInFrames={EP05_P5_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part06" component={EP05Part06} durationInFrames={EP05_P6_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part07" component={EP05Part07} durationInFrames={EP05_P7_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part08" component={EP05Part08} durationInFrames={EP05_P8_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part09" component={EP05Part09} durationInFrames={EP05_P9_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="EP05Part10" component={EP05Part10} durationInFrames={EP05_P10_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP05Hook" component={EP05Hook} durationInFrames={EP05_HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP04Hook" component={EP04Hook} durationInFrames={EP04_HOOK_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP03Part01" component={EP03Part01} durationInFrames={EP03_P1_FRAMES} fps={30} width={1920} height={1080} />

@@ -125,7 +125,7 @@ export const QuoteCard: React.FC<{ text: string; who: string; x: number; y: numb
 
 /** Source chip, bottom left: every shot carries one. */
 export const Src: React.FC<{ children: React.ReactNode; dark?: boolean; right?: boolean }> = ({ children, dark, right }) => (
-  <div style={{ position: 'absolute', ...(right ? { right: 48 } : { left: 48 }), bottom: 34, fontFamily: F.mono, fontSize: 19, letterSpacing: 0.5, color: dark ? 'rgba(243,238,226,.72)' : '#5C5444', background: dark ? 'rgba(0,0,0,.25)' : 'rgba(246,241,228,.75)', padding: '4px 10px' }}>{children}</div>
+  <div style={{ position: 'absolute', ...(right ? { right: 48 } : { left: 48 }), bottom: 34, fontFamily: F.mono, fontSize: 16, letterSpacing: 0.5, color: dark ? 'rgba(243,238,226,.6)' : 'rgba(92,84,68,.85)', background: dark ? 'rgba(0,0,0,.25)' : 'rgba(246,241,228,.75)', padding: '4px 10px' }}>{children}</div>
 );
 
 /** Channel bug, bottom right: small logo + wordmark. */

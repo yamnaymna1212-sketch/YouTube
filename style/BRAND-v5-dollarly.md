@@ -35,6 +35,12 @@ References the user liked: Precedent (cream paper, serif name cards, framed real
 - **≤10% real material**, used as a moment, not a slideshow: shown *inside the story* (on Jake's TV, his phone) or as one framed print. Never a long run of photos.
 - **Linked**: story → (camera dives into the TV/phone) → explainer → (zoom out to Jake) → story. Every scene hands a shape, a motion or a question to the next.
 
+## 3c. No dead second · minimal text (user rule, 7 Nov 2026) — non-negotiable
+- **Something new happens at least every 1–1.5 s**: an icon badge pops/swaps, a pawn hops, a route draws, seats flip, the camera pushes/pulls, a real clip plays, Jake reacts. A still image never sits on screen alone.
+- **One icon slot that swaps on the words** (e.g. Congress → gavel → "3" → wallet) is better than four labels.
+- **Minimal text**: max ~5 words on screen at once (plus the small source chip). Prefer an icon to a word (a crossed-out ballot instead of "Who won? Not the point."). Door/label words: 1–2 words.
+- **Pro motion only**: springs, eased camera moves, motion that carries into the next shot. No linear slides, no random jitter, no long holds.
+
 ## 4. Fixed brand elements (every shot)
 - Source chip bottom-left (mono). Logo + DOLLARLY bug bottom-right. Film grain over everything.
 - Chapter cards: red kicker "DOOR ONE" + serif title + red rule; entered by flying through a door/pin.

@@ -106,7 +106,7 @@ const Monument: React.FC<{ x: number; y: number; h: number }> = ({ x, y, h }) =>
 );
 export const World: React.FC<{ children?: React.ReactNode; kind?: 'stage' | 'map' | 'plain'; jake?: false | { beats?: Beat[]; pose?: 'stand' | 'think' | 'point' | 'shrug' }; floor?: number; push?: number }> = ({ children, kind = 'stage', jake = {}, floor = 900, push = 1 }) => {
   const f = useCurrentFrame();
-  const drift = f / 2600;
+  const drift = 0.07 * (1 - Math.exp(-f / 260)); // slow push that settles (never runs away on long shots)
   return (
     <PG>
       {kind === 'stage' && (

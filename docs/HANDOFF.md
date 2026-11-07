@@ -148,7 +148,8 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 ## Next steps (as of 7 Nov 2026, session 5)
 1. User generates the EP04 VO from `vo-clean.txt` (Flint, own account) → re-time (above) → re-render all parts → loudnorm assembly.
 2. Before upload: re-check the Dec 11 deadline (a new stopgap would change door one), AP final tallies, the refund figure (CBP/CIT) and the $29B Pentagon estimate (find primaries).
-3. Optional: EP04 music cue from `synth_audio.py` (parts use the EP03 music as placeholder).
+3. Audio (done 7 Nov): EP04 has its own ambient music + beds from `tools/synth_ep04.py` (`public/ep04/audio/`: music_ep04 one take across all parts, amb_air under everything, amb_room in Jake's apartment). For sound-only changes, render each part with `--codec=wav` (≈1.5 min each) and mux onto the existing video parts instead of re-rendering pictures.
+4. **VO rule from the user:** cut every pause clean and even, VO LOUDER than now → `tools/ep04_vo.sh` (tighten 0.16 s, de-ess, compressor, −15 LUFS VO; music 0.07 under it; final −14 LUFS).
 
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]

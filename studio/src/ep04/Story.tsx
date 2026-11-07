@@ -1,5 +1,5 @@
 import React from 'react';
-import { AbsoluteFill, interpolate, random, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Audio, interpolate, random, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { NightCity } from '../ep03/Real';
 import { B, cond, display } from '../brand/Brand';
 import { F } from '../theme';
@@ -46,6 +46,8 @@ export const Apartment: React.FC<{ tv?: React.ReactNode; tvOn?: number; children
       {/* TV light on the room */}
       <AbsoluteFill style={{ background: `radial-gradient(ellipse at ${TV_BOX.x + TV_BOX.w / 2}px ${TV_BOX.y + TV_BOX.h}px, rgba(150,190,230,${0.10 * tvOn * flick}), transparent 55%)` }} />
       {children}
+      {/* room tone: Jake's apartment always sounds like a real room at night */}
+      <Audio src={staticFile('ep04/audio/amb_room.mp3')} loop volume={0.05} />
     </AbsoluteFill>
   );
 };

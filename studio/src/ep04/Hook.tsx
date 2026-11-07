@@ -242,7 +242,7 @@ export const EP04Hook: React.FC = () => (
     <At from={CUT.s4[0]} to={CUT.s4[1]} name="4 story · jake"><S4Jake start={CUT.s4[0]} /></At>
     <At from={CUT.s5[0]} to={CUT.s5[1]} name="5 stage + doors"><S5Stage start={CUT.s5[0]} /></At>
     <At from={CUT.s6[0]} to={CUT.s6[1]} name="6 door light"><AbsoluteFill style={{ background: `linear-gradient(${B.gold}, #F6E3A8)` }} /></At>
-    <Sound base={0} music="iran/audio/music_ep03.mp3" cues={[
+    <Sound base={0} music="ep04/audio/music_ep04.mp3" cues={[
       [0.4, 'tick', 0.04], [1.4, 'tick', 0.04], [2.4, 'tick', 0.04], [3.4, 'tick', 0.04], [4.4, 'tick', 0.05],
       [T.party + 1.4, 'paper', 0.05], [T.lost, 'paper', 0.08], [T.nov3 + 0.1, 'paper', 0.06], [T.question + 0.2, 'type', 0.06],
       [T.open, 'paper', 0.06], [T.store, 'paper', 0.06], [T.war, 'paper', 0.06], [T.letsOpen + 0.2, 'paper', 0.07],

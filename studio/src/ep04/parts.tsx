@@ -3,11 +3,11 @@ import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, us
 import { Check, X, type LucideIcon } from 'lucide-react';
 import { B, cond, display } from '../brand/Brand';
 import { At, Sound, fr, type Cue } from './kit';
-import { paraT } from './t';
+import { paraT, HOOK_DUR } from './t';
 
 // Shared pieces for EP04 parts 2–9. A part = a run of paragraphs of vo-clean.txt on the word clock (t.ts).
 
-export const MUSIC = 'iran/audio/music_ep03.mp3';
+export const MUSIC = 'ep04/audio/music_ep04.mp3';
 export const rel = (sec: number, shotStart: number) => fr(sec - shotStart);
 export const ease = (x: number) => 1 - Math.pow(1 - x, 3);
 export const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
@@ -21,7 +21,7 @@ export const PartShell: React.FC<{ first: number; shots: Shot[]; cues?: Cue[] }>
   return (
     <AbsoluteFill style={{ background: B.paper }}>
       {shots.map(([a, b, el, name], i) => <At key={i} from={a} to={b} base={base} name={name ?? `shot ${i + 1}`}>{el(a)}</At>)}
-      <Sound base={base} music={MUSIC} cues={cues} />
+      <Sound base={base} music={MUSIC} musicBase={base - (paraT(5) - HOOK_DUR)} cues={cues} />
     </AbsoluteFill>
   );
 };

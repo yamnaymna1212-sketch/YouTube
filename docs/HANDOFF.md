@@ -159,3 +159,10 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 
 ## التعديلات التي أريدها الآن
 [اكتب هنا ما تريد تغييره]
+
+## Done 7 Nov 2026 (session 6: EP05 script · "If El-Sayed Became President, What Happens to Gas Prices?")
+- **User asked:** a gas-price video on "if Abdul El-Sayed became president", full script first, VO in ElevenLabs (user's own account).
+- **Files:** `episodes/ep05-elsayed-gas/` → `vo-clean.txt` (1,578 words ≈ 9 min, paste into ElevenLabs), `script.md` (68 shots, mix check, real-material plan, blockers), `research.md` (R1–R23 with ✔/◐/⚠ + Jake's maths).
+- **Structure:** hook ($62 tank vs $45 a year ago, El-Sayed won MI Senate Nov 3, "5 levers, one bigger than the ballot") → who is he + what he said (Iran-war blame, gas-tax pause in the debate, 100% renewables / GND, no gas-car ban per Bridge fact-check) → inside a gallon (EIA split, $1/bbl ≈ 2.4¢, Hormuz) → 5 levers: ① SPR (172M bbl, <300M lowest since 1983) ② federal gas tax 18.4¢ (Congress only, ≈ $140/yr for Jake) ③ waivers (E15, Jones Act, cents) ④ war & peace (−$20/bbl ≈ $370/yr; +$1/gal = $780) ⑤ long game (years) → dashboard → Maya/Luis (diesel $6.29)/Walter → close + 3 actions.
+- **Devices:** JAKE'S PUMP chip (top-right) + a 5-lever paper console reused in every chapter.
+- **Next:** user voices `vo-clean.txt` in ElevenLabs → upload MP3 to `studio/public/ep05/vo/vo_full.mp3` → tighten + whisper words → `studio/src/ep05/cues.json` → animation (copy EP04 kit). Re-check R2/R3/R8/R16/R19/R20 before voicing/upload.

@@ -38,6 +38,11 @@ Status key: ✔ primary/authoritative source found · ◐ news or secondary only
 | E1 | 55% of Americans say their finances are getting worse (record, Gallup 2026) | ◐ | [Zeale summary of Gallup](https://www.zeale.co/news/articles/gallup-finds-americans-concerned-about-cost-of-living-financial-future) |
 | E2 | Inflation 3.7% in Sep 2026 (CPI) | ⚠ | check bls.gov before any on-screen use |
 
+## F. Added in v2
+| F1 | During a shutdown: military and air traffic control continue (many unpaid); Social Security and Medicare benefit payments continue; public-facing offices and parks slow or close | ◐ | confirm: [OPM shutdown guidance](https://www.opm.gov/policy-data-oversight/pay-leave/furlough-guidance/) · SSA contingency plan · FAA |
+| F2 | Tariff pass-through example ($100 part, 10%) is an **illustration**, labelled EXAMPLE on screen, not a measurement | ✔ (labelled) | n/a |
+| F3 | Arguments for/against tariffs stated without numbers | ✔ | general policy debate; keep neutral |
+
 ## Rules for this episode
 - Neutral: both sides' arguments stated; "could happen" and "who decides", never a prediction.
 - No seat counts, no named politicians' motives. Say "Democrats"/"Republicans" and "the president".

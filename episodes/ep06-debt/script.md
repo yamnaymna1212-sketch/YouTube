@@ -139,7 +139,7 @@ Legend: **A** Jake story · **B** paper stage/map explainer · **N** night map �
 |---|---|---|
 | 69 | E · The hook odometer returns full screen, **$33,350** ticking; the Capitol behind it lights up; Jake stands next to it; the counter keeps ticking through the whole paragraph | One last number. Thirty-three thousand dollars a second. That's the price of the national debt, and it's paid every second whether anyone is watching or not. |
 | 70 | B · The three doors in a row; a ballot box icon + a Capitol icon appear over them with the line "WHO PAYS · AND WHEN" (≤ 5 words) | The question is not whether the bill comes. It's who pays it, and when. That's a decision for voters and for Congress, and it will shape your finances for years. |
-| 71 | D · Plain paper disclaimer card: "EDUCATIONAL ONLY · NOT FINANCIAL ADVICE" (on screen once, 3 s) | This video is for education only, and it's not financial advice. Talk to a licensed professional about your own situation. |
+| 71 | D · Plain paper disclaimer card: "EDUCATIONAL ONLY · NOT FINANCIAL ADVICE" (on screen, 3 s, over the end of para 37 + start of the end card). **Not spoken** (user decision 8 Nov: the take is used as recorded) | — |
 | 72 | D · End card: Dollarly logo tab + "Your Money. Decoded." + next-video slot (EP05) + subscribe pawn; odometer still ticking small in the corner | If this helped you understand where your money really goes, subscribe to Dollarly. Your money. Decoded. See you in the next one. |
 
 ---

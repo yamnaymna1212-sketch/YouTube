@@ -11,10 +11,10 @@ import numpy as np
 SR = 48000
 VO = os.environ.get('VO_DIR') or os.path.join(os.path.dirname(__file__), '..', 'public', 'sayed', 'vo')  # VO_DIR=studio/public/iran/vo for EP03
 OUT = os.path.join(VO, 'tight')
-KEEP = 0.16      # pause kept between phrases (s)
+KEEP = float(os.environ.get('KEEP', 0.16))      # pause kept between phrases (s)
 EDGE = 0.04      # silence kept at the very start/end (s)
-MIN_SIL = 0.18   # only pauses longer than this are shortened
-THRESH = '-38dB'
+MIN_SIL = float(os.environ.get('MIN_SIL', 0.18))   # only pauses longer than this are shortened
+THRESH = os.environ.get('THRESH', '-38dB')
 # Editorial cuts (original-take seconds to KEEP). vo_01: after HOOK v2 the cold open no longer repeats
 # "what if he became president?", the Gas/Health/Paychecks/Taxes promise or the "one number" loop.
 # Extra silence inserted before the first phrase that starts at/after an original-take time (s): room for a sound effect.

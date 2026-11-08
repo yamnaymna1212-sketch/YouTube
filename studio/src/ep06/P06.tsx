@@ -104,7 +104,16 @@ const P6E: React.FC<{ s: number }> = ({ s }) => {
   return (
     <Enter kind="fade" dur={8}>
       <NightGround>
-        <div style={{ position: 'absolute', left: 960, top: 1010, opacity: 0.5 }}><Pawn x={0} y={0} base={B.blue} scale={0.01} /></div>
+        <div style={{ position: 'absolute', inset: 0, transformOrigin: '50% 60%', transform: `scale(${1 + 0.07 * (1 - Math.exp(-f / 200))})` }}>
+        {/* money keeps flowing along the routes into Washington (no still frame) */}
+        {[[360, japan], [960, uk], [1560, china]].map(([x0, at], i) => Array.from({ length: 4 }).map((_, j) => {
+          const t = ((f - (at as number) - 14 - j * 22) % 88) / 88;
+          if (f < (at as number) + 14 + j * 22) return null;
+          const x = (x0 as number), cx = (x + 960) / 2;
+          const px = (1 - t) * (1 - t) * x + 2 * (1 - t) * t * cx + t * t * 960, py = (1 - t) * (1 - t) * 520 + 2 * (1 - t) * t * 760 + t * t * 960;
+          const thin = i === 2 && f > down && j % 2 === 1;
+          return thin ? null : <div key={i + '-' + j} style={{ position: 'absolute', left: px - 14, top: py - 14, width: 28, height: 28, borderRadius: '50%', background: B.gold, border: `3px solid ${B.ink}`, opacity: Math.sin(t * Math.PI) }} />;
+        }))}
         <svg width={1920} height={1080} style={{ position: 'absolute', left: 0, top: 0 }}>
           {[[360, japan], [960, uk], [1560, china]].map(([x, at], i) => (
             <path key={i} d={`M${x} 520 Q ${(x as number + 960) / 2} 760 960 960`} fill="none" stroke={i === 2 && f > down ? B.glow : B.gold} strokeWidth={i === 2 && f > down ? 3 : 6} strokeDasharray={`${kk(f, at as number, (at as number) + 14)} 1`} pathLength={1} opacity={0.8} />
@@ -115,8 +124,9 @@ const P6E: React.FC<{ s: number }> = ({ s }) => {
         <Holder x={960} y={360} at={uk - 6} flag="gb" name="U.K." to={1.01} a={uk} b={uk + 18} fmt={T} />
         <Holder x={1560} y={360} at={china - 4} flag="cn" name="CHINA" to={591} a={china} b={china + 18} fmt={Bn} />
         <div style={{ position: 'absolute', left: 1560, top: 640, transform: 'translateX(-50%)', fontFamily: display, fontWeight: 800, fontSize: 64, color: B.glow, opacity: kk(f, down, down + 8) }}>−$109B</div>
-        <div style={{ position: 'absolute', left: 960, top: 960, transform: 'translate(-50%,-50%)', width: 70, height: 70, borderRadius: '50%', background: B.gold, boxShadow: '0 0 60px 20px rgba(232,182,76,.4)' }} />
+        <div style={{ position: 'absolute', left: 960, top: 960, transform: 'translate(-50%,-50%)', width: 70, height: 70, borderRadius: '50%', background: B.gold, boxShadow: `0 0 ${50 + 20 * Math.sin(f / 8)}px 20px rgba(232,182,76,.4)` }} />
         <div style={{ position: 'absolute', left: 1010, top: 930, fontFamily: cond, fontWeight: 800, fontSize: 36, letterSpacing: 4, color: B.nightText }}>WASHINGTON</div>
+        </div>
         <Src dark>U.S. Treasury TIC, Major Foreign Holders (Aug 2026): Japan $1,068.3B · U.K. $1,009.5B · China $590.7B (Aug 2025: $699.7B) · flags: flag-icons (MIT)</Src>
         <Bug dark /><Grain />
       </NightGround>

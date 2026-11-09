@@ -15,9 +15,12 @@ def lpf(x, hz):  # FFT low-pass (fast)
     X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X[f > hz] *= np.exp(-(f[f > hz] - hz) / (hz * 0.3)); return np.fft.irfft(X, len(x))
 def hpf(x, hz):
     X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X[f < hz] *= (f[f < hz] / hz) ** 2; return np.fft.irfft(X, len(x))
+def fconv(x, h):
+    n = len(x) + len(h); N = 1 << (n - 1).bit_length()
+    return np.fft.irfft(np.fft.rfft(x, N) * np.fft.rfft(h, N), N)[:len(x)]
 def verb(x, sec=2.5, wet=0.35):
     n = int(sec * SR); ir = rng.standard_normal(n) * np.exp(-np.arange(n) / SR * 6.9 / sec)
-    L = np.convolve(x, ir * 0.02)[:len(x)]; R = np.convolve(x, np.roll(ir, 777) * 0.02)[:len(x)]
+    L = fconv(x, ir * 0.02); R = fconv(x, np.roll(ir, 777) * 0.02)
     return np.stack([x * (1 - wet) + L * wet, x * (1 - wet) + R * wet], 1)
 def norm(x, peak): return x / (np.max(np.abs(x)) + 1e-9) * peak
 def w(name, x, peak=0.9):
@@ -82,4 +85,8 @@ if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     w('sfx_heart.wav', heartbeat()); w('sfx_clock.wav', clock(), 0.7); w('sfx_boom.wav', boom(), 0.95)
     w('sfx_tinnitus.wav', tinnitus(), 0.25); w('sfx_heli.wav', heli(), 0.8); w('sfx_police.wav', police(), 0.7)
-    w('hook_bed.wav', bed(), 0.8)
+    import sys
+    if 'dread' in sys.argv:
+        w('dread_bed.wav', bed(total=252.0, cut=-10.0), 0.8)  # body of the episode: drone + slow dread pulse, no riser
+    else:
+        w('hook_bed.wav', bed(), 0.8)

@@ -56,4 +56,56 @@ The shot tables below from v1 still apply to Jake's doors (paras 8–11, 13–17
 | 25 | **D** Three paper cards: SHELTER · INSURED · PAPER LOSS | "Three things worth knowing" | |
 | 27 | **D** Disclaimer: "Education only · not safety instructions · follow local officials" | "It is not safety instructions" | |
 
-Real-material plan, mix check and Jake-door shots: see the v1 tables kept in git history (`893eece`) — the doors are unchanged.
+Real-material plan, mix check and Jake-door shots: the Jake door shots are in the appendix below (cue words still match the v2 VO).
+
+## Appendix · Jake door shots (from v1; paragraph numbers there refer to the v1 VO, use the cue words, not the numbers)
+
+## Part02 · DOOR 1 stocks (paras 5–9)
+| # | Shot | VO cue | Notes |
+|---|---|---|---|
+| 5a | **B** Door ① opens, camera flies through, CLOCK 00 → 06 | "Door one. Stocks. Hour zero to hour six." | |
+| 5b | **N** Sunday-night world map, Asia exchanges light up, NYSE stays dark | "isn't fully dark … Asian exchanges open while America sleeps" | |
+| 5c | **E** Futures chip (FUTURES · bet) over the NYSE; a pawn trader at a desk | "Futures, which are bets…" | |
+| 6a | **B** S&P ladder drawn as paper stairs: −7% / −13% / −20% | "falls seven percent" | each stair on its number |
+| 6b | **E** 15:00 timer ring ×2, then a red STOP sign for the day | "fifteen minutes … over for the day" | |
+| 6c | **D** Source chip: SEC / Nasdaq rule | "written down in advance" | |
+| 6d | **E** Clock 3:25 PM, grey-out after it; "1×" badge | "before three twenty-five … only once a day" | |
+| 7 | **B** Small cards of single stocks freezing one by one (snowflake icon), band 5/10/20 | "Individual stocks have their own pauses" | "runs out of patience" → hourglass |
+| 8 | **E** Calendar: March 2020, four red marks | "four times in a matter of days" | ◐ confirm F3 |
+| 9a | **C** YARDSTICK stamp 9/11; Prelinger-style NYC street footage or a framed print of the closed exchange (PD only) | "September eleventh, two thousand one." | no 9/11 imagery of the event itself |
+| 9b | **E** Calendar: Sep 11 → Sep 17, four crossed days | "closed for four days" | |
+| 9c | **E** Counter −684 on a paper Dow bar, −7% | "six hundred eighty-four points" | |
+| 10a | **A** Jake's retirement app: $10,000 → −$700 (paper) | "seven hundred dollars. On paper." | |
+| 10b | **E** Sell? button not pressed | "It only becomes real if he sells." | |
+| 10c | **B** The three paper rules (brakes) line up | "the machinery … built before the panic" | → door 2 |
+
+## Part03 · DOOR 2 gas (paras 10–13)
+| # | Shot | VO cue | Notes |
+|---|---|---|---|
+| 11a | **B** Door ② opens, CLOCK 06 → 12 | "Door two. Oil and the pump." | |
+| 11b | **N** Gulf map: Hormuz glow, tankers sail in a line | "twenty million barrels … every day" | |
+| 11c | **E** Pie: 1/5 of the world | "Roughly a fifth" | |
+| 11d | **B** Tanker pawns pause at the strait, "?" over each | "Do we still go?" | |
+| 12a | **N** World map: arrows from Hormuz to Asia (84%) | "Most of that oil heads to Asia." | |
+| 12b | **E** One world price tag on a globe; pump slice 51% crude | "one world market … more than half" | |
+| 13a | **C** YARDSTICK stamp 2019; desert map + Abqaiq pin (no explosion imagery) | "A Saturday in September, twenty nineteen." | |
+| 13b | **E** Counter 5.7M barrels/day; Brent bar +14.6% | "five point seven … fourteen point six" | |
+| 13c | **B** "1 plant" → "whole region" zoom out | "That was one plant." | |
+| 14a | **E** Barrel $1 → 2.4¢ drop into a gallon jug | "One dollar … two point four cents" | |
+| 14b | **A** Jake's tank: $62.30 → +$3.60 → +$7.20 → $69.50 | "three dollars sixty … sixty-nine fifty" | wallet-style tank chip |
+| 15 | **E** Rocket up fast, feather down slow, two lines | "like a rocket … like a feather" | |
+| 16 | **E** SPR caverns icon: 172M out, below 300M | "a hundred seventy-two million … lowest since nineteen eighty-three" | ◐ F13 |
+
+## Part04 · DOOR 3 bank (paras 14–16)
+| # | Shot | VO cue | Notes |
+|---|---|---|---|
+| 17a | **B** Door ③ opens, CLOCK 12 → 24 | "Door three. Your bank." | |
+| 17b | **C** YARDSTICK stamp SVB, phone app icon with withdrawals pouring out | "forty-two billion … in eight hours" | no logo as standalone image; use a generic bank pawn |
+| 17c | **E** 8-hour timer ring, bank shrinks by a quarter | "About a quarter of everything" | |
+| 17d | **D** DFPI quote card (short) | "social media and phone banking" | |
+| 18a | **E** Shield $250K over a pawn + one bank | "per person, per bank, per ownership category" | |
+| 18b | **E** Four icons (checking, savings, MMA, CD) get a green tick; stock/bond icons get a grey ✕ | "does not cover stocks or bonds" | ◐ F16 |
+| 19a | **N** Sunday calendar 15 Mar 2020, Fed building paper model | "On Sunday, March fifteenth …" | |
+| 19b | **E** Rate dial → 0, "$700B" counter | "near zero … seven hundred billion" | |
+| 19c | **B** Playbook page flips open | "already in the playbook" | → |
+

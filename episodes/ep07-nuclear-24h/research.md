@@ -36,3 +36,20 @@ EP03 ("If Trump Nuked Iran…") already covers the six rings of a U.S. strike on
 
 ## Re-check before upload
 F3, F4, F12 (weekly gas price), F13, F16, F17 URL; whether anything changed in the Iran war news that makes the "somewhere in the Gulf" line read as real news rather than a what-if.
+
+---
+# v2 additions (9 Nov 2026) — survival track ("Sam") and daily-life beat
+User direction: show what happens to the world, daily life and prices after a nuclear weapon is used, plus a character who does the right thing to stay safe, while Jake watches prices rise. **Hard rules:** nothing graphic (no blood, injuries, bodies, casualty counts, destruction footage), no weapon/targeting detail, no "how to build/avoid detection" content, the survival track = **official public guidance only**, stated as such, with "follow local officials". The blast itself is never shown: a white paper flash + silence + alert tone icon.
+
+| # | Fact used | Status | Source |
+|---|---|---|---|
+| S1 | Official guidance in three steps: get inside, stay inside, stay tuned | ✔ | [CDC: Radiation emergencies, "Get inside, stay inside, stay tuned"](https://www.cdc.gov/radiation-emergencies/) · [Ready.gov, Nuclear Explosion](https://www.ready.gov/nuclear-explosion) — **confirm both URLs open and quote the line on screen** |
+| S2 | Go to the middle of the building or a basement, away from doors and windows; more walls and distance help; brick/concrete multi-story buildings are better than light buildings | ◐ | CDC shelter-in-place page + FEMA/Ready.gov-derived guides (secondary copies found; open ready.gov/nuclear-explosion and cdc.gov/nceh/radiation/emergencies/shelter.htm before upload) |
+| S3 | Vehicles and the open street are not adequate shelter; you may have only minutes | ◐ | same as S2 (Ready.gov-derived text: "10 minutes or more" → the VO says "minutes") |
+| S4 | Do not leave until officials say it is safe; officials decide; time inside can be a day or more | ◐ | CDC shelter page (“do not leave … until emergency officials say it is safe”). The "at least 24 hours" wording was seen only on news copies, so the VO says "sometimes more than one day" |
+| S5 | **Tunnels/subways/parking garages: no specific official rule found.** The VO says so openly ("we will not invent one"). Do **not** show a tunnel as a safe spot. | ✔ (absence confirmed on two searches) | CDC/FEMA pages above; re-check FEMA *Planning Guidance for Response to a Nuclear Detonation* if the user wants a tunnel scene |
+| S6 | If you were outside: remove outer clothing, seal it in a bag, wash with soap and water, do not scrub | ◐ | CDC "removing clothing can eliminate up to 90% of contamination" (older CDC page, via UNT web archive) — **confirm the current CDC wording; if not found, cut the whole paragraph** |
+| S7 | After 9/11 U.S. airspace closed and flights stayed grounded for days (daily-life yardstick) | ◐ | FAA ground stop 11 Sep 2001, limited reopening 13 Sep — **add FAA/9-11 Commission link before upload, or cut** |
+| S8 | Sam, the phone at 17%, the "stay where you are" message | illustrative | narrative device, labelled ILLUSTRATIVE; not claimed as real guidance wording |
+
+**YouTube safety notes:** hypothetical + educational framing in the first 15 s, in the description and in the final disclaimer; no graphic imagery; no real faces; no news footage; source cards for every guidance line. Likely age/ads setting: "not made for kids", expect limited ads on the topic → mention to the user.

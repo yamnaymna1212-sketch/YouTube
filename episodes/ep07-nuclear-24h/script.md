@@ -5,7 +5,7 @@
 **Channel:** Dollarly · "Your Money. Decoded."
 **Hook:** money and the clock in second 0: "Sunday, six p.m. … The first markets on Earth are about to open." The clock is on screen from frame 1.
 **Frame (v2, user direction):** two tracks on one clock. **SAM** (illustrative delivery driver, unnamed Gulf port city) does what the official guidance says to stay safe (get inside, stay inside, stay tuned). **JAKE** (U.S.) watches the world react on TV and his phone: stocks, oil, gas, bank, daily life. Labelled WHAT IF on every frame. Yardsticks from real days. **Nothing graphic: the blast is a white paper flash + silence + alert icon. No bodies, blood, injuries, ruins, casualty numbers.**
-**Length:** VO 1,625 words ≈ 9:45 after pause cuts.
+**Length (v3, user asked 5-6 min max):** VO 828 words ≈ 5:00-5:20 after pause cuts. The 1,625-word cut is kept as `vo-clean-long.txt`. The script.md paragraph numbers refer to the long cut: re-map the cue words onto the short VO (sections cut: single-stock pauses, SPR, clothes-in-a-bag, Fed Sunday move, Walter, 9/11 airspace).
 **Voice:** default local Kokoro `am_michael` (`references/pipeline.md`). If the user sends their own ElevenLabs take → `tighten_vo.py` + faster-whisper → `episode_cues.py`.
 **Style:** `style/BRAND-v5-dollarly.md`. Mix ≈ 70% paper explainer / 20% Jake story / ≤ 10% real. Something new every 1–1.5 s, ≤ 5 words on screen + source chip, rich world, WHAT IF tag on every World.
 **Running devices:**

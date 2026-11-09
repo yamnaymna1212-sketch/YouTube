@@ -1,7 +1,7 @@
 import React from 'react';
 import { interpolate, random, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { noise2D } from '@remotion/noise';
-import { ArmAngles, BodyPose, FullBody, POSES } from './FullBody';
+import { ArmAngles, BodyPose, FullBody, Outfit, POSES } from './FullBody';
 import { HostPose } from './Host';
 
 // LIVE JAKE — the same drawn character, but never frozen:
@@ -32,8 +32,8 @@ const mixArms = (a: ArmAngles, b: ArmAngles, t: number): ArmAngles => ({
 });
 
 export const LiveJake: React.FC<{
-  pose?: BodyPose; face?: Partial<HostPose>; beats?: Beat[]; walk?: boolean; seed?: string; stub?: string; style?: React.CSSProperties;
-}> = ({ pose = 'stand', face = {}, beats = [], walk = false, seed = 'jake', stub, style }) => {
+  pose?: BodyPose; face?: Partial<HostPose>; beats?: Beat[]; walk?: boolean; seed?: string; stub?: string; style?: React.CSSProperties; outfit?: Outfit;
+}> = ({ pose = 'stand', face = {}, beats = [], walk = false, seed = 'jake', stub, style, outfit }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -88,7 +88,7 @@ export const LiveJake: React.FC<{
 
   return (
     <div style={{ ...style, transformOrigin: '50% 98%', transform: `translate(${shiftX}px, ${bob}px) rotate(${lean}deg)` }}>
-      <FullBody pose={pose} face={p} arms={arms} stride={stride} breathe={breathe} stub={stub} style={{ height: '100%', width: 'auto', overflow: 'visible', display: 'block' }} />
+      <FullBody pose={pose} face={p} arms={arms} stride={stride} breathe={breathe} stub={stub} outfit={outfit} style={{ height: '100%', width: 'auto', overflow: 'visible', display: 'block' }} />
     </div>
   );
 };

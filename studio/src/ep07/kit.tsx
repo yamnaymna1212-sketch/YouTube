@@ -199,3 +199,142 @@ export const MapPin: React.FC<{ x: number; y: number; label?: string; at?: numbe
     </div>
   );
 };
+
+// ================= CINEMATIC LAYER (hook v2: user asked for a scarier, film-like hook, 9 Nov 2026) =================
+/** cinema frame: letterbox bars, vignette, cold grade, optional camera shake from frame `shakeAt` */
+export const Cinema: React.FC<{ children: React.ReactNode; shakeAt?: number; shake?: number; grade?: string }> = ({ children, shakeAt = -1, shake = 14, grade = 'saturate(.85) contrast(1.08)' }) => {
+  const f = useCurrentFrame();
+  const k = shakeAt >= 0 && f >= shakeAt ? Math.exp(-(f - shakeAt) / 26) : 0;
+  const dx = k * shake * Math.sin(f * 2.3), dy = k * shake * Math.cos(f * 3.1);
+  return (
+    <AbsoluteFill style={{ background: '#000', overflow: 'hidden' }}>
+      <AbsoluteFill style={{ transform: `translate(${dx}px,${dy}px) scale(${1 + k * 0.03})`, filter: grade }}>{children}</AbsoluteFill>
+      <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,.6) 100%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 96, background: '#000' }} />
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 96, background: '#000' }} />
+    </AbsoluteFill>
+  );
+};
+
+/** red/blue emergency light washing over the scene */
+export const SirenWash: React.FC<{ at?: number; k?: number }> = ({ at = 0, k = 1 }) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const ph = (f - at) / 7;
+  const red = Math.max(0, Math.sin(ph)) ** 2, blue = Math.max(0, -Math.sin(ph)) ** 2;
+  return (
+    <>
+      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 15% 70%, rgba(230,40,40,${0.42 * red * k}), transparent 55%)`, mixBlendMode: 'screen', pointerEvents: 'none' }} />
+      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 85% 70%, rgba(40,90,255,${0.42 * blue * k}), transparent 55%)`, mixBlendMode: 'screen', pointerEvents: 'none' }} />
+    </>
+  );
+};
+
+/** one running silhouette (people hurrying to shelter, seen from far, no faces) */
+const Runner: React.FC<{ x: number; y: number; s: number; f: number; dir: number; tone: string }> = ({ x, y, s, f, dir, tone }) => {
+  const c = Math.sin(f / 3.2), b = Math.abs(Math.cos(f / 3.2)) * 8;
+  return (
+    <svg style={{ position: 'absolute', left: x - 40 * s, top: y - 170 * s - b * s, overflow: 'visible', transform: dir < 0 ? 'scaleX(-1)' : undefined }} width={80 * s} height={170 * s} viewBox="0 0 80 170">
+      <g fill={tone} stroke={tone} strokeLinecap="round">
+        <circle cx={44} cy={18} r={14} stroke="none" />
+        <path d="M40 34 L34 92" strokeWidth={20} />
+        <path d={`M38 44 L${38 + c * 26} ${70 - Math.abs(c) * 6}`} strokeWidth={10} />
+        <path d={`M38 44 L${38 - c * 26} ${70 - Math.abs(c) * 6}`} strokeWidth={10} />
+        <path d={`M34 90 L${34 + c * 24} 128 L${34 + c * 30} 166`} strokeWidth={12} fill="none" />
+        <path d={`M34 90 L${34 - c * 24} 128 L${34 - c * 34} 162`} strokeWidth={12} fill="none" />
+      </g>
+    </svg>
+  );
+};
+export const Crowd: React.FC<{ n?: number; y?: number; speed?: number; seed?: string; scale?: number; at?: number }> = ({ n = 14, y = 1000, speed = 1, seed = 'cr', scale = 1, at = 0 }) => {
+  const f = useCurrentFrame();
+  const t = Math.max(0, f - at);
+  return (
+    <>
+      {Array.from({ length: n }).map((_, i) => {
+        const dir = random(seed + 'd' + i) > 0.35 ? 1 : -1;
+        const sp = (5 + random(seed + 's' + i) * 5) * speed;
+        const depth = random(seed + 'z' + i);
+        const s = (0.55 + depth * 0.7) * scale;
+        const x0 = random(seed + 'x' + i) * 2400 - 240;
+        const x = dir > 0 ? ((x0 + t * sp) % 2400) - 240 : 2160 - ((2400 - x0 + t * sp) % 2400);
+        return <Runner key={i} x={x} y={y + depth * 60} s={s} f={t + i * 7} dir={dir} tone={`rgba(6,10,18,${0.75 + depth * 0.25})`} />;
+      })}
+    </>
+  );
+};
+
+/** helicopter silhouette with a spinning rotor, blinking light and a sweeping searchlight */
+export const Heli: React.FC<{ x0: number; x1: number; y: number; dur: number; s?: number; beam?: boolean }> = ({ x0, x1, y, dur, s = 1, beam = true }) => {
+  const f = useCurrentFrame();
+  const k = Math.min(1, f / dur), x = x0 + (x1 - x0) * k, yy = y + Math.sin(f / 18) * 8;
+  const sweep = Math.sin(f / 22) * 18;
+  return (
+    <div style={{ position: 'absolute', left: x, top: yy, transform: `scale(${s}) ${x1 < x0 ? 'scaleX(-1)' : ''}` }}>
+      {beam && <div style={{ position: 'absolute', left: -10, top: 30, width: 420, height: 1100, transformOrigin: '50% 0%', transform: `translateX(-200px) rotate(${sweep}deg)`, background: 'linear-gradient(rgba(255,250,220,.35), rgba(255,250,220,0))', clipPath: 'polygon(46% 0, 54% 0, 100% 100%, 0 100%)', filter: 'blur(6px)' }} />}
+      <svg width={260} height={110} viewBox="0 0 260 110" style={{ position: 'absolute', left: -130, top: -40, overflow: 'visible' }}>
+        <ellipse cx={130} cy={8} rx={120 * Math.abs(Math.cos(f * 1.7))} ry={4} fill="rgba(10,14,24,.55)" />
+        <rect x={126} y={8} width={8} height={18} fill="#070B14" />
+        <path d="M70 30 Q 70 22 96 22 L 150 22 Q 176 24 178 44 Q 176 64 150 66 L 92 66 Q 70 64 70 48 Z" fill="#070B14" />
+        <path d="M150 38 L 252 32 L 256 42 L 150 50 Z" fill="#070B14" />
+        <path d="M240 20 L 252 20 L 256 44 L 246 44 Z" fill="#070B14" />
+        <path d="M84 72 L 168 72 M 96 66 L 92 72 M 150 66 L 154 72" stroke="#070B14" strokeWidth={5} />
+        <circle cx={254} cy={38} r={5} fill={Math.floor(f / 10) % 2 ? '#FF4040' : '#300'} />
+        <path d="M80 34 Q 84 28 98 28 L 112 28 L 112 44 L 80 44 Z" fill="rgba(140,180,220,.35)" />
+      </svg>
+    </div>
+  );
+};
+
+/** police car silhouette with a flashing light bar (drives across or sits) */
+export const PoliceCar: React.FC<{ x0: number; x1?: number; y: number; dur?: number; s?: number }> = ({ x0, x1, y, dur = 60, s = 1 }) => {
+  const f = useCurrentFrame();
+  const x = x1 === undefined ? x0 : x0 + (x1 - x0) * Math.min(1, f / dur);
+  const on = Math.floor(f / 5) % 2;
+  return (
+    <div style={{ position: 'absolute', left: x, top: y, transform: `translate(-50%,-100%) scale(${s}) ${x1 !== undefined && x1 < x0 ? 'scaleX(-1)' : ''}` }}>
+      <div style={{ position: 'absolute', left: 60, top: -40, width: 120, height: 120, borderRadius: '50%', background: on ? 'rgba(255,40,40,.55)' : 'rgba(40,90,255,.55)', filter: 'blur(26px)' }} />
+      <svg width={320} height={120} viewBox="0 0 320 120" style={{ overflow: 'visible', display: 'block' }}>
+        <rect x={110} y={6} width={30} height={12} rx={3} fill={on ? '#FF3B3B' : '#401010'} /><rect x={140} y={6} width={30} height={12} rx={3} fill={on ? '#10204A' : '#3B6BFF'} />
+        <path d="M14 88 L 20 58 Q 24 50 40 48 L 92 46 L 122 20 L 210 20 L 248 46 L 296 52 Q 310 56 310 70 L 310 88 Z" fill="#0A0F1A" />
+        <path d="M128 26 L 204 26 L 232 46 L 106 46 Z" fill="rgba(140,180,220,.3)" />
+        <rect x={20} y={62} width={286} height={10} fill="#E9E6E0" opacity={0.85} />
+        <circle cx={80} cy={92} r={22} fill="#05070C" /><circle cx={250} cy={92} r={22} fill="#05070C" />
+        <circle cx={304} cy={70} r={6} fill="#FFF3C0" />
+      </svg>
+    </div>
+  );
+};
+
+/** far on the horizon: an orange dome glow and a rising dark cloud (no damage, no people; abstract) */
+export const HorizonCloud: React.FC<{ at: number; x?: number; y?: number; s?: number }> = ({ at, x = 960, y = 760, s = 1 }) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const t = f - at, k = 1 - Math.exp(-t / 50);
+  return (
+    <div style={{ position: 'absolute', left: x, top: y, transform: `translate(-50%,-100%) scale(${s})`, width: 900, height: 900 }}>
+      <div style={{ position: 'absolute', left: 450 - 420 * k, bottom: -60, width: 840 * k, height: 380 * k, borderRadius: '50% 50% 0 0', background: 'radial-gradient(ellipse at 50% 100%, rgba(255,170,80,.75), rgba(230,90,40,.35) 45%, transparent 70%)', filter: 'blur(14px)' }} />
+      <div style={{ position: 'absolute', left: 410, bottom: 60, width: 80, height: 520 * k, background: 'linear-gradient(rgba(60,50,48,.9), rgba(120,70,50,.6))', filter: 'blur(10px)', borderRadius: 40 }} />
+      <div style={{ position: 'absolute', left: 450 - 260 * k, bottom: 60 + 480 * k, width: 520 * k, height: 260 * k, borderRadius: '50%', background: 'radial-gradient(ellipse at 50% 60%, rgba(150,90,60,.95), rgba(50,40,40,.85) 60%, transparent 75%)', filter: 'blur(8px)', transform: `rotate(${Math.sin(t / 40) * 2}deg)` }} />
+    </div>
+  );
+};
+
+/** face close-up of Sam or Jake (emotional reaction), lit by a coloured light */
+export const CloseUp: React.FC<{ who: 'sam' | 'jake'; beats: Beat[]; light?: string; seed?: string; children?: React.ReactNode; bg?: string; face?: Record<string, number> }> = ({ who, beats, light = 'rgba(255,200,140,.35)', seed = 'cu', children, bg = '#0C1220', face }) => {
+  const f = useCurrentFrame();
+  const push = 1 + f / 900;
+  return (
+    <AbsoluteFill style={{ background: bg, overflow: 'hidden' }}>
+      {children}
+      <AbsoluteFill style={{ transform: `scale(${push})`, transformOrigin: '50% 30%' }}>
+        <LiveJake pose="stand" seed={seed} beats={beats} face={face as any} outfit={who === 'sam' ? SAM_OUTFIT : undefined}
+          style={{ position: "absolute", left: 60, top: -230, height: 2700 }} />
+      </AbsoluteFill>
+      <AbsoluteFill style={{ background: `radial-gradient(ellipse at 30% 40%, ${light}, transparent 60%)`, mixBlendMode: 'screen' }} />
+    </AbsoluteFill>
+  );
+};
+
+/** real archival film, full frame, black & white (source chip always on) */
+export { FullFilm } from '../brand/Brand';

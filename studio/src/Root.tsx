@@ -30,6 +30,7 @@ import { EP07Thumb } from './ep07/Thumb';
 import { EP08Thumb } from './ep08/Thumb';
 import { EP08V2, EP08V2_FRAMES } from './ep08/Film2';
 import { EP09Film, EP09_FRAMES } from './ep09/Film';
+import { EP09Thumb } from './ep09/Thumb';
 import { EP06Part02, EP06_P2_FRAMES, EP06Part03, EP06_P3_FRAMES } from './ep06/P02';
 import { EP06Part04, EP06_P4_FRAMES, EP06Part05, EP06_P5_FRAMES } from './ep06/P04';
 import { EP06Part06, EP06_P6_FRAMES, EP06Part07, EP06_P7_FRAMES, EP06Part08, EP06_P8_FRAMES } from './ep06/P06';
@@ -120,6 +121,7 @@ export const Root: React.FC = () => (
     <Still id="EP07Thumb" component={EP07Thumb} width={1920} height={1080} />
     <Still id="EP08Thumb" component={EP08Thumb} width={1920} height={1080} />
     <Composition id="EP08V2" component={EP08V2} durationInFrames={EP08V2_FRAMES} fps={30} width={1920} height={1080} />
+    <Still id="EP09Thumb" component={EP09Thumb} width={1920} height={1080} />
     <Composition id="EP09Film" component={EP09Film} durationInFrames={EP09_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP07Body" component={EP07Body} durationInFrames={EP07_BODY_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="EP07Hook" component={EP07Hook} durationInFrames={EP07_HOOK_FRAMES} fps={30} width={1920} height={1080} />

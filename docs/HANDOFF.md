@@ -176,3 +176,8 @@ User feedback on the preview: loud SFX (whoosh, bass hits) distract; cut the pau
 - **Package:** `episodes/ep05-elsayed-gas/youtube-upload.md` (titles, description, chapters from cues, sources, tags, settings, re-check list), `LICENSES.md`. **Thumbnail not made yet.**
 - **Rendered (7 Nov, on the user's Mac M3):** `~/Desktop/Dollarly-EP05/ep05-full.mp4` (8:36, 1080p, −14.1 LUFS, peak −1.9 dB, 112 MB). First try crashed on Part02 (Chrome "Session closed", likely sleep) → re-run with `caffeinate` + `--concurrency=4`: all 9 remaining parts in **10 min**. Preview in git: `episodes/ep05-elsayed-gas/renders/ep05-full-v1-preview720.mp4`.
 - **v1.1 small fixes:** dashboard shot (Part09 A) — lever 4 knob touches the title; Part07 E arrow badges a bit odd. Thumbnail still to make.
+
+## Done 11 Nov 2026 (EP09 session, branch `ep09-2028-inherits`)
+- **EP09 "Trump Can't Run in 2028. Here's What the Next President Inherits"**: research (`research.md`, 5 ◐ facts to re-check before upload), VO Kokoro `am_puck` 0.95 (5:00), animation `studio/src/ep09/Film.tsx` (one shot list, EP08 v2 grammar; EP08 building blocks now exported from `ep08/Film2.tsx`), music `tools/synth_ep09.py`, thumbnail `ep09/Thumb.tsx`.
+- Rendered on the Mac in ~6 min: `~/Desktop/Dollarly-EP09/ep09-full.mp4` (5:02, 1080p, −14.0 LUFS, peak −2.2 dB). Preview in git: `episodes/ep09-2028-inherits/renders/ep09-full-v1-preview720.mp4`.
+- Upload text: `episodes/ep09-2028-inherits/youtube-upload.md` (re-check list at the bottom).

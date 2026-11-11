@@ -21,7 +21,7 @@ const eo = (x: number) => 1 - Math.pow(1 - x, 3);
 const at = (s: number) => (p: number, w: string, n = 0) => fr(wordT(p, w, n) - s);
 
 const S = 'sayed/';
-const IMG = {
+export const IMG = {
   sayedTalk: S + 'abdul_el_sayed_meet_and_greet_by_conlan_houston_3.jpg',
   sayedFace: S + 'abdul_el_sayed_meet_and_greet_by_conlan_houston_5_cropped.jpg',
   sayedSenate: S + 'abdul_el_sayed_testifying_at_committee_hearing_2024.jpg',
@@ -37,7 +37,7 @@ const IMG = {
   eia: S + 'screens/eia_what_we_pay_per_gallon.png',
   usd20: S + 'money/usd20.jpg', usd100: S + 'money/usd100.jpg', usd1: S + 'money/usd1.jpg',
 };
-const VID = {
+export const VID = {
   houseFloor: 'ep04/footage/cap_house_floor.mp4', capDay: 'ep04/footage/day_capitol.mp4', dome: 'ep04/footage/day_dome_close.mp4',
   steps: 'ep04/footage/day_steps.mp4', guards: 'ep04/footage/cap_doors_guards.mp4', supreme: 'ep04/footage/cap_supreme_pediment.mp4',
   article1: 'ep04/footage/pow_article1.mp4', proclamation: 'ep04/footage/pow_proclamation.mp4', taxLedger: 'ep04/footage/pow_tax_ledger.mp4',
@@ -52,7 +52,7 @@ const CR = { conlan: 'Photo: Conlan Houston, CC BY-SA 4.0', senate: 'Photo: U.S.
 
 // ================================ cinematic building blocks ================================
 /** every shot: cinematic entrance (zoom-settle + blur clears in 8 frames), letterbox, grade, grain, vignette */
-const Shot: React.FC<{ children: React.ReactNode; grade?: string; credit?: string; dark?: boolean }> = ({ children, grade = 'contrast(1.06) saturate(1.05)', credit }) => {
+export const Shot: React.FC<{ children: React.ReactNode; grade?: string; credit?: string; dark?: boolean }> = ({ children, grade = 'contrast(1.06) saturate(1.05)', credit }) => {
   const f = useCurrentFrame();
   const k = eo(kk(f, 0, 9));
   const g = random('gr' + Math.floor(f / 2));
@@ -68,7 +68,7 @@ const Shot: React.FC<{ children: React.ReactNode; grade?: string; credit?: strin
   );
 };
 /** real photo with a cinematic camera move (Ken Burns + handheld drift); portrait photos get a blurred fill */
-const Photo: React.FC<{ src: string; z?: [number, number]; x?: [number, number]; y?: [number, number]; pos?: string; fill?: boolean; tone?: 'warm' | 'cold' | 'none'; dur?: number }> = ({ src, z = [1.05, 1.18], x = [0, 0], y = [0, 0], pos = '50% 50%', fill, tone = 'warm', dur = 90 }) => {
+export const Photo: React.FC<{ src: string; z?: [number, number]; x?: [number, number]; y?: [number, number]; pos?: string; fill?: boolean; tone?: 'warm' | 'cold' | 'none'; dur?: number }> = ({ src, z = [1.05, 1.18], x = [0, 0], y = [0, 0], pos = '50% 50%', fill, tone = 'warm', dur = 90 }) => {
   const f = useCurrentFrame();
   const k = eo(kk(f, 0, dur));
   const dx = noise2D('px' + src, f / 80, 0) * 6, dy = noise2D('py' + src, f / 80, 1) * 5;
@@ -82,13 +82,13 @@ const Photo: React.FC<{ src: string; z?: [number, number]; x?: [number, number];
   );
 };
 /** archival film clip, graded, pushed in */
-const Clip: React.FC<{ src: string; trim?: number; rate?: number; z?: [number, number]; pos?: string; bw?: boolean }> = ({ src, trim = 0, rate = 1, z = [1.04, 1.14], pos = '50% 50%', bw }) => {
+export const Clip: React.FC<{ src: string; trim?: number; rate?: number; z?: [number, number]; pos?: string; bw?: boolean }> = ({ src, trim = 0, rate = 1, z = [1.04, 1.14], pos = '50% 50%', bw }) => {
   const f = useCurrentFrame();
   const s = z[0] + (z[1] - z[0]) * kk(f, 0, 120);
   return <AbsoluteFill><OffthreadVideo src={staticFile(src)} muted trimBefore={trim} playbackRate={rate} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: pos, transform: `scale(${s})`, filter: bw ? 'grayscale(1) contrast(1.15)' : 'sepia(.35) contrast(1.1) brightness(.95)' }} /></AbsoluteFill>;
 };
 /** time slate: DAY 1 · 7:15 AM (lower-left, typewriter + gold line) */
-const Slate: React.FC<{ time: string; day?: string }> = ({ time, day = 'DAY 1' }) => {
+export const Slate: React.FC<{ time: string; day?: string }> = ({ time, day = 'DAY 1' }) => {
   const f = useCurrentFrame();
   const n = Math.floor(kk(f, 2, 2 + time.length * 1.5) * time.length);
   const line = eo(kk(f, 0, 14));
@@ -101,7 +101,7 @@ const Slate: React.FC<{ time: string; day?: string }> = ({ time, day = 'DAY 1' }
   );
 };
 /** one big number (the only text on most shots) */
-const Num: React.FC<{ from?: number; to: number; a: number; b: number; x?: number; y?: number; size?: number; prefix?: string; suffix?: string; dec?: number; color?: string; sub?: string }> = ({ from = 0, to, a, b, x = 960, y = 540, size = 190, prefix = '$', suffix = '', dec = 0, color = '#FFF8EA', sub }) => {
+export const Num: React.FC<{ from?: number; to: number; a: number; b: number; x?: number; y?: number; size?: number; prefix?: string; suffix?: string; dec?: number; color?: string; sub?: string }> = ({ from = 0, to, a, b, x = 960, y = 540, size = 190, prefix = '$', suffix = '', dec = 0, color = '#FFF8EA', sub }) => {
   const f = useCurrentFrame();
   const v = from + (to - from) * eo(kk(f, a, b));
   const s = 0.85 + 0.15 * eo(kk(f, a - 4, a + 6));
@@ -113,20 +113,20 @@ const Num: React.FC<{ from?: number; to: number; a: number; b: number; x?: numbe
   );
 };
 /** small caption (2–4 words), lower third */
-const Cap: React.FC<{ t: string; a?: number; x?: number; y?: number; color?: string }> = ({ t, a = 0, x = 90, y = 820, color = '#FFF8EA' }) => {
+export const Cap: React.FC<{ t: string; a?: number; x?: number; y?: number; color?: string }> = ({ t, a = 0, x = 90, y = 820, color = '#FFF8EA' }) => {
   const f = useCurrentFrame();
   const k = eo(kk(f, a, a + 8));
   return <div style={{ position: 'absolute', left: x, top: y, fontFamily: cond, fontWeight: 800, fontSize: 52, letterSpacing: 6, color, opacity: k, transform: `translateX(${(1 - k) * -30}px)`, textShadow: '0 4px 20px rgba(0,0,0,.85)', textTransform: 'uppercase' }}>{t}</div>;
 };
 /** rubber stamp slam */
-const Stamp: React.FC<{ t: string; a: number; x?: number; y?: number; color?: string; size?: number; rot?: number }> = ({ t, a, x = 960, y = 540, color = B.red, size = 110, rot = -7 }) => {
+export const Stamp: React.FC<{ t: string; a: number; x?: number; y?: number; color?: string; size?: number; rot?: number }> = ({ t, a, x = 960, y = 540, color = B.red, size = 110, rot = -7 }) => {
   const f = useCurrentFrame();
   if (f < a) return null;
   const k = Math.min(1, (f - a) / 5);
   return <div style={{ position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) rotate(${rot}deg) scale(${1.7 - 0.7 * k})`, opacity: k, border: `10px solid ${color}`, color, fontFamily: cond, fontWeight: 800, fontSize: size, letterSpacing: 6, padding: '0 30px', background: 'rgba(250,246,236,.9)', whiteSpace: 'nowrap' }}>{t}</div>;
 };
 /** real SPECIMEN banknotes falling / stacking */
-const Bills: React.FC<{ a: number; n?: number; note?: 'usd20' | 'usd100' | 'usd1'; x?: number; y?: number; spread?: number }> = ({ a, n = 10, note = 'usd20', x = 960, y = 640, spread = 520 }) => {
+export const Bills: React.FC<{ a: number; n?: number; note?: 'usd20' | 'usd100' | 'usd1'; x?: number; y?: number; spread?: number }> = ({ a, n = 10, note = 'usd20', x = 960, y = 640, spread = 520 }) => {
   const f = useCurrentFrame();
   return <>{Array.from({ length: n }).map((_, i) => {
     const t = kk(f, a + i * 3, a + i * 3 + 22);
@@ -134,18 +134,18 @@ const Bills: React.FC<{ a: number; n?: number; note?: 'usd20' | 'usd100' | 'usd1
     return <Img key={i} src={staticFile(IMG[note])} style={{ position: 'absolute', left: ex - 200, top: -400 + (ey + 400) * eo(t), width: 400, transform: `rotate(${(random('br' + i) - 0.5) * 50 * (1 - t) + (random('bq' + i) - 0.5) * 18}deg)`, opacity: t > 0 ? 1 : 0, boxShadow: '0 12px 30px rgba(0,0,0,.45)', border: '2px solid rgba(0,0,0,.2)' }} />;
   })}</>;
 };
-const JakeAt: React.FC<{ x: number; y: number; h?: number; beats?: Beat[]; pose?: BodyPose; walk?: boolean; flip?: boolean; seed: string; stub?: string }> = ({ x, y, h = 700, beats = [], pose = 'stand', walk, flip, seed, stub }) => (
+export const JakeAt: React.FC<{ x: number; y: number; h?: number; beats?: Beat[]; pose?: BodyPose; walk?: boolean; flip?: boolean; seed: string; stub?: string }> = ({ x, y, h = 700, beats = [], pose = 'stand', walk, flip, seed, stub }) => (
   <LiveJake pose={pose} walk={walk} seed={seed} beats={beats} stub={stub} style={{ position: 'absolute', left: x - h * 0.33, top: y - h, height: h, transform: flip ? 'scaleX(-1)' : undefined }} />
 );
-const Illus: React.FC = () => <div style={{ position: 'absolute', left: 90, top: 120, fontFamily: cond, fontWeight: 800, fontSize: 22, letterSpacing: 6, color: 'rgba(255,255,255,.7)', border: '2px solid rgba(255,255,255,.5)', padding: '2px 10px' }}>ILLUSTRATIVE</div>;
-const LightLeak: React.FC<{ a?: number }> = ({ a = 0 }) => {
+export const Illus: React.FC = () => <div style={{ position: 'absolute', left: 90, top: 120, fontFamily: cond, fontWeight: 800, fontSize: 22, letterSpacing: 6, color: 'rgba(255,255,255,.7)', border: '2px solid rgba(255,255,255,.5)', padding: '2px 10px' }}>ILLUSTRATIVE</div>;
+export const LightLeak: React.FC<{ a?: number }> = ({ a = 0 }) => {
   const f = useCurrentFrame();
   const o = Math.sin(Math.min(1, Math.max(0, (f - a) / 24)) * Math.PI) * 0.55;
   return <AbsoluteFill style={{ background: 'radial-gradient(ellipse at 15% 30%, rgba(255,190,110,.9), transparent 55%)', opacity: o, mixBlendMode: 'screen' }} />;
 };
 
 // ---------- drawn sets for Jake (rich, warm, full frame)
-const Store: React.FC<{ children?: React.ReactNode; pan?: number; tags?: number }> = ({ children, pan = 0, tags = -1 }) => {
+export const Store: React.FC<{ children?: React.ReactNode; pan?: number; tags?: number }> = ({ children, pan = 0, tags = -1 }) => {
   const f = useCurrentFrame();
   const cols = ['#C8553D', '#F2A541', '#3F7CAC', '#5B9A68', '#E7D7C1', '#8E5572', '#F28F3B'];
   return (
@@ -171,7 +171,7 @@ const Store: React.FC<{ children?: React.ReactNode; pan?: number; tags?: number 
     </AbsoluteFill>
   );
 };
-const Register: React.FC<{ total: string; a: number; children?: React.ReactNode }> = ({ total, a, children }) => {
+export const Register: React.FC<{ total: string; a: number; children?: React.ReactNode }> = ({ total, a, children }) => {
   const f = useCurrentFrame();
   const lines = ['MILK          3.89', 'EGGS          4.29', 'BREAD         2.99', 'APPLES        3.49', 'COFFEE        8.99'];
   const n = Math.floor(kk(f, a, a + 50) * lines.length);
@@ -215,7 +215,7 @@ const StubDoc: React.FC<{ gone: number; tax?: number }> = ({ gone, tax = -1 }) =
     </AbsoluteFill>
   );
 };
-const Keys: React.FC<{ a: number[]; lit: number[] }> = ({ a, lit }) => {
+export const Keys: React.FC<{ a: number[]; lit: number[] }> = ({ a, lit }) => {
   const f = useCurrentFrame();
   const L = ['HOUSE', 'SENATE · 60', 'PRESIDENT'];
   return (

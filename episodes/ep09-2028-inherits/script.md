@@ -3,8 +3,8 @@
 **Title:** Trump Can't Run in 2028. Here's What the Next President Inherits
 **Alt titles (A/B test):** "The Bill the Next President Inherits" · "The Money Problem the Next President Can't Avoid"
 **Channel:** Dollarly · "Your Money. Decoded."
-**Voice:** Kokoro `am_puck`, speed 1.0 (user pick, 11 Nov 2026) · pauses cut > 0.20 s → 0.14 s · VO −15 LUFS, mix −14 LUFS
-**Length:** VO ≈ 910 words ≈ 5:10 at ~175 wpm + end card
+**Voice:** Kokoro `am_puck`, speed 0.95 (user pick, 11 Nov 2026) · pauses cut > 0.20 s → 0.14 s · VO −15 LUFS, mix −14 LUFS
+**Length:** VO v1 = 1,100 words = 5:00 (`studio/public/ep09/vo/vo_ep09.mp3`, timings in `studio/src/ep09/cues.json`) + end card ≈ 5:10. Part start times below are pre-VO estimates; use cues.json.
 **Neutral rules:** no 2028 candidate named, no winner predicted, no motive given; both sides on tariffs and Social Security fixes; the only Trump claim is the 22nd Amendment fact + the White House's own words.
 **Running device:** THE INHERITANCE ENVELOPE: a paper envelope stamped "JAN 20, 2029" that fills with bills (PRICES · TARIFFS · RATES · DEBT) as each door is opened; at the end it lands on a blank desk in the Oval silhouette.
 **Mix:** ≈ 70% paper explainer (Pennsylvania Ave stage, doors, keys, calendar) · 20% Jake & Dana · ≤ 10% real (Prelinger Capitol/Fed/Treasury film, official portrait as a framed print) · new visual every 1–1.5 s · ≤ 5 words on screen · source chip every shot.
